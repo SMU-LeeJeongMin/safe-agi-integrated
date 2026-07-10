@@ -1,0 +1,3678 @@
+[
+  {
+    "uuid": "sess_demo_f1",
+    "ts": "2023-08-04T05:00:00+00:00",
+    "course_recommendation": null,
+    "risk": {
+      "e1_biometric": 0.2869,
+      "e2_combined": 0.241,
+      "representative": 0.2869,
+      "level": 0,
+      "label": "정상"
+    },
+    "fatigue": {
+      "state": "정상",
+      "confidence": 1.0,
+      "nearest_shelter": null
+    },
+    "descent_warning": {
+      "required": false,
+      "reason": null,
+      "remaining_daylight_min": null
+    },
+    "alerts": []
+  },
+  {
+    "uuid": "sess_demo_f1",
+    "ts": "2023-08-04T05:01:00+00:00",
+    "course_recommendation": null,
+    "risk": {
+      "e1_biometric": 0.2886,
+      "e2_combined": 0.2432,
+      "representative": 0.2886,
+      "level": 0,
+      "label": "정상"
+    },
+    "fatigue": {
+      "state": "정상",
+      "confidence": 1.0,
+      "nearest_shelter": null
+    },
+    "descent_warning": {
+      "required": false,
+      "reason": null,
+      "remaining_daylight_min": null
+    },
+    "alerts": []
+  },
+  {
+    "uuid": "sess_demo_f1",
+    "ts": "2023-08-04T05:02:00+00:00",
+    "course_recommendation": null,
+    "risk": {
+      "e1_biometric": 0.2903,
+      "e2_combined": 0.2454,
+      "representative": 0.2903,
+      "level": 0,
+      "label": "정상"
+    },
+    "fatigue": {
+      "state": "정상",
+      "confidence": 1.0,
+      "nearest_shelter": null
+    },
+    "descent_warning": {
+      "required": false,
+      "reason": null,
+      "remaining_daylight_min": null
+    },
+    "alerts": []
+  },
+  {
+    "uuid": "sess_demo_f1",
+    "ts": "2023-08-04T05:03:00+00:00",
+    "course_recommendation": null,
+    "risk": {
+      "e1_biometric": 0.292,
+      "e2_combined": 0.2476,
+      "representative": 0.292,
+      "level": 0,
+      "label": "정상"
+    },
+    "fatigue": {
+      "state": "정상",
+      "confidence": 1.0,
+      "nearest_shelter": null
+    },
+    "descent_warning": {
+      "required": false,
+      "reason": null,
+      "remaining_daylight_min": null
+    },
+    "alerts": []
+  },
+  {
+    "uuid": "sess_demo_f1",
+    "ts": "2023-08-04T05:04:00+00:00",
+    "course_recommendation": null,
+    "risk": {
+      "e1_biometric": 0.2937,
+      "e2_combined": 0.2498,
+      "representative": 0.2937,
+      "level": 0,
+      "label": "정상"
+    },
+    "fatigue": {
+      "state": "정상",
+      "confidence": 1.0,
+      "nearest_shelter": null
+    },
+    "descent_warning": {
+      "required": false,
+      "reason": null,
+      "remaining_daylight_min": null
+    },
+    "alerts": []
+  },
+  {
+    "uuid": "sess_demo_f1",
+    "ts": "2023-08-04T05:05:00+00:00",
+    "course_recommendation": null,
+    "risk": {
+      "e1_biometric": 0.2954,
+      "e2_combined": 0.252,
+      "representative": 0.2954,
+      "level": 0,
+      "label": "정상"
+    },
+    "fatigue": {
+      "state": "정상",
+      "confidence": 1.0,
+      "nearest_shelter": null
+    },
+    "descent_warning": {
+      "required": false,
+      "reason": null,
+      "remaining_daylight_min": null
+    },
+    "alerts": []
+  },
+  {
+    "uuid": "sess_demo_f1",
+    "ts": "2023-08-04T05:06:00+00:00",
+    "course_recommendation": null,
+    "risk": {
+      "e1_biometric": 0.2971,
+      "e2_combined": 0.2542,
+      "representative": 0.2971,
+      "level": 0,
+      "label": "정상"
+    },
+    "fatigue": {
+      "state": "정상",
+      "confidence": 1.0,
+      "nearest_shelter": null
+    },
+    "descent_warning": {
+      "required": false,
+      "reason": null,
+      "remaining_daylight_min": null
+    },
+    "alerts": []
+  },
+  {
+    "uuid": "sess_demo_f1",
+    "ts": "2023-08-04T05:07:00+00:00",
+    "course_recommendation": null,
+    "risk": {
+      "e1_biometric": 0.2988,
+      "e2_combined": 0.2564,
+      "representative": 0.2988,
+      "level": 0,
+      "label": "정상"
+    },
+    "fatigue": {
+      "state": "정상",
+      "confidence": 1.0,
+      "nearest_shelter": null
+    },
+    "descent_warning": {
+      "required": false,
+      "reason": null,
+      "remaining_daylight_min": null
+    },
+    "alerts": []
+  },
+  {
+    "uuid": "sess_demo_f1",
+    "ts": "2023-08-04T05:08:00+00:00",
+    "course_recommendation": null,
+    "risk": {
+      "e1_biometric": 0.3005,
+      "e2_combined": 0.2586,
+      "representative": 0.3005,
+      "level": 0,
+      "label": "정상"
+    },
+    "fatigue": {
+      "state": "정상",
+      "confidence": 1.0,
+      "nearest_shelter": null
+    },
+    "descent_warning": {
+      "required": false,
+      "reason": null,
+      "remaining_daylight_min": null
+    },
+    "alerts": []
+  },
+  {
+    "uuid": "sess_demo_f1",
+    "ts": "2023-08-04T05:09:00+00:00",
+    "course_recommendation": null,
+    "risk": {
+      "e1_biometric": 0.3027,
+      "e2_combined": 0.261,
+      "representative": 0.3027,
+      "level": 0,
+      "label": "정상"
+    },
+    "fatigue": {
+      "state": "정상",
+      "confidence": 1.0,
+      "nearest_shelter": null
+    },
+    "descent_warning": {
+      "required": false,
+      "reason": null,
+      "remaining_daylight_min": null
+    },
+    "alerts": []
+  },
+  {
+    "uuid": "sess_demo_f1",
+    "ts": "2023-08-04T05:10:00+00:00",
+    "course_recommendation": null,
+    "risk": {
+      "e1_biometric": 0.3048,
+      "e2_combined": 0.2634,
+      "representative": 0.3048,
+      "level": 0,
+      "label": "정상"
+    },
+    "fatigue": {
+      "state": "정상",
+      "confidence": 1.0,
+      "nearest_shelter": null
+    },
+    "descent_warning": {
+      "required": false,
+      "reason": null,
+      "remaining_daylight_min": null
+    },
+    "alerts": []
+  },
+  {
+    "uuid": "sess_demo_f1",
+    "ts": "2023-08-04T05:11:00+00:00",
+    "course_recommendation": null,
+    "risk": {
+      "e1_biometric": 0.307,
+      "e2_combined": 0.2659,
+      "representative": 0.307,
+      "level": 0,
+      "label": "정상"
+    },
+    "fatigue": {
+      "state": "정상",
+      "confidence": 1.0,
+      "nearest_shelter": null
+    },
+    "descent_warning": {
+      "required": false,
+      "reason": null,
+      "remaining_daylight_min": null
+    },
+    "alerts": []
+  },
+  {
+    "uuid": "sess_demo_f1",
+    "ts": "2023-08-04T05:12:00+00:00",
+    "course_recommendation": null,
+    "risk": {
+      "e1_biometric": 0.3092,
+      "e2_combined": 0.2683,
+      "representative": 0.3092,
+      "level": 0,
+      "label": "정상"
+    },
+    "fatigue": {
+      "state": "정상",
+      "confidence": 1.0,
+      "nearest_shelter": null
+    },
+    "descent_warning": {
+      "required": false,
+      "reason": null,
+      "remaining_daylight_min": null
+    },
+    "alerts": []
+  },
+  {
+    "uuid": "sess_demo_f1",
+    "ts": "2023-08-04T05:13:00+00:00",
+    "course_recommendation": null,
+    "risk": {
+      "e1_biometric": 0.3113,
+      "e2_combined": 0.2707,
+      "representative": 0.3113,
+      "level": 0,
+      "label": "정상"
+    },
+    "fatigue": {
+      "state": "정상",
+      "confidence": 1.0,
+      "nearest_shelter": null
+    },
+    "descent_warning": {
+      "required": false,
+      "reason": null,
+      "remaining_daylight_min": null
+    },
+    "alerts": []
+  },
+  {
+    "uuid": "sess_demo_f1",
+    "ts": "2023-08-04T05:14:00+00:00",
+    "course_recommendation": null,
+    "risk": {
+      "e1_biometric": 0.3135,
+      "e2_combined": 0.2732,
+      "representative": 0.3135,
+      "level": 0,
+      "label": "정상"
+    },
+    "fatigue": {
+      "state": "정상",
+      "confidence": 1.0,
+      "nearest_shelter": null
+    },
+    "descent_warning": {
+      "required": false,
+      "reason": null,
+      "remaining_daylight_min": null
+    },
+    "alerts": []
+  },
+  {
+    "uuid": "sess_demo_f1",
+    "ts": "2023-08-04T05:15:00+00:00",
+    "course_recommendation": null,
+    "risk": {
+      "e1_biometric": 0.3156,
+      "e2_combined": 0.2756,
+      "representative": 0.3156,
+      "level": 0,
+      "label": "정상"
+    },
+    "fatigue": {
+      "state": "정상",
+      "confidence": 1.0,
+      "nearest_shelter": null
+    },
+    "descent_warning": {
+      "required": false,
+      "reason": null,
+      "remaining_daylight_min": null
+    },
+    "alerts": []
+  },
+  {
+    "uuid": "sess_demo_f1",
+    "ts": "2023-08-04T05:16:00+00:00",
+    "course_recommendation": null,
+    "risk": {
+      "e1_biometric": 0.3177,
+      "e2_combined": 0.278,
+      "representative": 0.3177,
+      "level": 0,
+      "label": "정상"
+    },
+    "fatigue": {
+      "state": "정상",
+      "confidence": 0.9985,
+      "nearest_shelter": null
+    },
+    "descent_warning": {
+      "required": false,
+      "reason": null,
+      "remaining_daylight_min": null
+    },
+    "alerts": []
+  },
+  {
+    "uuid": "sess_demo_f1",
+    "ts": "2023-08-04T05:17:00+00:00",
+    "course_recommendation": null,
+    "risk": {
+      "e1_biometric": 0.3216,
+      "e2_combined": 0.2814,
+      "representative": 0.3216,
+      "level": 0,
+      "label": "정상"
+    },
+    "fatigue": {
+      "state": "정상",
+      "confidence": 0.9926,
+      "nearest_shelter": null
+    },
+    "descent_warning": {
+      "required": false,
+      "reason": null,
+      "remaining_daylight_min": null
+    },
+    "alerts": []
+  },
+  {
+    "uuid": "sess_demo_f1",
+    "ts": "2023-08-04T05:18:00+00:00",
+    "course_recommendation": null,
+    "risk": {
+      "e1_biometric": 0.3255,
+      "e2_combined": 0.2848,
+      "representative": 0.3255,
+      "level": 0,
+      "label": "정상"
+    },
+    "fatigue": {
+      "state": "정상",
+      "confidence": 0.9868,
+      "nearest_shelter": null
+    },
+    "descent_warning": {
+      "required": false,
+      "reason": null,
+      "remaining_daylight_min": null
+    },
+    "alerts": []
+  },
+  {
+    "uuid": "sess_demo_f1",
+    "ts": "2023-08-04T05:19:00+00:00",
+    "course_recommendation": null,
+    "risk": {
+      "e1_biometric": 0.3293,
+      "e2_combined": 0.2882,
+      "representative": 0.3293,
+      "level": 0,
+      "label": "정상"
+    },
+    "fatigue": {
+      "state": "정상",
+      "confidence": 0.9811,
+      "nearest_shelter": null
+    },
+    "descent_warning": {
+      "required": false,
+      "reason": null,
+      "remaining_daylight_min": null
+    },
+    "alerts": []
+  },
+  {
+    "uuid": "sess_demo_f1",
+    "ts": "2023-08-04T05:20:00+00:00",
+    "course_recommendation": null,
+    "risk": {
+      "e1_biometric": 0.3332,
+      "e2_combined": 0.2915,
+      "representative": 0.3332,
+      "level": 0,
+      "label": "정상"
+    },
+    "fatigue": {
+      "state": "정상",
+      "confidence": 0.9752,
+      "nearest_shelter": null
+    },
+    "descent_warning": {
+      "required": false,
+      "reason": null,
+      "remaining_daylight_min": null
+    },
+    "alerts": []
+  },
+  {
+    "uuid": "sess_demo_f1",
+    "ts": "2023-08-04T05:21:00+00:00",
+    "course_recommendation": null,
+    "risk": {
+      "e1_biometric": 0.337,
+      "e2_combined": 0.2949,
+      "representative": 0.337,
+      "level": 0,
+      "label": "정상"
+    },
+    "fatigue": {
+      "state": "정상",
+      "confidence": 0.9695,
+      "nearest_shelter": null
+    },
+    "descent_warning": {
+      "required": false,
+      "reason": null,
+      "remaining_daylight_min": null
+    },
+    "alerts": []
+  },
+  {
+    "uuid": "sess_demo_f1",
+    "ts": "2023-08-04T05:22:00+00:00",
+    "course_recommendation": null,
+    "risk": {
+      "e1_biometric": 0.3409,
+      "e2_combined": 0.2983,
+      "representative": 0.3409,
+      "level": 0,
+      "label": "정상"
+    },
+    "fatigue": {
+      "state": "정상",
+      "confidence": 0.9637,
+      "nearest_shelter": null
+    },
+    "descent_warning": {
+      "required": false,
+      "reason": null,
+      "remaining_daylight_min": null
+    },
+    "alerts": []
+  },
+  {
+    "uuid": "sess_demo_f1",
+    "ts": "2023-08-04T05:23:00+00:00",
+    "course_recommendation": null,
+    "risk": {
+      "e1_biometric": 0.3448,
+      "e2_combined": 0.3017,
+      "representative": 0.3448,
+      "level": 0,
+      "label": "정상"
+    },
+    "fatigue": {
+      "state": "정상",
+      "confidence": 0.9578,
+      "nearest_shelter": null
+    },
+    "descent_warning": {
+      "required": false,
+      "reason": null,
+      "remaining_daylight_min": null
+    },
+    "alerts": []
+  },
+  {
+    "uuid": "sess_demo_f1",
+    "ts": "2023-08-04T05:24:00+00:00",
+    "course_recommendation": null,
+    "risk": {
+      "e1_biometric": 0.3486,
+      "e2_combined": 0.305,
+      "representative": 0.3486,
+      "level": 0,
+      "label": "정상"
+    },
+    "fatigue": {
+      "state": "정상",
+      "confidence": 0.9521,
+      "nearest_shelter": null
+    },
+    "descent_warning": {
+      "required": false,
+      "reason": null,
+      "remaining_daylight_min": null
+    },
+    "alerts": []
+  },
+  {
+    "uuid": "sess_demo_f1",
+    "ts": "2023-08-04T05:25:00+00:00",
+    "course_recommendation": null,
+    "risk": {
+      "e1_biometric": 0.3497,
+      "e2_combined": 0.3068,
+      "representative": 0.3497,
+      "level": 0,
+      "label": "정상"
+    },
+    "fatigue": {
+      "state": "정상",
+      "confidence": 0.9505,
+      "nearest_shelter": null
+    },
+    "descent_warning": {
+      "required": false,
+      "reason": null,
+      "remaining_daylight_min": null
+    },
+    "alerts": []
+  },
+  {
+    "uuid": "sess_demo_f1",
+    "ts": "2023-08-04T05:26:00+00:00",
+    "course_recommendation": null,
+    "risk": {
+      "e1_biometric": 0.3507,
+      "e2_combined": 0.3086,
+      "representative": 0.3507,
+      "level": 0,
+      "label": "정상"
+    },
+    "fatigue": {
+      "state": "정상",
+      "confidence": 0.9489,
+      "nearest_shelter": null
+    },
+    "descent_warning": {
+      "required": false,
+      "reason": null,
+      "remaining_daylight_min": null
+    },
+    "alerts": []
+  },
+  {
+    "uuid": "sess_demo_f1",
+    "ts": "2023-08-04T05:27:00+00:00",
+    "course_recommendation": null,
+    "risk": {
+      "e1_biometric": 0.3517,
+      "e2_combined": 0.3105,
+      "representative": 0.3517,
+      "level": 0,
+      "label": "정상"
+    },
+    "fatigue": {
+      "state": "정상",
+      "confidence": 0.9475,
+      "nearest_shelter": null
+    },
+    "descent_warning": {
+      "required": false,
+      "reason": null,
+      "remaining_daylight_min": null
+    },
+    "alerts": []
+  },
+  {
+    "uuid": "sess_demo_f1",
+    "ts": "2023-08-04T05:28:00+00:00",
+    "course_recommendation": null,
+    "risk": {
+      "e1_biometric": 0.3527,
+      "e2_combined": 0.3123,
+      "representative": 0.3527,
+      "level": 0,
+      "label": "정상"
+    },
+    "fatigue": {
+      "state": "정상",
+      "confidence": 0.946,
+      "nearest_shelter": null
+    },
+    "descent_warning": {
+      "required": false,
+      "reason": null,
+      "remaining_daylight_min": null
+    },
+    "alerts": []
+  },
+  {
+    "uuid": "sess_demo_f1",
+    "ts": "2023-08-04T05:29:00+00:00",
+    "course_recommendation": null,
+    "risk": {
+      "e1_biometric": 0.3537,
+      "e2_combined": 0.3141,
+      "representative": 0.3537,
+      "level": 0,
+      "label": "정상"
+    },
+    "fatigue": {
+      "state": "정상",
+      "confidence": 0.9445,
+      "nearest_shelter": null
+    },
+    "descent_warning": {
+      "required": false,
+      "reason": null,
+      "remaining_daylight_min": null
+    },
+    "alerts": []
+  },
+  {
+    "uuid": "sess_demo_f1",
+    "ts": "2023-08-04T05:30:00+00:00",
+    "course_recommendation": null,
+    "risk": {
+      "e1_biometric": 0.3547,
+      "e2_combined": 0.3159,
+      "representative": 0.3547,
+      "level": 0,
+      "label": "정상"
+    },
+    "fatigue": {
+      "state": "정상",
+      "confidence": 0.9429,
+      "nearest_shelter": null
+    },
+    "descent_warning": {
+      "required": false,
+      "reason": null,
+      "remaining_daylight_min": null
+    },
+    "alerts": []
+  },
+  {
+    "uuid": "sess_demo_f1",
+    "ts": "2023-08-04T05:31:00+00:00",
+    "course_recommendation": null,
+    "risk": {
+      "e1_biometric": 0.3557,
+      "e2_combined": 0.3177,
+      "representative": 0.3557,
+      "level": 0,
+      "label": "정상"
+    },
+    "fatigue": {
+      "state": "정상",
+      "confidence": 0.9415,
+      "nearest_shelter": null
+    },
+    "descent_warning": {
+      "required": false,
+      "reason": null,
+      "remaining_daylight_min": null
+    },
+    "alerts": []
+  },
+  {
+    "uuid": "sess_demo_f1",
+    "ts": "2023-08-04T05:32:00+00:00",
+    "course_recommendation": null,
+    "risk": {
+      "e1_biometric": 0.3605,
+      "e2_combined": 0.3215,
+      "representative": 0.3605,
+      "level": 0,
+      "label": "정상"
+    },
+    "fatigue": {
+      "state": "정상",
+      "confidence": 0.9343,
+      "nearest_shelter": null
+    },
+    "descent_warning": {
+      "required": false,
+      "reason": null,
+      "remaining_daylight_min": null
+    },
+    "alerts": []
+  },
+  {
+    "uuid": "sess_demo_f1",
+    "ts": "2023-08-04T05:33:00+00:00",
+    "course_recommendation": null,
+    "risk": {
+      "e1_biometric": 0.3617,
+      "e2_combined": 0.3235,
+      "representative": 0.3617,
+      "level": 0,
+      "label": "정상"
+    },
+    "fatigue": {
+      "state": "정상",
+      "confidence": 0.9325,
+      "nearest_shelter": null
+    },
+    "descent_warning": {
+      "required": false,
+      "reason": null,
+      "remaining_daylight_min": null
+    },
+    "alerts": []
+  },
+  {
+    "uuid": "sess_demo_f1",
+    "ts": "2023-08-04T05:34:00+00:00",
+    "course_recommendation": null,
+    "risk": {
+      "e1_biometric": 0.3667,
+      "e2_combined": 0.3274,
+      "representative": 0.3667,
+      "level": 0,
+      "label": "정상"
+    },
+    "fatigue": {
+      "state": "정상",
+      "confidence": 0.9249,
+      "nearest_shelter": null
+    },
+    "descent_warning": {
+      "required": false,
+      "reason": null,
+      "remaining_daylight_min": null
+    },
+    "alerts": []
+  },
+  {
+    "uuid": "sess_demo_f1",
+    "ts": "2023-08-04T05:35:00+00:00",
+    "course_recommendation": null,
+    "risk": {
+      "e1_biometric": 0.3678,
+      "e2_combined": 0.3293,
+      "representative": 0.3678,
+      "level": 0,
+      "label": "정상"
+    },
+    "fatigue": {
+      "state": "정상",
+      "confidence": 0.9233,
+      "nearest_shelter": null
+    },
+    "descent_warning": {
+      "required": false,
+      "reason": null,
+      "remaining_daylight_min": null
+    },
+    "alerts": []
+  },
+  {
+    "uuid": "sess_demo_f1",
+    "ts": "2023-08-04T05:36:00+00:00",
+    "course_recommendation": null,
+    "risk": {
+      "e1_biometric": 0.3691,
+      "e2_combined": 0.3313,
+      "representative": 0.3691,
+      "level": 0,
+      "label": "정상"
+    },
+    "fatigue": {
+      "state": "정상",
+      "confidence": 0.9214,
+      "nearest_shelter": null
+    },
+    "descent_warning": {
+      "required": false,
+      "reason": null,
+      "remaining_daylight_min": null
+    },
+    "alerts": []
+  },
+  {
+    "uuid": "sess_demo_f1",
+    "ts": "2023-08-04T05:37:00+00:00",
+    "course_recommendation": null,
+    "risk": {
+      "e1_biometric": 0.374,
+      "e2_combined": 0.3352,
+      "representative": 0.374,
+      "level": 0,
+      "label": "정상"
+    },
+    "fatigue": {
+      "state": "정상",
+      "confidence": 0.914,
+      "nearest_shelter": null
+    },
+    "descent_warning": {
+      "required": false,
+      "reason": null,
+      "remaining_daylight_min": null
+    },
+    "alerts": []
+  },
+  {
+    "uuid": "sess_demo_f1",
+    "ts": "2023-08-04T05:38:00+00:00",
+    "course_recommendation": null,
+    "risk": {
+      "e1_biometric": 0.3752,
+      "e2_combined": 0.3371,
+      "representative": 0.3752,
+      "level": 0,
+      "label": "정상"
+    },
+    "fatigue": {
+      "state": "정상",
+      "confidence": 0.9122,
+      "nearest_shelter": null
+    },
+    "descent_warning": {
+      "required": false,
+      "reason": null,
+      "remaining_daylight_min": null
+    },
+    "alerts": []
+  },
+  {
+    "uuid": "sess_demo_f1",
+    "ts": "2023-08-04T05:39:00+00:00",
+    "course_recommendation": null,
+    "risk": {
+      "e1_biometric": 0.3801,
+      "e2_combined": 0.3411,
+      "representative": 0.3801,
+      "level": 0,
+      "label": "정상"
+    },
+    "fatigue": {
+      "state": "정상",
+      "confidence": 0.9049,
+      "nearest_shelter": null
+    },
+    "descent_warning": {
+      "required": false,
+      "reason": null,
+      "remaining_daylight_min": null
+    },
+    "alerts": []
+  },
+  {
+    "uuid": "sess_demo_f1",
+    "ts": "2023-08-04T05:40:00+00:00",
+    "course_recommendation": null,
+    "risk": {
+      "e1_biometric": 0.3814,
+      "e2_combined": 0.343,
+      "representative": 0.3814,
+      "level": 0,
+      "label": "정상"
+    },
+    "fatigue": {
+      "state": "정상",
+      "confidence": 0.9029,
+      "nearest_shelter": null
+    },
+    "descent_warning": {
+      "required": false,
+      "reason": null,
+      "remaining_daylight_min": null
+    },
+    "alerts": []
+  },
+  {
+    "uuid": "sess_demo_f1",
+    "ts": "2023-08-04T05:41:00+00:00",
+    "course_recommendation": null,
+    "risk": {
+      "e1_biometric": 0.3889,
+      "e2_combined": 0.3484,
+      "representative": 0.3889,
+      "level": 0,
+      "label": "정상"
+    },
+    "fatigue": {
+      "state": "정상",
+      "confidence": 0.8917,
+      "nearest_shelter": null
+    },
+    "descent_warning": {
+      "required": false,
+      "reason": null,
+      "remaining_daylight_min": null
+    },
+    "alerts": []
+  },
+  {
+    "uuid": "sess_demo_f1",
+    "ts": "2023-08-04T05:42:00+00:00",
+    "course_recommendation": null,
+    "risk": {
+      "e1_biometric": 0.4002,
+      "e2_combined": 0.3559,
+      "representative": 0.4002,
+      "level": 0,
+      "label": "정상"
+    },
+    "fatigue": {
+      "state": "정상",
+      "confidence": 0.8747,
+      "nearest_shelter": null
+    },
+    "descent_warning": {
+      "required": false,
+      "reason": null,
+      "remaining_daylight_min": null
+    },
+    "alerts": []
+  },
+  {
+    "uuid": "sess_demo_f1",
+    "ts": "2023-08-04T05:43:00+00:00",
+    "course_recommendation": null,
+    "risk": {
+      "e1_biometric": 0.4077,
+      "e2_combined": 0.3613,
+      "representative": 0.4077,
+      "level": 0,
+      "label": "정상"
+    },
+    "fatigue": {
+      "state": "정상",
+      "confidence": 0.8635,
+      "nearest_shelter": null
+    },
+    "descent_warning": {
+      "required": false,
+      "reason": null,
+      "remaining_daylight_min": null
+    },
+    "alerts": []
+  },
+  {
+    "uuid": "sess_demo_f1",
+    "ts": "2023-08-04T05:44:00+00:00",
+    "course_recommendation": null,
+    "risk": {
+      "e1_biometric": 0.419,
+      "e2_combined": 0.3687,
+      "representative": 0.419,
+      "level": 0,
+      "label": "정상"
+    },
+    "fatigue": {
+      "state": "휴식 권고",
+      "confidence": 0.8465,
+      "nearest_shelter": {
+        "poi_id": null,
+        "name": "쉼터",
+        "lat": 37.426212,
+        "lon": 127.047989,
+        "distance_m": 337,
+        "est_min": 7
+      }
+    },
+    "descent_warning": {
+      "required": false,
+      "reason": null,
+      "remaining_daylight_min": null
+    },
+    "alerts": [
+      {
+        "type": "F1",
+        "level": 1,
+        "title": "잠시 쉬어가세요",
+        "message": "심박과 피로 신호가 평소보다 높습니다. 가까운 쉼터에서 5분 이상 휴식하세요."
+      }
+    ]
+  },
+  {
+    "uuid": "sess_demo_f1",
+    "ts": "2023-08-04T05:45:00+00:00",
+    "course_recommendation": null,
+    "risk": {
+      "e1_biometric": 0.4265,
+      "e2_combined": 0.402,
+      "representative": 0.4265,
+      "level": 0,
+      "label": "정상"
+    },
+    "fatigue": {
+      "state": "휴식 권고",
+      "confidence": 0.8353,
+      "nearest_shelter": {
+        "poi_id": null,
+        "name": "쉼터",
+        "lat": 37.426212,
+        "lon": 127.047989,
+        "distance_m": 351,
+        "est_min": 8
+      }
+    },
+    "descent_warning": {
+      "required": false,
+      "reason": null,
+      "remaining_daylight_min": null
+    },
+    "alerts": [
+      {
+        "type": "F1",
+        "level": 1,
+        "title": "잠시 쉬어가세요",
+        "message": "심박과 피로 신호가 평소보다 높습니다. 가까운 쉼터에서 5분 이상 휴식하세요."
+      }
+    ]
+  },
+  {
+    "uuid": "sess_demo_f1",
+    "ts": "2023-08-04T05:46:00+00:00",
+    "course_recommendation": null,
+    "risk": {
+      "e1_biometric": 0.4341,
+      "e2_combined": 0.4118,
+      "representative": 0.4341,
+      "level": 0,
+      "label": "정상"
+    },
+    "fatigue": {
+      "state": "휴식 권고",
+      "confidence": 0.8239,
+      "nearest_shelter": {
+        "poi_id": null,
+        "name": "쉼터",
+        "lat": 37.426212,
+        "lon": 127.047989,
+        "distance_m": 358,
+        "est_min": 8
+      }
+    },
+    "descent_warning": {
+      "required": false,
+      "reason": null,
+      "remaining_daylight_min": null
+    },
+    "alerts": [
+      {
+        "type": "F1",
+        "level": 1,
+        "title": "잠시 쉬어가세요",
+        "message": "심박과 피로 신호가 평소보다 높습니다. 가까운 쉼터에서 5분 이상 휴식하세요."
+      }
+    ]
+  },
+  {
+    "uuid": "sess_demo_f1",
+    "ts": "2023-08-04T05:47:00+00:00",
+    "course_recommendation": null,
+    "risk": {
+      "e1_biometric": 0.4454,
+      "e2_combined": 0.4237,
+      "representative": 0.4454,
+      "level": 0,
+      "label": "정상"
+    },
+    "fatigue": {
+      "state": "휴식 권고",
+      "confidence": 0.8069,
+      "nearest_shelter": {
+        "poi_id": null,
+        "name": "쉼터",
+        "lat": 37.426212,
+        "lon": 127.047989,
+        "distance_m": 365,
+        "est_min": 8
+      }
+    },
+    "descent_warning": {
+      "required": false,
+      "reason": null,
+      "remaining_daylight_min": null
+    },
+    "alerts": [
+      {
+        "type": "F1",
+        "level": 1,
+        "title": "잠시 쉬어가세요",
+        "message": "심박과 피로 신호가 평소보다 높습니다. 가까운 쉼터에서 5분 이상 휴식하세요."
+      }
+    ]
+  },
+  {
+    "uuid": "sess_demo_f1",
+    "ts": "2023-08-04T05:48:00+00:00",
+    "course_recommendation": null,
+    "risk": {
+      "e1_biometric": 0.4529,
+      "e2_combined": 0.4336,
+      "representative": 0.4529,
+      "level": 0,
+      "label": "정상"
+    },
+    "fatigue": {
+      "state": "휴식 권고",
+      "confidence": 0.7956,
+      "nearest_shelter": {
+        "poi_id": null,
+        "name": "쉼터",
+        "lat": 37.426212,
+        "lon": 127.047989,
+        "distance_m": 373,
+        "est_min": 8
+      }
+    },
+    "descent_warning": {
+      "required": false,
+      "reason": null,
+      "remaining_daylight_min": null
+    },
+    "alerts": [
+      {
+        "type": "F1",
+        "level": 1,
+        "title": "잠시 쉬어가세요",
+        "message": "심박과 피로 신호가 평소보다 높습니다. 가까운 쉼터에서 5분 이상 휴식하세요."
+      }
+    ]
+  },
+  {
+    "uuid": "sess_demo_f1",
+    "ts": "2023-08-04T05:49:00+00:00",
+    "course_recommendation": null,
+    "risk": {
+      "e1_biometric": 0.4645,
+      "e2_combined": 0.4457,
+      "representative": 0.4645,
+      "level": 0,
+      "label": "정상"
+    },
+    "fatigue": {
+      "state": "휴식 권고",
+      "confidence": 0.7782,
+      "nearest_shelter": {
+        "poi_id": null,
+        "name": "쉼터",
+        "lat": 37.426212,
+        "lon": 127.047989,
+        "distance_m": 380,
+        "est_min": 8
+      }
+    },
+    "descent_warning": {
+      "required": false,
+      "reason": null,
+      "remaining_daylight_min": null
+    },
+    "alerts": [
+      {
+        "type": "F1",
+        "level": 1,
+        "title": "잠시 쉬어가세요",
+        "message": "심박과 피로 신호가 평소보다 높습니다. 가까운 쉼터에서 5분 이상 휴식하세요."
+      }
+    ]
+  },
+  {
+    "uuid": "sess_demo_f1",
+    "ts": "2023-08-04T05:50:00+00:00",
+    "course_recommendation": null,
+    "risk": {
+      "e1_biometric": 0.4723,
+      "e2_combined": 0.4557,
+      "representative": 0.4723,
+      "level": 0,
+      "label": "정상"
+    },
+    "fatigue": {
+      "state": "휴식 권고",
+      "confidence": 0.7666,
+      "nearest_shelter": {
+        "poi_id": null,
+        "name": "벤치와 데크 시설",
+        "lat": 37.430763,
+        "lon": 127.047287,
+        "distance_m": 186,
+        "est_min": 4
+      }
+    },
+    "descent_warning": {
+      "required": false,
+      "reason": null,
+      "remaining_daylight_min": null
+    },
+    "alerts": [
+      {
+        "type": "F1",
+        "level": 1,
+        "title": "잠시 쉬어가세요",
+        "message": "심박과 피로 신호가 평소보다 높습니다. 가까운 쉼터에서 5분 이상 휴식하세요."
+      }
+    ]
+  },
+  {
+    "uuid": "sess_demo_f1",
+    "ts": "2023-08-04T05:51:00+00:00",
+    "course_recommendation": null,
+    "risk": {
+      "e1_biometric": 0.4802,
+      "e2_combined": 0.4657,
+      "representative": 0.4802,
+      "level": 0,
+      "label": "정상"
+    },
+    "fatigue": {
+      "state": "휴식 권고",
+      "confidence": 0.7547,
+      "nearest_shelter": {
+        "poi_id": null,
+        "name": "벤치와 데크 시설",
+        "lat": 37.430763,
+        "lon": 127.047287,
+        "distance_m": 185,
+        "est_min": 4
+      }
+    },
+    "descent_warning": {
+      "required": false,
+      "reason": null,
+      "remaining_daylight_min": null
+    },
+    "alerts": [
+      {
+        "type": "F1",
+        "level": 1,
+        "title": "잠시 쉬어가세요",
+        "message": "심박과 피로 신호가 평소보다 높습니다. 가까운 쉼터에서 5분 이상 휴식하세요."
+      }
+    ]
+  },
+  {
+    "uuid": "sess_demo_f1",
+    "ts": "2023-08-04T05:52:00+00:00",
+    "course_recommendation": null,
+    "risk": {
+      "e1_biometric": 0.4918,
+      "e2_combined": 0.4778,
+      "representative": 0.4918,
+      "level": 0,
+      "label": "정상"
+    },
+    "fatigue": {
+      "state": "휴식 권고",
+      "confidence": 0.7373,
+      "nearest_shelter": {
+        "poi_id": null,
+        "name": "벤치",
+        "lat": 37.43096730280242,
+        "lon": 127.04754372086268,
+        "distance_m": 183,
+        "est_min": 4
+      }
+    },
+    "descent_warning": {
+      "required": false,
+      "reason": null,
+      "remaining_daylight_min": null
+    },
+    "alerts": [
+      {
+        "type": "F1",
+        "level": 1,
+        "title": "잠시 쉬어가세요",
+        "message": "심박과 피로 신호가 평소보다 높습니다. 가까운 쉼터에서 5분 이상 휴식하세요."
+      }
+    ]
+  },
+  {
+    "uuid": "sess_demo_f1",
+    "ts": "2023-08-04T05:53:00+00:00",
+    "course_recommendation": null,
+    "risk": {
+      "e1_biometric": 0.4996,
+      "e2_combined": 0.4878,
+      "representative": 0.4996,
+      "level": 0,
+      "label": "정상"
+    },
+    "fatigue": {
+      "state": "휴식 권고",
+      "confidence": 0.7256,
+      "nearest_shelter": {
+        "poi_id": null,
+        "name": "벤치",
+        "lat": 37.43096730280242,
+        "lon": 127.04754372086268,
+        "distance_m": 181,
+        "est_min": 4
+      }
+    },
+    "descent_warning": {
+      "required": false,
+      "reason": null,
+      "remaining_daylight_min": null
+    },
+    "alerts": [
+      {
+        "type": "F1",
+        "level": 1,
+        "title": "잠시 쉬어가세요",
+        "message": "심박과 피로 신호가 평소보다 높습니다. 가까운 쉼터에서 5분 이상 휴식하세요."
+      }
+    ]
+  },
+  {
+    "uuid": "sess_demo_f1",
+    "ts": "2023-08-04T05:54:00+00:00",
+    "course_recommendation": null,
+    "risk": {
+      "e1_biometric": 0.5112,
+      "e2_combined": 0.4998,
+      "representative": 0.5112,
+      "level": 1,
+      "label": "주의"
+    },
+    "fatigue": {
+      "state": "휴식 권고",
+      "confidence": 0.7082,
+      "nearest_shelter": {
+        "poi_id": null,
+        "name": "벤치",
+        "lat": 37.43096730280242,
+        "lon": 127.04754372086268,
+        "distance_m": 179,
+        "est_min": 4
+      }
+    },
+    "descent_warning": {
+      "required": false,
+      "reason": null,
+      "remaining_daylight_min": null
+    },
+    "alerts": [
+      {
+        "type": "F1",
+        "level": 1,
+        "title": "잠시 쉬어가세요",
+        "message": "심박과 피로 신호가 평소보다 높습니다. 가까운 쉼터에서 5분 이상 휴식하세요."
+      }
+    ]
+  },
+  {
+    "uuid": "sess_demo_f1",
+    "ts": "2023-08-04T05:55:00+00:00",
+    "course_recommendation": null,
+    "risk": {
+      "e1_biometric": 0.5191,
+      "e2_combined": 0.5098,
+      "representative": 0.5191,
+      "level": 1,
+      "label": "주의"
+    },
+    "fatigue": {
+      "state": "휴식 권고",
+      "confidence": 0.6964,
+      "nearest_shelter": {
+        "poi_id": null,
+        "name": "벤치",
+        "lat": 37.43096730280242,
+        "lon": 127.04754372086268,
+        "distance_m": 178,
+        "est_min": 4
+      }
+    },
+    "descent_warning": {
+      "required": false,
+      "reason": null,
+      "remaining_daylight_min": null
+    },
+    "alerts": [
+      {
+        "type": "F1",
+        "level": 1,
+        "title": "잠시 쉬어가세요",
+        "message": "심박과 피로 신호가 평소보다 높습니다. 가까운 쉼터에서 5분 이상 휴식하세요."
+      }
+    ]
+  },
+  {
+    "uuid": "sess_demo_f1",
+    "ts": "2023-08-04T05:56:00+00:00",
+    "course_recommendation": null,
+    "risk": {
+      "e1_biometric": 0.5307,
+      "e2_combined": 0.5219,
+      "representative": 0.5307,
+      "level": 1,
+      "label": "주의"
+    },
+    "fatigue": {
+      "state": "휴식 권고",
+      "confidence": 0.679,
+      "nearest_shelter": {
+        "poi_id": null,
+        "name": "벤치",
+        "lat": 37.43096730280242,
+        "lon": 127.04754372086268,
+        "distance_m": 177,
+        "est_min": 4
+      }
+    },
+    "descent_warning": {
+      "required": false,
+      "reason": null,
+      "remaining_daylight_min": null
+    },
+    "alerts": [
+      {
+        "type": "F1",
+        "level": 1,
+        "title": "잠시 쉬어가세요",
+        "message": "심박과 피로 신호가 평소보다 높습니다. 가까운 쉼터에서 5분 이상 휴식하세요."
+      }
+    ]
+  },
+  {
+    "uuid": "sess_demo_f1",
+    "ts": "2023-08-04T05:57:00+00:00",
+    "course_recommendation": null,
+    "risk": {
+      "e1_biometric": 0.539,
+      "e2_combined": 0.5322,
+      "representative": 0.539,
+      "level": 1,
+      "label": "주의"
+    },
+    "fatigue": {
+      "state": "휴식 권고",
+      "confidence": 0.6665,
+      "nearest_shelter": {
+        "poi_id": null,
+        "name": "벤치",
+        "lat": 37.43096730280242,
+        "lon": 127.04754372086268,
+        "distance_m": 176,
+        "est_min": 4
+      }
+    },
+    "descent_warning": {
+      "required": false,
+      "reason": null,
+      "remaining_daylight_min": null
+    },
+    "alerts": [
+      {
+        "type": "F1",
+        "level": 1,
+        "title": "잠시 쉬어가세요",
+        "message": "심박과 피로 신호가 평소보다 높습니다. 가까운 쉼터에서 5분 이상 휴식하세요."
+      }
+    ]
+  },
+  {
+    "uuid": "sess_demo_f1",
+    "ts": "2023-08-04T05:58:00+00:00",
+    "course_recommendation": null,
+    "risk": {
+      "e1_biometric": 0.5511,
+      "e2_combined": 0.5445,
+      "representative": 0.5511,
+      "level": 1,
+      "label": "주의"
+    },
+    "fatigue": {
+      "state": "휴식 권고",
+      "confidence": 0.6483,
+      "nearest_shelter": {
+        "poi_id": null,
+        "name": "벤치",
+        "lat": 37.43096730280242,
+        "lon": 127.04754372086268,
+        "distance_m": 176,
+        "est_min": 4
+      }
+    },
+    "descent_warning": {
+      "required": false,
+      "reason": null,
+      "remaining_daylight_min": null
+    },
+    "alerts": [
+      {
+        "type": "F1",
+        "level": 1,
+        "title": "잠시 쉬어가세요",
+        "message": "심박과 피로 신호가 평소보다 높습니다. 가까운 쉼터에서 5분 이상 휴식하세요."
+      }
+    ]
+  },
+  {
+    "uuid": "sess_demo_f1",
+    "ts": "2023-08-04T05:59:00+00:00",
+    "course_recommendation": null,
+    "risk": {
+      "e1_biometric": 0.5595,
+      "e2_combined": 0.5548,
+      "representative": 0.5595,
+      "level": 1,
+      "label": "주의"
+    },
+    "fatigue": {
+      "state": "휴식 권고",
+      "confidence": 0.6358,
+      "nearest_shelter": {
+        "poi_id": null,
+        "name": "벤치",
+        "lat": 37.43096730280242,
+        "lon": 127.04754372086268,
+        "distance_m": 176,
+        "est_min": 4
+      }
+    },
+    "descent_warning": {
+      "required": false,
+      "reason": null,
+      "remaining_daylight_min": null
+    },
+    "alerts": [
+      {
+        "type": "F1",
+        "level": 1,
+        "title": "잠시 쉬어가세요",
+        "message": "심박과 피로 신호가 평소보다 높습니다. 가까운 쉼터에서 5분 이상 휴식하세요."
+      }
+    ]
+  },
+  {
+    "uuid": "sess_demo_f1",
+    "ts": "2023-08-04T06:00:00+00:00",
+    "course_recommendation": null,
+    "risk": {
+      "e1_biometric": 0.5678,
+      "e2_combined": 0.5651,
+      "representative": 0.5678,
+      "level": 1,
+      "label": "주의"
+    },
+    "fatigue": {
+      "state": "휴식 권고",
+      "confidence": 0.6233,
+      "nearest_shelter": {
+        "poi_id": null,
+        "name": "벤치",
+        "lat": 37.43096730280242,
+        "lon": 127.04754372086268,
+        "distance_m": 177,
+        "est_min": 4
+      }
+    },
+    "descent_warning": {
+      "required": false,
+      "reason": null,
+      "remaining_daylight_min": null
+    },
+    "alerts": [
+      {
+        "type": "F1",
+        "level": 1,
+        "title": "잠시 쉬어가세요",
+        "message": "심박과 피로 신호가 평소보다 높습니다. 가까운 쉼터에서 5분 이상 휴식하세요."
+      }
+    ]
+  },
+  {
+    "uuid": "sess_demo_f1",
+    "ts": "2023-08-04T06:01:00+00:00",
+    "course_recommendation": null,
+    "risk": {
+      "e1_biometric": 0.58,
+      "e2_combined": 0.5775,
+      "representative": 0.58,
+      "level": 1,
+      "label": "주의"
+    },
+    "fatigue": {
+      "state": "휴식 권고",
+      "confidence": 0.605,
+      "nearest_shelter": {
+        "poi_id": null,
+        "name": "벤치",
+        "lat": 37.43096730280242,
+        "lon": 127.04754372086268,
+        "distance_m": 178,
+        "est_min": 4
+      }
+    },
+    "descent_warning": {
+      "required": false,
+      "reason": null,
+      "remaining_daylight_min": null
+    },
+    "alerts": [
+      {
+        "type": "F1",
+        "level": 1,
+        "title": "잠시 쉬어가세요",
+        "message": "심박과 피로 신호가 평소보다 높습니다. 가까운 쉼터에서 5분 이상 휴식하세요."
+      }
+    ]
+  },
+  {
+    "uuid": "sess_demo_f1",
+    "ts": "2023-08-04T06:02:00+00:00",
+    "course_recommendation": null,
+    "risk": {
+      "e1_biometric": 0.5883,
+      "e2_combined": 0.5878,
+      "representative": 0.5883,
+      "level": 1,
+      "label": "주의"
+    },
+    "fatigue": {
+      "state": "휴식 권고",
+      "confidence": 0.5925,
+      "nearest_shelter": {
+        "poi_id": null,
+        "name": "벤치",
+        "lat": 37.43096730280242,
+        "lon": 127.04754372086268,
+        "distance_m": 179,
+        "est_min": 4
+      }
+    },
+    "descent_warning": {
+      "required": false,
+      "reason": null,
+      "remaining_daylight_min": null
+    },
+    "alerts": [
+      {
+        "type": "F1",
+        "level": 1,
+        "title": "잠시 쉬어가세요",
+        "message": "심박과 피로 신호가 평소보다 높습니다. 가까운 쉼터에서 5분 이상 휴식하세요."
+      }
+    ]
+  },
+  {
+    "uuid": "sess_demo_f1",
+    "ts": "2023-08-04T06:03:00+00:00",
+    "course_recommendation": null,
+    "risk": {
+      "e1_biometric": 0.6004,
+      "e2_combined": 0.6001,
+      "representative": 0.6004,
+      "level": 1,
+      "label": "주의"
+    },
+    "fatigue": {
+      "state": "휴식 권고",
+      "confidence": 0.5744,
+      "nearest_shelter": {
+        "poi_id": null,
+        "name": "벤치",
+        "lat": 37.43096730280242,
+        "lon": 127.04754372086268,
+        "distance_m": 180,
+        "est_min": 4
+      }
+    },
+    "descent_warning": {
+      "required": false,
+      "reason": null,
+      "remaining_daylight_min": null
+    },
+    "alerts": [
+      {
+        "type": "F1",
+        "level": 1,
+        "title": "잠시 쉬어가세요",
+        "message": "심박과 피로 신호가 평소보다 높습니다. 가까운 쉼터에서 5분 이상 휴식하세요."
+      }
+    ]
+  },
+  {
+    "uuid": "sess_demo_f1",
+    "ts": "2023-08-04T06:04:00+00:00",
+    "course_recommendation": null,
+    "risk": {
+      "e1_biometric": 0.6088,
+      "e2_combined": 0.6104,
+      "representative": 0.6104,
+      "level": 1,
+      "label": "주의"
+    },
+    "fatigue": {
+      "state": "휴식 권고",
+      "confidence": 0.5594,
+      "nearest_shelter": {
+        "poi_id": null,
+        "name": "벤치",
+        "lat": 37.43096730280242,
+        "lon": 127.04754372086268,
+        "distance_m": 182,
+        "est_min": 4
+      }
+    },
+    "descent_warning": {
+      "required": false,
+      "reason": null,
+      "remaining_daylight_min": null
+    },
+    "alerts": [
+      {
+        "type": "F1",
+        "level": 1,
+        "title": "잠시 쉬어가세요",
+        "message": "심박과 피로 신호가 평소보다 높습니다. 가까운 쉼터에서 5분 이상 휴식하세요."
+      }
+    ]
+  },
+  {
+    "uuid": "sess_demo_f1",
+    "ts": "2023-08-04T06:05:00+00:00",
+    "course_recommendation": null,
+    "risk": {
+      "e1_biometric": 0.6183,
+      "e2_combined": 0.6214,
+      "representative": 0.6214,
+      "level": 1,
+      "label": "주의"
+    },
+    "fatigue": {
+      "state": "휴식 권고",
+      "confidence": 0.5429,
+      "nearest_shelter": {
+        "poi_id": null,
+        "name": "벤치",
+        "lat": 37.43096730280242,
+        "lon": 127.04754372086268,
+        "distance_m": 185,
+        "est_min": 4
+      }
+    },
+    "descent_warning": {
+      "required": false,
+      "reason": null,
+      "remaining_daylight_min": null
+    },
+    "alerts": [
+      {
+        "type": "F1",
+        "level": 1,
+        "title": "잠시 쉬어가세요",
+        "message": "심박과 피로 신호가 평소보다 높습니다. 가까운 쉼터에서 5분 이상 휴식하세요."
+      }
+    ]
+  },
+  {
+    "uuid": "sess_demo_f1",
+    "ts": "2023-08-04T06:06:00+00:00",
+    "course_recommendation": null,
+    "risk": {
+      "e1_biometric": 0.6242,
+      "e2_combined": 0.6258,
+      "representative": 0.6258,
+      "level": 1,
+      "label": "주의"
+    },
+    "fatigue": {
+      "state": "휴식 권고",
+      "confidence": 0.5363,
+      "nearest_shelter": {
+        "poi_id": null,
+        "name": "벤치",
+        "lat": 37.43096730280242,
+        "lon": 127.04754372086268,
+        "distance_m": 187,
+        "est_min": 4
+      }
+    },
+    "descent_warning": {
+      "required": false,
+      "reason": null,
+      "remaining_daylight_min": null
+    },
+    "alerts": [
+      {
+        "type": "F1",
+        "level": 1,
+        "title": "잠시 쉬어가세요",
+        "message": "심박과 피로 신호가 평소보다 높습니다. 가까운 쉼터에서 5분 이상 휴식하세요."
+      }
+    ]
+  },
+  {
+    "uuid": "sess_demo_f1",
+    "ts": "2023-08-04T06:07:00+00:00",
+    "course_recommendation": null,
+    "risk": {
+      "e1_biometric": 0.6337,
+      "e2_combined": 0.6324,
+      "representative": 0.6337,
+      "level": 1,
+      "label": "주의"
+    },
+    "fatigue": {
+      "state": "휴식 권고",
+      "confidence": 0.5244,
+      "nearest_shelter": {
+        "poi_id": null,
+        "name": "벤치",
+        "lat": 37.43096730280242,
+        "lon": 127.04754372086268,
+        "distance_m": 190,
+        "est_min": 4
+      }
+    },
+    "descent_warning": {
+      "required": false,
+      "reason": null,
+      "remaining_daylight_min": null
+    },
+    "alerts": [
+      {
+        "type": "F1",
+        "level": 1,
+        "title": "잠시 쉬어가세요",
+        "message": "심박과 피로 신호가 평소보다 높습니다. 가까운 쉼터에서 5분 이상 휴식하세요."
+      }
+    ]
+  },
+  {
+    "uuid": "sess_demo_f1",
+    "ts": "2023-08-04T06:08:00+00:00",
+    "course_recommendation": null,
+    "risk": {
+      "e1_biometric": 0.6433,
+      "e2_combined": 0.6389,
+      "representative": 0.6433,
+      "level": 1,
+      "label": "주의"
+    },
+    "fatigue": {
+      "state": "휴식 권고",
+      "confidence": 0.5101,
+      "nearest_shelter": {
+        "poi_id": null,
+        "name": "벤치",
+        "lat": 37.43096730280242,
+        "lon": 127.04754372086268,
+        "distance_m": 193,
+        "est_min": 4
+      }
+    },
+    "descent_warning": {
+      "required": false,
+      "reason": null,
+      "remaining_daylight_min": null
+    },
+    "alerts": [
+      {
+        "type": "F1",
+        "level": 1,
+        "title": "잠시 쉬어가세요",
+        "message": "심박과 피로 신호가 평소보다 높습니다. 가까운 쉼터에서 5분 이상 휴식하세요."
+      }
+    ]
+  },
+  {
+    "uuid": "sess_demo_f1",
+    "ts": "2023-08-04T06:09:00+00:00",
+    "course_recommendation": null,
+    "risk": {
+      "e1_biometric": 0.6491,
+      "e2_combined": 0.6433,
+      "representative": 0.6491,
+      "level": 1,
+      "label": "주의"
+    },
+    "fatigue": {
+      "state": "휴식 권고",
+      "confidence": 0.5013,
+      "nearest_shelter": {
+        "poi_id": null,
+        "name": "벤치",
+        "lat": 37.43096730280242,
+        "lon": 127.04754372086268,
+        "distance_m": 196,
+        "est_min": 4
+      }
+    },
+    "descent_warning": {
+      "required": false,
+      "reason": null,
+      "remaining_daylight_min": null
+    },
+    "alerts": [
+      {
+        "type": "F1",
+        "level": 1,
+        "title": "잠시 쉬어가세요",
+        "message": "심박과 피로 신호가 평소보다 높습니다. 가까운 쉼터에서 5분 이상 휴식하세요."
+      }
+    ]
+  },
+  {
+    "uuid": "sess_demo_f1",
+    "ts": "2023-08-04T06:10:00+00:00",
+    "course_recommendation": null,
+    "risk": {
+      "e1_biometric": 0.6587,
+      "e2_combined": 0.6498,
+      "representative": 0.6587,
+      "level": 2,
+      "label": "경고"
+    },
+    "fatigue": {
+      "state": "휴식 권고",
+      "confidence": 0.513,
+      "nearest_shelter": {
+        "poi_id": null,
+        "name": "벤치",
+        "lat": 37.43096730280242,
+        "lon": 127.04754372086268,
+        "distance_m": 200,
+        "est_min": 4
+      }
+    },
+    "descent_warning": {
+      "required": false,
+      "reason": null,
+      "remaining_daylight_min": null
+    },
+    "alerts": [
+      {
+        "type": "F1",
+        "level": 1,
+        "title": "잠시 쉬어가세요",
+        "message": "심박과 피로 신호가 평소보다 높습니다. 가까운 쉼터에서 5분 이상 휴식하세요."
+      }
+    ]
+  },
+  {
+    "uuid": "sess_demo_f1",
+    "ts": "2023-08-04T06:11:00+00:00",
+    "course_recommendation": null,
+    "risk": {
+      "e1_biometric": 0.6646,
+      "e2_combined": 0.6543,
+      "representative": 0.6646,
+      "level": 2,
+      "label": "경고"
+    },
+    "fatigue": {
+      "state": "휴식 권고",
+      "confidence": 0.5219,
+      "nearest_shelter": {
+        "poi_id": null,
+        "name": "벤치",
+        "lat": 37.43096730280242,
+        "lon": 127.04754372086268,
+        "distance_m": 204,
+        "est_min": 4
+      }
+    },
+    "descent_warning": {
+      "required": false,
+      "reason": null,
+      "remaining_daylight_min": null
+    },
+    "alerts": [
+      {
+        "type": "F1",
+        "level": 1,
+        "title": "잠시 쉬어가세요",
+        "message": "심박과 피로 신호가 평소보다 높습니다. 가까운 쉼터에서 5분 이상 휴식하세요."
+      }
+    ]
+  },
+  {
+    "uuid": "sess_demo_f1",
+    "ts": "2023-08-04T06:12:00+00:00",
+    "course_recommendation": null,
+    "risk": {
+      "e1_biometric": 0.6741,
+      "e2_combined": 0.6608,
+      "representative": 0.6741,
+      "level": 2,
+      "label": "경고"
+    },
+    "fatigue": {
+      "state": "휴식 권고",
+      "confidence": 0.5362,
+      "nearest_shelter": {
+        "poi_id": null,
+        "name": "벤치",
+        "lat": 37.43096730280242,
+        "lon": 127.04754372086268,
+        "distance_m": 208,
+        "est_min": 5
+      }
+    },
+    "descent_warning": {
+      "required": false,
+      "reason": null,
+      "remaining_daylight_min": null
+    },
+    "alerts": [
+      {
+        "type": "F1",
+        "level": 1,
+        "title": "잠시 쉬어가세요",
+        "message": "심박과 피로 신호가 평소보다 높습니다. 가까운 쉼터에서 5분 이상 휴식하세요."
+      }
+    ]
+  },
+  {
+    "uuid": "sess_demo_f1",
+    "ts": "2023-08-04T06:13:00+00:00",
+    "course_recommendation": null,
+    "risk": {
+      "e1_biometric": 0.6762,
+      "e2_combined": 0.6632,
+      "representative": 0.6762,
+      "level": 2,
+      "label": "경고"
+    },
+    "fatigue": {
+      "state": "휴식 권고",
+      "confidence": 0.5393,
+      "nearest_shelter": {
+        "poi_id": null,
+        "name": "벤치",
+        "lat": 37.43096730280242,
+        "lon": 127.04754372086268,
+        "distance_m": 212,
+        "est_min": 5
+      }
+    },
+    "descent_warning": {
+      "required": false,
+      "reason": null,
+      "remaining_daylight_min": null
+    },
+    "alerts": [
+      {
+        "type": "F1",
+        "level": 1,
+        "title": "잠시 쉬어가세요",
+        "message": "심박과 피로 신호가 평소보다 높습니다. 가까운 쉼터에서 5분 이상 휴식하세요."
+      }
+    ]
+  },
+  {
+    "uuid": "sess_demo_f1",
+    "ts": "2023-08-04T06:14:00+00:00",
+    "course_recommendation": null,
+    "risk": {
+      "e1_biometric": 0.6819,
+      "e2_combined": 0.6676,
+      "representative": 0.6819,
+      "level": 2,
+      "label": "경고"
+    },
+    "fatigue": {
+      "state": "휴식 권고",
+      "confidence": 0.5478,
+      "nearest_shelter": {
+        "poi_id": null,
+        "name": "벤치",
+        "lat": 37.43096730280242,
+        "lon": 127.04754372086268,
+        "distance_m": 217,
+        "est_min": 5
+      }
+    },
+    "descent_warning": {
+      "required": false,
+      "reason": null,
+      "remaining_daylight_min": null
+    },
+    "alerts": [
+      {
+        "type": "F1",
+        "level": 1,
+        "title": "잠시 쉬어가세요",
+        "message": "심박과 피로 신호가 평소보다 높습니다. 가까운 쉼터에서 5분 이상 휴식하세요."
+      }
+    ]
+  },
+  {
+    "uuid": "sess_demo_f1",
+    "ts": "2023-08-04T06:15:00+00:00",
+    "course_recommendation": null,
+    "risk": {
+      "e1_biometric": 0.6839,
+      "e2_combined": 0.67,
+      "representative": 0.6839,
+      "level": 2,
+      "label": "경고"
+    },
+    "fatigue": {
+      "state": "휴식 권고",
+      "confidence": 0.5508,
+      "nearest_shelter": {
+        "poi_id": null,
+        "name": "벤치",
+        "lat": 37.43096730280242,
+        "lon": 127.04754372086268,
+        "distance_m": 221,
+        "est_min": 5
+      }
+    },
+    "descent_warning": {
+      "required": false,
+      "reason": null,
+      "remaining_daylight_min": null
+    },
+    "alerts": [
+      {
+        "type": "F1",
+        "level": 1,
+        "title": "잠시 쉬어가세요",
+        "message": "심박과 피로 신호가 평소보다 높습니다. 가까운 쉼터에서 5분 이상 휴식하세요."
+      }
+    ]
+  },
+  {
+    "uuid": "sess_demo_f1",
+    "ts": "2023-08-04T06:16:00+00:00",
+    "course_recommendation": null,
+    "risk": {
+      "e1_biometric": 0.6897,
+      "e2_combined": 0.6744,
+      "representative": 0.6897,
+      "level": 2,
+      "label": "경고"
+    },
+    "fatigue": {
+      "state": "휴식 권고",
+      "confidence": 0.5595,
+      "nearest_shelter": {
+        "poi_id": null,
+        "name": "벤치",
+        "lat": 37.43096730280242,
+        "lon": 127.04754372086268,
+        "distance_m": 226,
+        "est_min": 5
+      }
+    },
+    "descent_warning": {
+      "required": false,
+      "reason": null,
+      "remaining_daylight_min": null
+    },
+    "alerts": [
+      {
+        "type": "F1",
+        "level": 1,
+        "title": "잠시 쉬어가세요",
+        "message": "심박과 피로 신호가 평소보다 높습니다. 가까운 쉼터에서 5분 이상 휴식하세요."
+      }
+    ]
+  },
+  {
+    "uuid": "sess_demo_f1",
+    "ts": "2023-08-04T06:17:00+00:00",
+    "course_recommendation": null,
+    "risk": {
+      "e1_biometric": 0.6955,
+      "e2_combined": 0.6788,
+      "representative": 0.6955,
+      "level": 2,
+      "label": "경고"
+    },
+    "fatigue": {
+      "state": "휴식 권고",
+      "confidence": 0.5682,
+      "nearest_shelter": {
+        "poi_id": null,
+        "name": "벤치",
+        "lat": 37.43096730280242,
+        "lon": 127.04754372086268,
+        "distance_m": 231,
+        "est_min": 5
+      }
+    },
+    "descent_warning": {
+      "required": false,
+      "reason": null,
+      "remaining_daylight_min": null
+    },
+    "alerts": [
+      {
+        "type": "F1",
+        "level": 1,
+        "title": "잠시 쉬어가세요",
+        "message": "심박과 피로 신호가 평소보다 높습니다. 가까운 쉼터에서 5분 이상 휴식하세요."
+      }
+    ]
+  },
+  {
+    "uuid": "sess_demo_f1",
+    "ts": "2023-08-04T06:18:00+00:00",
+    "course_recommendation": null,
+    "risk": {
+      "e1_biometric": 0.6975,
+      "e2_combined": 0.6812,
+      "representative": 0.6975,
+      "level": 2,
+      "label": "경고"
+    },
+    "fatigue": {
+      "state": "휴식 권고",
+      "confidence": 0.5713,
+      "nearest_shelter": {
+        "poi_id": null,
+        "name": "벤치",
+        "lat": 37.43096730280242,
+        "lon": 127.04754372086268,
+        "distance_m": 236,
+        "est_min": 5
+      }
+    },
+    "descent_warning": {
+      "required": false,
+      "reason": null,
+      "remaining_daylight_min": null
+    },
+    "alerts": [
+      {
+        "type": "F1",
+        "level": 1,
+        "title": "잠시 쉬어가세요",
+        "message": "심박과 피로 신호가 평소보다 높습니다. 가까운 쉼터에서 5분 이상 휴식하세요."
+      }
+    ]
+  },
+  {
+    "uuid": "sess_demo_f1",
+    "ts": "2023-08-04T06:19:00+00:00",
+    "course_recommendation": null,
+    "risk": {
+      "e1_biometric": 0.7033,
+      "e2_combined": 0.6856,
+      "representative": 0.7033,
+      "level": 2,
+      "label": "경고"
+    },
+    "fatigue": {
+      "state": "휴식 권고",
+      "confidence": 0.5799,
+      "nearest_shelter": {
+        "poi_id": null,
+        "name": "벤치",
+        "lat": 37.43096730280242,
+        "lon": 127.04754372086268,
+        "distance_m": 242,
+        "est_min": 5
+      }
+    },
+    "descent_warning": {
+      "required": false,
+      "reason": null,
+      "remaining_daylight_min": null
+    },
+    "alerts": [
+      {
+        "type": "F1",
+        "level": 1,
+        "title": "잠시 쉬어가세요",
+        "message": "심박과 피로 신호가 평소보다 높습니다. 가까운 쉼터에서 5분 이상 휴식하세요."
+      }
+    ]
+  },
+  {
+    "uuid": "sess_demo_f1",
+    "ts": "2023-08-04T06:20:00+00:00",
+    "course_recommendation": null,
+    "risk": {
+      "e1_biometric": 0.7091,
+      "e2_combined": 0.69,
+      "representative": 0.7091,
+      "level": 2,
+      "label": "경고"
+    },
+    "fatigue": {
+      "state": "휴식 권고",
+      "confidence": 0.5886,
+      "nearest_shelter": {
+        "poi_id": null,
+        "name": "벤치",
+        "lat": 37.43096730280242,
+        "lon": 127.04754372086268,
+        "distance_m": 247,
+        "est_min": 5
+      }
+    },
+    "descent_warning": {
+      "required": false,
+      "reason": null,
+      "remaining_daylight_min": null
+    },
+    "alerts": [
+      {
+        "type": "F1",
+        "level": 1,
+        "title": "잠시 쉬어가세요",
+        "message": "심박과 피로 신호가 평소보다 높습니다. 가까운 쉼터에서 5분 이상 휴식하세요."
+      }
+    ]
+  },
+  {
+    "uuid": "sess_demo_f1",
+    "ts": "2023-08-04T06:21:00+00:00",
+    "course_recommendation": null,
+    "risk": {
+      "e1_biometric": 0.7148,
+      "e2_combined": 0.6944,
+      "representative": 0.7148,
+      "level": 2,
+      "label": "경고"
+    },
+    "fatigue": {
+      "state": "휴식 권고",
+      "confidence": 0.5972,
+      "nearest_shelter": {
+        "poi_id": null,
+        "name": "벤치",
+        "lat": 37.43096730280242,
+        "lon": 127.04754372086268,
+        "distance_m": 253,
+        "est_min": 6
+      }
+    },
+    "descent_warning": {
+      "required": false,
+      "reason": null,
+      "remaining_daylight_min": null
+    },
+    "alerts": [
+      {
+        "type": "F1",
+        "level": 1,
+        "title": "잠시 쉬어가세요",
+        "message": "심박과 피로 신호가 평소보다 높습니다. 가까운 쉼터에서 5분 이상 휴식하세요."
+      }
+    ]
+  },
+  {
+    "uuid": "sess_demo_f1",
+    "ts": "2023-08-04T06:22:00+00:00",
+    "course_recommendation": null,
+    "risk": {
+      "e1_biometric": 0.7167,
+      "e2_combined": 0.6967,
+      "representative": 0.7167,
+      "level": 2,
+      "label": "경고"
+    },
+    "fatigue": {
+      "state": "휴식 권고",
+      "confidence": 0.6,
+      "nearest_shelter": {
+        "poi_id": null,
+        "name": "벤치",
+        "lat": 37.43096730280242,
+        "lon": 127.04754372086268,
+        "distance_m": 258,
+        "est_min": 6
+      }
+    },
+    "descent_warning": {
+      "required": false,
+      "reason": null,
+      "remaining_daylight_min": null
+    },
+    "alerts": [
+      {
+        "type": "F1",
+        "level": 1,
+        "title": "잠시 쉬어가세요",
+        "message": "심박과 피로 신호가 평소보다 높습니다. 가까운 쉼터에서 5분 이상 휴식하세요."
+      }
+    ]
+  },
+  {
+    "uuid": "sess_demo_f1",
+    "ts": "2023-08-04T06:23:00+00:00",
+    "course_recommendation": null,
+    "risk": {
+      "e1_biometric": 0.7224,
+      "e2_combined": 0.7011,
+      "representative": 0.7224,
+      "level": 2,
+      "label": "경고"
+    },
+    "fatigue": {
+      "state": "휴식 권고",
+      "confidence": 0.6086,
+      "nearest_shelter": {
+        "poi_id": null,
+        "name": "벤치",
+        "lat": 37.43096730280242,
+        "lon": 127.04754372086268,
+        "distance_m": 264,
+        "est_min": 6
+      }
+    },
+    "descent_warning": {
+      "required": false,
+      "reason": null,
+      "remaining_daylight_min": null
+    },
+    "alerts": [
+      {
+        "type": "F1",
+        "level": 1,
+        "title": "잠시 쉬어가세요",
+        "message": "심박과 피로 신호가 평소보다 높습니다. 가까운 쉼터에서 5분 이상 휴식하세요."
+      }
+    ]
+  },
+  {
+    "uuid": "sess_demo_f1",
+    "ts": "2023-08-04T06:24:00+00:00",
+    "course_recommendation": null,
+    "risk": {
+      "e1_biometric": 0.7282,
+      "e2_combined": 0.7055,
+      "representative": 0.7282,
+      "level": 2,
+      "label": "경고"
+    },
+    "fatigue": {
+      "state": "휴식 권고",
+      "confidence": 0.6173,
+      "nearest_shelter": {
+        "poi_id": null,
+        "name": "벤치",
+        "lat": 37.43096730280242,
+        "lon": 127.04754372086268,
+        "distance_m": 270,
+        "est_min": 6
+      }
+    },
+    "descent_warning": {
+      "required": false,
+      "reason": null,
+      "remaining_daylight_min": null
+    },
+    "alerts": [
+      {
+        "type": "F1",
+        "level": 1,
+        "title": "잠시 쉬어가세요",
+        "message": "심박과 피로 신호가 평소보다 높습니다. 가까운 쉼터에서 5분 이상 휴식하세요."
+      }
+    ]
+  },
+  {
+    "uuid": "sess_demo_f1",
+    "ts": "2023-08-04T06:25:00+00:00",
+    "course_recommendation": null,
+    "risk": {
+      "e1_biometric": 0.7339,
+      "e2_combined": 0.7099,
+      "representative": 0.7339,
+      "level": 2,
+      "label": "경고"
+    },
+    "fatigue": {
+      "state": "휴식 권고",
+      "confidence": 0.6259,
+      "nearest_shelter": {
+        "poi_id": null,
+        "name": "벤치",
+        "lat": 37.43096730280242,
+        "lon": 127.04754372086268,
+        "distance_m": 276,
+        "est_min": 6
+      }
+    },
+    "descent_warning": {
+      "required": false,
+      "reason": null,
+      "remaining_daylight_min": null
+    },
+    "alerts": [
+      {
+        "type": "F1",
+        "level": 1,
+        "title": "잠시 쉬어가세요",
+        "message": "심박과 피로 신호가 평소보다 높습니다. 가까운 쉼터에서 5분 이상 휴식하세요."
+      }
+    ]
+  },
+  {
+    "uuid": "sess_demo_f1",
+    "ts": "2023-08-04T06:26:00+00:00",
+    "course_recommendation": null,
+    "risk": {
+      "e1_biometric": 0.7358,
+      "e2_combined": 0.7122,
+      "representative": 0.7358,
+      "level": 2,
+      "label": "경고"
+    },
+    "fatigue": {
+      "state": "휴식 권고",
+      "confidence": 0.6287,
+      "nearest_shelter": {
+        "poi_id": null,
+        "name": "벤치",
+        "lat": 37.43096730280242,
+        "lon": 127.04754372086268,
+        "distance_m": 282,
+        "est_min": 6
+      }
+    },
+    "descent_warning": {
+      "required": false,
+      "reason": null,
+      "remaining_daylight_min": null
+    },
+    "alerts": [
+      {
+        "type": "F1",
+        "level": 1,
+        "title": "잠시 쉬어가세요",
+        "message": "심박과 피로 신호가 평소보다 높습니다. 가까운 쉼터에서 5분 이상 휴식하세요."
+      }
+    ]
+  },
+  {
+    "uuid": "sess_demo_f1",
+    "ts": "2023-08-04T06:27:00+00:00",
+    "course_recommendation": null,
+    "risk": {
+      "e1_biometric": 0.7415,
+      "e2_combined": 0.7166,
+      "representative": 0.7415,
+      "level": 2,
+      "label": "경고"
+    },
+    "fatigue": {
+      "state": "휴식 권고",
+      "confidence": 0.6373,
+      "nearest_shelter": {
+        "poi_id": null,
+        "name": "벤치",
+        "lat": 37.43096730280242,
+        "lon": 127.04754372086268,
+        "distance_m": 289,
+        "est_min": 6
+      }
+    },
+    "descent_warning": {
+      "required": false,
+      "reason": null,
+      "remaining_daylight_min": null
+    },
+    "alerts": [
+      {
+        "type": "F1",
+        "level": 1,
+        "title": "잠시 쉬어가세요",
+        "message": "심박과 피로 신호가 평소보다 높습니다. 가까운 쉼터에서 5분 이상 휴식하세요."
+      }
+    ]
+  },
+  {
+    "uuid": "sess_demo_f1",
+    "ts": "2023-08-04T06:28:00+00:00",
+    "course_recommendation": null,
+    "risk": {
+      "e1_biometric": 0.7472,
+      "e2_combined": 0.721,
+      "representative": 0.7472,
+      "level": 2,
+      "label": "경고"
+    },
+    "fatigue": {
+      "state": "휴식 권고",
+      "confidence": 0.6458,
+      "nearest_shelter": {
+        "poi_id": null,
+        "name": "벤치",
+        "lat": 37.43096730280242,
+        "lon": 127.04754372086268,
+        "distance_m": 295,
+        "est_min": 6
+      }
+    },
+    "descent_warning": {
+      "required": false,
+      "reason": null,
+      "remaining_daylight_min": null
+    },
+    "alerts": [
+      {
+        "type": "F1",
+        "level": 1,
+        "title": "잠시 쉬어가세요",
+        "message": "심박과 피로 신호가 평소보다 높습니다. 가까운 쉼터에서 5분 이상 휴식하세요."
+      }
+    ]
+  },
+  {
+    "uuid": "sess_demo_f1",
+    "ts": "2023-08-04T06:29:00+00:00",
+    "course_recommendation": null,
+    "risk": {
+      "e1_biometric": 0.7387,
+      "e2_combined": 0.7176,
+      "representative": 0.7387,
+      "level": 2,
+      "label": "경고"
+    },
+    "fatigue": {
+      "state": "휴식 권고",
+      "confidence": 0.6331,
+      "nearest_shelter": {
+        "poi_id": null,
+        "name": "벤치",
+        "lat": 37.43096730280242,
+        "lon": 127.04754372086268,
+        "distance_m": 301,
+        "est_min": 7
+      }
+    },
+    "descent_warning": {
+      "required": false,
+      "reason": null,
+      "remaining_daylight_min": null
+    },
+    "alerts": [
+      {
+        "type": "F1",
+        "level": 1,
+        "title": "잠시 쉬어가세요",
+        "message": "심박과 피로 신호가 평소보다 높습니다. 가까운 쉼터에서 5분 이상 휴식하세요."
+      }
+    ]
+  },
+  {
+    "uuid": "sess_demo_f1",
+    "ts": "2023-08-04T06:30:00+00:00",
+    "course_recommendation": null,
+    "risk": {
+      "e1_biometric": 0.7302,
+      "e2_combined": 0.7209,
+      "representative": 0.7302,
+      "level": 2,
+      "label": "경고"
+    },
+    "fatigue": {
+      "state": "휴식 권고",
+      "confidence": 0.6203,
+      "nearest_shelter": {
+        "poi_id": null,
+        "name": "벤치",
+        "lat": 37.43096730280242,
+        "lon": 127.04754372086268,
+        "distance_m": 306,
+        "est_min": 7
+      }
+    },
+    "descent_warning": {
+      "required": false,
+      "reason": null,
+      "remaining_daylight_min": null
+    },
+    "alerts": [
+      {
+        "type": "F1",
+        "level": 1,
+        "title": "잠시 쉬어가세요",
+        "message": "심박과 피로 신호가 평소보다 높습니다. 가까운 쉼터에서 5분 이상 휴식하세요."
+      }
+    ]
+  },
+  {
+    "uuid": "sess_demo_f1",
+    "ts": "2023-08-04T06:31:00+00:00",
+    "course_recommendation": null,
+    "risk": {
+      "e1_biometric": 0.7178,
+      "e2_combined": 0.6987,
+      "representative": 0.7178,
+      "level": 2,
+      "label": "경고"
+    },
+    "fatigue": {
+      "state": "휴식 권고",
+      "confidence": 0.6017,
+      "nearest_shelter": {
+        "poi_id": null,
+        "name": "벤치4",
+        "lat": 37.431957,
+        "lon": 127.047272,
+        "distance_m": 309,
+        "est_min": 7
+      }
+    },
+    "descent_warning": {
+      "required": false,
+      "reason": null,
+      "remaining_daylight_min": null
+    },
+    "alerts": [
+      {
+        "type": "F1",
+        "level": 1,
+        "title": "잠시 쉬어가세요",
+        "message": "심박과 피로 신호가 평소보다 높습니다. 가까운 쉼터에서 5분 이상 휴식하세요."
+      }
+    ]
+  },
+  {
+    "uuid": "sess_demo_f1",
+    "ts": "2023-08-04T06:32:00+00:00",
+    "course_recommendation": null,
+    "risk": {
+      "e1_biometric": 0.7093,
+      "e2_combined": 0.6952,
+      "representative": 0.7093,
+      "level": 2,
+      "label": "경고"
+    },
+    "fatigue": {
+      "state": "휴식 권고",
+      "confidence": 0.589,
+      "nearest_shelter": {
+        "poi_id": null,
+        "name": "벤치4",
+        "lat": 37.431957,
+        "lon": 127.047272,
+        "distance_m": 311,
+        "est_min": 7
+      }
+    },
+    "descent_warning": {
+      "required": false,
+      "reason": null,
+      "remaining_daylight_min": null
+    },
+    "alerts": [
+      {
+        "type": "F1",
+        "level": 1,
+        "title": "잠시 쉬어가세요",
+        "message": "심박과 피로 신호가 평소보다 높습니다. 가까운 쉼터에서 5분 이상 휴식하세요."
+      }
+    ]
+  },
+  {
+    "uuid": "sess_demo_f1",
+    "ts": "2023-08-04T06:33:00+00:00",
+    "course_recommendation": null,
+    "risk": {
+      "e1_biometric": 0.7007,
+      "e2_combined": 0.6918,
+      "representative": 0.7007,
+      "level": 2,
+      "label": "경고"
+    },
+    "fatigue": {
+      "state": "휴식 권고",
+      "confidence": 0.576,
+      "nearest_shelter": {
+        "poi_id": null,
+        "name": "벤치4",
+        "lat": 37.431957,
+        "lon": 127.047272,
+        "distance_m": 314,
+        "est_min": 7
+      }
+    },
+    "descent_warning": {
+      "required": false,
+      "reason": null,
+      "remaining_daylight_min": null
+    },
+    "alerts": [
+      {
+        "type": "F1",
+        "level": 1,
+        "title": "잠시 쉬어가세요",
+        "message": "심박과 피로 신호가 평소보다 높습니다. 가까운 쉼터에서 5분 이상 휴식하세요."
+      }
+    ]
+  },
+  {
+    "uuid": "sess_demo_f1",
+    "ts": "2023-08-04T06:34:00+00:00",
+    "course_recommendation": null,
+    "risk": {
+      "e1_biometric": 0.6921,
+      "e2_combined": 0.6883,
+      "representative": 0.6921,
+      "level": 2,
+      "label": "경고"
+    },
+    "fatigue": {
+      "state": "휴식 권고",
+      "confidence": 0.5632,
+      "nearest_shelter": {
+        "poi_id": null,
+        "name": "벤치4",
+        "lat": 37.431957,
+        "lon": 127.047272,
+        "distance_m": 316,
+        "est_min": 7
+      }
+    },
+    "descent_warning": {
+      "required": false,
+      "reason": null,
+      "remaining_daylight_min": null
+    },
+    "alerts": [
+      {
+        "type": "F1",
+        "level": 1,
+        "title": "잠시 쉬어가세요",
+        "message": "심박과 피로 신호가 평소보다 높습니다. 가까운 쉼터에서 5분 이상 휴식하세요."
+      }
+    ]
+  },
+  {
+    "uuid": "sess_demo_f1",
+    "ts": "2023-08-04T06:35:00+00:00",
+    "course_recommendation": null,
+    "risk": {
+      "e1_biometric": 0.6836,
+      "e2_combined": 0.6848,
+      "representative": 0.6848,
+      "level": 2,
+      "label": "경고"
+    },
+    "fatigue": {
+      "state": "휴식 권고",
+      "confidence": 0.5522,
+      "nearest_shelter": {
+        "poi_id": null,
+        "name": "벤치4",
+        "lat": 37.431957,
+        "lon": 127.047272,
+        "distance_m": 318,
+        "est_min": 7
+      }
+    },
+    "descent_warning": {
+      "required": false,
+      "reason": null,
+      "remaining_daylight_min": null
+    },
+    "alerts": [
+      {
+        "type": "F1",
+        "level": 1,
+        "title": "잠시 쉬어가세요",
+        "message": "심박과 피로 신호가 평소보다 높습니다. 가까운 쉼터에서 5분 이상 휴식하세요."
+      }
+    ]
+  },
+  {
+    "uuid": "sess_demo_f1",
+    "ts": "2023-08-04T06:36:00+00:00",
+    "course_recommendation": null,
+    "risk": {
+      "e1_biometric": 0.675,
+      "e2_combined": 0.6814,
+      "representative": 0.6814,
+      "level": 2,
+      "label": "경고"
+    },
+    "fatigue": {
+      "state": "휴식 권고",
+      "confidence": 0.5471,
+      "nearest_shelter": {
+        "poi_id": null,
+        "name": "벤치4",
+        "lat": 37.431957,
+        "lon": 127.047272,
+        "distance_m": 321,
+        "est_min": 7
+      }
+    },
+    "descent_warning": {
+      "required": false,
+      "reason": null,
+      "remaining_daylight_min": null
+    },
+    "alerts": [
+      {
+        "type": "F1",
+        "level": 1,
+        "title": "잠시 쉬어가세요",
+        "message": "심박과 피로 신호가 평소보다 높습니다. 가까운 쉼터에서 5분 이상 휴식하세요."
+      }
+    ]
+  },
+  {
+    "uuid": "sess_demo_f1",
+    "ts": "2023-08-04T06:37:00+00:00",
+    "course_recommendation": null,
+    "risk": {
+      "e1_biometric": 0.6594,
+      "e2_combined": 0.674,
+      "representative": 0.674,
+      "level": 2,
+      "label": "경고"
+    },
+    "fatigue": {
+      "state": "휴식 권고",
+      "confidence": 0.536,
+      "nearest_shelter": {
+        "poi_id": null,
+        "name": "벤치4",
+        "lat": 37.431957,
+        "lon": 127.047272,
+        "distance_m": 323,
+        "est_min": 7
+      }
+    },
+    "descent_warning": {
+      "required": false,
+      "reason": null,
+      "remaining_daylight_min": null
+    },
+    "alerts": [
+      {
+        "type": "F1",
+        "level": 1,
+        "title": "잠시 쉬어가세요",
+        "message": "심박과 피로 신호가 평소보다 높습니다. 가까운 쉼터에서 5분 이상 휴식하세요."
+      }
+    ]
+  },
+  {
+    "uuid": "sess_demo_f1",
+    "ts": "2023-08-04T06:38:00+00:00",
+    "course_recommendation": null,
+    "risk": {
+      "e1_biometric": 0.6474,
+      "e2_combined": 0.6687,
+      "representative": 0.6687,
+      "level": 2,
+      "label": "경고"
+    },
+    "fatigue": {
+      "state": "휴식 권고",
+      "confidence": 0.528,
+      "nearest_shelter": {
+        "poi_id": null,
+        "name": "벤치4",
+        "lat": 37.431957,
+        "lon": 127.047272,
+        "distance_m": 326,
+        "est_min": 7
+      }
+    },
+    "descent_warning": {
+      "required": false,
+      "reason": null,
+      "remaining_daylight_min": null
+    },
+    "alerts": [
+      {
+        "type": "F1",
+        "level": 1,
+        "title": "잠시 쉬어가세요",
+        "message": "심박과 피로 신호가 평소보다 높습니다. 가까운 쉼터에서 5분 이상 휴식하세요."
+      }
+    ]
+  },
+  {
+    "uuid": "sess_demo_f1",
+    "ts": "2023-08-04T06:39:00+00:00",
+    "course_recommendation": null,
+    "risk": {
+      "e1_biometric": 0.6355,
+      "e2_combined": 0.6634,
+      "representative": 0.6634,
+      "level": 2,
+      "label": "경고"
+    },
+    "fatigue": {
+      "state": "휴식 권고",
+      "confidence": 0.5201,
+      "nearest_shelter": {
+        "poi_id": null,
+        "name": "벤치4",
+        "lat": 37.431957,
+        "lon": 127.047272,
+        "distance_m": 328,
+        "est_min": 7
+      }
+    },
+    "descent_warning": {
+      "required": false,
+      "reason": null,
+      "remaining_daylight_min": null
+    },
+    "alerts": [
+      {
+        "type": "F1",
+        "level": 1,
+        "title": "잠시 쉬어가세요",
+        "message": "심박과 피로 신호가 평소보다 높습니다. 가까운 쉼터에서 5분 이상 휴식하세요."
+      }
+    ]
+  },
+  {
+    "uuid": "sess_demo_f1",
+    "ts": "2023-08-04T06:40:00+00:00",
+    "course_recommendation": null,
+    "risk": {
+      "e1_biometric": 0.6236,
+      "e2_combined": 0.6581,
+      "representative": 0.6581,
+      "level": 2,
+      "label": "경고"
+    },
+    "fatigue": {
+      "state": "휴식 권고",
+      "confidence": 0.5121,
+      "nearest_shelter": {
+        "poi_id": null,
+        "name": "벤치4",
+        "lat": 37.431957,
+        "lon": 127.047272,
+        "distance_m": 330,
+        "est_min": 7
+      }
+    },
+    "descent_warning": {
+      "required": false,
+      "reason": null,
+      "remaining_daylight_min": null
+    },
+    "alerts": [
+      {
+        "type": "F1",
+        "level": 1,
+        "title": "잠시 쉬어가세요",
+        "message": "심박과 피로 신호가 평소보다 높습니다. 가까운 쉼터에서 5분 이상 휴식하세요."
+      }
+    ]
+  },
+  {
+    "uuid": "sess_demo_f1",
+    "ts": "2023-08-04T06:41:00+00:00",
+    "course_recommendation": null,
+    "risk": {
+      "e1_biometric": 0.6117,
+      "e2_combined": 0.6528,
+      "representative": 0.6528,
+      "level": 2,
+      "label": "경고"
+    },
+    "fatigue": {
+      "state": "휴식 권고",
+      "confidence": 0.5042,
+      "nearest_shelter": {
+        "poi_id": null,
+        "name": "벤치4",
+        "lat": 37.431957,
+        "lon": 127.047272,
+        "distance_m": 333,
+        "est_min": 7
+      }
+    },
+    "descent_warning": {
+      "required": false,
+      "reason": null,
+      "remaining_daylight_min": null
+    },
+    "alerts": [
+      {
+        "type": "F1",
+        "level": 1,
+        "title": "잠시 쉬어가세요",
+        "message": "심박과 피로 신호가 평소보다 높습니다. 가까운 쉼터에서 5분 이상 휴식하세요."
+      }
+    ]
+  },
+  {
+    "uuid": "sess_demo_f1",
+    "ts": "2023-08-04T06:42:00+00:00",
+    "course_recommendation": null,
+    "risk": {
+      "e1_biometric": 0.5998,
+      "e2_combined": 0.6475,
+      "representative": 0.6475,
+      "level": 1,
+      "label": "주의"
+    },
+    "fatigue": {
+      "state": "휴식 권고",
+      "confidence": 0.5038,
+      "nearest_shelter": {
+        "poi_id": null,
+        "name": "벤치4",
+        "lat": 37.431957,
+        "lon": 127.047272,
+        "distance_m": 336,
+        "est_min": 7
+      }
+    },
+    "descent_warning": {
+      "required": false,
+      "reason": null,
+      "remaining_daylight_min": null
+    },
+    "alerts": [
+      {
+        "type": "F1",
+        "level": 1,
+        "title": "잠시 쉬어가세요",
+        "message": "심박과 피로 신호가 평소보다 높습니다. 가까운 쉼터에서 5분 이상 휴식하세요."
+      }
+    ]
+  },
+  {
+    "uuid": "sess_demo_f1",
+    "ts": "2023-08-04T06:43:00+00:00",
+    "course_recommendation": null,
+    "risk": {
+      "e1_biometric": 0.5841,
+      "e2_combined": 0.6401,
+      "representative": 0.6401,
+      "level": 1,
+      "label": "주의"
+    },
+    "fatigue": {
+      "state": "휴식 권고",
+      "confidence": 0.5149,
+      "nearest_shelter": {
+        "poi_id": null,
+        "name": "벤치4",
+        "lat": 37.431957,
+        "lon": 127.047272,
+        "distance_m": 338,
+        "est_min": 7
+      }
+    },
+    "descent_warning": {
+      "required": false,
+      "reason": null,
+      "remaining_daylight_min": null
+    },
+    "alerts": [
+      {
+        "type": "F1",
+        "level": 1,
+        "title": "잠시 쉬어가세요",
+        "message": "심박과 피로 신호가 평소보다 높습니다. 가까운 쉼터에서 5분 이상 휴식하세요."
+      }
+    ]
+  },
+  {
+    "uuid": "sess_demo_f1",
+    "ts": "2023-08-04T06:44:00+00:00",
+    "course_recommendation": null,
+    "risk": {
+      "e1_biometric": 0.5722,
+      "e2_combined": 0.6348,
+      "representative": 0.6348,
+      "level": 1,
+      "label": "주의"
+    },
+    "fatigue": {
+      "state": "휴식 권고",
+      "confidence": 0.5228,
+      "nearest_shelter": {
+        "poi_id": null,
+        "name": "벤치4",
+        "lat": 37.431957,
+        "lon": 127.047272,
+        "distance_m": 341,
+        "est_min": 7
+      }
+    },
+    "descent_warning": {
+      "required": false,
+      "reason": null,
+      "remaining_daylight_min": null
+    },
+    "alerts": [
+      {
+        "type": "F1",
+        "level": 1,
+        "title": "잠시 쉬어가세요",
+        "message": "심박과 피로 신호가 평소보다 높습니다. 가까운 쉼터에서 5분 이상 휴식하세요."
+      }
+    ]
+  },
+  {
+    "uuid": "sess_demo_f1",
+    "ts": "2023-08-04T06:45:00+00:00",
+    "course_recommendation": null,
+    "risk": {
+      "e1_biometric": 0.5605,
+      "e2_combined": 0.6296,
+      "representative": 0.6296,
+      "level": 1,
+      "label": "주의"
+    },
+    "fatigue": {
+      "state": "휴식 권고",
+      "confidence": 0.5306,
+      "nearest_shelter": {
+        "poi_id": null,
+        "name": "벤치4",
+        "lat": 37.431957,
+        "lon": 127.047272,
+        "distance_m": 343,
+        "est_min": 7
+      }
+    },
+    "descent_warning": {
+      "required": false,
+      "reason": null,
+      "remaining_daylight_min": null
+    },
+    "alerts": [
+      {
+        "type": "F1",
+        "level": 1,
+        "title": "잠시 쉬어가세요",
+        "message": "심박과 피로 신호가 평소보다 높습니다. 가까운 쉼터에서 5분 이상 휴식하세요."
+      }
+    ]
+  },
+  {
+    "uuid": "sess_demo_f1",
+    "ts": "2023-08-04T06:46:00+00:00",
+    "course_recommendation": null,
+    "risk": {
+      "e1_biometric": 0.5525,
+      "e2_combined": 0.6265,
+      "representative": 0.6265,
+      "level": 1,
+      "label": "주의"
+    },
+    "fatigue": {
+      "state": "휴식 권고",
+      "confidence": 0.5353,
+      "nearest_shelter": {
+        "poi_id": null,
+        "name": "벤치4",
+        "lat": 37.431957,
+        "lon": 127.047272,
+        "distance_m": 346,
+        "est_min": 8
+      }
+    },
+    "descent_warning": {
+      "required": false,
+      "reason": null,
+      "remaining_daylight_min": null
+    },
+    "alerts": [
+      {
+        "type": "F1",
+        "level": 1,
+        "title": "잠시 쉬어가세요",
+        "message": "심박과 피로 신호가 평소보다 높습니다. 가까운 쉼터에서 5분 이상 휴식하세요."
+      }
+    ]
+  },
+  {
+    "uuid": "sess_demo_f1",
+    "ts": "2023-08-04T06:47:00+00:00",
+    "course_recommendation": null,
+    "risk": {
+      "e1_biometric": 0.5445,
+      "e2_combined": 0.6233,
+      "representative": 0.6233,
+      "level": 1,
+      "label": "주의"
+    },
+    "fatigue": {
+      "state": "휴식 권고",
+      "confidence": 0.5401,
+      "nearest_shelter": {
+        "poi_id": null,
+        "name": "벤치4",
+        "lat": 37.431957,
+        "lon": 127.047272,
+        "distance_m": 349,
+        "est_min": 8
+      }
+    },
+    "descent_warning": {
+      "required": false,
+      "reason": null,
+      "remaining_daylight_min": null
+    },
+    "alerts": [
+      {
+        "type": "F1",
+        "level": 1,
+        "title": "잠시 쉬어가세요",
+        "message": "심박과 피로 신호가 평소보다 높습니다. 가까운 쉼터에서 5분 이상 휴식하세요."
+      }
+    ]
+  },
+  {
+    "uuid": "sess_demo_f1",
+    "ts": "2023-08-04T06:48:00+00:00",
+    "course_recommendation": null,
+    "risk": {
+      "e1_biometric": 0.5365,
+      "e2_combined": 0.6202,
+      "representative": 0.6202,
+      "level": 1,
+      "label": "주의"
+    },
+    "fatigue": {
+      "state": "휴식 권고",
+      "confidence": 0.5447,
+      "nearest_shelter": {
+        "poi_id": null,
+        "name": "벤치4",
+        "lat": 37.431957,
+        "lon": 127.047272,
+        "distance_m": 351,
+        "est_min": 8
+      }
+    },
+    "descent_warning": {
+      "required": false,
+      "reason": null,
+      "remaining_daylight_min": null
+    },
+    "alerts": [
+      {
+        "type": "F1",
+        "level": 1,
+        "title": "잠시 쉬어가세요",
+        "message": "심박과 피로 신호가 평소보다 높습니다. 가까운 쉼터에서 5분 이상 휴식하세요."
+      }
+    ]
+  },
+  {
+    "uuid": "sess_demo_f1",
+    "ts": "2023-08-04T06:49:00+00:00",
+    "course_recommendation": null,
+    "risk": {
+      "e1_biometric": 0.5286,
+      "e2_combined": 0.6171,
+      "representative": 0.6171,
+      "level": 1,
+      "label": "주의"
+    },
+    "fatigue": {
+      "state": "휴식 권고",
+      "confidence": 0.5494,
+      "nearest_shelter": {
+        "poi_id": null,
+        "name": "벤치4",
+        "lat": 37.431957,
+        "lon": 127.047272,
+        "distance_m": 354,
+        "est_min": 8
+      }
+    },
+    "descent_warning": {
+      "required": false,
+      "reason": null,
+      "remaining_daylight_min": null
+    },
+    "alerts": [
+      {
+        "type": "F1",
+        "level": 1,
+        "title": "잠시 쉬어가세요",
+        "message": "심박과 피로 신호가 평소보다 높습니다. 가까운 쉼터에서 5분 이상 휴식하세요."
+      }
+    ]
+  },
+  {
+    "uuid": "sess_demo_f1",
+    "ts": "2023-08-04T06:50:00+00:00",
+    "course_recommendation": null,
+    "risk": {
+      "e1_biometric": 0.5206,
+      "e2_combined": 0.6139,
+      "representative": 0.6139,
+      "level": 1,
+      "label": "주의"
+    },
+    "fatigue": {
+      "state": "휴식 권고",
+      "confidence": 0.5542,
+      "nearest_shelter": {
+        "poi_id": null,
+        "name": "벤치4",
+        "lat": 37.431957,
+        "lon": 127.047272,
+        "distance_m": 357,
+        "est_min": 8
+      }
+    },
+    "descent_warning": {
+      "required": false,
+      "reason": null,
+      "remaining_daylight_min": null
+    },
+    "alerts": [
+      {
+        "type": "F1",
+        "level": 1,
+        "title": "잠시 쉬어가세요",
+        "message": "심박과 피로 신호가 평소보다 높습니다. 가까운 쉼터에서 5분 이상 휴식하세요."
+      }
+    ]
+  },
+  {
+    "uuid": "sess_demo_f1",
+    "ts": "2023-08-04T06:51:00+00:00",
+    "course_recommendation": null,
+    "risk": {
+      "e1_biometric": 0.5126,
+      "e2_combined": 0.6108,
+      "representative": 0.6108,
+      "level": 1,
+      "label": "주의"
+    },
+    "fatigue": {
+      "state": "휴식 권고",
+      "confidence": 0.5588,
+      "nearest_shelter": {
+        "poi_id": null,
+        "name": "벤치4",
+        "lat": 37.431957,
+        "lon": 127.047272,
+        "distance_m": 360,
+        "est_min": 8
+      }
+    },
+    "descent_warning": {
+      "required": false,
+      "reason": null,
+      "remaining_daylight_min": null
+    },
+    "alerts": [
+      {
+        "type": "F1",
+        "level": 1,
+        "title": "잠시 쉬어가세요",
+        "message": "심박과 피로 신호가 평소보다 높습니다. 가까운 쉼터에서 5분 이상 휴식하세요."
+      }
+    ]
+  },
+  {
+    "uuid": "sess_demo_f1",
+    "ts": "2023-08-04T06:52:00+00:00",
+    "course_recommendation": null,
+    "risk": {
+      "e1_biometric": 0.5047,
+      "e2_combined": 0.6077,
+      "representative": 0.6077,
+      "level": 1,
+      "label": "주의"
+    },
+    "fatigue": {
+      "state": "휴식 권고",
+      "confidence": 0.5635,
+      "nearest_shelter": {
+        "poi_id": null,
+        "name": "벤치4",
+        "lat": 37.431957,
+        "lon": 127.047272,
+        "distance_m": 362,
+        "est_min": 8
+      }
+    },
+    "descent_warning": {
+      "required": false,
+      "reason": null,
+      "remaining_daylight_min": null
+    },
+    "alerts": [
+      {
+        "type": "F1",
+        "level": 1,
+        "title": "잠시 쉬어가세요",
+        "message": "심박과 피로 신호가 평소보다 높습니다. 가까운 쉼터에서 5분 이상 휴식하세요."
+      }
+    ]
+  },
+  {
+    "uuid": "sess_demo_f1",
+    "ts": "2023-08-04T06:53:00+00:00",
+    "course_recommendation": null,
+    "risk": {
+      "e1_biometric": 0.4938,
+      "e2_combined": 0.603,
+      "representative": 0.603,
+      "level": 1,
+      "label": "주의"
+    },
+    "fatigue": {
+      "state": "휴식 권고",
+      "confidence": 0.5705,
+      "nearest_shelter": {
+        "poi_id": null,
+        "name": "벤치4",
+        "lat": 37.431957,
+        "lon": 127.047272,
+        "distance_m": 365,
+        "est_min": 8
+      }
+    },
+    "descent_warning": {
+      "required": false,
+      "reason": null,
+      "remaining_daylight_min": null
+    },
+    "alerts": [
+      {
+        "type": "F1",
+        "level": 1,
+        "title": "잠시 쉬어가세요",
+        "message": "심박과 피로 신호가 평소보다 높습니다. 가까운 쉼터에서 5분 이상 휴식하세요."
+      }
+    ]
+  },
+  {
+    "uuid": "sess_demo_f1",
+    "ts": "2023-08-04T06:54:00+00:00",
+    "course_recommendation": null,
+    "risk": {
+      "e1_biometric": 0.483,
+      "e2_combined": 0.5983,
+      "representative": 0.5983,
+      "level": 1,
+      "label": "주의"
+    },
+    "fatigue": {
+      "state": "휴식 권고",
+      "confidence": 0.5776,
+      "nearest_shelter": {
+        "poi_id": null,
+        "name": "벤치4",
+        "lat": 37.431957,
+        "lon": 127.047272,
+        "distance_m": 368,
+        "est_min": 8
+      }
+    },
+    "descent_warning": {
+      "required": false,
+      "reason": null,
+      "remaining_daylight_min": null
+    },
+    "alerts": [
+      {
+        "type": "F1",
+        "level": 1,
+        "title": "잠시 쉬어가세요",
+        "message": "심박과 피로 신호가 평소보다 높습니다. 가까운 쉼터에서 5분 이상 휴식하세요."
+      }
+    ]
+  },
+  {
+    "uuid": "sess_demo_f1",
+    "ts": "2023-08-04T06:55:00+00:00",
+    "course_recommendation": null,
+    "risk": {
+      "e1_biometric": 0.4722,
+      "e2_combined": 0.5936,
+      "representative": 0.5936,
+      "level": 1,
+      "label": "주의"
+    },
+    "fatigue": {
+      "state": "휴식 권고",
+      "confidence": 0.5846,
+      "nearest_shelter": {
+        "poi_id": null,
+        "name": "벤치4",
+        "lat": 37.431957,
+        "lon": 127.047272,
+        "distance_m": 371,
+        "est_min": 8
+      }
+    },
+    "descent_warning": {
+      "required": false,
+      "reason": null,
+      "remaining_daylight_min": null
+    },
+    "alerts": [
+      {
+        "type": "F1",
+        "level": 1,
+        "title": "잠시 쉬어가세요",
+        "message": "심박과 피로 신호가 평소보다 높습니다. 가까운 쉼터에서 5분 이상 휴식하세요."
+      }
+    ]
+  }
+]
