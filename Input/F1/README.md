@@ -1,61 +1,84 @@
-# F1 Input Pipeline
+# F1 산행 안전 AI — Feature Engineering (Input → 피처표)
 
-이 폴더는 F1 시나리오의 원천 입력을 1분 단위 feature 및 DTO-5 시퀀스로 변환하는 Input 파트입니다.
-모델 코드는 루트 `Model/` 폴더를 공통으로 사용합니다.
+워치 생체 데이터·GPS·기상·산악사고 통계를 입력받아, **1분 단위 20컬럼 피처표**를 생성하는 모듈입니다.
+전체 F1 파이프라인의 **01 Input → 02 Feature Engineering** 단계를 담당하며,
+산출물(`fatigue_minute_features.csv`)은 이후 판정 모델·대시보드의 입력으로 사용됩니다.
 
-# 산행 AI — F1(피로/휴식권고) 파이프라인 (수정본 전체)
+## 하는 일
 
-처음에 주신 코드 전체를 실제 임포트 구조에 맞춰 패키지로 재구성한 묶음입니다.
-전체 파이썬 모듈은 임포트 검증을 통과합니다(아래 "검증" 참고).
+원천 센서 데이터는 구간 형태로, 데이터별 주기가 달라 그대로는 "현재 종합 상태"를 산출할 수 없습니다.
+이 모듈은 모든 입력을 **1분 격자에 정렬**해 모델이 바로 쓸 수 있는 피처표로 가공합니다.
 
-## 폴더 구조
+집계 엔진 5단계:
+
+1. **1분 리샘플** — 심박(평균)·SpO2(최솟값)·걸음(합계)을 1분 대표값으로 집계
+2. **시간 가중 보간** — 8~10분 간격 심박 사이의 빈 1분을 앞뒤 값의 시간비율로 채움 (`missing_flags` 표시)
+3. **GPS 속도 실계산** — 위경도 좌표의 실제 거리로 분당 이동량(m/min) 산출
+4. **과부하 5분 판정** — 심박이 위험 구간에 5분 연속 머물렀는지 판단 (`hr_overload_5min`)
+5. **UTC 변환** — 한국시간(KST)을 UTC로 변환해 저장
+
+## 프로젝트 구조
+
 ```
 .
-├── data_adapters/          # 원천 데이터 어댑터 (구 phase5)
-│   ├── common.py           # 삼성헬스 zip 로더 (get_zip, load_csv, col_index, parse_dt)
-│   ├── biometric.py        # 심박/SpO2/피부온도  [수정]
-│   ├── location.py         # GPS/쉼터/최근접 계산 [수정]
-│   ├── weather.py          # 기상 provider/heat_index [수정]
-│   └── accident.py         # accident_prior 산출 [수정]
-├── features/               # 피처 엔지니어링 (구 phase6 + phase7)
-│   ├── resample.py         # 1분 리샘플/보간/GPS속도/과부하판정 (구 phase6.py) [수정]
-│   ├── schema.py           # 컬럼 스키마/spo2_grade (구 phase7) [수정]
-│   ├── build_features.py   # 분단위 피처 테이블 생성 (구 phase7) [수정]
-│   └── hr_pattern.py       # 심박 노이즈/변동성 (구 phase7)
-├── ├── export.py               # 전체 러너 (피처표→모델→DTO-5→쉼터). 구 phase8; ROOT 경로 1단계 조정
-├── run_features.py          # 피처표까지만 만드는 러너 (input→피처표). export.py의 앞부분과 동일 로직
-├── research/               # 독립 실증 스크립트 (구 phase3)
-├── data_raw/               # ⚠️ 원천 데이터 (미포함 — 아래 참고)
-└── (참고) fatigue_minute_features.csv / dto5_sequence.json / validation_report.json  ← 수정 前 기존 출력
+├── run_features.py          # 진입점: input → 피처표 CSV
+├── data_adapters/           # 01 Input 어댑터
+│   ├── common.py            # 삼성헬스 export zip 로더
+│   ├── biometric.py         # 심박 / SpO2 / 피부온도 + 개인 baseline
+│   ├── weather.py           # 기상 provider(Open-Meteo) + heat_index
+│   ├── accident.py          # 산악사고 통계 → accident_prior
+│   └── location.py          # GPS 로드
+├── features/                # 02 Feature Engineering
+│   ├── resample.py          # 1분 리샘플·보간·GPS속도·과부하5분·UTC
+│   ├── schema.py            # 20컬럼 스키마 정의 + 검증
+│   ├── build_features.py    # 피처표 생성 (build_feature_table)
+│   └── hr_pattern.py        # 실측 심박 변동성 반영
+├── data_raw/                # 입력 데이터 (아래 참고)
+└── outputs/                 # 결과물 (fatigue_minute_features.csv)
 ```
 
-## 실행에 필요한 원천 데이터 (⚠️ 이 zip에 없음)
-코드가 `data_raw/`에서 아래를 읽습니다:
-1. **삼성헬스 export zip** — common.py::_find_zip() 이 `data_raw/extracted/<폴더>/05_*/` 안의 `*1988*.zip` 을 자동 탐색.
-2. **산악사고 현황 CSV** — accident.py 가 `data_raw/현황데이터_필수선택_최종.csv` 를 읽음.
-3. 쉼터 shapefile 등(location.py) — 사용 시 필요.
+## 요구 사항
 
-## 실행 방법
+- Python 3.10+
+- 의존성: `pandas`
+
 ```bash
-python export.py                 # 피처→F1추론→dto5_sequence.json/*.csv/validation_report.json
-python -m features.build_features
-# 모델/DTO-5 코드는 루트 Model/ 폴더를 사용합니다.
+pip install pandas
 ```
 
-## 이번에 고친 것
-값 관련 확정(실측 검증):
-- accident.py — accident_prior 합산(덧셈), 실측 CSV로 0.31 확인.
-- features/resample.py — 과부하 "0.6 이상" 유지(밴드 아님), 이상구간 휴식권고 정상 발동.
+## 데이터 준비
 
-크래시 방어(출력 불변): location 정렬 None, biometric/weather 컬럼누락, biometric 빈데이터, export 빈세그먼트 NaN, dto5 alerts None 제거.
-안전 표기(출력 불변): schema spo2 None→"미측정", build_features HR 0.0 결측오인 수정.
-수정 없음: common, hr_pattern, f1_model, research/*.
+`data_raw/` 아래에 다음을 배치합니다.
 
-## 검증
-- 14개 모듈 py_compile 통과.
-- 루트에서 12개 모듈 import 성공(순환참조/경로 문제 없음).
-- **실측 재실행 완료 (POI 포함, 전체 파이프라인)**: 느어아웅 zip + 현황 CSV + 청계산 POI(poi_1961)로
-  `python export.py` 전체 실행 → `outputs/` 재생성.
-  결과: 116행×20컬럼, 상태분포 정상44/휴식72, alert 72, F1 검증(이상구간 휴식권고) 통과,
-  nearest_shelter 채워짐(name="쉼터", 337m, 7분, 72건) = 원본 출력과 완전 일치.
-- 청계산 POI shapefile(poi_1961.shp/.shx/.dbf/.cpg/.prj)은 data_raw/ 에 포함됨.
+| 경로 | 내용 |
+|------|------|
+| `data_raw/extracted/<사용자>/05_*/삼성헬스_export.zip` | 워치 데이터 (심박·SpO2·걸음·GPS·운동세션) |
+| `data_raw/현황데이터_필수선택_최종.csv` | 산악사고 통계 (accident_prior 근거) |
+
+기상 데이터는 실행 시 Open-Meteo API로 조회하며, 실패 시 통계 기반 값으로 대체합니다.
+
+## 실행
+
+```bash
+python run_features.py
+#  → outputs/fatigue_minute_features.csv  (116행 × 20컬럼)
+```
+
+## 출력: 피처표 20컬럼
+
+| 분류 | 컬럼 |
+|------|------|
+| 식별·위치 | `uuid`, `ts`, `user_lat`, `user_lon` |
+| 심박 | `hr_mean_bpm`, `hr_max_bpm`, `hr_ratio_maxhr`, `hr_overload_5min`, `hr_z_personal` |
+| 산소 | `spo2_min_pct`, `spo2_grade` |
+| 이동·누적 | `steps_1min`, `speed_mean_mpm`, `cumulative_min`, `rest_due_90min` |
+| 환경·프로필·결측 | `heat_index`, `accident_prior`, `age_group`, `gender`, `missing_flags` |
+
+**GIVEN** (입력에서 그대로/정적 참조): uuid, ts, 위경도, 평균 심박, 최소 SpO2, 걸음 수, 연령대, 성별, accident_prior, 결측 표시
+**DERIVED** (집계 엔진 계산): 최대심박 대비 비율, 과부하 5분 여부, 개인 기준 편차, SpO2 등급, 평균 속도, 누적 시간, 90분 휴식 필요 여부, heat_index
+
+## 참고
+
+- 페르소나 기준값: 안정시 심박 58bpm·표준편차 13.6 (국민건강영양조사 60대 남성, n=398), 최대심박 155 (Fox 220−65).
+- SpO2·연령대·성별은 60대 실측 부족으로 가상 보정, 체온은 미측정 대신 heat_index로 대체합니다.
+- 산출된 피처표는 판정 모델(e1/e2)·DTO-5·대시보드 단계의 입력으로 연결됩니다.
