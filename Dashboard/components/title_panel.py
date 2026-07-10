@@ -15,7 +15,7 @@ def render_title_panel(row: pd.Series | None = None, dto5: dict | None = None, r
             <div class="safe-muted">
             65세 남성 사용자가 여름 오후 청계산을 등산 중입니다.<br/>
             오르막 이후 심박수가 상승하고 이동량이 감소합니다.<br/>
-            AI는 워치, GPS, 기상, 사고 데이터를 함께 분석해 피로·탈진 위험을 감지하고 가까운 쉼터에서 휴식을 권고합니다.
+            AI는 워치, GPS, 기상, 사고 데이터를 함께 분석해 피로 및 탈진 위험을 감지하고 가까운 쉼터에서 휴식을 권고합니다.
             </div>
         </div>
         """,

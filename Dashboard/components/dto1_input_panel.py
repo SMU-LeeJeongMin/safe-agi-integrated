@@ -39,7 +39,7 @@ def _card_html(kind: str, title: str, body: str) -> str:
 def render_dto1_input_panel(row: pd.Series) -> None:
     st.header("[1] DTO-1 Input Panel")
     st.markdown(
-        '<div class="panel-description">워치·GPS·기상·사고 데이터가 모델에 들어가기 전 어떤 값으로 들어왔는지 확인하는 panel</div>',
+        '<div class="panel-description">워치, GPS, 기상, 사고 데이터가 모델에 들어가기 전 어떤 값으로 들어왔는지 확인하는 panel</div>',
         unsafe_allow_html=True,
     )
 
