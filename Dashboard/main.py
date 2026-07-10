@@ -7,8 +7,16 @@ from pathlib import Path
 import streamlit as st
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
-if str(REPO_ROOT) not in sys.path:
-    sys.path.insert(0, str(REPO_ROOT))
+DASHBOARD_DIR = Path(__file__).resolve().parent
+
+# Streamlit Cloud에서 Dashboard/main.py를 entry point로 실행할 때
+# 레포 루트와 Dashboard 폴더를 모두 import 경로에 추가합니다.
+# - Model/ 은 레포 루트 기준으로 import
+# - components/, utils/, file_location.py 는 Dashboard 폴더 기준으로 import
+for path in (REPO_ROOT, DASHBOARD_DIR):
+    path_str = str(path)
+    if path_str not in sys.path:
+        sys.path.insert(0, path_str)
 
 from utils.file_loader import (
     load_features,
