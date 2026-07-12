@@ -101,9 +101,19 @@ def gps_speed_1min(gps, minute_keys):
         if not pts:
             out[m] = None
             continue
-        # 분내 누적 이동거리
-        dist = sum(haversine_m(pts[i][1], pts[i][2], pts[i+1][1], pts[i+1][2])
-                   for i in range(len(pts)-1))
+        # 분내 누적 이동거리 (GPS 노이즈 클리핑)
+        # 실데이터 검증서 발견: 산속 워치 GPS가 위성 재획득 순간 좌표 점프(최대 400m/초).
+        # 사람 보행 최대 ~8m/s → 초당 이동이 이를 넘으면 노이즈로 보고 해당 구간 제외.
+        dist = 0.0
+        for i in range(len(pts) - 1):
+            seg = haversine_m(pts[i][1], pts[i][2], pts[i+1][1], pts[i+1][2])
+            dt_sec = (pts[i+1][0] - pts[i][0]).total_seconds()
+            if dt_sec <= 0:
+                continue
+            if seg / dt_sec > 8.0:      # 8m/s 초과 = 비현실적 점프 → 제외
+                continue
+            dist += seg
+        dist = min(dist, 120.0)          # 이중 방어: 분당 120m 상한 클리핑
         rep_lat = sum(p[1] for p in pts) / len(pts)
         rep_lon = sum(p[2] for p in pts) / len(pts)
         out[m] = (round(rep_lat, 6), round(rep_lon, 6),
