@@ -1,5 +1,5 @@
 # [5] MAML 개인화 Panel (inner loop)
-# 같은 현재 입력이라도 사용자별 baseline이 달라지면 위험도 계산이 달라지는 효과를 보여준다.
+# 같은 현재 입력이라도 사용자별 baseline이 달라지면 위험도 계산이 달라지는 효과
 
 from __future__ import annotations
 
@@ -8,9 +8,11 @@ import html
 import pandas as pd
 import streamlit as st
 
+from components.panel_kit import persona_card, risk_tone
+
 from Model.f1_model import infer_f1
 from Model.personal_baseline import PersonalBaselineAdapter, personalized_features
-from utils.xAI import get_nested
+from utils.explanation import get_nested
 
 # 가상 페르소나 support set (세션 초반 저강도 구간 심박 10분 관측 가정)
 PERSONA_LOW = [72, 74, 76, 75, 73, 74, 75, 76, 74, 73]
@@ -32,17 +34,6 @@ def _fmt_bpm(value: float) -> str:
     return f"{float(value):.1f} bpm"
 
 
-def _risk_tone(label: str) -> str:
-    if label == "정상":
-        return "normal"
-    if label == "주의":
-        return "caution"
-    if label == "경고":
-        return "warning"
-    if label == "위험":
-        return "danger"
-    return "neutral"
-
 
 def _support_mean(values: list[float]) -> float:
     return sum(values) / len(values)
@@ -60,25 +51,22 @@ def _persona_card(
     risk_score = get_nested(dto5, ["risk", "representative"], 0)
     risk_label = get_nested(dto5, ["risk", "label"], "-")
     fatigue_state = get_nested(dto5, ["fatigue", "state"], "-")
-    risk_tone = _risk_tone(str(risk_label))
-    return (
-        f'<div class="maml-persona-card {tone}">'
-        f'<div class="maml-persona-title">{_safe(title)}</div>'
-        f'<div class="maml-persona-subtitle">{_safe(subtitle)}</div>'
-        '<div class="maml-divider"></div>'
-        '<div class="maml-metric-row">'
-        '<div><span>조정된 기준 심박 <span class="dto1-tooltip maml-tooltip dto1-tooltip-wide">i<span class="dto1-tooltip-text">개인화 후 모델이 사용하는 기준 심박<br />계산: (1-개인화 반영률)×60대 평균 기준 심박 + 개인화 반영률×초반 산행 심박 평균</span></span></span>'
-        f'<b>{_fmt_bpm(adapter.adapted_mean)}</b></div>'
-        '<div><span>위험도</span>'
-        f'<b>{_fmt_score(risk_score)}</b></div>'
-        '</div>'
-        '<div class="maml-result-row">'
-        f'<span class="maml-risk-pill {risk_tone}">risk_label: {_safe(risk_label)}</span>'
-        f'<span class="maml-state-pill">{_safe(fatigue_state)}</span>'
-        '</div>'
-        f'<div class="maml-interpretation">{_safe(interpretation)}</div>'
-        '</div>'
+    baseline_label = (
+        '조정된 기준 심박 <span class="dto1-tooltip maml-tooltip dto1-tooltip-wide">i'
+        '<span class="dto1-tooltip-text">개인화 후 모델이 사용하는 기준 심박<br />'
+        '계산: (1-개인화 반영률)×60대 평균 기준 심박 + 개인화 반영률×초반 산행 심박 평균</span></span>'
     )
+    return persona_card(
+        title=title,
+        subtitle=subtitle,
+        metrics=[(baseline_label, _fmt_bpm(adapter.adapted_mean)), ("위험도", _fmt_score(risk_score))],
+        risk_pill_class=risk_tone(str(risk_label)),
+        risk_pill_text=f"risk_label: {risk_label}",
+        state_pill_text=str(fatigue_state),
+        interpretation=interpretation,
+        tone=tone,
+    )
+
 
 
 def _summary_df(adapters: list[tuple[str, PersonalBaselineAdapter]]) -> pd.DataFrame:

@@ -1,5 +1,5 @@
 # [3] Model Explanation Panel
-# 모델이 해당 시점에서 특정 위험 등급과 피로 상태를 판단한 이유를 설명한다.
+# 모델이 해당 시점에서 특정 위험 등급과 피로 상태를 판단한 이유를 설명
 
 from __future__ import annotations
 
@@ -10,6 +10,15 @@ import pandas as pd
 import streamlit as st
 
 from components.layout import render_risk_gauge
+from components.panel_kit import (
+    formula_line,
+    model_detail_button_label,
+    metric_card,
+    render_contribution_card,
+    render_contribution_section_header,
+    render_offline_weight_explanation,
+    step_card,
+)
 from Model.f1_model import (
     ACCU_REF_MIN,
     HEAT_BASE,
@@ -21,13 +30,11 @@ from Model.f1_model import (
     STEP_BASELINE,
     W,
 )
-from utils.xAI import (
+from utils.explanation import (
     HR_OVERLOAD_RATIO,
     RISK_CAUTION,
     RISK_DANGER,
     RISK_WARNING,
-    build_feature_importance,
-    build_threshold_checks,
     to_bool,
     to_float,
 )
@@ -97,41 +104,9 @@ def _score_components(row: pd.Series) -> dict[str, float]:
     }
 
 
-def _metric_card(label: str, value: Any, description: str) -> str:
-    return (
-        '<div class="safe-card soft model-metric-card">'
-        '<div class="dto1-label-row">'
-        f'<span class="dto1-label">{_safe(label)}</span>'
-        '</div>'
-        f'<div class="dto1-value model-metric-value">{_safe(value)}</div>'
-        f'<div class="model-metric-desc">{_safe(description)}</div>'
-        '</div>'
-    )
-
-
-def _formula_line(title: str, text: str) -> str:
-    text_html = _safe(text).replace("\n", "<br />")
-    return (
-        '<div class="model-formula-line">'
-        f'<span class="model-formula-label">{_safe(title)}</span>'
-        f'<span class="model-formula-text">{text_html}</span>'
-        '</div>'
-    )
-
-
 def _render_step_card(title: str, summary: str, value: object, formulas: list[tuple[str, str]]) -> None:
-    formula_html = "".join(_formula_line(k, v) for k, v in formulas)
-    st.markdown(
-        (
-            '<div class="safe-card soft model-step-card">'
-            f'<h4>{_safe(title)}</h4>'
-            f'<div class="model-step-summary">{_safe(summary)}</div>'
-            f'<div class="dto1-value model-step-value">{_safe(value)}</div>'
-            f'{formula_html}'
-            '</div>'
-        ),
-        unsafe_allow_html=True,
-    )
+    st.markdown(step_card(title, summary, value, formulas), unsafe_allow_html=True)
+
 
 
 def _fatigue_rule_text(row: pd.Series, fatigue_state: str) -> str:
@@ -145,7 +120,12 @@ def _fatigue_rule_text(row: pd.Series, fatigue_state: str) -> str:
     )
 
 
-def render_model_explanation_panel(row: pd.Series, dto5: dict, reason_text: str) -> None:
+def render_model_explanation_panel(
+    row: pd.Series,
+    dto5: dict,
+    reason_text: str,
+    explanation: dict[str, Any] | None = None,
+) -> None:
     st.header("[3] Model Explanation Panel")
     st.markdown(
         '<div class="panel-description">변환된 feature를 기반으로 위험도와 피로 상태가 어떻게 계산되는지 보여주는 panel</div>',
@@ -163,23 +143,38 @@ def render_model_explanation_panel(row: pd.Series, dto5: dict, reason_text: str)
     col1, col2, col3 = st.columns(3)
     with col1:
         st.markdown(
-            _metric_card("e1_biometric", f"{e1:.4f}", "생체 신호만 반영한 위험 점수"),
+            metric_card("e1_biometric", f"{e1:.4f}", "생체 신호만 반영한 위험 점수"),
             unsafe_allow_html=True,
         )
     with col2:
         st.markdown(
-            _metric_card("e2_combined", f"{e2:.4f}", "생체, 이동량, 누적 시간, 환경을 반영한 종합 점수"),
+            metric_card("e2_combined", f"{e2:.4f}", "생체, 이동량, 누적 시간, 환경을 반영한 종합 점수"),
             unsafe_allow_html=True,
         )
     with col3:
         st.markdown(
-            _metric_card("representative", f"{rep:.4f}", "e1과 e2 중 더 큰 값을 대표 위험도로 사용"),
+            metric_card("representative", f"{rep:.4f}", "e1과 e2 중 더 큰 값을 대표 위험도로 사용"),
             unsafe_allow_html=True,
         )
 
-    st.markdown('<div class="model-button-gap"></div>', unsafe_allow_html=True)
+    st.markdown('<div class="model-section-gap"></div>', unsafe_allow_html=True)
+    st.markdown("#### Risk_label 등급과 판단 근거")
+    render_risk_gauge(rep)
+    st.markdown(
+        (
+            f'<div class="safe-card risk-zone-card {_risk_zone_class(rep)}">'
+            f'<b>{_safe(_risk_zone_text(rep))}</b><br/>'
+            '<span class="safe-muted">위험 등급은 전체 위험 수준이고, 피로 상태는 F1 시나리오에서 사용자에게 안내할 행동 판단입니다.</span>'
+            '</div>'
+        ),
+        unsafe_allow_html=True,
+    )
+    st.markdown('<div class="whatif-info-gap"></div>', unsafe_allow_html=True)
+    st.info(reason_text)
+
+    st.markdown('<div class="model-section-gap"></div>', unsafe_allow_html=True)
     run_key = f"model_run_visible_{row.get('ts')}"
-    if st.button("선택 시점으로 모델 계산 실행", type="primary"):
+    if st.button(model_detail_button_label("F1"), type="primary"):
         st.session_state[run_key] = True
 
     if st.session_state.get(run_key):
@@ -231,56 +226,40 @@ def render_model_explanation_panel(row: pd.Series, dto5: dict, reason_text: str)
                     ("현재", _fatigue_rule_text(row, str(fatigue_state))),
                 ],
             )
+        st.markdown('<div class="model-after-steps-gap"></div>', unsafe_allow_html=True)
+        render_contribution_section_header()
+
+        e1_items = [
+            ("심박 부담도", 0.5, comp["hr_ratio"], "green"),
+            ("SpO2 저하", 0.3, comp["spo2_drop"], ""),
+            ("개인 기준 편차", 0.2, comp["hr_z_norm"], "amber"),
+        ]
+        e2_items = [
+            ("생체 (e1)", W["bio"], comp["e1_calc"], "green"),
+            ("이동량 저하", W["move"], comp["move"], ""),
+            ("누적 산행 시간", W["accu"], comp["accu"], "amber"),
+            ("환경 (더위 및 사고 이력)", W["env"], comp["env"], "gray"),
+        ]
+        left, right = st.columns(2)
+        with left:
+            render_contribution_card(
+                f"e1_biometric 기여도 분해 ({e1:.4f})",
+                "생체 신호만 반영한 점수입니다. 심박 부담, SpO2 저하, 개인 기준 편차 세 항목으로 구성됩니다.",
+                e1_items,
+                bottom_label="가중치 출처",
+                bottom_text="정의서 F1 확정 공식 (0.5, 0.3, 0.2)",
+            )
+        with right:
+            render_contribution_card(
+                f"e2_combined 기여도 분해 ({e2:.4f})",
+                "생체 점수(e1)에 이동량, 누적 산행 시간, 환경 조건을 더한 종합 점수입니다.",
+                e2_items,
+                bottom_label="가중치 출처",
+                bottom_text="회의 확정 가중치 (0.55, 0.20, 0.15, 0.10)",
+            )
+
+        st.markdown('<div style="height:16px;"></div>', unsafe_allow_html=True)
+        render_offline_weight_explanation(explanation, scenario_id="F1")
     else:
-        st.info("버튼을 누르면 e1, e2, representative, fatigue.state가 계산되는 흐름을 단계별로 확인할 수 있습니다.")
+        st.info("버튼을 누르면 e1, e2, representative, fatigue.state 계산 단계와 항목별 기여도 분해, 학습 가중치 근거를 확인할 수 있습니다.")
 
-    st.markdown('<div class="model-after-steps-gap"></div>', unsafe_allow_html=True)
-    st.markdown("#### 판정 기준표")
-    st.markdown(
-        '<div class="panel-description">충족된 조건은 현재 시점에서 위험 판단에 영향을 준 신호입니다.<br />충족된 조건이 많을수록 위험 신호가 여러 개 겹친 상황이고, 미충족 조건은 아직 해당 기준까지는 도달하지 않은 항목입니다.</div>',
-        unsafe_allow_html=True,
-    )
-    checks = pd.DataFrame(build_threshold_checks(row, dto5))
-    hit_df = checks[checks["충족 여부"] == "충족"]
-    miss_df = checks[checks["충족 여부"] == "미충족"]
-
-    c1, c2 = st.columns(2)
-    with c1:
-        st.markdown("##### 충족된 조건")
-        if hit_df.empty:
-            st.caption("현재 시점에서 충족된 위험 조건이 없습니다.")
-        else:
-            st.dataframe(hit_df, use_container_width=True, hide_index=True)
-    with c2:
-        st.markdown("##### 미충족 조건")
-        if miss_df.empty:
-            st.caption("모든 조건이 충족되었습니다.")
-        else:
-            st.dataframe(miss_df, use_container_width=True, hide_index=True)
-
-    st.markdown("#### Risk_label 등급")
-    render_risk_gauge(rep)
-    st.markdown(
-        (
-            f'<div class="safe-card risk-zone-card {_risk_zone_class(rep)}">'
-            f'<b>{_safe(_risk_zone_text(rep))}</b><br/>'
-            '<span class="safe-muted">위험 등급은 전체 위험 수준이고, 피로 상태는 F1 시나리오에서 사용자에게 안내할 행동 판단입니다.</span>'
-            '</div>'
-        ),
-        unsafe_allow_html=True,
-    )
-
-    st.markdown('<div class="model-section-gap"></div>', unsafe_allow_html=True)
-    st.markdown("#### 판단 근거 문장")
-    st.markdown(
-        (
-            '<div class="panel-description">'
-            '현재 판단 근거 문장은 F1 모델 계산식과 규칙 기반 중요도 값을 기준으로 생성됩니다.<br />'
-            '중요도는 현재 feature 값을 0~1 범위로 정규화하거나, 위험 조건 충족 여부에 따라 부여한 설명용 점수입니다.<br />'
-            '중요도가 높은 feature 5개를 선택해 결과 판단 근거로 표시합니다.<br />'
-            'Azure ML/SHAP 기반 xAI는 아직 미연동 상태이며, 다음 단계에서 연동하여 설명 근거를 고도화할 예정입니다.'
-            '</div>'
-        ),
-        unsafe_allow_html=True,
-    )
-    st.info(reason_text)

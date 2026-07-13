@@ -1,11 +1,13 @@
 # [4] What-If Simulating Panel
-# 입력값이 바뀌었을 때 실제 F1 모델 재계산 결과를 비교한다.
+# 입력값이 바뀌었을 때 실제 F1 모델 재계산 결과를 비교
 
 import pandas as pd
 import streamlit as st
 
 from Model.f1_model import infer_f1
-from utils.xAI import build_whatif_features, get_nested, to_float
+
+from components.panel_kit import WHATIF_RERUN_LABEL, result_card
+from utils.explanation import build_whatif_features, get_nested, to_float
 
 
 def _format_risk_value(value: object) -> str:
@@ -17,13 +19,7 @@ def _format_risk_value(value: object) -> str:
 
 def _result_card(title: str, risk_value: object, label: object, state: object, class_name: str = "soft") -> None:
     st.markdown(
-        f"""
-        <div class="safe-card {class_name}">
-            <h4>{title}</h4>
-            <div class="big">{_format_risk_value(risk_value)}</div>
-            <div class="safe-muted">위험 등급: <b>{label}</b><br/>피로 상태: <b>{state}</b></div>
-        </div>
-        """,
+        result_card(title, _format_risk_value(risk_value), [("위험 등급", label), ("피로 상태", state)], class_name),
         unsafe_allow_html=True,
     )
 
@@ -69,7 +65,7 @@ def render_whatif_panel(row: pd.Series, dto5: dict) -> None:
             changed_heat_index = st.slider("Heat Index", 20.0, 40.0, float(current_heat_index), 0.5)
 
     run_key = f"whatif_result_{row.get('ts')}"
-    if st.button("변경값으로 다시 분석하기", type="primary", use_container_width=True):
+    if st.button(WHATIF_RERUN_LABEL, type="primary", use_container_width=True):
         whatif_features = build_whatif_features(
             row=row,
             changed_hr=changed_hr,
@@ -116,7 +112,7 @@ def render_whatif_panel(row: pd.Series, dto5: dict) -> None:
 
     st.markdown("#### What-If 결과 저장")
     if st.button("이 What-If 결과를 InferenceResult로 저장"):
-        from components.inferenceresult_panel import flatten_for_save, save_inference_result
+        from scenarios.f1.inferenceresult_panel import flatten_for_save, save_inference_result
 
         whatif_row = pd.Series(whatif_features)
         record = flatten_for_save(whatif_row, whatif_dto5, result["reason"], source="whatif")

@@ -1,4 +1,4 @@
-# 공통 레이아웃 및 스타일 컴포넌트
+# 공통 레이아웃 및 스타일 컴포넌트 (CSS)
 
 from __future__ import annotations
 
@@ -22,7 +22,7 @@ PANEL_OPTIONS = [
 ]
 
 SCENARIOS = [
-    ("A1", "낭떠러지 및 낙석 위험 구역 접근", "위험 구역 접근 시 생체 반응 + 지형 분석 → 경고 및 우회 경로", False),
+    ("A1", "낭떠러지 및 낙석 위험 구역 접근", "위험 구역 접근 시 생체 반응 + 지형 분석 → 경고 및 우회 경로", True),
     ("A2", "야생동물 출몰 지역 진입", "야생동물 출몰 지역 진입 시 이상 행동 패턴 감지 → 즉각 경고", False),
     ("A5", "과거 사고 다수 발생 지역 진입", "과거 사고 다수 발생 지역 진입 감지 → 경고 및 주의 안내", False),
     ("F1", "피로 및 심박 이상 감지", "이상 징후 감지 → 휴식 권고, 속도 및 경로 조절", True),
@@ -36,9 +36,25 @@ SCENARIOS = [
 
 ASSET_DIR = Path(__file__).resolve().parents[1] / "assets"
 
+# 공통 작업 레포 링크 (단일 URL)
+GITHUB_REPO_URL = "https://github.com/SMU-LeeJeongMin/safe-agi-integrated"
+GITHUB_LINK_LABEL = "SAFE AI Project"
+
+
+def github_link_html(extra_class: str = "") -> str:
+    """GitHub 아이콘 + 'SAFE AI Project' 문구로 구성된 링크 HTML을 반환한다."""
+    icon_uri = _asset_data_uri("Github.png", "image/png")
+    icon_img = f'<img src="{icon_uri}" alt="GitHub" />' if icon_uri else ""
+    class_attr = f"project-link {extra_class}".strip()
+    return (
+        f'<a class="{class_attr}" href="{GITHUB_REPO_URL}" target="_blank" '
+        f'rel="noopener noreferrer" aria-label="공통 GitHub 레포로 이동">'
+        f'{icon_img}<span>{GITHUB_LINK_LABEL}</span></a>'
+    )
+
 
 def _asset_data_uri(filename: str, mime: str) -> str:
-    """Return a base64 data URI for Streamlit HTML/CSS assets."""
+    """Streamlit HTML/CSS에서 쓸 base64 data URI를 반환한다."""
     path = ASSET_DIR / filename
     if not path.exists():
         return ""
@@ -804,6 +820,15 @@ def inject_global_css() -> None:
             border: 1px solid transparent;
             line-height: 1.25;
         }
+        .scenario-sidebar-nav {
+            margin-top: 0;
+            padding-top: 0;
+        }
+
+        .scenario-sidebar-nav a {
+            padding-left: 0.15rem;
+        }
+
         .sidebar-nav a:hover {
             background: #eef7ef;
             border-color: #c7dfc8;
@@ -989,6 +1014,123 @@ def inject_global_css() -> None:
             .intro-root::after { height: 30vh; background-size: auto 100%; }
             .intro-desc { font-size: 1rem; }
         }
+        /* ── 신규: 프로젝트 링크 (GitHub) — sidebar-nav와 동일한 시각 언어 ── */
+        .project-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+            padding: 8px 11px;
+            border-radius: 10px;
+            border: 1px solid transparent;
+            color: #1f2937 !important;
+            text-decoration: none !important;
+            font-weight: 750;
+            line-height: 1.25;
+        }
+        .project-link:hover {
+            background: #eef7ef;
+            border-color: #c7dfc8;
+            color: #2e6b35 !important;
+        }
+        .project-link img {
+            width: 20px;
+            height: 20px;
+            border-radius: 999px;
+            display: block;
+        }
+        .intro-footer .project-link {
+            padding: 6px 10px;
+            color: rgba(255,255,255,.86) !important;
+            font-weight: 750;
+        }
+        .intro-footer .project-link:hover {
+            background: rgba(255,255,255,.10);
+            border-color: rgba(255,255,255,.28);
+            color: #ffffff !important;
+        }
+
+        /* ── 신규: [3] Model Explanation 기여도 분해 바 ── */
+        .model-contrib-row { margin: 0 0 14px; }
+        .model-contrib-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 5px;
+        }
+        .model-contrib-name {
+            color: var(--safe-navy);
+            font-size: 1.02rem;
+            font-weight: 800;
+        }
+        .model-contrib-name span { color: #667085; font-weight: 600; font-size: .95rem; }
+        .model-contrib-value { color: #344054; font-size: .98rem; font-weight: 800; }
+        .model-contrib-track {
+            height: 12px;
+            border-radius: 999px;
+            background: #eef2f7;
+            border: 1px solid #e2e8f2;
+            overflow: hidden;
+        }
+        .model-contrib-fill {
+            height: 100%;
+            border-radius: 999px;
+            background: linear-gradient(90deg, #2454a6, #4b7bd6);
+        }
+        .model-contrib-fill.green { background: linear-gradient(90deg, #1f7a5a, #35a37e); }
+        .model-contrib-fill.amber { background: linear-gradient(90deg, #ad741b, #d29a3f); }
+        .model-contrib-fill.gray { background: linear-gradient(90deg, #98a2b3, #b6bfcc); }
+
+        /* ── 신규: 실시간 모니터링 페이지 ── */
+        .monitor-live-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 12px;
+            border-radius: 999px;
+            background: #f2fbf7;
+            border: 1px solid #cdebdc;
+            color: #16734f;
+            font-weight: 850;
+            font-size: .9rem;
+        }
+        .monitor-live-pill.paused {
+            background: #f2f4f7;
+            border-color: #e4e7ec;
+            color: #667085;
+        }
+        .monitor-live-dot {
+            width: 9px;
+            height: 9px;
+            border-radius: 999px;
+            background: #1f7a5a;
+            animation: monitor-pulse 1.4s ease-in-out infinite;
+        }
+        .monitor-live-pill.paused .monitor-live-dot {
+            background: #98a2b3;
+            animation: none;
+        }
+        @keyframes monitor-pulse {
+            0% { box-shadow: 0 0 0 0 rgba(31, 122, 90, .45); }
+            70% { box-shadow: 0 0 0 8px rgba(31, 122, 90, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(31, 122, 90, 0); }
+        }
+        .monitor-metric-card {
+            min-height: 150px;
+            height: 150px;
+            box-sizing: border-box;
+            overflow: visible;
+        }
+        .monitor-inject-note {
+            color: #667085;
+            font-size: .98rem;
+            line-height: 1.55;
+            word-break: keep-all;
+            margin: 6px 0 4px;
+        }
+        .scenario-card.monitor {
+            background: #f8fbff;
+            border-color: #c9d9f3;
+        }
         </style>
         """,
         unsafe_allow_html=True,
@@ -1000,7 +1142,7 @@ def safe_html(text: object) -> str:
 
 
 def scenario_desc_html(text: str) -> str:
-    """Render scenario descriptions with the action arrow on a new line."""
+    """시나리오 설명에서 대응 화살표(→) 뒷부분을 줄바꿈해 표시한다."""
     if "→" not in text:
         return safe_html(text)
     before, after = text.split("→", 1)
@@ -1051,6 +1193,7 @@ def render_intro_page() -> None:
         '<div class="intro-footer">'
         '<span><strong>CONSORTIUM</strong> 숙명여자대학교 AGI 연구팀 × iNavi Systems Consortium</span>'
         '<span><strong>COPYRIGHT</strong> © 2026 Sookmyung Women’s University AGI Lab. All rights reserved.</span>'
+        f'{github_link_html()}'
         '</div>'
         '</div>'
         '</section>'
@@ -1080,12 +1223,31 @@ def render_scenario_select_page() -> None:
                     unsafe_allow_html=True,
                 )
                 if enabled:
-                    if st.button("F1 대시보드 열기", key=f"open_{code}", use_container_width=True, type="primary"):
+                    if st.button(f"{code} 대시보드 열기", key=f"open_{code}", use_container_width=True, type="primary"):
                         st.session_state["selected_scenario"] = code
                         st.session_state["page"] = "dashboard"
                         st.rerun()
                 else:
                     st.button("준비 중", key=f"disabled_{code}", disabled=True, use_container_width=True)
+
+    # 시나리오 카드와 동일한 시각 언어의 실시간 모니터링 진입 카드
+    st.markdown('<div style="height:18px;"></div>', unsafe_allow_html=True)
+    cols = st.columns(3)
+    with cols[0]:
+        st.markdown(
+            """
+            <div class="scenario-card monitor">
+                <div class="scenario-code">LIVE</div>
+                <div class="scenario-title">실시간 모니터링</div>
+                <div class="scenario-desc">특정 관찰 대상을 선택해 유입값을 스트리밍으로 관찰<br /><span class='scenario-arrow'>→ 이벤트 주입으로 위험 반응 확인</span></div>
+                <div class="scenario-status"><span class="safe-pill">BETA</span></div>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
+        if st.button("실시간 모니터링 열기", key="open_monitor", use_container_width=True, type="primary"):
+            st.session_state["page"] = "monitor"
+            st.rerun()
 
 
 def render_pipeline_nav() -> None:

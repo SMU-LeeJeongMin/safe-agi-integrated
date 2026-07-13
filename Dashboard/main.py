@@ -1,5 +1,7 @@
 # 대시보드 실행 파일
-# streamlit run dashboard/main.py 명령어로 실행
+# streamlit run Dashboard/main.py 명령어로 실행
+
+from __future__ import annotations
 
 import sys
 from pathlib import Path
@@ -9,73 +11,22 @@ import streamlit as st
 REPO_ROOT = Path(__file__).resolve().parents[1]
 DASHBOARD_DIR = Path(__file__).resolve().parent
 
-# Streamlit Cloud에서 Dashboard/main.py를 entry point로 실행할 때
-# 레포 루트와 Dashboard 폴더를 모두 import 경로에 추가합니다.
-# - Model/ 은 레포 루트 기준으로 import
-# - components/, utils/, file_location.py 는 Dashboard 폴더 기준으로 import
 for path in (REPO_ROOT, DASHBOARD_DIR):
-    path_str = str(path)
-    if path_str not in sys.path:
-        sys.path.insert(0, path_str)
+    path_text = str(path)
+    if path_text not in sys.path:
+        sys.path.insert(0, path_text)
 
-from utils.file_loader import (
-    load_features,
-    load_dto5_sequence,
-    load_validation_report,
-)
-from utils.xAI import make_reason_text
-
-from components.layout import (
-    inject_global_css,
-    render_intro_page,
-    render_scenario_select_page,
-)
-from components.sidebar import render_sidebar
-from components.title_panel import render_title_panel
-from components.dto1_input_panel import render_dto1_input_panel
-from components.feature_engineering_panel import render_feature_engineering_panel
-from components.model_explanation_panel import render_model_explanation_panel
-from components.whatif_panel import render_whatif_panel
-from components.personalization_panel import render_personalization_panel
-from components.dto5_panel import render_dto5_panel
-from components.inferenceresult_panel import render_inferenceresult_panel
+from components.layout import inject_global_css, render_intro_page, render_scenario_select_page
+from core.registry import get_scenario
+from core.router import load_renderer
+from core.source_loader import load_scenario_payload
 
 
-PANEL_RENDERERS = {
-    "DTO-1 Input Panel": "dto1",
-    "Feature Engineering Panel": "feature",
-    "Model Explanation Panel": "model",
-    "What-If Simulating Panel": "whatif",
-    "MAML 개인화 Panel": "maml",
-    "DTO-5 Output Panel": "dto5",
-    "InferenceResult 저장 Panel": "save",
-}
-
-
-def _show_panel(panel_key: str, selected_panel: str) -> bool:
-    if selected_panel == "전체 보기":
-        return True
-    return PANEL_RENDERERS.get(selected_panel) == panel_key
-
-
-def _back_buttons() -> None:
-    st.markdown(
-        """
-        <div style="display:flex; gap:10px; align-items:center; margin:0 0 24px 0;">
-            <a href="?page=intro" target="_self"
-               style="display:inline-flex; align-items:center; justify-content:center;
-                      min-width:92px; padding:8px 15px; border:1px solid #d0d5dd;
-                      border-radius:8px; color:#1f2937; text-decoration:none;
-                      background:#ffffff; font-weight:500; line-height:1.2;">처음으로</a>
-            <a href="?page=scenario" target="_self"
-               style="display:inline-flex; align-items:center; justify-content:center;
-                      min-width:118px; padding:8px 15px; border:1px solid #d0d5dd;
-                      border-radius:8px; color:#1f2937; text-decoration:none;
-                      background:#ffffff; font-weight:500; line-height:1.2;">시나리오 선택</a>
-        </div>
-        """,
-        unsafe_allow_html=True,
-    )
+def _query_value(name: str) -> str | None:
+    value = st.query_params.get(name)
+    if isinstance(value, list):
+        return value[0] if value else None
+    return value
 
 
 def main() -> None:
@@ -89,11 +40,17 @@ def main() -> None:
     if "page" not in st.session_state:
         st.session_state["page"] = "intro"
 
-    # Introduction Page의 CTA 버튼은 ?page=scenario 링크를 사용합니다.
-    # 쿼리 파라미터를 session_state로 반영한 뒤 주소창은 다시 정리합니다.
-    query_page = st.query_params.get("page")
-    if query_page in {"intro", "scenario", "dashboard"}:
+    query_page = _query_value("page")
+    query_scenario = _query_value("scenario")
+
+    query_applied = False
+    if query_page in {"intro", "scenario", "dashboard", "monitor"}:
         st.session_state["page"] = query_page
+        query_applied = True
+    if query_scenario:
+        st.session_state["selected_scenario"] = query_scenario.upper()
+        query_applied = True
+    if query_applied:
         st.query_params.clear()
 
     page = st.session_state["page"]
@@ -106,52 +63,24 @@ def main() -> None:
         render_scenario_select_page()
         return
 
-    features = load_features()
-    dto5_sequence = load_dto5_sequence()
-    report = load_validation_report()
+    if page == "monitor":
+        from monitor.page import render_monitor_page
 
-    if len(features) != len(dto5_sequence):
-        st.warning(
-            f"feature 행 수({len(features)})와 DTO-5 개수({len(dto5_sequence)})가 다릅니다."
-        )
+        render_monitor_page()
+        return
 
-    selected_idx = render_sidebar(features, dto5_sequence)
+    selected_scenario = st.session_state.get("selected_scenario", "F1")
+    definition = get_scenario(selected_scenario)
 
-    row = features.iloc[selected_idx]
-    dto5 = dto5_sequence[selected_idx]
-    reason_text = make_reason_text(row, dto5)
+    if not definition.enabled or definition.source_spec is None:
+        st.session_state["page"] = "scenario"
+        st.warning(f"{definition.scenario_id} 시나리오는 아직 준비 중입니다.")
+        render_scenario_select_page()
+        return
 
-    _back_buttons()
-    st.markdown('<span id="dashboard-top" class="panel-anchor"></span>', unsafe_allow_html=True)
-    render_title_panel(row=row, dto5=dto5, report=report)
-
-    st.markdown('<span id="dto1-input-panel" class="panel-anchor"></span>', unsafe_allow_html=True)
-    st.divider()
-    render_dto1_input_panel(row)
-
-    st.markdown('<span id="feature-engineering-panel" class="panel-anchor"></span>', unsafe_allow_html=True)
-    st.divider()
-    render_feature_engineering_panel(row, features, dto5_sequence)
-
-    st.markdown('<span id="model-explanation-panel" class="panel-anchor"></span>', unsafe_allow_html=True)
-    st.divider()
-    render_model_explanation_panel(row, dto5, reason_text)
-
-    st.markdown('<span id="whatif-simulating-panel" class="panel-anchor"></span>', unsafe_allow_html=True)
-    st.divider()
-    render_whatif_panel(row, dto5)
-
-    st.markdown('<span id="maml-personalization-panel" class="panel-anchor"></span>', unsafe_allow_html=True)
-    st.divider()
-    render_personalization_panel(row, dto5)
-
-    st.markdown('<span id="dto5-output-panel" class="panel-anchor"></span>', unsafe_allow_html=True)
-    st.divider()
-    render_dto5_panel(row, dto5, reason_text)
-
-    st.markdown('<span id="inferenceresult-save-panel" class="panel-anchor"></span>', unsafe_allow_html=True)
-    st.divider()
-    render_inferenceresult_panel(row, dto5, reason_text)
+    payload = load_scenario_payload(definition.source_spec)
+    renderer = load_renderer(definition)
+    renderer(payload, definition)
 
 
 if __name__ == "__main__":

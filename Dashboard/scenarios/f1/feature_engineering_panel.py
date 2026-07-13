@@ -1,5 +1,5 @@
 # [2] Feature Engineering Panel
-# DTO-1 기반 입력값이 모델 입력 feature로 어떻게 변환되었는지 보여준다.
+# DTO-1 기반 입력값이 모델 입력 feature로 어떻게 변환되었는지 
 
 import html
 
@@ -7,8 +7,9 @@ import pandas as pd
 import plotly.express as px
 import streamlit as st
 
+from components.panel_kit import feature_card, style_feature_fig
 from utils.time_utils import to_kst_timestamp
-from utils.xAI import build_feature_calculations, get_nested
+from utils.explanation import build_feature_calculations, get_nested
 
 
 KEY_FEATURES = ["hr_ratio_maxhr", "hr_z_personal", "hr_overload_5min", "spo2_grade"]
@@ -46,55 +47,19 @@ def _feature_desc(feature: str) -> str:
     return FEATURE_HELP.get(feature, {}).get("desc", "")
 
 
-def _feature_formula(feature: str, item: dict[str, str]) -> str:
-    formula = FEATURE_HELP.get(feature, {}).get("formula", item.get("계산 과정", "-"))
-    return (
-        '<div class="feature-formula-box">'
-        '<div class="feature-formula-row">'
-        '<span class="feature-formula-label">공식</span>'
-        f'<span class="feature-formula-text">{html.escape(str(formula))}</span>'
-        '</div>'
-        '</div>'
-    )
-
 
 def _feature_summary(feature: str, item: dict[str, str]) -> str:
-    """Return a feature card that shows the feature value and formula."""
-    value = item.get("값", "-")
-    title = html.escape(_feature_title(feature))
-    desc = html.escape(_feature_desc(feature))
-    return (
-        '<div class="safe-card soft feature-card">'
-        f'<h4>{html.escape(str(feature))}</h4>'
-        '<div class="feature-metric-block">'
-        '<div class="dto1-label-row">'
-        f'<span class="dto1-label">{title}</span>'
-        '<span class="dto1-tooltip">i'
-        f'<span class="dto1-tooltip-text">{desc}</span>'
-        '</span>'
-        '</div>'
-        f'<div class="dto1-value">{html.escape(str(value))}</div>'
-        '</div>'
-        f'{_feature_formula(feature, item)}'
-        '</div>'
+    formula = FEATURE_HELP.get(feature, {}).get("formula", item.get("계산 과정", "-"))
+    return feature_card(
+        field=feature,
+        title=_feature_title(feature),
+        value=item.get("값", "-"),
+        tooltip=_feature_desc(feature),
+        box_label="공식",
+        box_text=formula,
     )
 
 
-def _style_feature_fig(fig):
-    safe_green = "#2e6b35"
-    fig.update_traces(
-        line=dict(color=safe_green, width=3),
-        marker=dict(color=safe_green, size=7),
-    )
-    fig.update_layout(
-        font=dict(size=16),
-        title_font=dict(size=20),
-        legend_font=dict(size=15),
-        margin=dict(l=20, r=20, t=58, b=34),
-    )
-    fig.update_xaxes(title_font=dict(size=16), tickfont=dict(size=14))
-    fig.update_yaxes(title_font=dict(size=16), tickfont=dict(size=14))
-    return fig
 
 
 def render_feature_engineering_panel(
@@ -153,7 +118,7 @@ def render_feature_engineering_panel(
     def add_selected_line(fig):
         if selected_ts is not None:
             fig.add_vline(x=selected_ts, line_dash="dash", line_color="gray")
-        return _style_feature_fig(fig)
+        return style_feature_fig(fig)
 
     tab1, tab2, tab3, tab4 = st.tabs(["심박수", "SpO2", "위험도", "걸음/속도"])
 

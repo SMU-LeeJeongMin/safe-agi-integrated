@@ -1,16 +1,16 @@
-# xAI 및 설명 생성 관련 utility 파일
+# 판단 근거 설명 생성 유틸리티 (구 xAI.py)
+# 규칙 기반 중요도와 판단 근거 문장
+# 위험 등급 임계값, 개인 baseline 상수 등 화면 설명에 쓰는 공용 상수도 여기서 관리
 
 from typing import Any
 
 import pandas as pd
 
-# ---------------------------------------------------------------------------
-# 표시·What-if용 상수 — 출처를 model/ 모듈로 일원화 (drift 방지)
+# 표시 및 What-if용 상수 — 출처를 model/ 모듈로 일원화 (drift 방지)
 #   - HR_BASELINE / HR_STD: model/personal_baseline.py의 국건영 60대 실측 prior를 import
 #   - RISK_* 컷오프: 규격 DTO_v1.2 주3 = model/dto5.py risk_level()과 동일
 #     (등급 판정 자체는 risk_label_from_score()가 model.dto5.risk_level에 위임)
 #   - MAX_HR_60S: 페르소나 공식 220 − 65 (7/2 회의록)
-# ---------------------------------------------------------------------------
 from Model.personal_baseline import PRIOR_MEAN as HR_BASELINE  # 58.0
 from Model.personal_baseline import PRIOR_STD as HR_STD        # 13.6
 from Model.f1_model import K_PERSONAL_STD
@@ -152,14 +152,14 @@ def build_feature_calculations(row: pd.Series) -> list[dict[str, str]]:
         },
         {
             "feature": "heat_index",
-            "원본 입력": "기상 데이터 (기온·습도)",
+            "원본 입력": "기상 데이터 (기온 및 습도)",
             "계산 과정": "체감 위험 보정값 산출",
             "값": f"{heat:.1f}",
             "해석": f"{HEAT_WARN:.0f} 이상 고온 가중" if heat >= HEAT_WARN else "고온 가중 없음",
         },
         {
             "feature": "accident_prior",
-            "원본 입력": "산악사고 통계 (여름·탈진 비율)",
+            "원본 입력": "산악사고 통계 (여름 및 탈진 비율)",
             "계산 과정": "사고 prior 보정값",
             "값": f"{prior:.2f}",
             "해석": "환경 위험 보정에 반영",
@@ -341,7 +341,7 @@ def build_feature_importance(row: pd.Series, dto5: dict[str, Any]) -> list[dict[
         candidates.append({
             "feature": "accident_prior",
             "importance": min(accident_prior, 1.0),
-            "reason": f"산악사고 기반 탈진·탈수 prior가 {accident_prior:.2f}입니다."
+            "reason": f"산악사고 기반 탈진 및 탈수 prior가 {accident_prior:.2f}입니다."
         })
 
     if not candidates:

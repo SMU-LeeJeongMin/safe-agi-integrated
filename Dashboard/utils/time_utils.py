@@ -1,5 +1,5 @@
 # 시간 표시 유틸리티
-# 내부 데이터는 UTC로 저장하고, 시연 화면에서는 한국시간(KST, UTC+9)을 기본 표기로 사용한다.
+# UTC로 입력값은 들어가지만 KST로 변환하여 대시보드에 표시
 
 from __future__ import annotations
 

@@ -1,14 +1,21 @@
 # 대시보드 왼쪽 사이드바 component
-# 1분 단위 시점 index와 패널 위치 이동 링크를 제공한다.
+# 선택 시점과 전체 시나리오별 패널 이동 링크를 제공
+
+from __future__ import annotations
+
+from html import escape
+from typing import Any
 
 import pandas as pd
 import streamlit as st
 
+from core.registry import SCENARIOS
+from components.layout import github_link_html
 from utils.time_utils import format_kst
 
 
 PANEL_NAV_LINKS = [
-    ("시나리오 요약 Panel", "dashboard-top"),
+    ("시나리오 요약", "dashboard-top"),
     ("[1] DTO-1 Input Panel", "dto1-input-panel"),
     ("[2] Feature Engineering Panel", "feature-engineering-panel"),
     ("[3] Model Explanation Panel", "model-explanation-panel"),
@@ -19,15 +26,67 @@ PANEL_NAV_LINKS = [
 ]
 
 
-def _render_panel_nav_links() -> str:
+def _panel_href(scenario_id: str, anchor: str, current_scenario: str) -> str:
+    """현재 시나리오는 바로 이동하고, 다른 시나리오는 전환 후 이동한다."""
+    if scenario_id == current_scenario:
+        return f"#{anchor}"
+    return f"?page=dashboard&scenario={scenario_id}#{anchor}"
+
+
+def _render_scenario_panel_links(scenario_id: str, current_scenario: str) -> str:
     links = "".join(
-        f'<a href="#{anchor}" target="_self">{label}</a>'
+        (
+            f'<a href="{_panel_href(scenario_id, anchor, current_scenario)}" '
+            f'target="_self">{escape(label)}</a>'
+        )
         for label, anchor in PANEL_NAV_LINKS
     )
-    return f'<div class="sidebar-nav">{links}</div>'
+    return f'<div class="sidebar-nav scenario-sidebar-nav">{links}</div>'
 
 
-def render_sidebar(features: pd.DataFrame, dto5_sequence: list[dict]) -> int:
+def _render_all_scenario_navigation(current_scenario: str) -> None:
+    """선택 화면과 같은 순서로 모든 시나리오 및 패널을 표시한다."""
+    for scenario_id in SCENARIOS:
+        with st.sidebar.expander(
+            f"{scenario_id} 시나리오",
+            expanded=scenario_id == current_scenario,
+        ):
+            st.markdown(
+                _render_scenario_panel_links(scenario_id, current_scenario),
+                unsafe_allow_html=True,
+            )
+
+
+def _dto_timestamp(dto5_sequence: list[dict[str, Any]], index: int) -> Any:
+    if not dto5_sequence:
+        return None
+    safe_index = min(max(index, 0), len(dto5_sequence) - 1)
+    item = dto5_sequence[safe_index]
+    if not isinstance(item, dict):
+        return None
+    return item.get("timestamp") or item.get("ts") or item.get("trigger_ts")
+
+
+def render_sidebar_links() -> None:
+    """공통 작업 링크(GitHub 등)를 사이드바 최하단에 고정 표시한다."""
+    st.sidebar.divider()
+    st.sidebar.markdown(
+        """
+        <div class="sidebar-section-heading">Links</div>
+        <div class="sidebar-section-caption">공통 작업 레포 바로가기</div>
+        """,
+        unsafe_allow_html=True,
+    )
+    st.sidebar.markdown(github_link_html(), unsafe_allow_html=True)
+
+
+def render_sidebar(
+    features: pd.DataFrame,
+    dto5_sequence: list[dict],
+    scenario_code: str = "F1",
+) -> int:
+    current_scenario = scenario_code.upper()
+
     st.sidebar.markdown(
         """
         <div class="sidebar-section-heading">시점 선택</div>
@@ -36,22 +95,47 @@ def render_sidebar(features: pd.DataFrame, dto5_sequence: list[dict]) -> int:
         unsafe_allow_html=True,
     )
 
-    max_idx = min(len(features), len(dto5_sequence)) - 1
+    if not features.empty and dto5_sequence:
+        item_count = min(len(features), len(dto5_sequence))
+    elif not features.empty:
+        item_count = len(features)
+    else:
+        item_count = len(dto5_sequence)
 
-    selected_idx = st.sidebar.slider(
-        "분 단위 시점 index",
-        min_value=0,
-        max_value=max_idx,
-        value=max_idx,
-        label_visibility="collapsed",
-    )
+    if item_count > 1:
+        selected_idx = st.sidebar.slider(
+            "분 단위 시점 index",
+            min_value=0,
+            max_value=item_count - 1,
+            value=item_count - 1,
+            label_visibility="collapsed",
+            key=f"{current_scenario}_time_index",
+        )
+    else:
+        selected_idx = st.sidebar.slider(
+            "분 단위 시점 index",
+            min_value=0,
+            max_value=1,
+            value=0,
+            disabled=True,
+            label_visibility="collapsed",
+            key=f"{current_scenario}_time_index_waiting",
+        )
 
-    selected_ts = features.iloc[selected_idx].get("ts")
+    selected_ts = None
+    if not features.empty:
+        safe_index = min(selected_idx, len(features) - 1)
+        row = features.iloc[safe_index]
+        selected_ts = row.get("ts", row.get("timestamp"))
+    if selected_ts is None:
+        selected_ts = _dto_timestamp(dto5_sequence, selected_idx)
+
+    selected_time_text = format_kst(selected_ts) if selected_ts is not None else "데이터 연결 대기"
     st.sidebar.markdown(
         f"""
         <div class="sidebar-time-box">
             <div class="sidebar-time-label">선택 시점</div>
-            <div class="sidebar-time-value">{format_kst(selected_ts)}</div>
+            <div class="sidebar-time-value">{selected_time_text}</div>
         </div>
         """,
         unsafe_allow_html=True,
@@ -61,10 +145,21 @@ def render_sidebar(features: pd.DataFrame, dto5_sequence: list[dict]) -> int:
     st.sidebar.markdown(
         """
         <div class="sidebar-section-heading">Panel Navigation</div>
-        <div class="sidebar-section-caption">패널 바로가기</div>
+        <div class="sidebar-section-caption">전체 시나리오 및 Panel 바로가기</div>
         """,
         unsafe_allow_html=True,
     )
-    st.sidebar.markdown(_render_panel_nav_links(), unsafe_allow_html=True)
+    _render_all_scenario_navigation(current_scenario)
+
+    st.sidebar.markdown(
+        (
+            '<div class="sidebar-nav" style="margin-top:10px;">'
+            '<a href="?page=monitor" target="_self">실시간 모니터링 (BETA)</a>'
+            '</div>'
+        ),
+        unsafe_allow_html=True,
+    )
+
+    render_sidebar_links()
 
     return selected_idx
