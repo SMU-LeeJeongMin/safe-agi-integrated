@@ -8,7 +8,7 @@ import os, csv
 
 def _path():
     return os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
-                        "data_raw", "현황데이터_필수선택_최종.csv")
+                        "data_raw", "현황데이터_필수선택_정제.csv")
 
 
 def accident_prior_summer():
