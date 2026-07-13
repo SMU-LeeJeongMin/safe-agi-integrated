@@ -64,6 +64,18 @@ def to_bool(value: Any) -> bool:
     return False
 
 
+def format_id(value: Any, head: int = 8, tail: int = 4, max_len: int = 16) -> tuple[str, str | None]:
+    """긴 식별자(세션 uuid 등)를 카드 표시용으로 축약한다.
+
+    반환: (표시 문자열, 전체값 툴팁 문구 또는 None).
+    max_len 이하면 원본 그대로 반환하고 툴팁은 생략한다.
+    """
+    text = "" if value is None else str(value)
+    if len(text) <= max_len:
+        return text, None
+    return f"{text[:head]}…{text[-tail:]}", f"전체 세션 ID: {text}"
+
+
 def format_value(value: Any, digits: int = 2) -> str:
     try:
         if pd.isna(value):

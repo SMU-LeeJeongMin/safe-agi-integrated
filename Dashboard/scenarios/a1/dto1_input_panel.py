@@ -10,6 +10,7 @@ from components.panel_kit import (
 )
 from scenarios.a1.mapper import A1Context, first_value, nested, row_value
 from scenarios.a1.formatting import _fmt, _fmt_bool, _text
+from utils.explanation import format_id
 from utils.time_utils import format_kst, format_utc
 
 
@@ -26,6 +27,8 @@ def render_dto1_input_panel(context: A1Context) -> None:
     hazard_type = first_value(row_value(row, "hazard_type"), context.location.get("hazard_type"), context.alert.get("hazard_type"))
     hazard_poi_id = first_value(row_value(row, "hazard_poi_id", "poi_id"), context.location.get("poi_id"))
     distance = row_value(row, "dist_to_hazard_m", "distance_to_hazard_m")
+    uuid_display, uuid_tooltip = format_id(_text(row_value(row, "uuid", "session_id")))
+    uuid_block = ("세션 ID", uuid_display, uuid_tooltip) if uuid_tooltip else ("세션 ID", uuid_display)
 
     render_input_cards(
         [
@@ -33,7 +36,7 @@ def render_dto1_input_panel(context: A1Context) -> None:
                 "soft",
                 "사용자 정보",
                 [
-                    ("세션 ID", _text(row_value(row, "uuid", "session_id"))),
+                    uuid_block,
                     ("연령대", _text(row_value(row, "age_group"))),
                     ("성별", _text(row_value(row, "gender"))),
                 ],

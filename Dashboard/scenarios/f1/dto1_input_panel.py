@@ -5,7 +5,7 @@ import pandas as pd
 import streamlit as st
 
 from components.panel_kit import render_detail_expander, render_input_cards, render_panel_header, render_time_card
-from utils.explanation import format_value, to_float
+from utils.explanation import format_id, format_value, to_float
 from utils.time_utils import format_kst, format_utc
 
 
@@ -22,6 +22,8 @@ def render_dto1_input_panel(row: pd.Series) -> None:
     speed = to_float(row.get("speed_mean_mpm"))
     lat = to_float(row.get("user_lat"))
     lon = to_float(row.get("user_lon"))
+    uuid_display, uuid_tooltip = format_id(row.get("uuid"))
+    uuid_block = ("세션 ID", uuid_display, uuid_tooltip) if uuid_tooltip else ("세션 ID", uuid_display)
 
     render_input_cards(
         [
@@ -29,7 +31,7 @@ def render_dto1_input_panel(row: pd.Series) -> None:
                 "soft",
                 "사용자 정보",
                 [
-                    ("세션 ID", str(row.get("uuid"))),
+                    uuid_block,
                     ("연령대", str(row.get("age_group"))),
                     ("성별", str(row.get("gender"))),
                 ],
