@@ -2,7 +2,7 @@
   "source": "safe_db (real)",
   "session_id": "97d67527cd4562da24c276c5e571cfc1",
   "rows": 125,
-  "columns": 20,
+  "columns": 23,
   "signal_counts": {
     "hr": 6,
     "spo2": 1,
@@ -11,7 +11,7 @@
   },
   "session_start": "2026-06-30 08:33:23.945503",
   "session_end_resolved": "2026-06-30 10:36:39.113625",
-  "baseline_source": "PERSONA(국건영 60대 남성 fallback)",
+  "baseline_source": "KNHANES 2020-2024 HE_mPLS (60s male: mean58.4 std13.5 n396) (adult 20+ fallback)",
   "state_distribution": {
     "정상": 124,
     "휴식 권고": 1
