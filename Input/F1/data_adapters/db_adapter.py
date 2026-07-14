@@ -37,6 +37,7 @@ Phase 1 발견 → Phase 2 반영 사항
 """
 from datetime import datetime
 from sqlalchemy import create_engine, text
+from features.baseline_reference import get_baseline
 
 
 def _as_dt(v):
@@ -169,20 +170,32 @@ def _load_gps(conn, sid):
     return [(_as_dt(r[0]), float(r[1]), float(r[2]), None) for r in rows]
 
 
-def resolve_baseline(session_meta, persona):
+def resolve_baseline(session_meta, persona=None):
     """
-    개인 baseline 결정: session_biometric_summary.hr_rest 실측 우선,
-    없으면 PERSONA 상수(국건영 60대 남성 58/13.6) fallback.
-    표준편차는 요약 테이블에 없으므로 항상 PERSONA std 사용.
+    개인 baseline 결정:
+      1) session_biometric_summary.hr_rest 실측 있으면 우선 사용
+      2) 없으면 get_baseline(age_band, gender)로 국건영 연령대별 기준
+         (프로필 null이면 성인 전체통계 fallback)
+    반환: dict(resting_hr, hr_std, max_hr, is_fallback, source)
     """
+    age = session_meta.get("age_group")
+    gender = session_meta.get("gender")
+    ref = get_baseline(age, gender)
+
     hr_rest = session_meta.get("hr_rest")
     if hr_rest is not None and hr_rest > 0:
-        return float(hr_rest), persona["resting_hr_std"], "session_biometric_summary.hr_rest(실측)"
-    return persona["resting_hr"], persona["resting_hr_std"], "PERSONA(국건영 60대 남성 fallback)"
+        return {
+            "resting_hr": float(hr_rest), "hr_std": ref["resting_std"],
+            "max_hr": ref["max_hr"], "is_fallback": ref["is_fallback"],
+            "source": "session_biometric_summary.hr_rest(실측)",
+        }
+    return {
+        "resting_hr": ref["resting_hr"], "hr_std": ref["resting_std"],
+        "max_hr": ref["max_hr"], "is_fallback": ref["is_fallback"],
+        "source": ref["resting_source"],
+    }
 
 
-def resolve_profile(session_meta, persona):
-    """age_group/gender null이면 PERSONA fallback."""
-    age = session_meta.get("age_group") or persona["age_group"]
-    gender = session_meta.get("gender") or persona["gender"]
-    return age, gender
+def resolve_profile(session_meta, persona=None):
+    """age_group/gender를 null 그대로 반환 (PERSONA 대체 안 함)."""
+    return session_meta.get("age_group"), session_meta.get("gender")

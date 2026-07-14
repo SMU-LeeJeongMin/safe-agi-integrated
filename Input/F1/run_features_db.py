@@ -41,12 +41,13 @@ def run(engine, session_id, *, heatwave_date="2023-08-04", weather_hour=14):
         wx = StatVirtualWeatherProvider().get_weather(
             anchor_lat, anchor_lon, meta["start_time"])
 
-    hr_rest, hr_std, base_src = resolve_baseline(meta, PERSONA)
-    age_group, gender = resolve_profile(meta, PERSONA)
+    bl = resolve_baseline(meta)
+    age_group, gender = resolve_profile(meta)
 
     rows = build_from_series(
         session_id, hr, spo2, step, gps,
-        hr_rest=hr_rest, hr_std=hr_std, max_hr=PERSONA["max_hr"],
+        hr_rest=bl["resting_hr"], hr_std=bl["hr_std"], max_hr=bl["max_hr"],
+        is_fallback=bl["is_fallback"],
         heat_index=wx["heat_index"], accident_prior=acc["prior"],
         age_group=age_group, gender=gender)
 
@@ -56,8 +57,9 @@ def run(engine, session_id, *, heatwave_date="2023-08-04", weather_hour=14):
                           "step": len(step), "gps": len(gps)},
         "session_start": str(meta["start_time"]),
         "session_end_resolved": str(meta.get("end_time")),
-        "baseline_source": base_src,
-        "baseline": {"hr_rest": hr_rest, "hr_std": hr_std},
+        "baseline_source": bl["source"],
+        "baseline": {"hr_rest": bl["resting_hr"], "hr_std": bl["hr_std"],
+                     "max_hr": bl["max_hr"], "is_fallback": bl["is_fallback"]},
         "profile": {"age_group": age_group, "gender": gender},
         "weather": wx,
         "accident_prior": acc["prior"],

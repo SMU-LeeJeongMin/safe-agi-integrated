@@ -22,8 +22,8 @@ DEMO_LAT, DEMO_LON = 37.4212, 127.0421   # 청계산 GIS 노드 부근
 
 
 def build_from_series(uuid, hr_series, spo2_series, step_series, gps_series,
-                      *, hr_rest, hr_std, max_hr, heat_index, accident_prior,
-                      age_group, gender):
+                      *, hr_rest, hr_std, max_hr, is_fallback=False,
+                      heat_index, accident_prior, age_group, gender):
     """원천 시계열 → 실제 1분 집계 → feature rows."""
     all_dts = [dt for dt, _ in hr_series] + [g[0] for g in gps_series]
     if not all_dts:
@@ -83,6 +83,8 @@ def build_from_series(uuid, hr_series, spo2_series, step_series, gps_series,
             "rest_due_90min": (cumulative > 0 and cumulative % 90 == 0),
             "heat_index": heat_index, "accident_prior": accident_prior,
             "age_group": age_group, "gender": gender,
+            "ref_resting_hr": round(hr_rest, 1), "ref_max_hr": round(max_hr, 1),
+            "baseline_is_fallback": is_fallback,
             "missing_flags": ",".join(flags),
         })
     return rows
@@ -152,7 +154,7 @@ def build_feature_table():
     rows = build_from_series(
         UUID, hr_s, spo2_s, step_s, gps_s,
         hr_rest=PERSONA["resting_hr"], hr_std=PERSONA["resting_hr_std"],
-        max_hr=PERSONA["max_hr"], heat_index=wx["heat_index"],
+        max_hr=PERSONA["max_hr"], is_fallback=False, heat_index=wx["heat_index"],
         accident_prior=acc["prior"],
         age_group=PERSONA["age_group"], gender=PERSONA["gender"])
     meta = {

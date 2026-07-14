@@ -50,8 +50,11 @@ FEATURE_SCHEMA = [
     ("rest_due_90min",    "bool",     False, "90분 주기 휴식 도래 여부"),
     ("heat_index",        "float",    True,  "기상 API/통계가상 주입 체감온도"),
     ("accident_prior",    "float",    False, "accident_history 계절·유형 0~1"),
-    ("age_group",         "str",      False, "users.age_group(null이면 PERSONA '60s')"),
-    ("gender",            "str",      False, "users.gender(null이면 PERSONA 'M')"),
+    ("age_group",         "str",      True,  "users.age_group(null 유지)"),
+    ("gender",            "str",      True,  "users.gender(null 유지)"),
+    ("ref_resting_hr",      "float",  False, "적용된 기준 안정심박(국건영 연령대별/실측/fallback)"),
+    ("ref_max_hr",          "float",  False, "적용된 기준 최대심박(Fox 연령대별/fallback)"),
+    ("baseline_is_fallback","bool",   False, "프로필 null로 전체통계 fallback 사용 여부"),
     ("missing_flags",     "str",      False, "결측/보간 컬럼명 콤마구분"),
 ]
 
