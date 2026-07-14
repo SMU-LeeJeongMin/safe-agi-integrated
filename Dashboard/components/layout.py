@@ -1081,6 +1081,12 @@ def inject_global_css() -> None:
         .model-contrib-fill.gray { background: linear-gradient(90deg, #98a2b3, #b6bfcc); }
 
         /* ── 신규: 실시간 모니터링 페이지 ── */
+        .monitor-risk-now {
+            font-size: 0.72em;
+            font-weight: 500;
+            color: #5b6472;
+            margin-left: 10px;
+        }
         .monitor-live-pill {
             display: inline-flex;
             align-items: center;
@@ -1267,39 +1273,83 @@ def render_pipeline_nav() -> None:
     )
 
 
-def render_risk_gauge(score: float) -> None:
+def _risk_marker_color(score: float) -> str:
+    if score < 0.50:
+        return "#16734f"
+    if score < 0.65:
+        return "#8a5900"
+    if score < 0.85:
+        return "#a83d3d"
+    return "#7a1f1f"
+
+
+def render_risk_gauge(
+    score: float,
+    secondary_score: float | None = None,
+    primary_label: str | None = None,
+    secondary_label: str | None = None,
+) -> None:
+    """위험도 색상 막대. secondary_score를 주면 비교 마커(원본 등)를 함께 표시한다.
+
+    HTML은 빈 줄 없이 한 덩어리로 조립한다. 중간에 빈 줄이 생기면
+    마크다운이 HTML 블록을 끊고 뒤를 코드블록으로 렌더링하기 때문.
+    """
     score = max(0.0, min(1.0, float(score or 0.0)))
     pct = score * 100
-    if score < 0.50:
-        marker_color = "#16734f"
-    elif score < 0.65:
-        marker_color = "#8a5900"
-    elif score < 0.85:
-        marker_color = "#a83d3d"
-    else:
-        marker_color = "#7a1f1f"
-    st.markdown(
-        f"""
-        <div class="risk-gauge-wrap">
-            <div class="risk-marker-label" style="left: calc({pct:.1f}%); color: {marker_color};">{score:.4f}</div>
-            <div class="risk-gauge">
-                <div class="risk-marker" style="left: calc({pct:.1f}% - 2px); background: {marker_color};"></div>
-            </div>
-            <div class="risk-axis">
-                <span class="risk-label" style="left:25%;">정상</span>
-                <span class="risk-label" style="left:57.5%;">주의</span>
-                <span class="risk-label" style="left:75%;">경고</span>
-                <span class="risk-label" style="left:92.5%;">위험</span>
-                <span class="risk-tick first" style="left:0%;">0.00</span>
-                <span class="risk-tick" style="left:50%;">0.50</span>
-                <span class="risk-tick" style="left:65%;">0.65</span>
-                <span class="risk-tick" style="left:85%;">0.85</span>
-                <span class="risk-tick last" style="left:100%;">1.00</span>
-            </div>
-        </div>
-        """,
-        unsafe_allow_html=True,
+    marker_color = _risk_marker_color(score)
+    primary_suffix = f" {primary_label}" if primary_label else ""
+
+    # 이중 마커일 때는 라벨을 2단 레인으로 분리해 겹침을 방지한다.
+    #   윗줄(top:0) = 원본(보조), 아랫줄(top:26px) = 주입(주 값, 막대에 더 가깝게)
+    # 글씨 크기는 동일하게 두고 보조는 투명도로만 구분한다.
+    dual = secondary_score is not None
+    labels: list[str] = []
+    markers: list[str] = []
+    if dual:
+        sec = max(0.0, min(1.0, float(secondary_score or 0.0)))
+        sec_pct = sec * 100
+        sec_color = _risk_marker_color(sec)
+        sec_suffix = f" {secondary_label}" if secondary_label else ""
+        labels.append(
+            f'<div class="risk-marker-label" '
+            f'style="left: calc({sec_pct:.1f}%); top: 0; color: {sec_color}; opacity: 0.7;">'
+            f'{sec:.4f}{sec_suffix}</div>'
+        )
+        markers.append(
+            f'<div class="risk-marker" '
+            f'style="left: calc({sec_pct:.1f}% - 2px); background: {sec_color}; opacity: 0.55;"></div>'
+        )
+    primary_top = "26px" if dual else "0"
+    labels.append(
+        f'<div class="risk-marker-label" style="left: calc({pct:.1f}%); top: {primary_top}; color: {marker_color};">'
+        f'{score:.4f}{primary_suffix}</div>'
     )
+    markers.append(
+        f'<div class="risk-marker" style="left: calc({pct:.1f}% - 2px); background: {marker_color};"></div>'
+    )
+
+    axis = (
+        '<div class="risk-axis">'
+        '<span class="risk-label" style="left:25%;">정상</span>'
+        '<span class="risk-label" style="left:57.5%;">주의</span>'
+        '<span class="risk-label" style="left:75%;">경고</span>'
+        '<span class="risk-label" style="left:92.5%;">위험</span>'
+        '<span class="risk-tick first" style="left:0%;">0.00</span>'
+        '<span class="risk-tick" style="left:50%;">0.50</span>'
+        '<span class="risk-tick" style="left:65%;">0.65</span>'
+        '<span class="risk-tick" style="left:85%;">0.85</span>'
+        '<span class="risk-tick last" style="left:100%;">1.00</span>'
+        '</div>'
+    )
+    wrap_style = ' style="padding-top: 56px;"' if dual else ""
+    html = (
+        f'<div class="risk-gauge-wrap"{wrap_style}>'
+        + "".join(labels)
+        + '<div class="risk-gauge">' + "".join(markers) + '</div>'
+        + axis
+        + '</div>'
+    )
+    st.markdown(html, unsafe_allow_html=True)
 
 
 def render_panel_selector(default: str = "전체 보기") -> str:

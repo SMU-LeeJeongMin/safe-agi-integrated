@@ -73,7 +73,6 @@ def render_inferenceresult_panel(row: pd.Series, dto5: dict, reason_text: str) -
     )
 
     st.info(
-        "Dashboard 폴더 안에는 별도 결과 CSV를 생성하지 않습니다.\n"
         "현재 화면 세션에서 실제 결과와 What-If 결과를 비교하고 CSV로 내려받으며, DB 저장은 추후 서버 REST API로 연결합니다."
     )
 

@@ -18,8 +18,8 @@ KEY_FEATURES = ["hr_ratio_maxhr", "hr_z_personal", "hr_overload_5min", "spo2_gra
 FEATURE_HELP = {
     "hr_ratio_maxhr": {
         "title": "현재 심박 부담도",
-        "desc": "65세 기준 최대심박수 대비 현재 평균 심박수의 부담 정도",
-        "formula": "평균 심박수 ÷ 65세 기준 최대심박수",
+        "desc": "기준 최대심박수 대비 현재 평균 심박수의 부담 정도",
+        "formula": "평균 심박수 ÷ 기준 최대심박수(연령대별, 미등록 시 성인 전체)",
     },
     "hr_z_personal": {
         "title": "개인 기준 대비 상승",

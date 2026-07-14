@@ -411,8 +411,7 @@ def render_contribution_section_header() -> None:
     st.markdown(
         (
             '<div class="panel-description">'
-            '막대는 위험 점수를 구성하는 각 항목이 이번 시점에 차지한 몫으로, 몫이 큰 항목일수록 판단에 크게 기여한 신호입니다.<br />'
-            '별도의 분석 도구를 실시간으로 돌리지 않고 계산식을 그대로 나눠 보여주는 방식이라 화면 속도에는 영향이 없습니다.'
+            '막대는 위험 점수를 구성하는 각 항목이 이번 시점에 차지한 몫으로, 몫이 큰 항목일수록 판단에 크게 기여한 신호입니다.'
             '</div>'
         ),
         unsafe_allow_html=True,
@@ -472,8 +471,6 @@ def render_offline_weight_explanation(explanation: dict[str, Any] | None, scenar
                 '<h4>학습 가중치 근거 — 연결 대기</h4>'
                 '<div class="safe-muted">'
                 '가중치를 딥러닝으로 학습한 뒤에는 "왜 이 계수가 나왔는지"를 이 카드에서 보여줍니다.<br/>'
-                f'학습 파이프라인이 <b>Model/{_safe(scenario_id)}/outputs/explanation.json</b>을 내보내면 '
-                '대시보드가 자동으로 읽어 표시합니다.<br/>'
                 '기대 형식: <b>trained_at, method, summary, weights[]</b> '
                 '(항목별 name, weight, prev, reason)'
                 '</div>'

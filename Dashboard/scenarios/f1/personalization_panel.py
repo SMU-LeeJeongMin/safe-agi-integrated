@@ -12,11 +12,40 @@ from components.panel_kit import persona_card, risk_tone
 
 from Model.f1_model import infer_f1
 from Model.personal_baseline import PersonalBaselineAdapter, personalized_features
-from utils.explanation import get_nested
+from utils.explanation import format_profile, get_nested, ref_hr_baseline
 
 # 가상 페르소나 support set (세션 초반 저강도 구간 심박 10분 관측 가정)
 PERSONA_LOW = [72, 74, 76, 75, 73, 74, 75, 76, 74, 73]
 PERSONA_HIGH = [104, 106, 108, 107, 105, 106, 107, 108, 106, 105]
+
+
+_AGE_LABELS = {
+    "10s": "10대", "20s": "20대", "30s": "30대", "40s": "40대",
+    "50s": "50대", "60s": "60대", "70s": "70대", "80s": "80대", "90s": "90대",
+}
+
+
+def _baseline_wording(row: pd.Series) -> tuple[str, str, dict]:
+    """행의 프로필과 판정 기준값으로 기본 모델 카드 문구를 구성한다.
+
+    반환: (흐름 카드 설명, 비교 카드 부제, baseline dict)
+    연령대가 있으면 해당 연령대 기준, null이면 성인 전체 기준으로 서술한다.
+    """
+    baseline = ref_hr_baseline(row)
+    age_label = _AGE_LABELS.get(str(row.get("age_group")))
+    if format_profile(row.get("age_group")) == "미등록" or age_label is None:
+        desc = (
+            f"프로필 미등록: 국민건강영양조사 성인 전체 평균 기준 심박 "
+            f"{baseline['rest_hr']:.1f} bpm"
+        )
+        subtitle = "성인 전체 평균 심박 기준 사용"
+    else:
+        desc = (
+            f"국민건강영양조사 {age_label} 평균 기준 심박 "
+            f"{baseline['rest_hr']:.1f} bpm"
+        )
+        subtitle = f"{age_label} 평균 심박 기준 사용"
+    return desc, subtitle, baseline
 
 
 def _safe(text: object) -> str:
@@ -95,9 +124,11 @@ def render_personalization_panel(row: pd.Series, dto5: dict) -> None:
 
     row_dict = row.to_dict()
     row_dict["ts"] = str(row_dict.get("ts"))
-    adapter_v0 = PersonalBaselineAdapter()  # 관측 0 → 기존 v0와 동일
-    adapter_low = PersonalBaselineAdapter.from_support(PERSONA_LOW)
-    adapter_high = PersonalBaselineAdapter.from_support(PERSONA_HIGH)
+    base_desc, base_subtitle, baseline = _baseline_wording(row)
+    prior_kwargs = {"prior_mean": baseline["rest_hr"], "prior_std": baseline["rest_std"]}
+    adapter_v0 = PersonalBaselineAdapter(**prior_kwargs)  # 관측 0 → 행의 판정 기준과 동일
+    adapter_low = PersonalBaselineAdapter.from_support(PERSONA_LOW, **prior_kwargs)
+    adapter_high = PersonalBaselineAdapter.from_support(PERSONA_HIGH, **prior_kwargs)
 
     dto5_v0 = infer_f1(row_dict)
     dto5_low = infer_f1(personalized_features(row_dict, adapter_low))
@@ -110,13 +141,13 @@ def render_personalization_panel(row: pd.Series, dto5: dict) -> None:
             '<div class="maml-flow-card">'
             '<span>기본 모델</span>'
             '<b>모든 사용자에게 같은 기준 적용</b>'
-            '<p>국민건강영양조사 60대 남성 평균 기준 심박 58 bpm에서 시작합니다.</p>'
+            f'<p>{_safe(base_desc)}</p>'
             '</div>'
             '<div class="maml-flow-arrow">→</div>'
             '<div class="maml-flow-card">'
             '<span>개인화 모델</span>'
             '<b>초반 산행 심박으로 개인 기준 조정 <span class="dto1-tooltip maml-tooltip dto1-tooltip-wide">i<span class="dto1-tooltip-text">산행 초반 10~20분 심박을 개인 기준으로 사용<br />관측 10분부터 개인 심박 특성을 절반 정도 반영</span></span></b>'
-            '<p>평소 심박이 낮은 사람과 높은 사람의 위험도를 다르게 계산합니다.</p>'
+            '<p>평소 심박이 낮은 사람과 높은 사람의 위험도를 다르게 계산</p>'
             '</div>'
             '</div>'
         ),
@@ -134,7 +165,7 @@ def render_personalization_panel(row: pd.Series, dto5: dict) -> None:
         st.markdown(
             _persona_card(
                 title="기본 모델",
-                subtitle="60대 평균 심박 기준 사용",
+                subtitle=base_subtitle,
                 adapter=adapter_v0,
                 dto5=dto5_v0,
                 interpretation="아직 개인 데이터가 없으므로 모든 사용자에게 같은 기준을 적용합니다.",

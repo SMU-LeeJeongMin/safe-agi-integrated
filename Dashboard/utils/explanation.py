@@ -64,6 +64,39 @@ def to_bool(value: Any) -> bool:
     return False
 
 
+def format_profile(value: Any) -> str:
+    """프로필 항목(연령대, 성별) 표시값. DB 값이 null이면 '미등록'으로 표기한다."""
+    if value is None:
+        return "미등록"
+    try:
+        if pd.isna(value):
+            return "미등록"
+    except (TypeError, ValueError):
+        pass
+    text = str(value).strip()
+    return text if text and text.lower() not in ("nan", "none", "null") else "미등록"
+
+
+def ref_hr_baseline(row: pd.Series) -> dict[str, Any]:
+    """
+    행에 포함된 판정 기준값(ref_max_hr, ref_resting_hr, baseline_is_fallback)을 반환.
+    Input 산출물(23컬럼)에 기준값이 없으면 기존 상수로 폴백한다.
+    개인 변동폭(std)은 산출물에 컬럼이 없어 hr_z 역산으로 유도하고, 불가하면 상수 사용.
+    """
+    max_hr = to_float(row.get("ref_max_hr"), default=0.0) or MAX_HR_60S
+    rest_hr = to_float(row.get("ref_resting_hr"), default=0.0) or HR_BASELINE
+    hr = to_float(row.get("hr_mean_bpm"))
+    hr_z = to_float(row.get("hr_z_personal"))
+    std = HR_STD
+    if hr_z != 0 and hr > rest_hr:
+        derived = (hr - rest_hr) / hr_z
+        if 1.0 <= derived <= 60.0:
+            std = derived
+    fallback = row.get("baseline_is_fallback")
+    is_fallback = bool(fallback) if fallback is not None and not (isinstance(fallback, float) and pd.isna(fallback)) else None
+    return {"max_hr": max_hr, "rest_hr": rest_hr, "rest_std": std, "is_fallback": is_fallback}
+
+
 def format_id(value: Any, head: int = 8, tail: int = 4, max_len: int = 16) -> tuple[str, str | None]:
     """긴 식별자(세션 uuid 등)를 카드 표시용으로 축약한다.
 
@@ -102,6 +135,7 @@ def build_feature_calculations(row: pd.Series) -> list[dict[str, str]]:
     hr = to_float(row.get("hr_mean_bpm"))
     ratio = to_float(row.get("hr_ratio_maxhr"))
     z = to_float(row.get("hr_z_personal"))
+    baseline = ref_hr_baseline(row)
     spo2 = to_float(row.get("spo2_min_pct"))
     grade = row.get("spo2_grade", "-")
     steps = to_float(row.get("steps_1min"))
@@ -119,7 +153,7 @@ def build_feature_calculations(row: pd.Series) -> list[dict[str, str]]:
         {
             "feature": "hr_ratio_maxhr",
             "원본 입력": f"hr_mean_bpm {hr:.1f}",
-            "계산 과정": f"{hr:.1f} ÷ {MAX_HR_60S:.0f} (60대 최대심박)",
+            "계산 과정": f"{hr:.1f} ÷ {baseline['max_hr']:.0f} (기준 최대심박)",
             "값": f"{ratio:.3f}",
             "해석": (
                 f"임계 {HR_OVERLOAD_RATIO:.2f} 초과 → 심박 과부하"
@@ -285,7 +319,7 @@ def build_feature_importance(row: pd.Series, dto5: dict[str, Any]) -> list[dict[
         candidates.append({
             "feature": "hr_ratio_maxhr",
             "importance": min(hr_ratio, 1.0),
-            "reason": f"60대 기준 최대심박수 대비 심박 비율이 {hr_ratio:.2f}입니다."
+            "reason": f"기준 최대심박수 대비 심박 비율이 {hr_ratio:.2f}입니다."
         })
 
     hr_z = to_float(row.get("hr_z_personal"))
@@ -393,8 +427,9 @@ def build_whatif_features(
     슬라이더 입력에 딸린 파생 컬럼(hr_ratio_maxhr, hr_z_personal,
     hr_overload_5min, spo2_grade, speed_mean_mpm)을 함께 재계산한다.
     """
-    hr_ratio = changed_hr / MAX_HR_60S
-    hr_z = (changed_hr - HR_BASELINE) / HR_STD
+    baseline = ref_hr_baseline(row)
+    hr_ratio = changed_hr / baseline["max_hr"]
+    hr_z = (changed_hr - baseline["rest_hr"]) / baseline["rest_std"]
 
     if changed_spo2 >= SPO2_WARN:
         spo2_grade = "정상"
