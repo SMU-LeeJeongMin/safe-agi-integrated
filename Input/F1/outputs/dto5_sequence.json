@@ -4,15 +4,15 @@
     "ts": "2026-06-29T23:32:00+00:00",
     "course_recommendation": null,
     "risk": {
-      "e1_biometric": 0.2884,
-      "e2_combined": 0.4234,
-      "representative": 0.4234,
+      "e1_biometric": 0.2835,
+      "e2_combined": 0.4207,
+      "representative": 0.4207,
       "level": 0,
       "label": "정상"
     },
     "fatigue": {
       "state": "정상",
-      "confidence": 0.8399,
+      "confidence": 0.8439,
       "nearest_shelter": null
     },
     "descent_warning": {
@@ -27,9 +27,9 @@
     "ts": "2026-06-29T23:33:00+00:00",
     "course_recommendation": null,
     "risk": {
-      "e1_biometric": 0.2884,
-      "e2_combined": 0.2269,
-      "representative": 0.2884,
+      "e1_biometric": 0.2835,
+      "e2_combined": 0.2242,
+      "representative": 0.2835,
       "level": 0,
       "label": "정상"
     },
@@ -50,7 +50,99 @@
     "ts": "2026-06-29T23:34:00+00:00",
     "course_recommendation": null,
     "risk": {
-      "e1_biometric": 0.2899,
+      "e1_biometric": 0.285,
+      "e2_combined": 0.4229,
+      "representative": 0.4229,
+      "level": 0,
+      "label": "정상"
+    },
+    "fatigue": {
+      "state": "정상",
+      "confidence": 0.8407,
+      "nearest_shelter": null
+    },
+    "descent_warning": {
+      "required": false,
+      "reason": null,
+      "remaining_daylight_min": null
+    },
+    "alerts": []
+  },
+  {
+    "uuid": "97d67527cd4562da24c276c5e571cfc1",
+    "ts": "2026-06-29T23:35:00+00:00",
+    "course_recommendation": null,
+    "risk": {
+      "e1_biometric": 0.2865,
+      "e2_combined": 0.4205,
+      "representative": 0.4205,
+      "level": 0,
+      "label": "정상"
+    },
+    "fatigue": {
+      "state": "정상",
+      "confidence": 0.8443,
+      "nearest_shelter": null
+    },
+    "descent_warning": {
+      "required": false,
+      "reason": null,
+      "remaining_daylight_min": null
+    },
+    "alerts": []
+  },
+  {
+    "uuid": "97d67527cd4562da24c276c5e571cfc1",
+    "ts": "2026-06-29T23:36:00+00:00",
+    "course_recommendation": null,
+    "risk": {
+      "e1_biometric": 0.2879,
+      "e2_combined": 0.4215,
+      "representative": 0.4215,
+      "level": 0,
+      "label": "정상"
+    },
+    "fatigue": {
+      "state": "정상",
+      "confidence": 0.8428,
+      "nearest_shelter": null
+    },
+    "descent_warning": {
+      "required": false,
+      "reason": null,
+      "remaining_daylight_min": null
+    },
+    "alerts": []
+  },
+  {
+    "uuid": "97d67527cd4562da24c276c5e571cfc1",
+    "ts": "2026-06-29T23:37:00+00:00",
+    "course_recommendation": null,
+    "risk": {
+      "e1_biometric": 0.2894,
+      "e2_combined": 0.4235,
+      "representative": 0.4235,
+      "level": 0,
+      "label": "정상"
+    },
+    "fatigue": {
+      "state": "정상",
+      "confidence": 0.8397,
+      "nearest_shelter": null
+    },
+    "descent_warning": {
+      "required": false,
+      "reason": null,
+      "remaining_daylight_min": null
+    },
+    "alerts": []
+  },
+  {
+    "uuid": "97d67527cd4562da24c276c5e571cfc1",
+    "ts": "2026-06-29T23:38:00+00:00",
+    "course_recommendation": null,
+    "risk": {
+      "e1_biometric": 0.2908,
       "e2_combined": 0.4256,
       "representative": 0.4256,
       "level": 0,
@@ -70,110 +162,18 @@
   },
   {
     "uuid": "97d67527cd4562da24c276c5e571cfc1",
-    "ts": "2026-06-29T23:35:00+00:00",
-    "course_recommendation": null,
-    "risk": {
-      "e1_biometric": 0.2913,
-      "e2_combined": 0.4232,
-      "representative": 0.4232,
-      "level": 0,
-      "label": "정상"
-    },
-    "fatigue": {
-      "state": "정상",
-      "confidence": 0.8402,
-      "nearest_shelter": null
-    },
-    "descent_warning": {
-      "required": false,
-      "reason": null,
-      "remaining_daylight_min": null
-    },
-    "alerts": []
-  },
-  {
-    "uuid": "97d67527cd4562da24c276c5e571cfc1",
-    "ts": "2026-06-29T23:36:00+00:00",
-    "course_recommendation": null,
-    "risk": {
-      "e1_biometric": 0.2928,
-      "e2_combined": 0.4242,
-      "representative": 0.4242,
-      "level": 0,
-      "label": "정상"
-    },
-    "fatigue": {
-      "state": "정상",
-      "confidence": 0.8387,
-      "nearest_shelter": null
-    },
-    "descent_warning": {
-      "required": false,
-      "reason": null,
-      "remaining_daylight_min": null
-    },
-    "alerts": []
-  },
-  {
-    "uuid": "97d67527cd4562da24c276c5e571cfc1",
-    "ts": "2026-06-29T23:37:00+00:00",
-    "course_recommendation": null,
-    "risk": {
-      "e1_biometric": 0.2943,
-      "e2_combined": 0.4262,
-      "representative": 0.4262,
-      "level": 0,
-      "label": "정상"
-    },
-    "fatigue": {
-      "state": "정상",
-      "confidence": 0.8357,
-      "nearest_shelter": null
-    },
-    "descent_warning": {
-      "required": false,
-      "reason": null,
-      "remaining_daylight_min": null
-    },
-    "alerts": []
-  },
-  {
-    "uuid": "97d67527cd4562da24c276c5e571cfc1",
-    "ts": "2026-06-29T23:38:00+00:00",
-    "course_recommendation": null,
-    "risk": {
-      "e1_biometric": 0.2958,
-      "e2_combined": 0.4283,
-      "representative": 0.4283,
-      "level": 0,
-      "label": "정상"
-    },
-    "fatigue": {
-      "state": "정상",
-      "confidence": 0.8326,
-      "nearest_shelter": null
-    },
-    "descent_warning": {
-      "required": false,
-      "reason": null,
-      "remaining_daylight_min": null
-    },
-    "alerts": []
-  },
-  {
-    "uuid": "97d67527cd4562da24c276c5e571cfc1",
     "ts": "2026-06-29T23:39:00+00:00",
     "course_recommendation": null,
     "risk": {
-      "e1_biometric": 0.2973,
-      "e2_combined": 0.4237,
-      "representative": 0.4237,
+      "e1_biometric": 0.2923,
+      "e2_combined": 0.421,
+      "representative": 0.421,
       "level": 0,
       "label": "정상"
     },
     "fatigue": {
       "state": "정상",
-      "confidence": 0.8395,
+      "confidence": 0.8435,
       "nearest_shelter": null
     },
     "descent_warning": {
@@ -188,15 +188,15 @@
     "ts": "2026-06-29T23:40:00+00:00",
     "course_recommendation": null,
     "risk": {
-      "e1_biometric": 0.2988,
-      "e2_combined": 0.4069,
-      "representative": 0.4069,
+      "e1_biometric": 0.2938,
+      "e2_combined": 0.4041,
+      "representative": 0.4041,
       "level": 0,
       "label": "정상"
     },
     "fatigue": {
       "state": "정상",
-      "confidence": 0.8647,
+      "confidence": 0.8689,
       "nearest_shelter": null
     },
     "descent_warning": {
@@ -211,15 +211,15 @@
     "ts": "2026-06-29T23:41:00+00:00",
     "course_recommendation": null,
     "risk": {
-      "e1_biometric": 0.3003,
-      "e2_combined": 0.4079,
-      "representative": 0.4079,
+      "e1_biometric": 0.2952,
+      "e2_combined": 0.4051,
+      "representative": 0.4051,
       "level": 0,
       "label": "정상"
     },
     "fatigue": {
       "state": "정상",
-      "confidence": 0.8632,
+      "confidence": 0.8674,
       "nearest_shelter": null
     },
     "descent_warning": {
@@ -234,15 +234,15 @@
     "ts": "2026-06-29T23:42:00+00:00",
     "course_recommendation": null,
     "risk": {
-      "e1_biometric": 0.3018,
-      "e2_combined": 0.4344,
-      "representative": 0.4344,
+      "e1_biometric": 0.2967,
+      "e2_combined": 0.4316,
+      "representative": 0.4316,
       "level": 0,
       "label": "정상"
     },
     "fatigue": {
       "state": "정상",
-      "confidence": 0.8234,
+      "confidence": 0.8276,
       "nearest_shelter": null
     },
     "descent_warning": {
@@ -257,15 +257,15 @@
     "ts": "2026-06-29T23:43:00+00:00",
     "course_recommendation": null,
     "risk": {
-      "e1_biometric": 0.3033,
-      "e2_combined": 0.4042,
-      "representative": 0.4042,
+      "e1_biometric": 0.2982,
+      "e2_combined": 0.4014,
+      "representative": 0.4014,
       "level": 0,
       "label": "정상"
     },
     "fatigue": {
       "state": "정상",
-      "confidence": 0.8687,
+      "confidence": 0.8729,
       "nearest_shelter": null
     },
     "descent_warning": {
@@ -280,15 +280,15 @@
     "ts": "2026-06-29T23:44:00+00:00",
     "course_recommendation": null,
     "risk": {
-      "e1_biometric": 0.3048,
-      "e2_combined": 0.4207,
-      "representative": 0.4207,
+      "e1_biometric": 0.2996,
+      "e2_combined": 0.4179,
+      "representative": 0.4179,
       "level": 0,
       "label": "정상"
     },
     "fatigue": {
       "state": "정상",
-      "confidence": 0.8439,
+      "confidence": 0.8482,
       "nearest_shelter": null
     },
     "descent_warning": {
@@ -303,15 +303,15 @@
     "ts": "2026-06-29T23:45:00+00:00",
     "course_recommendation": null,
     "risk": {
-      "e1_biometric": 0.3063,
-      "e2_combined": 0.4095,
-      "representative": 0.4095,
+      "e1_biometric": 0.3011,
+      "e2_combined": 0.4066,
+      "representative": 0.4066,
       "level": 0,
       "label": "정상"
     },
     "fatigue": {
       "state": "정상",
-      "confidence": 0.8608,
+      "confidence": 0.8651,
       "nearest_shelter": null
     },
     "descent_warning": {
@@ -326,15 +326,15 @@
     "ts": "2026-06-29T23:46:00+00:00",
     "course_recommendation": null,
     "risk": {
-      "e1_biometric": 0.3077,
-      "e2_combined": 0.436,
-      "representative": 0.436,
+      "e1_biometric": 0.3025,
+      "e2_combined": 0.4331,
+      "representative": 0.4331,
       "level": 0,
       "label": "정상"
     },
     "fatigue": {
       "state": "정상",
-      "confidence": 0.821,
+      "confidence": 0.8254,
       "nearest_shelter": null
     },
     "descent_warning": {
@@ -349,15 +349,15 @@
     "ts": "2026-06-29T23:47:00+00:00",
     "course_recommendation": null,
     "risk": {
-      "e1_biometric": 0.3092,
-      "e2_combined": 0.4203,
-      "representative": 0.4203,
+      "e1_biometric": 0.304,
+      "e2_combined": 0.4174,
+      "representative": 0.4174,
       "level": 0,
       "label": "정상"
     },
     "fatigue": {
       "state": "정상",
-      "confidence": 0.8446,
+      "confidence": 0.8489,
       "nearest_shelter": null
     },
     "descent_warning": {
@@ -372,15 +372,15 @@
     "ts": "2026-06-29T23:48:00+00:00",
     "course_recommendation": null,
     "risk": {
-      "e1_biometric": 0.3107,
-      "e2_combined": 0.4223,
-      "representative": 0.4223,
+      "e1_biometric": 0.3055,
+      "e2_combined": 0.4194,
+      "representative": 0.4194,
       "level": 0,
       "label": "정상"
     },
     "fatigue": {
       "state": "정상",
-      "confidence": 0.8416,
+      "confidence": 0.8459,
       "nearest_shelter": null
     },
     "descent_warning": {
@@ -395,15 +395,15 @@
     "ts": "2026-06-29T23:49:00+00:00",
     "course_recommendation": null,
     "risk": {
-      "e1_biometric": 0.3122,
-      "e2_combined": 0.4244,
-      "representative": 0.4244,
+      "e1_biometric": 0.3069,
+      "e2_combined": 0.4215,
+      "representative": 0.4215,
       "level": 0,
       "label": "정상"
     },
     "fatigue": {
       "state": "정상",
-      "confidence": 0.8384,
+      "confidence": 0.8428,
       "nearest_shelter": null
     },
     "descent_warning": {
@@ -418,15 +418,15 @@
     "ts": "2026-06-29T23:50:00+00:00",
     "course_recommendation": null,
     "risk": {
-      "e1_biometric": 0.3137,
-      "e2_combined": 0.4276,
-      "representative": 0.4276,
+      "e1_biometric": 0.3084,
+      "e2_combined": 0.4247,
+      "representative": 0.4247,
       "level": 0,
       "label": "정상"
     },
     "fatigue": {
       "state": "정상",
-      "confidence": 0.8336,
+      "confidence": 0.8379,
       "nearest_shelter": null
     },
     "descent_warning": {
@@ -441,15 +441,15 @@
     "ts": "2026-06-29T23:51:00+00:00",
     "course_recommendation": null,
     "risk": {
-      "e1_biometric": 0.3117,
-      "e2_combined": 0.4288,
-      "representative": 0.4288,
+      "e1_biometric": 0.3064,
+      "e2_combined": 0.4259,
+      "representative": 0.4259,
       "level": 0,
       "label": "정상"
     },
     "fatigue": {
       "state": "정상",
-      "confidence": 0.8318,
+      "confidence": 0.8362,
       "nearest_shelter": null
     },
     "descent_warning": {
@@ -464,15 +464,15 @@
     "ts": "2026-06-29T23:52:00+00:00",
     "course_recommendation": null,
     "risk": {
-      "e1_biometric": 0.3096,
-      "e2_combined": 0.4301,
-      "representative": 0.4301,
+      "e1_biometric": 0.3044,
+      "e2_combined": 0.4272,
+      "representative": 0.4272,
       "level": 0,
       "label": "정상"
     },
     "fatigue": {
       "state": "정상",
-      "confidence": 0.8299,
+      "confidence": 0.8342,
       "nearest_shelter": null
     },
     "descent_warning": {
@@ -487,15 +487,15 @@
     "ts": "2026-06-29T23:53:00+00:00",
     "course_recommendation": null,
     "risk": {
-      "e1_biometric": 0.3076,
-      "e2_combined": 0.4313,
-      "representative": 0.4313,
+      "e1_biometric": 0.3024,
+      "e2_combined": 0.4285,
+      "representative": 0.4285,
       "level": 0,
       "label": "정상"
     },
     "fatigue": {
       "state": "정상",
-      "confidence": 0.828,
+      "confidence": 0.8323,
       "nearest_shelter": null
     },
     "descent_warning": {
@@ -510,15 +510,15 @@
     "ts": "2026-06-29T23:54:00+00:00",
     "course_recommendation": null,
     "risk": {
-      "e1_biometric": 0.3056,
-      "e2_combined": 0.4326,
-      "representative": 0.4326,
+      "e1_biometric": 0.3004,
+      "e2_combined": 0.4297,
+      "representative": 0.4297,
       "level": 0,
       "label": "정상"
     },
     "fatigue": {
       "state": "정상",
-      "confidence": 0.8261,
+      "confidence": 0.8305,
       "nearest_shelter": null
     },
     "descent_warning": {
@@ -533,15 +533,15 @@
     "ts": "2026-06-29T23:55:00+00:00",
     "course_recommendation": null,
     "risk": {
-      "e1_biometric": 0.3036,
-      "e2_combined": 0.4338,
-      "representative": 0.4338,
+      "e1_biometric": 0.2985,
+      "e2_combined": 0.431,
+      "representative": 0.431,
       "level": 0,
       "label": "정상"
     },
     "fatigue": {
       "state": "정상",
-      "confidence": 0.8243,
+      "confidence": 0.8285,
       "nearest_shelter": null
     },
     "descent_warning": {
@@ -556,15 +556,15 @@
     "ts": "2026-06-29T23:56:00+00:00",
     "course_recommendation": null,
     "risk": {
-      "e1_biometric": 0.3015,
-      "e2_combined": 0.4351,
-      "representative": 0.4351,
+      "e1_biometric": 0.2965,
+      "e2_combined": 0.4323,
+      "representative": 0.4323,
       "level": 0,
       "label": "정상"
     },
     "fatigue": {
       "state": "정상",
-      "confidence": 0.8224,
+      "confidence": 0.8266,
       "nearest_shelter": null
     },
     "descent_warning": {
@@ -579,15 +579,15 @@
     "ts": "2026-06-29T23:57:00+00:00",
     "course_recommendation": null,
     "risk": {
-      "e1_biometric": 0.2995,
-      "e2_combined": 0.4363,
-      "representative": 0.4363,
+      "e1_biometric": 0.2945,
+      "e2_combined": 0.4335,
+      "representative": 0.4335,
       "level": 0,
       "label": "정상"
     },
     "fatigue": {
       "state": "정상",
-      "confidence": 0.8206,
+      "confidence": 0.8248,
       "nearest_shelter": null
     },
     "descent_warning": {
@@ -602,15 +602,15 @@
     "ts": "2026-06-29T23:58:00+00:00",
     "course_recommendation": null,
     "risk": {
-      "e1_biometric": 0.2975,
-      "e2_combined": 0.4376,
-      "representative": 0.4376,
+      "e1_biometric": 0.2925,
+      "e2_combined": 0.4348,
+      "representative": 0.4348,
       "level": 0,
       "label": "정상"
     },
     "fatigue": {
       "state": "정상",
-      "confidence": 0.8186,
+      "confidence": 0.8228,
       "nearest_shelter": null
     },
     "descent_warning": {
@@ -625,15 +625,15 @@
     "ts": "2026-06-29T23:59:00+00:00",
     "course_recommendation": null,
     "risk": {
-      "e1_biometric": 0.2955,
-      "e2_combined": 0.4388,
-      "representative": 0.4388,
+      "e1_biometric": 0.2905,
+      "e2_combined": 0.4361,
+      "representative": 0.4361,
       "level": 0,
       "label": "정상"
     },
     "fatigue": {
       "state": "정상",
-      "confidence": 0.8168,
+      "confidence": 0.8209,
       "nearest_shelter": null
     },
     "descent_warning": {
@@ -648,15 +648,15 @@
     "ts": "2026-06-30T00:00:00+00:00",
     "course_recommendation": null,
     "risk": {
-      "e1_biometric": 0.2935,
-      "e2_combined": 0.4401,
-      "representative": 0.4401,
+      "e1_biometric": 0.2885,
+      "e2_combined": 0.4374,
+      "representative": 0.4374,
       "level": 0,
       "label": "정상"
     },
     "fatigue": {
       "state": "정상",
-      "confidence": 0.8149,
+      "confidence": 0.8189,
       "nearest_shelter": null
     },
     "descent_warning": {
@@ -671,15 +671,15 @@
     "ts": "2026-06-30T00:01:00+00:00",
     "course_recommendation": null,
     "risk": {
-      "e1_biometric": 0.2935,
-      "e2_combined": 0.4424,
-      "representative": 0.4424,
+      "e1_biometric": 0.2885,
+      "e2_combined": 0.4397,
+      "representative": 0.4397,
       "level": 0,
       "label": "정상"
     },
     "fatigue": {
       "state": "정상",
-      "confidence": 0.8114,
+      "confidence": 0.8155,
       "nearest_shelter": null
     },
     "descent_warning": {
@@ -694,15 +694,15 @@
     "ts": "2026-06-30T00:02:00+00:00",
     "course_recommendation": null,
     "risk": {
-      "e1_biometric": 0.2935,
-      "e2_combined": 0.4448,
-      "representative": 0.4448,
+      "e1_biometric": 0.2885,
+      "e2_combined": 0.4421,
+      "representative": 0.4421,
       "level": 0,
       "label": "정상"
     },
     "fatigue": {
       "state": "정상",
-      "confidence": 0.8078,
+      "confidence": 0.8119,
       "nearest_shelter": null
     },
     "descent_warning": {
@@ -717,15 +717,15 @@
     "ts": "2026-06-30T00:03:00+00:00",
     "course_recommendation": null,
     "risk": {
-      "e1_biometric": 0.2935,
-      "e2_combined": 0.4471,
-      "representative": 0.4471,
+      "e1_biometric": 0.2885,
+      "e2_combined": 0.4444,
+      "representative": 0.4444,
       "level": 0,
       "label": "정상"
     },
     "fatigue": {
       "state": "정상",
-      "confidence": 0.8044,
+      "confidence": 0.8084,
       "nearest_shelter": null
     },
     "descent_warning": {
@@ -740,15 +740,15 @@
     "ts": "2026-06-30T00:04:00+00:00",
     "course_recommendation": null,
     "risk": {
-      "e1_biometric": 0.2935,
-      "e2_combined": 0.4495,
-      "representative": 0.4495,
+      "e1_biometric": 0.2885,
+      "e2_combined": 0.4468,
+      "representative": 0.4468,
       "level": 0,
       "label": "정상"
     },
     "fatigue": {
       "state": "정상",
-      "confidence": 0.8008,
+      "confidence": 0.8048,
       "nearest_shelter": null
     },
     "descent_warning": {
@@ -763,15 +763,15 @@
     "ts": "2026-06-30T00:05:00+00:00",
     "course_recommendation": null,
     "risk": {
-      "e1_biometric": 0.2935,
-      "e2_combined": 0.4508,
-      "representative": 0.4508,
+      "e1_biometric": 0.2885,
+      "e2_combined": 0.4481,
+      "representative": 0.4481,
       "level": 0,
       "label": "정상"
     },
     "fatigue": {
       "state": "정상",
-      "confidence": 0.7988,
+      "confidence": 0.8029,
       "nearest_shelter": null
     },
     "descent_warning": {
@@ -786,15 +786,15 @@
     "ts": "2026-06-30T00:06:00+00:00",
     "course_recommendation": null,
     "risk": {
-      "e1_biometric": 0.2935,
-      "e2_combined": 0.4531,
-      "representative": 0.4531,
+      "e1_biometric": 0.2885,
+      "e2_combined": 0.4504,
+      "representative": 0.4504,
       "level": 0,
       "label": "정상"
     },
     "fatigue": {
       "state": "정상",
-      "confidence": 0.7954,
+      "confidence": 0.7994,
       "nearest_shelter": null
     },
     "descent_warning": {
@@ -809,15 +809,15 @@
     "ts": "2026-06-30T00:07:00+00:00",
     "course_recommendation": null,
     "risk": {
-      "e1_biometric": 0.2935,
-      "e2_combined": 0.4555,
-      "representative": 0.4555,
+      "e1_biometric": 0.2885,
+      "e2_combined": 0.4528,
+      "representative": 0.4528,
       "level": 0,
       "label": "정상"
     },
     "fatigue": {
       "state": "정상",
-      "confidence": 0.7917,
+      "confidence": 0.7958,
       "nearest_shelter": null
     },
     "descent_warning": {
@@ -832,15 +832,15 @@
     "ts": "2026-06-30T00:08:00+00:00",
     "course_recommendation": null,
     "risk": {
-      "e1_biometric": 0.2935,
-      "e2_combined": 0.4578,
-      "representative": 0.4578,
+      "e1_biometric": 0.2885,
+      "e2_combined": 0.4551,
+      "representative": 0.4551,
       "level": 0,
       "label": "정상"
     },
     "fatigue": {
       "state": "정상",
-      "confidence": 0.7883,
+      "confidence": 0.7923,
       "nearest_shelter": null
     },
     "descent_warning": {
@@ -855,15 +855,15 @@
     "ts": "2026-06-30T00:09:00+00:00",
     "course_recommendation": null,
     "risk": {
-      "e1_biometric": 0.2935,
-      "e2_combined": 0.4602,
-      "representative": 0.4602,
+      "e1_biometric": 0.2885,
+      "e2_combined": 0.4575,
+      "representative": 0.4575,
       "level": 0,
       "label": "정상"
     },
     "fatigue": {
       "state": "정상",
-      "confidence": 0.7847,
+      "confidence": 0.7888,
       "nearest_shelter": null
     },
     "descent_warning": {
@@ -878,15 +878,15 @@
     "ts": "2026-06-30T00:10:00+00:00",
     "course_recommendation": null,
     "risk": {
-      "e1_biometric": 0.2935,
-      "e2_combined": 0.4626,
-      "representative": 0.4626,
+      "e1_biometric": 0.2885,
+      "e2_combined": 0.4599,
+      "representative": 0.4599,
       "level": 0,
       "label": "정상"
     },
     "fatigue": {
       "state": "정상",
-      "confidence": 0.7811,
+      "confidence": 0.7852,
       "nearest_shelter": null
     },
     "descent_warning": {
@@ -901,15 +901,15 @@
     "ts": "2026-06-30T00:11:00+00:00",
     "course_recommendation": null,
     "risk": {
-      "e1_biometric": 0.296,
-      "e2_combined": 0.4663,
-      "representative": 0.4663,
+      "e1_biometric": 0.291,
+      "e2_combined": 0.4636,
+      "representative": 0.4636,
       "level": 0,
       "label": "정상"
     },
     "fatigue": {
       "state": "정상",
-      "confidence": 0.7756,
+      "confidence": 0.7796,
       "nearest_shelter": null
     },
     "descent_warning": {
@@ -924,15 +924,15 @@
     "ts": "2026-06-30T00:12:00+00:00",
     "course_recommendation": null,
     "risk": {
-      "e1_biometric": 0.2985,
-      "e2_combined": 0.4701,
-      "representative": 0.4701,
+      "e1_biometric": 0.2935,
+      "e2_combined": 0.4673,
+      "representative": 0.4673,
       "level": 0,
       "label": "정상"
     },
     "fatigue": {
       "state": "정상",
-      "confidence": 0.7699,
+      "confidence": 0.7741,
       "nearest_shelter": null
     },
     "descent_warning": {
@@ -947,15 +947,15 @@
     "ts": "2026-06-30T00:13:00+00:00",
     "course_recommendation": null,
     "risk": {
-      "e1_biometric": 0.3011,
-      "e2_combined": 0.4738,
-      "representative": 0.4738,
+      "e1_biometric": 0.296,
+      "e2_combined": 0.471,
+      "representative": 0.471,
       "level": 0,
       "label": "정상"
     },
     "fatigue": {
       "state": "정상",
-      "confidence": 0.7643,
+      "confidence": 0.7685,
       "nearest_shelter": null
     },
     "descent_warning": {
@@ -970,15 +970,15 @@
     "ts": "2026-06-30T00:14:00+00:00",
     "course_recommendation": null,
     "risk": {
-      "e1_biometric": 0.3036,
-      "e2_combined": 0.4776,
-      "representative": 0.4776,
+      "e1_biometric": 0.2985,
+      "e2_combined": 0.4748,
+      "representative": 0.4748,
       "level": 0,
       "label": "정상"
     },
     "fatigue": {
       "state": "정상",
-      "confidence": 0.7586,
+      "confidence": 0.7628,
       "nearest_shelter": null
     },
     "descent_warning": {
@@ -993,15 +993,15 @@
     "ts": "2026-06-30T00:15:00+00:00",
     "course_recommendation": null,
     "risk": {
-      "e1_biometric": 0.3061,
-      "e2_combined": 0.4813,
-      "representative": 0.4813,
+      "e1_biometric": 0.3009,
+      "e2_combined": 0.4785,
+      "representative": 0.4785,
       "level": 0,
       "label": "정상"
     },
     "fatigue": {
       "state": "정상",
-      "confidence": 0.753,
+      "confidence": 0.7573,
       "nearest_shelter": null
     },
     "descent_warning": {
@@ -1016,15 +1016,15 @@
     "ts": "2026-06-30T00:16:00+00:00",
     "course_recommendation": null,
     "risk": {
-      "e1_biometric": 0.3086,
-      "e2_combined": 0.4851,
-      "representative": 0.4851,
+      "e1_biometric": 0.3034,
+      "e2_combined": 0.4822,
+      "representative": 0.4822,
       "level": 0,
       "label": "정상"
     },
     "fatigue": {
       "state": "정상",
-      "confidence": 0.7474,
+      "confidence": 0.7517,
       "nearest_shelter": null
     },
     "descent_warning": {
@@ -1039,15 +1039,15 @@
     "ts": "2026-06-30T00:17:00+00:00",
     "course_recommendation": null,
     "risk": {
-      "e1_biometric": 0.3112,
-      "e2_combined": 0.4888,
-      "representative": 0.4888,
+      "e1_biometric": 0.3059,
+      "e2_combined": 0.4859,
+      "representative": 0.4859,
       "level": 0,
       "label": "정상"
     },
     "fatigue": {
       "state": "정상",
-      "confidence": 0.7418,
+      "confidence": 0.7462,
       "nearest_shelter": null
     },
     "descent_warning": {
@@ -1062,15 +1062,15 @@
     "ts": "2026-06-30T00:18:00+00:00",
     "course_recommendation": null,
     "risk": {
-      "e1_biometric": 0.3137,
-      "e2_combined": 0.4926,
-      "representative": 0.4926,
+      "e1_biometric": 0.3084,
+      "e2_combined": 0.4897,
+      "representative": 0.4897,
       "level": 0,
       "label": "정상"
     },
     "fatigue": {
       "state": "정상",
-      "confidence": 0.7361,
+      "confidence": 0.7405,
       "nearest_shelter": null
     },
     "descent_warning": {
@@ -1085,15 +1085,15 @@
     "ts": "2026-06-30T00:19:00+00:00",
     "course_recommendation": null,
     "risk": {
-      "e1_biometric": 0.3162,
-      "e2_combined": 0.4963,
-      "representative": 0.4963,
+      "e1_biometric": 0.3108,
+      "e2_combined": 0.4934,
+      "representative": 0.4934,
       "level": 0,
       "label": "정상"
     },
     "fatigue": {
       "state": "정상",
-      "confidence": 0.7306,
+      "confidence": 0.7349,
       "nearest_shelter": null
     },
     "descent_warning": {
@@ -1108,15 +1108,15 @@
     "ts": "2026-06-30T00:20:00+00:00",
     "course_recommendation": null,
     "risk": {
-      "e1_biometric": 0.3187,
-      "e2_combined": 0.499,
-      "representative": 0.499,
+      "e1_biometric": 0.3133,
+      "e2_combined": 0.496,
+      "representative": 0.496,
       "level": 0,
       "label": "정상"
     },
     "fatigue": {
       "state": "정상",
-      "confidence": 0.7265,
+      "confidence": 0.731,
       "nearest_shelter": null
     },
     "descent_warning": {
@@ -1131,15 +1131,15 @@
     "ts": "2026-06-30T00:21:00+00:00",
     "course_recommendation": null,
     "risk": {
-      "e1_biometric": 0.3122,
-      "e2_combined": 0.4966,
-      "representative": 0.4966,
+      "e1_biometric": 0.3069,
+      "e2_combined": 0.4937,
+      "representative": 0.4937,
       "level": 0,
       "label": "정상"
     },
     "fatigue": {
       "state": "정상",
-      "confidence": 0.7301,
+      "confidence": 0.7345,
       "nearest_shelter": null
     },
     "descent_warning": {
@@ -1154,467 +1154,7 @@
     "ts": "2026-06-30T00:22:00+00:00",
     "course_recommendation": null,
     "risk": {
-      "e1_biometric": 0.3056,
-      "e2_combined": 0.4943,
-      "representative": 0.4943,
-      "level": 0,
-      "label": "정상"
-    },
-    "fatigue": {
-      "state": "정상",
-      "confidence": 0.7336,
-      "nearest_shelter": null
-    },
-    "descent_warning": {
-      "required": false,
-      "reason": null,
-      "remaining_daylight_min": null
-    },
-    "alerts": []
-  },
-  {
-    "uuid": "97d67527cd4562da24c276c5e571cfc1",
-    "ts": "2026-06-30T00:23:00+00:00",
-    "course_recommendation": null,
-    "risk": {
-      "e1_biometric": 0.299,
-      "e2_combined": 0.4919,
-      "representative": 0.4919,
-      "level": 0,
-      "label": "정상"
-    },
-    "fatigue": {
-      "state": "정상",
-      "confidence": 0.7371,
-      "nearest_shelter": null
-    },
-    "descent_warning": {
-      "required": false,
-      "reason": null,
-      "remaining_daylight_min": null
-    },
-    "alerts": []
-  },
-  {
-    "uuid": "97d67527cd4562da24c276c5e571cfc1",
-    "ts": "2026-06-30T00:24:00+00:00",
-    "course_recommendation": null,
-    "risk": {
-      "e1_biometric": 0.2924,
-      "e2_combined": 0.4895,
-      "representative": 0.4895,
-      "level": 0,
-      "label": "정상"
-    },
-    "fatigue": {
-      "state": "정상",
-      "confidence": 0.7408,
-      "nearest_shelter": null
-    },
-    "descent_warning": {
-      "required": false,
-      "reason": null,
-      "remaining_daylight_min": null
-    },
-    "alerts": []
-  },
-  {
-    "uuid": "97d67527cd4562da24c276c5e571cfc1",
-    "ts": "2026-06-30T00:25:00+00:00",
-    "course_recommendation": null,
-    "risk": {
-      "e1_biometric": 0.2858,
-      "e2_combined": 0.4871,
-      "representative": 0.4871,
-      "level": 0,
-      "label": "정상"
-    },
-    "fatigue": {
-      "state": "정상",
-      "confidence": 0.7444,
-      "nearest_shelter": null
-    },
-    "descent_warning": {
-      "required": false,
-      "reason": null,
-      "remaining_daylight_min": null
-    },
-    "alerts": []
-  },
-  {
-    "uuid": "97d67527cd4562da24c276c5e571cfc1",
-    "ts": "2026-06-30T00:26:00+00:00",
-    "course_recommendation": null,
-    "risk": {
-      "e1_biometric": 0.2793,
-      "e2_combined": 0.4848,
-      "representative": 0.4848,
-      "level": 0,
-      "label": "정상"
-    },
-    "fatigue": {
-      "state": "정상",
-      "confidence": 0.7478,
-      "nearest_shelter": null
-    },
-    "descent_warning": {
-      "required": false,
-      "reason": null,
-      "remaining_daylight_min": null
-    },
-    "alerts": []
-  },
-  {
-    "uuid": "97d67527cd4562da24c276c5e571cfc1",
-    "ts": "2026-06-30T00:27:00+00:00",
-    "course_recommendation": null,
-    "risk": {
-      "e1_biometric": 0.2727,
-      "e2_combined": 0.4824,
-      "representative": 0.4824,
-      "level": 0,
-      "label": "정상"
-    },
-    "fatigue": {
-      "state": "정상",
-      "confidence": 0.7514,
-      "nearest_shelter": null
-    },
-    "descent_warning": {
-      "required": false,
-      "reason": null,
-      "remaining_daylight_min": null
-    },
-    "alerts": []
-  },
-  {
-    "uuid": "97d67527cd4562da24c276c5e571cfc1",
-    "ts": "2026-06-30T00:28:00+00:00",
-    "course_recommendation": null,
-    "risk": {
-      "e1_biometric": 0.2661,
-      "e2_combined": 0.48,
-      "representative": 0.48,
-      "level": 0,
-      "label": "정상"
-    },
-    "fatigue": {
-      "state": "정상",
-      "confidence": 0.755,
-      "nearest_shelter": null
-    },
-    "descent_warning": {
-      "required": false,
-      "reason": null,
-      "remaining_daylight_min": null
-    },
-    "alerts": []
-  },
-  {
-    "uuid": "97d67527cd4562da24c276c5e571cfc1",
-    "ts": "2026-06-30T00:29:00+00:00",
-    "course_recommendation": null,
-    "risk": {
-      "e1_biometric": 0.2595,
-      "e2_combined": 0.4777,
-      "representative": 0.4777,
-      "level": 0,
-      "label": "정상"
-    },
-    "fatigue": {
-      "state": "정상",
-      "confidence": 0.7585,
-      "nearest_shelter": null
-    },
-    "descent_warning": {
-      "required": false,
-      "reason": null,
-      "remaining_daylight_min": null
-    },
-    "alerts": []
-  },
-  {
-    "uuid": "97d67527cd4562da24c276c5e571cfc1",
-    "ts": "2026-06-30T00:30:00+00:00",
-    "course_recommendation": null,
-    "risk": {
-      "e1_biometric": 0.2529,
-      "e2_combined": 0.4764,
-      "representative": 0.4764,
-      "level": 0,
-      "label": "정상"
-    },
-    "fatigue": {
-      "state": "정상",
-      "confidence": 0.7604,
-      "nearest_shelter": null
-    },
-    "descent_warning": {
-      "required": false,
-      "reason": null,
-      "remaining_daylight_min": null
-    },
-    "alerts": []
-  },
-  {
-    "uuid": "97d67527cd4562da24c276c5e571cfc1",
-    "ts": "2026-06-30T00:31:00+00:00",
-    "course_recommendation": null,
-    "risk": {
-      "e1_biometric": 0.2529,
-      "e2_combined": 0.4776,
-      "representative": 0.4776,
-      "level": 0,
-      "label": "정상"
-    },
-    "fatigue": {
-      "state": "정상",
-      "confidence": 0.7586,
-      "nearest_shelter": null
-    },
-    "descent_warning": {
-      "required": false,
-      "reason": null,
-      "remaining_daylight_min": null
-    },
-    "alerts": []
-  },
-  {
-    "uuid": "97d67527cd4562da24c276c5e571cfc1",
-    "ts": "2026-06-30T00:32:00+00:00",
-    "course_recommendation": null,
-    "risk": {
-      "e1_biometric": 0.2529,
-      "e2_combined": 0.4789,
-      "representative": 0.4789,
-      "level": 0,
-      "label": "정상"
-    },
-    "fatigue": {
-      "state": "정상",
-      "confidence": 0.7567,
-      "nearest_shelter": null
-    },
-    "descent_warning": {
-      "required": false,
-      "reason": null,
-      "remaining_daylight_min": null
-    },
-    "alerts": []
-  },
-  {
-    "uuid": "97d67527cd4562da24c276c5e571cfc1",
-    "ts": "2026-06-30T00:33:00+00:00",
-    "course_recommendation": null,
-    "risk": {
-      "e1_biometric": 0.2529,
-      "e2_combined": 0.4801,
-      "representative": 0.4801,
-      "level": 0,
-      "label": "정상"
-    },
-    "fatigue": {
-      "state": "정상",
-      "confidence": 0.7549,
-      "nearest_shelter": null
-    },
-    "descent_warning": {
-      "required": false,
-      "reason": null,
-      "remaining_daylight_min": null
-    },
-    "alerts": []
-  },
-  {
-    "uuid": "97d67527cd4562da24c276c5e571cfc1",
-    "ts": "2026-06-30T00:34:00+00:00",
-    "course_recommendation": null,
-    "risk": {
-      "e1_biometric": 0.2529,
-      "e2_combined": 0.4814,
-      "representative": 0.4814,
-      "level": 0,
-      "label": "정상"
-    },
-    "fatigue": {
-      "state": "정상",
-      "confidence": 0.7529,
-      "nearest_shelter": null
-    },
-    "descent_warning": {
-      "required": false,
-      "reason": null,
-      "remaining_daylight_min": null
-    },
-    "alerts": []
-  },
-  {
-    "uuid": "97d67527cd4562da24c276c5e571cfc1",
-    "ts": "2026-06-30T00:35:00+00:00",
-    "course_recommendation": null,
-    "risk": {
-      "e1_biometric": 0.2529,
-      "e2_combined": 0.4826,
-      "representative": 0.4826,
-      "level": 0,
-      "label": "정상"
-    },
-    "fatigue": {
-      "state": "정상",
-      "confidence": 0.7511,
-      "nearest_shelter": null
-    },
-    "descent_warning": {
-      "required": false,
-      "reason": null,
-      "remaining_daylight_min": null
-    },
-    "alerts": []
-  },
-  {
-    "uuid": "97d67527cd4562da24c276c5e571cfc1",
-    "ts": "2026-06-30T00:36:00+00:00",
-    "course_recommendation": null,
-    "risk": {
-      "e1_biometric": 0.2529,
-      "e2_combined": 0.4839,
-      "representative": 0.4839,
-      "level": 0,
-      "label": "정상"
-    },
-    "fatigue": {
-      "state": "정상",
-      "confidence": 0.7491,
-      "nearest_shelter": null
-    },
-    "descent_warning": {
-      "required": false,
-      "reason": null,
-      "remaining_daylight_min": null
-    },
-    "alerts": []
-  },
-  {
-    "uuid": "97d67527cd4562da24c276c5e571cfc1",
-    "ts": "2026-06-30T00:37:00+00:00",
-    "course_recommendation": null,
-    "risk": {
-      "e1_biometric": 0.2529,
-      "e2_combined": 0.4851,
-      "representative": 0.4851,
-      "level": 0,
-      "label": "정상"
-    },
-    "fatigue": {
-      "state": "정상",
-      "confidence": 0.7474,
-      "nearest_shelter": null
-    },
-    "descent_warning": {
-      "required": false,
-      "reason": null,
-      "remaining_daylight_min": null
-    },
-    "alerts": []
-  },
-  {
-    "uuid": "97d67527cd4562da24c276c5e571cfc1",
-    "ts": "2026-06-30T00:38:00+00:00",
-    "course_recommendation": null,
-    "risk": {
-      "e1_biometric": 0.2529,
-      "e2_combined": 0.4864,
-      "representative": 0.4864,
-      "level": 0,
-      "label": "정상"
-    },
-    "fatigue": {
-      "state": "정상",
-      "confidence": 0.7454,
-      "nearest_shelter": null
-    },
-    "descent_warning": {
-      "required": false,
-      "reason": null,
-      "remaining_daylight_min": null
-    },
-    "alerts": []
-  },
-  {
-    "uuid": "97d67527cd4562da24c276c5e571cfc1",
-    "ts": "2026-06-30T00:39:00+00:00",
-    "course_recommendation": null,
-    "risk": {
-      "e1_biometric": 0.2529,
-      "e2_combined": 0.4876,
-      "representative": 0.4876,
-      "level": 0,
-      "label": "정상"
-    },
-    "fatigue": {
-      "state": "정상",
-      "confidence": 0.7436,
-      "nearest_shelter": null
-    },
-    "descent_warning": {
-      "required": false,
-      "reason": null,
-      "remaining_daylight_min": null
-    },
-    "alerts": []
-  },
-  {
-    "uuid": "97d67527cd4562da24c276c5e571cfc1",
-    "ts": "2026-06-30T00:40:00+00:00",
-    "course_recommendation": null,
-    "risk": {
-      "e1_biometric": 0.2529,
-      "e2_combined": 0.4889,
-      "representative": 0.4889,
-      "level": 0,
-      "label": "정상"
-    },
-    "fatigue": {
-      "state": "정상",
-      "confidence": 0.7417,
-      "nearest_shelter": null
-    },
-    "descent_warning": {
-      "required": false,
-      "reason": null,
-      "remaining_daylight_min": null
-    },
-    "alerts": []
-  },
-  {
-    "uuid": "97d67527cd4562da24c276c5e571cfc1",
-    "ts": "2026-06-30T00:41:00+00:00",
-    "course_recommendation": null,
-    "risk": {
-      "e1_biometric": 0.2529,
-      "e2_combined": 0.4901,
-      "representative": 0.4901,
-      "level": 0,
-      "label": "정상"
-    },
-    "fatigue": {
-      "state": "정상",
-      "confidence": 0.7399,
-      "nearest_shelter": null
-    },
-    "descent_warning": {
-      "required": false,
-      "reason": null,
-      "remaining_daylight_min": null
-    },
-    "alerts": []
-  },
-  {
-    "uuid": "97d67527cd4562da24c276c5e571cfc1",
-    "ts": "2026-06-30T00:42:00+00:00",
-    "course_recommendation": null,
-    "risk": {
-      "e1_biometric": 0.2529,
+      "e1_biometric": 0.3004,
       "e2_combined": 0.4914,
       "representative": 0.4914,
       "level": 0,
@@ -1634,18 +1174,478 @@
   },
   {
     "uuid": "97d67527cd4562da24c276c5e571cfc1",
-    "ts": "2026-06-30T00:43:00+00:00",
+    "ts": "2026-06-30T00:23:00+00:00",
     "course_recommendation": null,
     "risk": {
-      "e1_biometric": 0.2529,
-      "e2_combined": 0.4926,
-      "representative": 0.4926,
+      "e1_biometric": 0.294,
+      "e2_combined": 0.4891,
+      "representative": 0.4891,
       "level": 0,
       "label": "정상"
     },
     "fatigue": {
       "state": "정상",
-      "confidence": 0.7361,
+      "confidence": 0.7414,
+      "nearest_shelter": null
+    },
+    "descent_warning": {
+      "required": false,
+      "reason": null,
+      "remaining_daylight_min": null
+    },
+    "alerts": []
+  },
+  {
+    "uuid": "97d67527cd4562da24c276c5e571cfc1",
+    "ts": "2026-06-30T00:24:00+00:00",
+    "course_recommendation": null,
+    "risk": {
+      "e1_biometric": 0.2875,
+      "e2_combined": 0.4868,
+      "representative": 0.4868,
+      "level": 0,
+      "label": "정상"
+    },
+    "fatigue": {
+      "state": "정상",
+      "confidence": 0.7448,
+      "nearest_shelter": null
+    },
+    "descent_warning": {
+      "required": false,
+      "reason": null,
+      "remaining_daylight_min": null
+    },
+    "alerts": []
+  },
+  {
+    "uuid": "97d67527cd4562da24c276c5e571cfc1",
+    "ts": "2026-06-30T00:25:00+00:00",
+    "course_recommendation": null,
+    "risk": {
+      "e1_biometric": 0.2811,
+      "e2_combined": 0.4845,
+      "representative": 0.4845,
+      "level": 0,
+      "label": "정상"
+    },
+    "fatigue": {
+      "state": "정상",
+      "confidence": 0.7483,
+      "nearest_shelter": null
+    },
+    "descent_warning": {
+      "required": false,
+      "reason": null,
+      "remaining_daylight_min": null
+    },
+    "alerts": []
+  },
+  {
+    "uuid": "97d67527cd4562da24c276c5e571cfc1",
+    "ts": "2026-06-30T00:26:00+00:00",
+    "course_recommendation": null,
+    "risk": {
+      "e1_biometric": 0.2746,
+      "e2_combined": 0.4822,
+      "representative": 0.4822,
+      "level": 0,
+      "label": "정상"
+    },
+    "fatigue": {
+      "state": "정상",
+      "confidence": 0.7517,
+      "nearest_shelter": null
+    },
+    "descent_warning": {
+      "required": false,
+      "reason": null,
+      "remaining_daylight_min": null
+    },
+    "alerts": []
+  },
+  {
+    "uuid": "97d67527cd4562da24c276c5e571cfc1",
+    "ts": "2026-06-30T00:27:00+00:00",
+    "course_recommendation": null,
+    "risk": {
+      "e1_biometric": 0.2682,
+      "e2_combined": 0.4799,
+      "representative": 0.4799,
+      "level": 0,
+      "label": "정상"
+    },
+    "fatigue": {
+      "state": "정상",
+      "confidence": 0.7551,
+      "nearest_shelter": null
+    },
+    "descent_warning": {
+      "required": false,
+      "reason": null,
+      "remaining_daylight_min": null
+    },
+    "alerts": []
+  },
+  {
+    "uuid": "97d67527cd4562da24c276c5e571cfc1",
+    "ts": "2026-06-30T00:28:00+00:00",
+    "course_recommendation": null,
+    "risk": {
+      "e1_biometric": 0.2617,
+      "e2_combined": 0.4776,
+      "representative": 0.4776,
+      "level": 0,
+      "label": "정상"
+    },
+    "fatigue": {
+      "state": "정상",
+      "confidence": 0.7586,
+      "nearest_shelter": null
+    },
+    "descent_warning": {
+      "required": false,
+      "reason": null,
+      "remaining_daylight_min": null
+    },
+    "alerts": []
+  },
+  {
+    "uuid": "97d67527cd4562da24c276c5e571cfc1",
+    "ts": "2026-06-30T00:29:00+00:00",
+    "course_recommendation": null,
+    "risk": {
+      "e1_biometric": 0.2553,
+      "e2_combined": 0.4753,
+      "representative": 0.4753,
+      "level": 0,
+      "label": "정상"
+    },
+    "fatigue": {
+      "state": "정상",
+      "confidence": 0.7621,
+      "nearest_shelter": null
+    },
+    "descent_warning": {
+      "required": false,
+      "reason": null,
+      "remaining_daylight_min": null
+    },
+    "alerts": []
+  },
+  {
+    "uuid": "97d67527cd4562da24c276c5e571cfc1",
+    "ts": "2026-06-30T00:30:00+00:00",
+    "course_recommendation": null,
+    "risk": {
+      "e1_biometric": 0.2488,
+      "e2_combined": 0.4741,
+      "representative": 0.4741,
+      "level": 0,
+      "label": "정상"
+    },
+    "fatigue": {
+      "state": "정상",
+      "confidence": 0.7639,
+      "nearest_shelter": null
+    },
+    "descent_warning": {
+      "required": false,
+      "reason": null,
+      "remaining_daylight_min": null
+    },
+    "alerts": []
+  },
+  {
+    "uuid": "97d67527cd4562da24c276c5e571cfc1",
+    "ts": "2026-06-30T00:31:00+00:00",
+    "course_recommendation": null,
+    "risk": {
+      "e1_biometric": 0.2488,
+      "e2_combined": 0.4754,
+      "representative": 0.4754,
+      "level": 0,
+      "label": "정상"
+    },
+    "fatigue": {
+      "state": "정상",
+      "confidence": 0.7619,
+      "nearest_shelter": null
+    },
+    "descent_warning": {
+      "required": false,
+      "reason": null,
+      "remaining_daylight_min": null
+    },
+    "alerts": []
+  },
+  {
+    "uuid": "97d67527cd4562da24c276c5e571cfc1",
+    "ts": "2026-06-30T00:32:00+00:00",
+    "course_recommendation": null,
+    "risk": {
+      "e1_biometric": 0.2488,
+      "e2_combined": 0.4766,
+      "representative": 0.4766,
+      "level": 0,
+      "label": "정상"
+    },
+    "fatigue": {
+      "state": "정상",
+      "confidence": 0.7601,
+      "nearest_shelter": null
+    },
+    "descent_warning": {
+      "required": false,
+      "reason": null,
+      "remaining_daylight_min": null
+    },
+    "alerts": []
+  },
+  {
+    "uuid": "97d67527cd4562da24c276c5e571cfc1",
+    "ts": "2026-06-30T00:33:00+00:00",
+    "course_recommendation": null,
+    "risk": {
+      "e1_biometric": 0.2488,
+      "e2_combined": 0.4779,
+      "representative": 0.4779,
+      "level": 0,
+      "label": "정상"
+    },
+    "fatigue": {
+      "state": "정상",
+      "confidence": 0.7582,
+      "nearest_shelter": null
+    },
+    "descent_warning": {
+      "required": false,
+      "reason": null,
+      "remaining_daylight_min": null
+    },
+    "alerts": []
+  },
+  {
+    "uuid": "97d67527cd4562da24c276c5e571cfc1",
+    "ts": "2026-06-30T00:34:00+00:00",
+    "course_recommendation": null,
+    "risk": {
+      "e1_biometric": 0.2488,
+      "e2_combined": 0.4791,
+      "representative": 0.4791,
+      "level": 0,
+      "label": "정상"
+    },
+    "fatigue": {
+      "state": "정상",
+      "confidence": 0.7563,
+      "nearest_shelter": null
+    },
+    "descent_warning": {
+      "required": false,
+      "reason": null,
+      "remaining_daylight_min": null
+    },
+    "alerts": []
+  },
+  {
+    "uuid": "97d67527cd4562da24c276c5e571cfc1",
+    "ts": "2026-06-30T00:35:00+00:00",
+    "course_recommendation": null,
+    "risk": {
+      "e1_biometric": 0.2488,
+      "e2_combined": 0.4804,
+      "representative": 0.4804,
+      "level": 0,
+      "label": "정상"
+    },
+    "fatigue": {
+      "state": "정상",
+      "confidence": 0.7544,
+      "nearest_shelter": null
+    },
+    "descent_warning": {
+      "required": false,
+      "reason": null,
+      "remaining_daylight_min": null
+    },
+    "alerts": []
+  },
+  {
+    "uuid": "97d67527cd4562da24c276c5e571cfc1",
+    "ts": "2026-06-30T00:36:00+00:00",
+    "course_recommendation": null,
+    "risk": {
+      "e1_biometric": 0.2488,
+      "e2_combined": 0.4816,
+      "representative": 0.4816,
+      "level": 0,
+      "label": "정상"
+    },
+    "fatigue": {
+      "state": "정상",
+      "confidence": 0.7526,
+      "nearest_shelter": null
+    },
+    "descent_warning": {
+      "required": false,
+      "reason": null,
+      "remaining_daylight_min": null
+    },
+    "alerts": []
+  },
+  {
+    "uuid": "97d67527cd4562da24c276c5e571cfc1",
+    "ts": "2026-06-30T00:37:00+00:00",
+    "course_recommendation": null,
+    "risk": {
+      "e1_biometric": 0.2488,
+      "e2_combined": 0.4829,
+      "representative": 0.4829,
+      "level": 0,
+      "label": "정상"
+    },
+    "fatigue": {
+      "state": "정상",
+      "confidence": 0.7507,
+      "nearest_shelter": null
+    },
+    "descent_warning": {
+      "required": false,
+      "reason": null,
+      "remaining_daylight_min": null
+    },
+    "alerts": []
+  },
+  {
+    "uuid": "97d67527cd4562da24c276c5e571cfc1",
+    "ts": "2026-06-30T00:38:00+00:00",
+    "course_recommendation": null,
+    "risk": {
+      "e1_biometric": 0.2488,
+      "e2_combined": 0.4841,
+      "representative": 0.4841,
+      "level": 0,
+      "label": "정상"
+    },
+    "fatigue": {
+      "state": "정상",
+      "confidence": 0.7489,
+      "nearest_shelter": null
+    },
+    "descent_warning": {
+      "required": false,
+      "reason": null,
+      "remaining_daylight_min": null
+    },
+    "alerts": []
+  },
+  {
+    "uuid": "97d67527cd4562da24c276c5e571cfc1",
+    "ts": "2026-06-30T00:39:00+00:00",
+    "course_recommendation": null,
+    "risk": {
+      "e1_biometric": 0.2488,
+      "e2_combined": 0.4854,
+      "representative": 0.4854,
+      "level": 0,
+      "label": "정상"
+    },
+    "fatigue": {
+      "state": "정상",
+      "confidence": 0.7469,
+      "nearest_shelter": null
+    },
+    "descent_warning": {
+      "required": false,
+      "reason": null,
+      "remaining_daylight_min": null
+    },
+    "alerts": []
+  },
+  {
+    "uuid": "97d67527cd4562da24c276c5e571cfc1",
+    "ts": "2026-06-30T00:40:00+00:00",
+    "course_recommendation": null,
+    "risk": {
+      "e1_biometric": 0.2488,
+      "e2_combined": 0.4866,
+      "representative": 0.4866,
+      "level": 0,
+      "label": "정상"
+    },
+    "fatigue": {
+      "state": "정상",
+      "confidence": 0.7451,
+      "nearest_shelter": null
+    },
+    "descent_warning": {
+      "required": false,
+      "reason": null,
+      "remaining_daylight_min": null
+    },
+    "alerts": []
+  },
+  {
+    "uuid": "97d67527cd4562da24c276c5e571cfc1",
+    "ts": "2026-06-30T00:41:00+00:00",
+    "course_recommendation": null,
+    "risk": {
+      "e1_biometric": 0.2488,
+      "e2_combined": 0.4879,
+      "representative": 0.4879,
+      "level": 0,
+      "label": "정상"
+    },
+    "fatigue": {
+      "state": "정상",
+      "confidence": 0.7431,
+      "nearest_shelter": null
+    },
+    "descent_warning": {
+      "required": false,
+      "reason": null,
+      "remaining_daylight_min": null
+    },
+    "alerts": []
+  },
+  {
+    "uuid": "97d67527cd4562da24c276c5e571cfc1",
+    "ts": "2026-06-30T00:42:00+00:00",
+    "course_recommendation": null,
+    "risk": {
+      "e1_biometric": 0.2488,
+      "e2_combined": 0.4891,
+      "representative": 0.4891,
+      "level": 0,
+      "label": "정상"
+    },
+    "fatigue": {
+      "state": "정상",
+      "confidence": 0.7414,
+      "nearest_shelter": null
+    },
+    "descent_warning": {
+      "required": false,
+      "reason": null,
+      "remaining_daylight_min": null
+    },
+    "alerts": []
+  },
+  {
+    "uuid": "97d67527cd4562da24c276c5e571cfc1",
+    "ts": "2026-06-30T00:43:00+00:00",
+    "course_recommendation": null,
+    "risk": {
+      "e1_biometric": 0.2488,
+      "e2_combined": 0.4904,
+      "representative": 0.4904,
+      "level": 0,
+      "label": "정상"
+    },
+    "fatigue": {
+      "state": "정상",
+      "confidence": 0.7394,
       "nearest_shelter": null
     },
     "descent_warning": {
@@ -1660,15 +1660,15 @@
     "ts": "2026-06-30T00:44:00+00:00",
     "course_recommendation": null,
     "risk": {
-      "e1_biometric": 0.2529,
-      "e2_combined": 0.4939,
-      "representative": 0.4939,
+      "e1_biometric": 0.2488,
+      "e2_combined": 0.4916,
+      "representative": 0.4916,
       "level": 0,
       "label": "정상"
     },
     "fatigue": {
       "state": "정상",
-      "confidence": 0.7342,
+      "confidence": 0.7376,
       "nearest_shelter": null
     },
     "descent_warning": {
@@ -1683,15 +1683,15 @@
     "ts": "2026-06-30T00:45:00+00:00",
     "course_recommendation": null,
     "risk": {
-      "e1_biometric": 0.2529,
-      "e2_combined": 0.4951,
-      "representative": 0.4951,
+      "e1_biometric": 0.2488,
+      "e2_combined": 0.4929,
+      "representative": 0.4929,
       "level": 0,
       "label": "정상"
     },
     "fatigue": {
       "state": "정상",
-      "confidence": 0.7324,
+      "confidence": 0.7357,
       "nearest_shelter": null
     },
     "descent_warning": {
@@ -1706,15 +1706,15 @@
     "ts": "2026-06-30T00:46:00+00:00",
     "course_recommendation": null,
     "risk": {
-      "e1_biometric": 0.2529,
-      "e2_combined": 0.4964,
-      "representative": 0.4964,
+      "e1_biometric": 0.2488,
+      "e2_combined": 0.4941,
+      "representative": 0.4941,
       "level": 0,
       "label": "정상"
     },
     "fatigue": {
       "state": "정상",
-      "confidence": 0.7304,
+      "confidence": 0.7339,
       "nearest_shelter": null
     },
     "descent_warning": {
@@ -1729,15 +1729,15 @@
     "ts": "2026-06-30T00:47:00+00:00",
     "course_recommendation": null,
     "risk": {
-      "e1_biometric": 0.2529,
-      "e2_combined": 0.4976,
-      "representative": 0.4976,
+      "e1_biometric": 0.2488,
+      "e2_combined": 0.4954,
+      "representative": 0.4954,
       "level": 0,
       "label": "정상"
     },
     "fatigue": {
       "state": "정상",
-      "confidence": 0.7286,
+      "confidence": 0.7319,
       "nearest_shelter": null
     },
     "descent_warning": {
@@ -1752,15 +1752,15 @@
     "ts": "2026-06-30T00:48:00+00:00",
     "course_recommendation": null,
     "risk": {
-      "e1_biometric": 0.2529,
-      "e2_combined": 0.4989,
-      "representative": 0.4989,
+      "e1_biometric": 0.2488,
+      "e2_combined": 0.4966,
+      "representative": 0.4966,
       "level": 0,
       "label": "정상"
     },
     "fatigue": {
       "state": "정상",
-      "confidence": 0.7267,
+      "confidence": 0.7301,
       "nearest_shelter": null
     },
     "descent_warning": {
@@ -1775,15 +1775,15 @@
     "ts": "2026-06-30T00:49:00+00:00",
     "course_recommendation": null,
     "risk": {
-      "e1_biometric": 0.2529,
-      "e2_combined": 0.5001,
-      "representative": 0.5001,
-      "level": 1,
-      "label": "주의"
+      "e1_biometric": 0.2488,
+      "e2_combined": 0.4979,
+      "representative": 0.4979,
+      "level": 0,
+      "label": "정상"
     },
     "fatigue": {
       "state": "정상",
-      "confidence": 0.7248,
+      "confidence": 0.7282,
       "nearest_shelter": null
     },
     "descent_warning": {
@@ -1798,15 +1798,15 @@
     "ts": "2026-06-30T00:50:00+00:00",
     "course_recommendation": null,
     "risk": {
-      "e1_biometric": 0.2529,
-      "e2_combined": 0.5014,
-      "representative": 0.5014,
-      "level": 1,
-      "label": "주의"
+      "e1_biometric": 0.2488,
+      "e2_combined": 0.4991,
+      "representative": 0.4991,
+      "level": 0,
+      "label": "정상"
     },
     "fatigue": {
       "state": "정상",
-      "confidence": 0.7229,
+      "confidence": 0.7264,
       "nearest_shelter": null
     },
     "descent_warning": {
@@ -1821,15 +1821,15 @@
     "ts": "2026-06-30T00:51:00+00:00",
     "course_recommendation": null,
     "risk": {
-      "e1_biometric": 0.2529,
-      "e2_combined": 0.5026,
-      "representative": 0.5026,
+      "e1_biometric": 0.2488,
+      "e2_combined": 0.5004,
+      "representative": 0.5004,
       "level": 1,
       "label": "주의"
     },
     "fatigue": {
       "state": "정상",
-      "confidence": 0.7211,
+      "confidence": 0.7244,
       "nearest_shelter": null
     },
     "descent_warning": {
@@ -1844,15 +1844,15 @@
     "ts": "2026-06-30T00:52:00+00:00",
     "course_recommendation": null,
     "risk": {
-      "e1_biometric": 0.2529,
-      "e2_combined": 0.5039,
-      "representative": 0.5039,
+      "e1_biometric": 0.2488,
+      "e2_combined": 0.5016,
+      "representative": 0.5016,
       "level": 1,
       "label": "주의"
     },
     "fatigue": {
       "state": "정상",
-      "confidence": 0.7191,
+      "confidence": 0.7226,
       "nearest_shelter": null
     },
     "descent_warning": {
@@ -1867,15 +1867,15 @@
     "ts": "2026-06-30T00:53:00+00:00",
     "course_recommendation": null,
     "risk": {
-      "e1_biometric": 0.2529,
-      "e2_combined": 0.5051,
-      "representative": 0.5051,
+      "e1_biometric": 0.2488,
+      "e2_combined": 0.5029,
+      "representative": 0.5029,
       "level": 1,
       "label": "주의"
     },
     "fatigue": {
       "state": "정상",
-      "confidence": 0.7174,
+      "confidence": 0.7207,
       "nearest_shelter": null
     },
     "descent_warning": {
@@ -1890,15 +1890,15 @@
     "ts": "2026-06-30T00:54:00+00:00",
     "course_recommendation": null,
     "risk": {
-      "e1_biometric": 0.2529,
-      "e2_combined": 0.5064,
-      "representative": 0.5064,
+      "e1_biometric": 0.2488,
+      "e2_combined": 0.5041,
+      "representative": 0.5041,
       "level": 1,
       "label": "주의"
     },
     "fatigue": {
       "state": "정상",
-      "confidence": 0.7154,
+      "confidence": 0.7188,
       "nearest_shelter": null
     },
     "descent_warning": {
@@ -1913,15 +1913,15 @@
     "ts": "2026-06-30T00:55:00+00:00",
     "course_recommendation": null,
     "risk": {
-      "e1_biometric": 0.2529,
-      "e2_combined": 0.5076,
-      "representative": 0.5076,
+      "e1_biometric": 0.2488,
+      "e2_combined": 0.5054,
+      "representative": 0.5054,
       "level": 1,
       "label": "주의"
     },
     "fatigue": {
       "state": "정상",
-      "confidence": 0.7136,
+      "confidence": 0.7169,
       "nearest_shelter": null
     },
     "descent_warning": {
@@ -1936,15 +1936,15 @@
     "ts": "2026-06-30T00:56:00+00:00",
     "course_recommendation": null,
     "risk": {
-      "e1_biometric": 0.2529,
-      "e2_combined": 0.5089,
-      "representative": 0.5089,
+      "e1_biometric": 0.2488,
+      "e2_combined": 0.5066,
+      "representative": 0.5066,
       "level": 1,
       "label": "주의"
     },
     "fatigue": {
       "state": "정상",
-      "confidence": 0.7117,
+      "confidence": 0.7151,
       "nearest_shelter": null
     },
     "descent_warning": {
@@ -1959,15 +1959,15 @@
     "ts": "2026-06-30T00:57:00+00:00",
     "course_recommendation": null,
     "risk": {
-      "e1_biometric": 0.2529,
-      "e2_combined": 0.5101,
-      "representative": 0.5101,
+      "e1_biometric": 0.2488,
+      "e2_combined": 0.5079,
+      "representative": 0.5079,
       "level": 1,
       "label": "주의"
     },
     "fatigue": {
       "state": "정상",
-      "confidence": 0.7099,
+      "confidence": 0.7131,
       "nearest_shelter": null
     },
     "descent_warning": {
@@ -1982,15 +1982,15 @@
     "ts": "2026-06-30T00:58:00+00:00",
     "course_recommendation": null,
     "risk": {
-      "e1_biometric": 0.2529,
-      "e2_combined": 0.5114,
-      "representative": 0.5114,
+      "e1_biometric": 0.2488,
+      "e2_combined": 0.5091,
+      "representative": 0.5091,
       "level": 1,
       "label": "주의"
     },
     "fatigue": {
       "state": "정상",
-      "confidence": 0.7079,
+      "confidence": 0.7114,
       "nearest_shelter": null
     },
     "descent_warning": {
@@ -2005,15 +2005,15 @@
     "ts": "2026-06-30T00:59:00+00:00",
     "course_recommendation": null,
     "risk": {
-      "e1_biometric": 0.2529,
-      "e2_combined": 0.5126,
-      "representative": 0.5126,
+      "e1_biometric": 0.2488,
+      "e2_combined": 0.5104,
+      "representative": 0.5104,
       "level": 1,
       "label": "주의"
     },
     "fatigue": {
       "state": "정상",
-      "confidence": 0.7061,
+      "confidence": 0.7094,
       "nearest_shelter": null
     },
     "descent_warning": {
@@ -2028,15 +2028,15 @@
     "ts": "2026-06-30T01:00:00+00:00",
     "course_recommendation": null,
     "risk": {
-      "e1_biometric": 0.2529,
-      "e2_combined": 0.5139,
-      "representative": 0.5139,
+      "e1_biometric": 0.2488,
+      "e2_combined": 0.5116,
+      "representative": 0.5116,
       "level": 1,
       "label": "주의"
     },
     "fatigue": {
       "state": "정상",
-      "confidence": 0.7042,
+      "confidence": 0.7076,
       "nearest_shelter": null
     },
     "descent_warning": {
@@ -2051,15 +2051,15 @@
     "ts": "2026-06-30T01:01:00+00:00",
     "course_recommendation": null,
     "risk": {
-      "e1_biometric": 0.2529,
-      "e2_combined": 0.5151,
-      "representative": 0.5151,
+      "e1_biometric": 0.2488,
+      "e2_combined": 0.5129,
+      "representative": 0.5129,
       "level": 1,
       "label": "주의"
     },
     "fatigue": {
       "state": "정상",
-      "confidence": 0.7024,
+      "confidence": 0.7056,
       "nearest_shelter": null
     },
     "descent_warning": {
@@ -2074,15 +2074,15 @@
     "ts": "2026-06-30T01:02:00+00:00",
     "course_recommendation": null,
     "risk": {
-      "e1_biometric": 0.2529,
-      "e2_combined": 0.5164,
-      "representative": 0.5164,
+      "e1_biometric": 0.2488,
+      "e2_combined": 0.5141,
+      "representative": 0.5141,
       "level": 1,
       "label": "주의"
     },
     "fatigue": {
       "state": "휴식 권고",
-      "confidence": 0.7004,
+      "confidence": 0.7039,
       "nearest_shelter": {
         "poi_id": null,
         "name": "정상",
@@ -2111,15 +2111,15 @@
     "ts": "2026-06-30T01:03:00+00:00",
     "course_recommendation": null,
     "risk": {
-      "e1_biometric": 0.2529,
-      "e2_combined": 0.5176,
-      "representative": 0.5176,
+      "e1_biometric": 0.2488,
+      "e2_combined": 0.5154,
+      "representative": 0.5154,
       "level": 1,
       "label": "주의"
     },
     "fatigue": {
       "state": "정상",
-      "confidence": 0.6986,
+      "confidence": 0.7019,
       "nearest_shelter": null
     },
     "descent_warning": {
@@ -2134,15 +2134,15 @@
     "ts": "2026-06-30T01:04:00+00:00",
     "course_recommendation": null,
     "risk": {
-      "e1_biometric": 0.2529,
-      "e2_combined": 0.5189,
-      "representative": 0.5189,
+      "e1_biometric": 0.2488,
+      "e2_combined": 0.5166,
+      "representative": 0.5166,
       "level": 1,
       "label": "주의"
     },
     "fatigue": {
       "state": "정상",
-      "confidence": 0.6966,
+      "confidence": 0.7001,
       "nearest_shelter": null
     },
     "descent_warning": {
@@ -2157,15 +2157,15 @@
     "ts": "2026-06-30T01:05:00+00:00",
     "course_recommendation": null,
     "risk": {
-      "e1_biometric": 0.2529,
-      "e2_combined": 0.5201,
-      "representative": 0.5201,
+      "e1_biometric": 0.2488,
+      "e2_combined": 0.5179,
+      "representative": 0.5179,
       "level": 1,
       "label": "주의"
     },
     "fatigue": {
       "state": "정상",
-      "confidence": 0.6948,
+      "confidence": 0.6982,
       "nearest_shelter": null
     },
     "descent_warning": {
@@ -2180,15 +2180,15 @@
     "ts": "2026-06-30T01:06:00+00:00",
     "course_recommendation": null,
     "risk": {
-      "e1_biometric": 0.2529,
-      "e2_combined": 0.5214,
-      "representative": 0.5214,
+      "e1_biometric": 0.2488,
+      "e2_combined": 0.5191,
+      "representative": 0.5191,
       "level": 1,
       "label": "주의"
     },
     "fatigue": {
       "state": "정상",
-      "confidence": 0.6929,
+      "confidence": 0.6964,
       "nearest_shelter": null
     },
     "descent_warning": {
@@ -2203,15 +2203,15 @@
     "ts": "2026-06-30T01:07:00+00:00",
     "course_recommendation": null,
     "risk": {
-      "e1_biometric": 0.2529,
-      "e2_combined": 0.5226,
-      "representative": 0.5226,
+      "e1_biometric": 0.2488,
+      "e2_combined": 0.5204,
+      "representative": 0.5204,
       "level": 1,
       "label": "주의"
     },
     "fatigue": {
       "state": "정상",
-      "confidence": 0.6911,
+      "confidence": 0.6944,
       "nearest_shelter": null
     },
     "descent_warning": {
@@ -2226,15 +2226,15 @@
     "ts": "2026-06-30T01:08:00+00:00",
     "course_recommendation": null,
     "risk": {
-      "e1_biometric": 0.2529,
-      "e2_combined": 0.5239,
-      "representative": 0.5239,
+      "e1_biometric": 0.2488,
+      "e2_combined": 0.5216,
+      "representative": 0.5216,
       "level": 1,
       "label": "주의"
     },
     "fatigue": {
       "state": "정상",
-      "confidence": 0.6891,
+      "confidence": 0.6926,
       "nearest_shelter": null
     },
     "descent_warning": {
@@ -2249,15 +2249,15 @@
     "ts": "2026-06-30T01:09:00+00:00",
     "course_recommendation": null,
     "risk": {
-      "e1_biometric": 0.2529,
-      "e2_combined": 0.5251,
-      "representative": 0.5251,
+      "e1_biometric": 0.2488,
+      "e2_combined": 0.5229,
+      "representative": 0.5229,
       "level": 1,
       "label": "주의"
     },
     "fatigue": {
       "state": "정상",
-      "confidence": 0.6874,
+      "confidence": 0.6906,
       "nearest_shelter": null
     },
     "descent_warning": {
@@ -2272,15 +2272,15 @@
     "ts": "2026-06-30T01:10:00+00:00",
     "course_recommendation": null,
     "risk": {
-      "e1_biometric": 0.2529,
-      "e2_combined": 0.5264,
-      "representative": 0.5264,
+      "e1_biometric": 0.2488,
+      "e2_combined": 0.5241,
+      "representative": 0.5241,
       "level": 1,
       "label": "주의"
     },
     "fatigue": {
       "state": "정상",
-      "confidence": 0.6854,
+      "confidence": 0.6888,
       "nearest_shelter": null
     },
     "descent_warning": {
@@ -2295,15 +2295,15 @@
     "ts": "2026-06-30T01:11:00+00:00",
     "course_recommendation": null,
     "risk": {
-      "e1_biometric": 0.2529,
-      "e2_combined": 0.5276,
-      "representative": 0.5276,
+      "e1_biometric": 0.2488,
+      "e2_combined": 0.5254,
+      "representative": 0.5254,
       "level": 1,
       "label": "주의"
     },
     "fatigue": {
       "state": "정상",
-      "confidence": 0.6836,
+      "confidence": 0.6869,
       "nearest_shelter": null
     },
     "descent_warning": {
@@ -2318,15 +2318,15 @@
     "ts": "2026-06-30T01:12:00+00:00",
     "course_recommendation": null,
     "risk": {
-      "e1_biometric": 0.2529,
-      "e2_combined": 0.5289,
-      "representative": 0.5289,
+      "e1_biometric": 0.2488,
+      "e2_combined": 0.5266,
+      "representative": 0.5266,
       "level": 1,
       "label": "주의"
     },
     "fatigue": {
       "state": "정상",
-      "confidence": 0.6816,
+      "confidence": 0.6851,
       "nearest_shelter": null
     },
     "descent_warning": {
@@ -2341,15 +2341,15 @@
     "ts": "2026-06-30T01:13:00+00:00",
     "course_recommendation": null,
     "risk": {
-      "e1_biometric": 0.2529,
-      "e2_combined": 0.5301,
-      "representative": 0.5301,
+      "e1_biometric": 0.2488,
+      "e2_combined": 0.5279,
+      "representative": 0.5279,
       "level": 1,
       "label": "주의"
     },
     "fatigue": {
       "state": "정상",
-      "confidence": 0.6799,
+      "confidence": 0.6831,
       "nearest_shelter": null
     },
     "descent_warning": {
@@ -2364,15 +2364,15 @@
     "ts": "2026-06-30T01:14:00+00:00",
     "course_recommendation": null,
     "risk": {
-      "e1_biometric": 0.2529,
-      "e2_combined": 0.5314,
-      "representative": 0.5314,
+      "e1_biometric": 0.2488,
+      "e2_combined": 0.5291,
+      "representative": 0.5291,
       "level": 1,
       "label": "주의"
     },
     "fatigue": {
       "state": "정상",
-      "confidence": 0.6779,
+      "confidence": 0.6814,
       "nearest_shelter": null
     },
     "descent_warning": {
@@ -2387,15 +2387,15 @@
     "ts": "2026-06-30T01:15:00+00:00",
     "course_recommendation": null,
     "risk": {
-      "e1_biometric": 0.2529,
-      "e2_combined": 0.5326,
-      "representative": 0.5326,
+      "e1_biometric": 0.2488,
+      "e2_combined": 0.5304,
+      "representative": 0.5304,
       "level": 1,
       "label": "주의"
     },
     "fatigue": {
       "state": "정상",
-      "confidence": 0.6761,
+      "confidence": 0.6794,
       "nearest_shelter": null
     },
     "descent_warning": {
@@ -2410,15 +2410,15 @@
     "ts": "2026-06-30T01:16:00+00:00",
     "course_recommendation": null,
     "risk": {
-      "e1_biometric": 0.2529,
-      "e2_combined": 0.5339,
-      "representative": 0.5339,
+      "e1_biometric": 0.2488,
+      "e2_combined": 0.5316,
+      "representative": 0.5316,
       "level": 1,
       "label": "주의"
     },
     "fatigue": {
       "state": "정상",
-      "confidence": 0.6742,
+      "confidence": 0.6776,
       "nearest_shelter": null
     },
     "descent_warning": {
@@ -2433,15 +2433,15 @@
     "ts": "2026-06-30T01:17:00+00:00",
     "course_recommendation": null,
     "risk": {
-      "e1_biometric": 0.2529,
-      "e2_combined": 0.5351,
-      "representative": 0.5351,
+      "e1_biometric": 0.2488,
+      "e2_combined": 0.5329,
+      "representative": 0.5329,
       "level": 1,
       "label": "주의"
     },
     "fatigue": {
       "state": "정상",
-      "confidence": 0.6724,
+      "confidence": 0.6756,
       "nearest_shelter": null
     },
     "descent_warning": {
@@ -2456,15 +2456,15 @@
     "ts": "2026-06-30T01:18:00+00:00",
     "course_recommendation": null,
     "risk": {
-      "e1_biometric": 0.2529,
-      "e2_combined": 0.5364,
-      "representative": 0.5364,
+      "e1_biometric": 0.2488,
+      "e2_combined": 0.5341,
+      "representative": 0.5341,
       "level": 1,
       "label": "주의"
     },
     "fatigue": {
       "state": "정상",
-      "confidence": 0.6704,
+      "confidence": 0.6739,
       "nearest_shelter": null
     },
     "descent_warning": {
@@ -2479,15 +2479,15 @@
     "ts": "2026-06-30T01:19:00+00:00",
     "course_recommendation": null,
     "risk": {
-      "e1_biometric": 0.2529,
-      "e2_combined": 0.5376,
-      "representative": 0.5376,
+      "e1_biometric": 0.2488,
+      "e2_combined": 0.5354,
+      "representative": 0.5354,
       "level": 1,
       "label": "주의"
     },
     "fatigue": {
       "state": "정상",
-      "confidence": 0.6686,
+      "confidence": 0.6719,
       "nearest_shelter": null
     },
     "descent_warning": {
@@ -2502,15 +2502,15 @@
     "ts": "2026-06-30T01:20:00+00:00",
     "course_recommendation": null,
     "risk": {
-      "e1_biometric": 0.2529,
-      "e2_combined": 0.5389,
-      "representative": 0.5389,
+      "e1_biometric": 0.2488,
+      "e2_combined": 0.5366,
+      "representative": 0.5366,
       "level": 1,
       "label": "주의"
     },
     "fatigue": {
       "state": "정상",
-      "confidence": 0.6666,
+      "confidence": 0.6701,
       "nearest_shelter": null
     },
     "descent_warning": {
@@ -2525,15 +2525,15 @@
     "ts": "2026-06-30T01:21:00+00:00",
     "course_recommendation": null,
     "risk": {
-      "e1_biometric": 0.2529,
-      "e2_combined": 0.5401,
-      "representative": 0.5401,
+      "e1_biometric": 0.2488,
+      "e2_combined": 0.5379,
+      "representative": 0.5379,
       "level": 1,
       "label": "주의"
     },
     "fatigue": {
       "state": "정상",
-      "confidence": 0.6648,
+      "confidence": 0.6682,
       "nearest_shelter": null
     },
     "descent_warning": {
@@ -2548,15 +2548,15 @@
     "ts": "2026-06-30T01:22:00+00:00",
     "course_recommendation": null,
     "risk": {
-      "e1_biometric": 0.2529,
-      "e2_combined": 0.5414,
-      "representative": 0.5414,
+      "e1_biometric": 0.2488,
+      "e2_combined": 0.5391,
+      "representative": 0.5391,
       "level": 1,
       "label": "주의"
     },
     "fatigue": {
       "state": "정상",
-      "confidence": 0.6629,
+      "confidence": 0.6663,
       "nearest_shelter": null
     },
     "descent_warning": {
@@ -2571,191 +2571,7 @@
     "ts": "2026-06-30T01:23:00+00:00",
     "course_recommendation": null,
     "risk": {
-      "e1_biometric": 0.2529,
-      "e2_combined": 0.5426,
-      "representative": 0.5426,
-      "level": 1,
-      "label": "주의"
-    },
-    "fatigue": {
-      "state": "정상",
-      "confidence": 0.6611,
-      "nearest_shelter": null
-    },
-    "descent_warning": {
-      "required": false,
-      "reason": null,
-      "remaining_daylight_min": null
-    },
-    "alerts": []
-  },
-  {
-    "uuid": "97d67527cd4562da24c276c5e571cfc1",
-    "ts": "2026-06-30T01:24:00+00:00",
-    "course_recommendation": null,
-    "risk": {
-      "e1_biometric": 0.2529,
-      "e2_combined": 0.5439,
-      "representative": 0.5439,
-      "level": 1,
-      "label": "주의"
-    },
-    "fatigue": {
-      "state": "정상",
-      "confidence": 0.6591,
-      "nearest_shelter": null
-    },
-    "descent_warning": {
-      "required": false,
-      "reason": null,
-      "remaining_daylight_min": null
-    },
-    "alerts": []
-  },
-  {
-    "uuid": "97d67527cd4562da24c276c5e571cfc1",
-    "ts": "2026-06-30T01:25:00+00:00",
-    "course_recommendation": null,
-    "risk": {
-      "e1_biometric": 0.2529,
-      "e2_combined": 0.5451,
-      "representative": 0.5451,
-      "level": 1,
-      "label": "주의"
-    },
-    "fatigue": {
-      "state": "정상",
-      "confidence": 0.6573,
-      "nearest_shelter": null
-    },
-    "descent_warning": {
-      "required": false,
-      "reason": null,
-      "remaining_daylight_min": null
-    },
-    "alerts": []
-  },
-  {
-    "uuid": "97d67527cd4562da24c276c5e571cfc1",
-    "ts": "2026-06-30T01:26:00+00:00",
-    "course_recommendation": null,
-    "risk": {
-      "e1_biometric": 0.2529,
-      "e2_combined": 0.5464,
-      "representative": 0.5464,
-      "level": 1,
-      "label": "주의"
-    },
-    "fatigue": {
-      "state": "정상",
-      "confidence": 0.6554,
-      "nearest_shelter": null
-    },
-    "descent_warning": {
-      "required": false,
-      "reason": null,
-      "remaining_daylight_min": null
-    },
-    "alerts": []
-  },
-  {
-    "uuid": "97d67527cd4562da24c276c5e571cfc1",
-    "ts": "2026-06-30T01:27:00+00:00",
-    "course_recommendation": null,
-    "risk": {
-      "e1_biometric": 0.2529,
-      "e2_combined": 0.5476,
-      "representative": 0.5476,
-      "level": 1,
-      "label": "주의"
-    },
-    "fatigue": {
-      "state": "정상",
-      "confidence": 0.6536,
-      "nearest_shelter": null
-    },
-    "descent_warning": {
-      "required": false,
-      "reason": null,
-      "remaining_daylight_min": null
-    },
-    "alerts": []
-  },
-  {
-    "uuid": "97d67527cd4562da24c276c5e571cfc1",
-    "ts": "2026-06-30T01:28:00+00:00",
-    "course_recommendation": null,
-    "risk": {
-      "e1_biometric": 0.2529,
-      "e2_combined": 0.5489,
-      "representative": 0.5489,
-      "level": 1,
-      "label": "주의"
-    },
-    "fatigue": {
-      "state": "정상",
-      "confidence": 0.6516,
-      "nearest_shelter": null
-    },
-    "descent_warning": {
-      "required": false,
-      "reason": null,
-      "remaining_daylight_min": null
-    },
-    "alerts": []
-  },
-  {
-    "uuid": "97d67527cd4562da24c276c5e571cfc1",
-    "ts": "2026-06-30T01:29:00+00:00",
-    "course_recommendation": null,
-    "risk": {
-      "e1_biometric": 0.2529,
-      "e2_combined": 0.5501,
-      "representative": 0.5501,
-      "level": 1,
-      "label": "주의"
-    },
-    "fatigue": {
-      "state": "정상",
-      "confidence": 0.6499,
-      "nearest_shelter": null
-    },
-    "descent_warning": {
-      "required": false,
-      "reason": null,
-      "remaining_daylight_min": null
-    },
-    "alerts": []
-  },
-  {
-    "uuid": "97d67527cd4562da24c276c5e571cfc1",
-    "ts": "2026-06-30T01:30:00+00:00",
-    "course_recommendation": null,
-    "risk": {
-      "e1_biometric": 0.2529,
-      "e2_combined": 0.5425,
-      "representative": 0.5425,
-      "level": 1,
-      "label": "주의"
-    },
-    "fatigue": {
-      "state": "정상",
-      "confidence": 0.6613,
-      "nearest_shelter": null
-    },
-    "descent_warning": {
-      "required": false,
-      "reason": null,
-      "remaining_daylight_min": null
-    },
-    "alerts": []
-  },
-  {
-    "uuid": "97d67527cd4562da24c276c5e571cfc1",
-    "ts": "2026-06-30T01:31:00+00:00",
-    "course_recommendation": null,
-    "risk": {
-      "e1_biometric": 0.2529,
+      "e1_biometric": 0.2488,
       "e2_combined": 0.5404,
       "representative": 0.5404,
       "level": 1,
@@ -2775,18 +2591,202 @@
   },
   {
     "uuid": "97d67527cd4562da24c276c5e571cfc1",
-    "ts": "2026-06-30T01:32:00+00:00",
+    "ts": "2026-06-30T01:24:00+00:00",
     "course_recommendation": null,
     "risk": {
-      "e1_biometric": 0.2529,
-      "e2_combined": 0.545,
-      "representative": 0.545,
+      "e1_biometric": 0.2488,
+      "e2_combined": 0.5416,
+      "representative": 0.5416,
       "level": 1,
       "label": "주의"
     },
     "fatigue": {
       "state": "정상",
-      "confidence": 0.6575,
+      "confidence": 0.6626,
+      "nearest_shelter": null
+    },
+    "descent_warning": {
+      "required": false,
+      "reason": null,
+      "remaining_daylight_min": null
+    },
+    "alerts": []
+  },
+  {
+    "uuid": "97d67527cd4562da24c276c5e571cfc1",
+    "ts": "2026-06-30T01:25:00+00:00",
+    "course_recommendation": null,
+    "risk": {
+      "e1_biometric": 0.2488,
+      "e2_combined": 0.5429,
+      "representative": 0.5429,
+      "level": 1,
+      "label": "주의"
+    },
+    "fatigue": {
+      "state": "정상",
+      "confidence": 0.6606,
+      "nearest_shelter": null
+    },
+    "descent_warning": {
+      "required": false,
+      "reason": null,
+      "remaining_daylight_min": null
+    },
+    "alerts": []
+  },
+  {
+    "uuid": "97d67527cd4562da24c276c5e571cfc1",
+    "ts": "2026-06-30T01:26:00+00:00",
+    "course_recommendation": null,
+    "risk": {
+      "e1_biometric": 0.2488,
+      "e2_combined": 0.5441,
+      "representative": 0.5441,
+      "level": 1,
+      "label": "주의"
+    },
+    "fatigue": {
+      "state": "정상",
+      "confidence": 0.6588,
+      "nearest_shelter": null
+    },
+    "descent_warning": {
+      "required": false,
+      "reason": null,
+      "remaining_daylight_min": null
+    },
+    "alerts": []
+  },
+  {
+    "uuid": "97d67527cd4562da24c276c5e571cfc1",
+    "ts": "2026-06-30T01:27:00+00:00",
+    "course_recommendation": null,
+    "risk": {
+      "e1_biometric": 0.2488,
+      "e2_combined": 0.5454,
+      "representative": 0.5454,
+      "level": 1,
+      "label": "주의"
+    },
+    "fatigue": {
+      "state": "정상",
+      "confidence": 0.6569,
+      "nearest_shelter": null
+    },
+    "descent_warning": {
+      "required": false,
+      "reason": null,
+      "remaining_daylight_min": null
+    },
+    "alerts": []
+  },
+  {
+    "uuid": "97d67527cd4562da24c276c5e571cfc1",
+    "ts": "2026-06-30T01:28:00+00:00",
+    "course_recommendation": null,
+    "risk": {
+      "e1_biometric": 0.2488,
+      "e2_combined": 0.5466,
+      "representative": 0.5466,
+      "level": 1,
+      "label": "주의"
+    },
+    "fatigue": {
+      "state": "정상",
+      "confidence": 0.6551,
+      "nearest_shelter": null
+    },
+    "descent_warning": {
+      "required": false,
+      "reason": null,
+      "remaining_daylight_min": null
+    },
+    "alerts": []
+  },
+  {
+    "uuid": "97d67527cd4562da24c276c5e571cfc1",
+    "ts": "2026-06-30T01:29:00+00:00",
+    "course_recommendation": null,
+    "risk": {
+      "e1_biometric": 0.2488,
+      "e2_combined": 0.5479,
+      "representative": 0.5479,
+      "level": 1,
+      "label": "주의"
+    },
+    "fatigue": {
+      "state": "정상",
+      "confidence": 0.6531,
+      "nearest_shelter": null
+    },
+    "descent_warning": {
+      "required": false,
+      "reason": null,
+      "remaining_daylight_min": null
+    },
+    "alerts": []
+  },
+  {
+    "uuid": "97d67527cd4562da24c276c5e571cfc1",
+    "ts": "2026-06-30T01:30:00+00:00",
+    "course_recommendation": null,
+    "risk": {
+      "e1_biometric": 0.2488,
+      "e2_combined": 0.5403,
+      "representative": 0.5403,
+      "level": 1,
+      "label": "주의"
+    },
+    "fatigue": {
+      "state": "정상",
+      "confidence": 0.6645,
+      "nearest_shelter": null
+    },
+    "descent_warning": {
+      "required": false,
+      "reason": null,
+      "remaining_daylight_min": null
+    },
+    "alerts": []
+  },
+  {
+    "uuid": "97d67527cd4562da24c276c5e571cfc1",
+    "ts": "2026-06-30T01:31:00+00:00",
+    "course_recommendation": null,
+    "risk": {
+      "e1_biometric": 0.2488,
+      "e2_combined": 0.5382,
+      "representative": 0.5382,
+      "level": 1,
+      "label": "주의"
+    },
+    "fatigue": {
+      "state": "정상",
+      "confidence": 0.6677,
+      "nearest_shelter": null
+    },
+    "descent_warning": {
+      "required": false,
+      "reason": null,
+      "remaining_daylight_min": null
+    },
+    "alerts": []
+  },
+  {
+    "uuid": "97d67527cd4562da24c276c5e571cfc1",
+    "ts": "2026-06-30T01:32:00+00:00",
+    "course_recommendation": null,
+    "risk": {
+      "e1_biometric": 0.2488,
+      "e2_combined": 0.5428,
+      "representative": 0.5428,
+      "level": 1,
+      "label": "주의"
+    },
+    "fatigue": {
+      "state": "정상",
+      "confidence": 0.6608,
       "nearest_shelter": null
     },
     "descent_warning": {
@@ -2801,15 +2801,15 @@
     "ts": "2026-06-30T01:33:00+00:00",
     "course_recommendation": null,
     "risk": {
-      "e1_biometric": 0.2529,
-      "e2_combined": 0.535,
-      "representative": 0.535,
+      "e1_biometric": 0.2488,
+      "e2_combined": 0.5328,
+      "representative": 0.5328,
       "level": 1,
       "label": "주의"
     },
     "fatigue": {
       "state": "정상",
-      "confidence": 0.6725,
+      "confidence": 0.6758,
       "nearest_shelter": null
     },
     "descent_warning": {
@@ -2824,15 +2824,15 @@
     "ts": "2026-06-30T01:34:00+00:00",
     "course_recommendation": null,
     "risk": {
-      "e1_biometric": 0.2529,
-      "e2_combined": 0.535,
-      "representative": 0.535,
+      "e1_biometric": 0.2488,
+      "e2_combined": 0.5328,
+      "representative": 0.5328,
       "level": 1,
       "label": "주의"
     },
     "fatigue": {
       "state": "정상",
-      "confidence": 0.6725,
+      "confidence": 0.6758,
       "nearest_shelter": null
     },
     "descent_warning": {
@@ -2847,15 +2847,15 @@
     "ts": "2026-06-30T01:35:00+00:00",
     "course_recommendation": null,
     "risk": {
-      "e1_biometric": 0.2529,
-      "e2_combined": 0.535,
-      "representative": 0.535,
+      "e1_biometric": 0.2488,
+      "e2_combined": 0.5328,
+      "representative": 0.5328,
       "level": 1,
       "label": "주의"
     },
     "fatigue": {
       "state": "정상",
-      "confidence": 0.6725,
+      "confidence": 0.6758,
       "nearest_shelter": null
     },
     "descent_warning": {
@@ -2870,15 +2870,15 @@
     "ts": "2026-06-30T01:36:00+00:00",
     "course_recommendation": null,
     "risk": {
-      "e1_biometric": 0.2529,
-      "e2_combined": 0.5428,
-      "representative": 0.5428,
+      "e1_biometric": 0.2488,
+      "e2_combined": 0.5405,
+      "representative": 0.5405,
       "level": 1,
       "label": "주의"
     },
     "fatigue": {
       "state": "정상",
-      "confidence": 0.6608,
+      "confidence": 0.6643,
       "nearest_shelter": null
     },
     "descent_warning": {
