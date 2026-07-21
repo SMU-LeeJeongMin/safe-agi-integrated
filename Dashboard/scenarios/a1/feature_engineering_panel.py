@@ -7,8 +7,9 @@ from typing import Mapping
 import pandas as pd
 import plotly.express as px
 import streamlit as st
+from scenarios.common import render_panel_placeholder
 
-from components.panel_kit import feature_card
+from components.panel_kit import feature_card, render_panel_banner, render_subsection, render_soft_notice
 
 from core.contracts import ScenarioPayload
 from scenarios.a1.mapper import A1Context, parse_json_value, row_value
@@ -25,13 +26,14 @@ def _feature_card_html(field: str, title: str, value: str, description: str, sou
 
 def render_feature_engineering_panel(context: A1Context, payload: ScenarioPayload) -> None:
     row = context.row
-    st.header("[2] Feature Engineering Panel")
-    st.markdown(
-        '<div class="panel-description">Input 단계에서 산출된 위험 지점 거리, 지정로 이탈, 경사, 접근 상태를 확인하는 panel</div>',
-        unsafe_allow_html=True,
-    )
+    render_panel_banner(2, "Feature Engineering Panel", "Input 단계에서 산출된 위험 지점 거리, 지정로 이탈, 경사, 접근 상태를 확인하는 panel")
+    # F1 디자인 이식 방향이 확정될 때까지 골격 시나리오와 동일한 자리표시로 둔다.
+    # 기존 구현은 아래에 보존되어 있으며, 이 두 줄을 제거하면 복원된다.
+    render_panel_placeholder("A1")
+    return
 
-    st.markdown("#### A1 시나리오에 사용되는 대표 Feature")
+
+    render_subsection("A1 시나리오에 사용되는 대표 Feature")
     cards = [
         ("dist_to_hazard_m", "위험 지점까지 거리", _fmt(row_value(row, "dist_to_hazard_m"), 1, " m"), "최근접 낭떠러지 및 낙석 POI까지의 거리", "Input/A1 feature"),
         ("off_trail_dist_m", "지정로 이탈 거리", _fmt(row_value(row, "off_trail_dist_m"), 1, " m"), "사용자 위치와 지정 등산로 사이 거리", "Input/A1 feature"),
@@ -44,10 +46,10 @@ def render_feature_engineering_panel(context: A1Context, payload: ScenarioPayloa
             st.markdown(_feature_card_html(*item), unsafe_allow_html=True)
 
     st.markdown('<div class="feature-table-gap"></div>', unsafe_allow_html=True)
-    st.markdown("#### 사용자 위치와 위험 POI")
+    render_subsection("사용자 위치와 위험 POI")
     render_a1_map(context)
 
-    st.markdown("#### 시간 흐름 그래프")
+    render_subsection("시간 흐름 그래프")
     st.markdown(
         '<div class="panel-description">그래프의 시간축은 한국시간(KST) 기준입니다. 회색 점선은 현재 선택한 시점을 의미합니다.</div>',
         unsafe_allow_html=True,
@@ -55,7 +57,7 @@ def render_feature_engineering_panel(context: A1Context, payload: ScenarioPayloa
 
     features = payload.features.copy()
     if features.empty:
-        st.info("A1 Feature 시계열 파일이 연결되면 거리 및 이탈 및 경사 변화 그래프가 표시됩니다.")
+        render_soft_notice("A1 Feature 시계열 파일이 연결되면 거리 및 이탈 및 경사 변화 그래프가 표시됩니다.")
     else:
         time_col = "ts" if "ts" in features.columns else "timestamp" if "timestamp" in features.columns else None
         if time_col:

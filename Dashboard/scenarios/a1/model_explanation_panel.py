@@ -6,9 +6,13 @@ from typing import Any
 
 import pandas as pd
 import streamlit as st
+from scenarios.common import render_panel_placeholder
 
 from components.layout import render_risk_gauge
 from components.panel_kit import (
+    render_panel_banner,
+    render_subsection,
+    render_soft_notice,
     metric_card,
     model_detail_button_label,
     render_contribution_card,
@@ -32,11 +36,12 @@ def _step_card(title: str, summary: str, value: Any, rows: list[tuple[str, Any]]
 
 def render_model_explanation_panel(context: A1Context) -> None:
     row = context.row
-    st.header("[3] Model Explanation Panel")
-    st.markdown(
-        '<div class="panel-description">외부 A1 Model이 반환한 공간 점수, 보정 점수, 대표값과 최종 판단 근거를 보여주는 panel</div>',
-        unsafe_allow_html=True,
-    )
+    render_panel_banner(3, "Model Explanation Panel", "외부 A1 Model이 반환한 공간 점수, 보정 점수, 대표값과 최종 판단 근거를 보여주는 panel")
+    # F1 디자인 이식 방향이 확정될 때까지 골격 시나리오와 동일한 자리표시로 둔다.
+    # 기존 구현은 아래에 보존되어 있으며, 이 두 줄을 제거하면 복원된다.
+    render_panel_placeholder("A1")
+    return
+
 
     cols = st.columns(3)
     metrics = [
@@ -49,14 +54,14 @@ def render_model_explanation_panel(context: A1Context) -> None:
             st.markdown(_model_metric_card(*metric), unsafe_allow_html=True)
 
     st.markdown('<div class="model-section-gap"></div>', unsafe_allow_html=True)
-    st.markdown("#### 대표 점수 위치와 판단 근거")
+    render_subsection("대표 점수 위치와 판단 근거")
     if context.representative is not None:
         render_risk_gauge(context.representative)
         st.caption("게이지 구간은 현재 F1 공통 UI를 그대로 사용하며, A1 임계값 규격 확정 시 표시 문구만 교체합니다.")
     else:
         st.caption("외부 A1 Model 산출물이 연결되면 대표 점수 위치가 게이지로 표시됩니다.")
     st.markdown('<div class="whatif-info-gap"></div>', unsafe_allow_html=True)
-    st.info(context.reason_text)
+    render_soft_notice(context.reason_text)
 
     st.markdown('<div class="model-section-gap"></div>', unsafe_allow_html=True)
     run_key = f"a1_model_detail_{_text(row_value(row, 'ts', 'timestamp'), 'waiting')}"
@@ -113,10 +118,10 @@ def render_model_explanation_panel(context: A1Context) -> None:
         st.markdown('<div style="height:16px;"></div>', unsafe_allow_html=True)
         render_offline_weight_explanation(None, scenario_id="A1")
     else:
-        st.info("버튼을 누르면 외부 Feature 및 Model 및 DTO-5 필드가 연결되는 계산 흐름과 기여도 분해, 학습 가중치 근거를 확인할 수 있습니다.")
+        render_soft_notice("버튼을 누르면 외부 Feature 및 Model 및 DTO-5 필드가 연결되는 계산 흐름과 기여도 분해, 학습 가중치 근거를 확인할 수 있습니다.")
 
     st.markdown('<div class="model-after-steps-gap"></div>', unsafe_allow_html=True)
-    st.markdown("#### 적용된 판정 규칙")
+    render_subsection("적용된 판정 규칙")
     if context.rules:
         st.dataframe(pd.DataFrame(context.rules), use_container_width=True, hide_index=True)
     else:

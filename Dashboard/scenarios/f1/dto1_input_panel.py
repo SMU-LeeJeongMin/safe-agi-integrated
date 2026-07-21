@@ -4,17 +4,17 @@
 import pandas as pd
 import streamlit as st
 
-from components.panel_kit import render_detail_expander, render_input_cards, render_panel_header, render_time_card
+from components.panel_kit import render_detail_expander, render_input_bubbles, render_panel_header, render_panel_banner
 from utils.explanation import format_id, format_profile, format_value, ref_hr_baseline, to_float
 from utils.time_utils import format_kst, format_utc
 
 
-def render_dto1_input_panel(row: pd.Series) -> None:
-    render_panel_header(
-        "[1] DTO-1 Input Panel",
-        "워치, GPS, 기상, 사고 데이터가 모델에 들어가기 전 어떤 값으로 들어왔는지 확인하는 panel",
-    )
-    render_time_card(format_kst(row.get("ts")))
+def render_dto1_input_panel(
+    row: pd.Series,
+    features: pd.DataFrame | None = None,
+    dto5_sequence: list[dict] | None = None,
+) -> None:
+    render_panel_banner(1, "DTO-1 Input Panel", "워치, GPS, 기상, 사고 데이터가 모델에 들어가기 전 어떤 값으로 들어왔는지 확인하는 panel")
 
     hr = to_float(row.get("hr_mean_bpm"))
     hr_max = to_float(row.get("hr_max_bpm"))
@@ -33,9 +33,9 @@ def render_dto1_input_panel(row: pd.Series) -> None:
     ]
     if baseline["is_fallback"] is not None:
         baseline_tooltip = (
-            "프로필 미등록으로 국민건강영양조사(KNHANES) 성인 전체 통계 기준을 적용했습니다."
+            "프로필 미등록으로 국민건강영양조사(KNHANES) 성인 전체 통계 기준을 적용"
             if baseline["is_fallback"]
-            else "국민건강영양조사(KNHANES) 연령대별 통계 기준입니다."
+            else "국민건강영양조사(KNHANES) 연령대별 통계 기준을 적용"
         )
         user_items.append((
             "판정 기준 심박",
@@ -43,16 +43,14 @@ def render_dto1_input_panel(row: pd.Series) -> None:
             baseline_tooltip,
         ))
 
-    render_input_cards(
+    render_input_bubbles(
         [
             (
-                "soft",
                 "사용자 정보",
                 user_items,
             ),
             (
-                "amber",
-                "워치 데이터",
+                "생체 데이터",
                 [
                     ("평균 심박수", f"{format_value(hr, 1)} bpm"),
                     ("최대 심박수", f"{format_value(hr_max, 1)} bpm"),
@@ -60,7 +58,6 @@ def render_dto1_input_panel(row: pd.Series) -> None:
                 ],
             ),
             (
-                "soft",
                 "이동 데이터",
                 [
                     ("최근 1분 걸음 수", f"{format_value(row.get('steps_1min'), 0)} 보"),
@@ -68,16 +65,16 @@ def render_dto1_input_panel(row: pd.Series) -> None:
                 ],
             ),
             (
-                "green",
                 "환경 데이터",
                 [
                     ("heat_index", format_value(row.get("heat_index"), 1), "체감더위 기반 온열 위험 보정값"),
-                    ("accident_prior", format_value(row.get("accident_prior"), 2), "여름 및 탈진성 산악사고 사전위험도"),
+                    ("accident_prior", format_value(row.get("accident_prior"), 2), "여름 및 탈진성 산악사고 사전위험도", True),
                     ("위도", format_value(lat, 6)),
                     ("경도", format_value(lon, 6)),
                 ],
             ),
-        ]
+        ],
+        time_text=format_kst(row.get("ts")),
     )
 
     render_detail_expander(
@@ -101,3 +98,8 @@ def render_dto1_input_panel(row: pd.Series) -> None:
             {"구분": "판정 기준", "항목": "baseline_is_fallback", "값": str(row.get("baseline_is_fallback"))},
         ]
     )
+
+    # 시간 흐름 그래프 ([2]에서 이동)
+    if features is not None and not features.empty:
+        from scenarios.f1.feature_engineering_panel import render_time_series_section
+        render_time_series_section(row, features, dto5_sequence or [])

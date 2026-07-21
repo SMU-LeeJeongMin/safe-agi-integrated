@@ -3,8 +3,9 @@
 from __future__ import annotations
 
 from components.panel_kit import (
+    render_panel_banner,
     render_detail_expander,
-    render_input_cards,
+    render_input_bubbles,
     render_panel_header,
     render_time_card,
 )
@@ -16,11 +17,7 @@ from utils.time_utils import format_kst, format_utc
 
 def render_dto1_input_panel(context: A1Context) -> None:
     row = context.row
-    render_panel_header(
-        "[1] DTO-1 Input Panel",
-        "사용자 위치, 워치 입력, 지형, 위험 POI가 모델에 들어가기 전 어떤 값으로 전달되었는지 확인하는 panel",
-    )
-    render_time_card(format_kst(row_value(row, "ts", "timestamp")) if row else "데이터 연결 대기")
+    render_panel_banner(1, "DTO-1 Input Panel", "사용자 위치, 워치 입력, 지형, 위험 POI가 모델에 들어가기 전 어떤 값으로 전달되었는지 확인하는 panel")
 
     user_lat = first_value(row_value(row, "user_lat", "gps_lat", "lat"), nested(context.dto5, "user_location", "lat"))
     user_lon = first_value(row_value(row, "user_lon", "gps_lon", "lon"), nested(context.dto5, "user_location", "lon"))
@@ -30,10 +27,9 @@ def render_dto1_input_panel(context: A1Context) -> None:
     uuid_display, uuid_tooltip = format_id(_text(row_value(row, "uuid", "session_id")))
     uuid_block = ("세션 ID", uuid_display, uuid_tooltip) if uuid_tooltip else ("세션 ID", uuid_display)
 
-    render_input_cards(
+    render_input_bubbles(
         [
             (
-                "soft",
                 "사용자 정보",
                 [
                     uuid_block,
@@ -42,7 +38,6 @@ def render_dto1_input_panel(context: A1Context) -> None:
                 ],
             ),
             (
-                "amber",
                 "현재 위치",
                 [
                     ("위도", _fmt(user_lat, 6)),
@@ -51,7 +46,6 @@ def render_dto1_input_panel(context: A1Context) -> None:
                 ],
             ),
             (
-                "red",
                 "위험 POI",
                 [
                     ("위험 유형", _text(hazard_type), "Input/DTO-3의 위험 POI 유형"),
@@ -60,7 +54,6 @@ def render_dto1_input_panel(context: A1Context) -> None:
                 ],
             ),
             (
-                "green",
                 "지형 및 보조 입력",
                 [
                     ("경사도", _fmt(row_value(row, "slope_deg"), 1, "°")),
@@ -69,7 +62,8 @@ def render_dto1_input_panel(context: A1Context) -> None:
                     ("평균 심박수", _fmt(row_value(row, "hr_mean_bpm"), 1, " bpm"), "A1 공간 판단의 보조 입력"),
                 ],
             ),
-        ]
+        ],
+        time_text=format_kst(row_value(row, "ts", "timestamp")) if row else None,
     )
 
     detail_rows = None

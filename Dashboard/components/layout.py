@@ -16,13 +16,14 @@ PANEL_OPTIONS = [
     "[2] Feature Engineering Panel",
     "[3] Model Explanation Panel",
     "[4] What-If Simulating Panel",
-    "[5] MAML 개인화 Panel",
+    "[5] Meta Learning 개인화 Panel",
     "[6] DTO-5 Output Panel",
     "[7] InferenceResult 저장 Panel",
 ]
 
 SCENARIOS = [
-    ("A1", "낭떠러지 및 낙석 위험 구역 접근", "위험 구역 접근 시 생체 반응 + 지형 분석 → 경고 및 우회 경로", True),
+    # 4번째 값: 시연 가능 여부(선택 화면 pill 표기용). 모든 시나리오는 골격 화면으로 진입 가능.
+    ("A1", "낭떠러지 및 낙석 위험 구역 접근", "위험 구역 접근 시 생체 반응 + 지형 분석 → 경고 및 우회 경로", False),
     ("A2", "야생동물 출몰 지역 진입", "야생동물 출몰 지역 진입 시 이상 행동 패턴 감지 → 즉각 경고", False),
     ("A5", "과거 사고 다수 발생 지역 진입", "과거 사고 다수 발생 지역 진입 감지 → 경고 및 주의 안내", False),
     ("F1", "피로 및 심박 이상 감지", "이상 징후 감지 → 휴식 권고, 속도 및 경로 조절", True),
@@ -106,6 +107,410 @@ def inject_global_css() -> None:
         }
         .safe-card.soft { background: #f8fbff; }
         .safe-card.green { background: #f2fbf7; border-color: #cdebdc; }
+
+        /* 패널 제목 배너: 왼쪽 큰 번호 + 오른쪽 사선 초록 리본 */
+        .panel-banner {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin: 2px 0 20px;
+        }
+        .panel-banner-num {
+            flex: 0 0 76px;
+            font-size: 3.4rem;
+            font-weight: 900;
+            color: #2e6b35;
+            line-height: .95;
+            letter-spacing: -0.03em;
+        }
+
+        /* panel 내부 소제목: 얇은 사다리꼴 리본을 글씨 하단에 배치 */
+        .panel-subsection {
+            margin: 30px 0 14px;
+        }
+        .panel-subsection span {
+            display: inline-block;
+            position: relative;
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: #1f2937;
+            padding: 0 4px 10px 2px;
+        }
+        .panel-subsection span::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            right: -30px;
+            bottom: 0;
+            height: 8px;
+            background: #2e6b35;
+            clip-path: polygon(0 0, 100% 0, calc(100% - 14px) 100%, 0 100%);
+            border-radius: 2px;
+        }
+        .panel-banner-body {
+            flex: 1;
+            background: #2e6b35;
+            color: #ffffff;
+            padding: 14px 52px 14px 22px;
+            clip-path: polygon(0 0, 100% 0, calc(100% - 40px) 100%, 0 100%);
+            border-radius: 4px;
+        }
+        .panel-banner-title {
+            font-size: 1.55rem;
+            font-weight: 800;
+            line-height: 1.25;
+        }
+        .panel-banner-desc {
+            font-size: .95rem;
+            color: rgba(255, 255, 255, 0.88);
+            margin-top: 3px;
+        }
+
+        /* 연한 초록 안내 박스 (파란 info 대체) */
+        .soft-notice {
+            background: #eef1e8;
+            border: 1px solid #dfe6d6;
+            border-radius: 12px;
+            padding: 14px 16px;
+            color: #33402c;
+        }
+
+        /* [6] DTO-5: 나비형 4분할 + 중앙 서버 아이콘 */
+        .dto5-quad {
+            position: relative;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px;
+            margin: 6px 0 10px;
+        }
+        .dto5-quad-bubble {
+            min-height: 190px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .dto5-quad-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px 52px;
+        }
+        .dto5-quad .dto5-quad-bubble:nth-child(1) .dto5-quad-row,
+        .dto5-quad .dto5-quad-bubble:nth-child(3) .dto5-quad-row {
+            justify-content: flex-end;
+        }
+        .dto5-quad .dto1-bubble::after {
+            display: none; /* 말풍선 꼬리는 사용하지 않음 */
+        }
+        /* 꽃잎 구도: 바깥과 중앙 대각 모서리는 뾰족, 나머지 두 모서리는 크게 둥글린다 */
+        .dto5-quad .dto5-quad-bubble:nth-child(1) { border-radius: 6px 64px 6px 64px; }
+        .dto5-quad .dto5-quad-bubble:nth-child(2) { border-radius: 64px 6px 64px 6px; }
+        .dto5-quad .dto5-quad-bubble:nth-child(3) { border-radius: 64px 6px 64px 6px; }
+        .dto5-quad .dto5-quad-bubble:nth-child(4) { border-radius: 6px 64px 6px 64px; }
+        /* 글씨는 중앙(서버 아이콘) 쪽으로 정렬하되 중앙과 여유를 둔다 */
+        .dto5-quad .dto5-quad-bubble:nth-child(1),
+        .dto5-quad .dto5-quad-bubble:nth-child(3) {
+            text-align: right;
+            padding-right: 130px;
+        }
+        .dto5-quad .dto5-quad-bubble:nth-child(1) .dto1-label-row,
+        .dto5-quad .dto5-quad-bubble:nth-child(3) .dto1-label-row {
+            justify-content: flex-end;
+        }
+        .dto5-quad .dto5-quad-bubble:nth-child(2),
+        .dto5-quad .dto5-quad-bubble:nth-child(4) {
+            padding-left: 130px;
+        }
+        .dto5-quad-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 122px;
+            height: 122px;
+            border-radius: 999px;
+            background: #ffffff;
+            box-shadow: 0 0 0 12px #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2;
+        }
+        .dto5-quad-center img {
+            width: 62px;
+            height: 62px;
+        }
+
+        /* [4] What-If: VS 게이지 레이아웃 */
+        .whatif-vs {
+            text-align: center;
+            font-size: 1.9rem;
+            font-weight: 900;
+            color: #1f2937;
+            padding-top: 14px;
+            line-height: 1.1;
+        }
+        .whatif-side-title {
+            text-align: center;
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: #1f2937;
+            margin: 0 0 2px;
+        }
+        .whatif-side-status {
+            text-align: center;
+            color: #475467;
+            font-size: 1.0rem;
+            margin: 0 0 4px;
+        }
+        .whatif-side-status b { color: #111827; }
+        .whatif-track {
+            height: 26px;
+            border-radius: 999px;
+            /* 파란기 없는 웜 그레이 바탕 */
+            background: #f1f0ec;
+            overflow: hidden;
+        }
+        .whatif-track.left {
+            display: flex;
+            justify-content: flex-end;
+        }
+        .whatif-fill {
+            height: 100%;
+            border-radius: 999px;
+        }
+        .whatif-fill.left { background: #9aa19a; }
+        .whatif-metric-label {
+            text-align: center;
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: #2e6b35;
+        }
+        .whatif-bar-value {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: #111827;
+            white-space: nowrap;
+        }
+        .whatif-bar-value.left { text-align: right; }
+        /* 오른쪽 게이지: 슬라이더 자체를 26px 알약 막대로 스타일링.
+           채움은 테마 primary에 filter를 걸어 연한 초록 톤으로, 바탕은 밝은 웜 그레이로 보인다. */
+        [class*="st-key-wfbar_"] [data-testid="stSlider"] {
+            padding: 0;
+        }
+        [class*="st-key-wfbar_"] div[data-baseweb="slider"] {
+            height: 30px;
+            align-items: center;
+            padding-top: 0;
+            padding-bottom: 0;
+        }
+        [class*="st-key-wfbar_"] [data-testid="stSlider"] {
+            min-height: 30px;
+        }
+        [class*="st-key-wfbar_"] div[data-baseweb="slider"] > div:first-child {
+            position: relative;
+        }
+        /* 네이티브 트랙은 투명화하고, 실제 게이지는 파이썬이 주입하는
+           ::before 알약(왼쪽 막대와 동일한 색 gradient)이 그린다 */
+        [class*="st-key-wfbar_"] div[data-baseweb="slider"] > div:first-child > div {
+            background: transparent !important;
+        }
+        [class*="st-key-wfbar_"] div[data-baseweb="slider"] {
+            z-index: 1;
+        }
+        [class*="st-key-wfbar_"] [data-testid="stSliderTickBarMin"],
+        [class*="st-key-wfbar_"] [data-testid="stSliderTickBarMax"],
+        [class*="st-key-wfbar_"] [data-testid="stSliderThumbValue"] {
+            display: none;
+        }
+        [class*="st-key-wfbar_"] div[data-baseweb="slider"] [role="slider"] {
+            width: 24px;
+            height: 24px;
+            background: #2e6b35;
+            border: 2px solid #ffffff;
+            box-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);
+            cursor: grab;
+        }
+        [class*="st-key-wfbar_"] div[data-baseweb="slider"] [role="slider"]:active {
+            cursor: grabbing;
+        }
+
+        /* [2] Feature: 좌우 번갈아 배치되는 라운드 밴드 */
+        .feature-band-row {
+            display: flex;
+            align-items: center;
+            margin: 18px 0;
+        }
+        .feature-band-row.reverse {
+            flex-direction: row-reverse;
+        }
+        .feature-band {
+            flex: 0 0 62%;
+            background: #e4e9db;
+            padding: 20px 30px;
+        }
+        .feature-band-row:not(.reverse) .feature-band {
+            border-radius: 0 999px 999px 0;
+            margin-left: -1rem;
+            padding-left: calc(1rem + 30px);
+            padding-right: 56px;
+        }
+        .feature-band-row.reverse .feature-band {
+            border-radius: 999px 0 0 999px;
+            margin-right: -1rem;
+            padding-right: calc(1rem + 30px);
+            padding-left: 56px;
+        }
+        .feature-band-label {
+            color: #667085;
+            font-size: 1.0rem;
+            font-weight: 500;
+        }
+        .feature-band-value {
+            color: #111827;
+            font-size: 1.2rem;
+            font-weight: 800;
+            margin: 2px 0 10px;
+        }
+        .feature-band-sub {
+            color: #667085;
+            font-size: 1.0rem;
+            font-weight: 500;
+            margin-top: 6px;
+        }
+        .feature-band-text {
+            color: #1f2937;
+            font-size: 1.1rem;
+            font-weight: 700;
+            line-height: 1.45;
+        }
+        .feature-band-connector {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 0 16px;
+        }
+        .feature-band-row.reverse .feature-band-connector {
+            flex-direction: row-reverse;
+        }
+        .feature-band-connector .knot {
+            flex: 0 0 auto;
+            width: 15px;
+            height: 15px;
+            border-radius: 999px;
+            background: #c9d4bb;
+        }
+        .feature-band-connector .line {
+            flex: 1;
+            border-top: 3px dashed #c9d4bb;
+        }
+        .feature-band-name {
+            flex: 0 0 auto;
+            font-weight: 800;
+            color: #2e6b35;
+            font-size: 1.2rem;
+            letter-spacing: .02em;
+        }
+        /* 오른쪽에 놓이는 feature 이름과 점선 사이 간격 */
+        .feature-band-row:not(.reverse) .feature-band-name {
+            margin-left: 14px;
+        }
+
+        /* [1] Input: 말풍선 4개 + 중앙 워치 구도 */
+        .dto1-bubble-row {
+            display: flex;
+            gap: 18px;
+            align-items: stretch;
+            flex-wrap: wrap;
+            margin: 6px 0 0;
+        }
+        .dto1-bubble {
+            position: relative;
+            flex: 1 1 0;
+            min-width: 200px;
+            background: var(--bubble, #e2e8d9);
+            border-radius: 26px;
+            padding: 18px 18px 20px;
+        }
+        .dto1-bubble-title {
+            font-weight: 800;
+            color: #2e6b35;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+        .dto1-bubble .dto1-value {
+            font-size: 1.2rem;
+        }
+        .dto1-bubble::after {
+            content: "";
+            position: absolute;
+            bottom: -16px;
+            width: 0;
+            height: 0;
+            border: 17px solid transparent;
+            border-top-color: var(--bubble, #e2e8d9);
+            border-bottom: 0;
+        }
+        .dto1-bubble:nth-child(1)::after { right: 24px; transform: skewX(28deg); }
+        .dto1-bubble:nth-child(2)::after { right: 34%; transform: skewX(14deg); }
+        .dto1-bubble:nth-child(3)::after { left: 34%; transform: skewX(-14deg); }
+        .dto1-bubble:nth-child(4)::after { left: 24px; transform: skewX(-28deg); }
+        .dto1-watch {
+            display: flex;
+            justify-content: center;
+            margin: 30px 0 6px;
+        }
+        .dto1-watch img {
+            width: 96px;
+            height: 96px;
+        }
+        .dto1-watch-time {
+            text-align: center;
+            color: #33402c;
+            line-height: 1.45;
+            margin: 0 0 22px;
+        }
+        .dto1-watch-time .time-label {
+            font-weight: 800;
+            color: #2e6b35;
+            font-size: .95rem;
+        }
+        .dto1-watch-time .time-value {
+            font-size: 1.02rem;
+            font-weight: 600;
+        }
+
+        /* 시나리오 헤더: 초록 배너 + 겹치는 요약 카드 */
+        .scenario-hero {
+            /* 테마 primary(#2e6b35) 기준 초록. 본문 컨테이너 패딩(1rem)만큼
+               좌우로 당겨 가로 가득 배치한다. */
+            background: linear-gradient(135deg, #2e6b35 0%, #1d4a26 100%);
+            border-radius: 0;
+            margin-left: -1rem;
+            margin-right: -1rem;
+            padding: 32px calc(1rem + 34px) 88px;
+            color: #ffffff;
+        }
+        .scenario-hero-eyebrow {
+            color: rgba(255, 255, 255, 0.78);
+            font-weight: 800;
+            letter-spacing: .08em;
+            font-size: .9rem;
+        }
+        .scenario-hero-title {
+            color: #ffffff !important;
+            font-size: 2.7rem;
+            line-height: 1.15;
+            font-weight: 900;
+            letter-spacing: -0.04em;
+            margin: 10px 0 0;
+            padding: 0;
+        }
+        .scenario-hero-summary {
+            position: relative;
+            z-index: 2;
+            margin: -62px 24px 0;
+        }
         .safe-card.amber { background: #fff8ec; border-color: #f1d19a; }
         .safe-card.red { background: #fff3f3; border-color: #efc0c0; }
         .safe-card h3, .safe-card h4 { margin-top: 0; color: var(--safe-navy); }
@@ -213,6 +618,11 @@ def inject_global_css() -> None:
         .dto1-tooltip.dto1-tooltip-wide .dto1-tooltip-text {
             min-width: 480px;
             max-width: 620px;
+            white-space: nowrap;
+        }
+        .dto1-tooltip.dto1-tooltip-nowrap .dto1-tooltip-text {
+            min-width: max-content;
+            max-width: none;
             white-space: nowrap;
         }
         .dto1-tooltip:hover .dto1-tooltip-text {
@@ -825,6 +1235,20 @@ def inject_global_css() -> None:
             padding-top: 0;
         }
 
+        /* 사이드바 시나리오 expander 라벨: 긴 제목이 잘리지 않도록 줄바꿈 허용 */
+        [data-testid="stSidebar"] details summary p,
+        [data-testid="stSidebar"] details summary span {
+            white-space: normal !important;
+            overflow: visible !important;
+            text-overflow: clip !important;
+            word-break: keep-all;
+            line-height: 1.35;
+        }
+        [data-testid="stSidebar"] details summary [data-testid="stMarkdownContainer"] p {
+            font-size: .95rem;
+            font-weight: 750;
+        }
+
         .scenario-sidebar-nav a {
             padding-left: 0.15rem;
         }
@@ -1137,6 +1561,106 @@ def inject_global_css() -> None:
             background: #f8fbff;
             border-color: #c9d9f3;
         }
+
+        /* ── 신규: 실시간 모니터링 세션 리스트 ── */
+        .monitor-session-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 12px;
+            border: 1px solid var(--safe-border);
+            border-radius: 14px;
+            background: #ffffff;
+            margin: 4px 0;
+        }
+        .monitor-session-row.selected {
+            background: #f2fbf7;
+            border-color: #cdebdc;
+        }
+        .monitor-session-meta {
+            display: flex;
+            flex-direction: column;
+            min-width: 0;
+        }
+        .monitor-session-meta b {
+            color: var(--safe-navy);
+            font-size: .98rem;
+            line-height: 1.3;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        .monitor-session-meta span {
+            color: #667085;
+            font-size: .88rem;
+            line-height: 1.35;
+        }
+        .monitor-session-dot {
+            flex: 0 0 auto;
+            width: 11px;
+            height: 11px;
+            border-radius: 999px;
+        }
+        .monitor-session-dot.normal { background: #1f7a5a; }
+        .monitor-session-dot.caution { background: #d99a1b; }
+        .monitor-session-dot.warning,
+        .monitor-session-dot.danger {
+            background: #c83e3e;
+            animation: monitor-pulse-red 1.4s ease-in-out infinite;
+        }
+        @keyframes monitor-pulse-red {
+            0% { box-shadow: 0 0 0 0 rgba(200, 62, 62, .5); }
+            70% { box-shadow: 0 0 0 8px rgba(200, 62, 62, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(200, 62, 62, 0); }
+        }
+        .monitor-session-list {
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+        }
+        .monitor-session-item {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+            padding: 7px 10px;
+            border-radius: 10px;
+            border: 1px solid transparent;
+            color: #1f2937 !important;
+            text-decoration: none !important;
+            font-weight: 700;
+            line-height: 1.25;
+        }
+        a.monitor-session-item:hover {
+            background: #eef7ef;
+            border-color: #c7dfc8;
+            color: #2e6b35 !important;
+        }
+        .monitor-session-item.selected {
+            background: #f2fbf7;
+            border-color: #cdebdc;
+        }
+        .monitor-session-id {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            font-size: .92rem;
+        }
+        /* 사이드바 배치용 컴팩트 스타일 */
+        [data-testid="stSidebar"] .monitor-session-row {
+            padding: 8px 10px;
+            margin: 3px 0;
+            gap: 8px;
+        }
+        [data-testid="stSidebar"] .monitor-session-meta b {
+            font-size: .9rem;
+        }
+        [data-testid="stSidebar"] .monitor-session-meta span {
+            font-size: .8rem;
+        }
+        [data-testid="stSidebar"] .monitor-session-dot {
+            width: 10px;
+            height: 10px;
+        }
         </style>
         """,
         unsafe_allow_html=True,
@@ -1212,14 +1736,13 @@ def render_scenario_select_page() -> None:
 
     for start in range(0, len(SCENARIOS), 3):
         cols = st.columns(3)
-        for col, (code, title, desc, enabled) in zip(cols, SCENARIOS[start:start + 3]):
+        for col, (code, title, desc, demo_ready) in zip(cols, SCENARIOS[start:start + 3]):
             with col:
-                status = "시연 가능" if enabled else "준비 중"
-                pill_class = "green" if enabled else "gray"
-                disabled_class = "" if enabled else "disabled"
+                status = "시연 가능" if demo_ready else "준비 중"
+                pill_class = "green" if demo_ready else "gray"
                 st.markdown(
                     f"""
-                    <div class="scenario-card {disabled_class}">
+                    <div class="scenario-card">
                         <div class="scenario-code">{safe_html(code)}</div>
                         <div class="scenario-title">{safe_html(title)}</div>
                         <div class="scenario-desc">{scenario_desc_html(desc)}</div>
@@ -1228,13 +1751,11 @@ def render_scenario_select_page() -> None:
                     """,
                     unsafe_allow_html=True,
                 )
-                if enabled:
-                    if st.button(f"{code} 대시보드 열기", key=f"open_{code}", use_container_width=True, type="primary"):
-                        st.session_state["selected_scenario"] = code
-                        st.session_state["page"] = "dashboard"
-                        st.rerun()
-                else:
-                    st.button("준비 중", key=f"disabled_{code}", disabled=True, use_container_width=True)
+                button_type = "primary" if demo_ready else "secondary"
+                if st.button(f"{code} 대시보드 열기", key=f"open_{code}", use_container_width=True, type=button_type):
+                    st.session_state["selected_scenario"] = code
+                    st.session_state["page"] = "dashboard"
+                    st.rerun()
 
     # 시나리오 카드와 동일한 시각 언어의 실시간 모니터링 진입 카드
     st.markdown('<div style="height:18px;"></div>', unsafe_allow_html=True)
@@ -1264,7 +1785,7 @@ def render_pipeline_nav() -> None:
             <div class="pipeline-step"><span>2</span>Feature Engineering</div>
             <div class="pipeline-step"><span>3</span>Model Explanation</div>
             <div class="pipeline-step"><span>4</span>What-If Simulating</div>
-            <div class="pipeline-step"><span>5</span>MAML 개인화</div>
+            <div class="pipeline-step"><span>5</span>Meta Learning 개인화</div>
             <div class="pipeline-step"><span>6</span>DTO-5 Output</div>
             <div class="pipeline-step"><span>7</span>InferenceResult 저장</div>
         </div>

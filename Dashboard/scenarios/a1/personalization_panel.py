@@ -1,12 +1,13 @@
-# [5] MAML 개인화 Panel — A1 개인화 전후 비교
+# [5] Meta Learning 개인화 Panel — A1 개인화 전후 비교
 
 from __future__ import annotations
 
 from typing import Any
 
 import streamlit as st
+from scenarios.common import render_panel_placeholder
 
-from components.panel_kit import persona_card, risk_tone
+from components.panel_kit import persona_card, risk_tone, render_panel_banner, render_subsection
 
 from scenarios.a1.mapper import A1Context, first_value, nested, row_value
 from scenarios.a1.formatting import _selected_alert_label, _fmt, _safe, _text
@@ -29,13 +30,14 @@ def _persona_card(title: str, subtitle: str, score: Any, label: str, interpretat
 
 def render_personalization_panel(context: A1Context) -> None:
     personalization = context.personalization
-    st.header("[5] MAML 개인화 Panel")
-    st.markdown(
-        '<div class="panel-description">연령 및 개인 심박 기준 등 A1 개인화 입력과 Model이 반환한 보정 결과를 확인하는 panel</div>',
-        unsafe_allow_html=True,
-    )
+    render_panel_banner(5, "Meta Learning 개인화 Panel", "연령 및 개인 심박 기준 등 A1 개인화 입력과 Model이 반환한 보정 결과를 확인하는 panel")
+    # F1 디자인 이식 방향이 확정될 때까지 골격 시나리오와 동일한 자리표시로 둔다.
+    # 기존 구현은 아래에 보존되어 있으며, 이 두 줄을 제거하면 복원된다.
+    render_panel_placeholder("A1")
+    return
 
-    st.markdown("#### 개인화 전후 흐름")
+
+    render_subsection("개인화 전후 흐름")
     st.markdown(
         """
         <div class="maml-flow">
@@ -60,7 +62,7 @@ def render_personalization_panel(context: A1Context) -> None:
     profile = _text(first_value(personalization.get("profile"), row_value(context.row, "age_group")), "미수신")
     label = _selected_alert_label(context)
 
-    st.markdown("#### A1 개인화 결과 비교")
+    render_subsection("A1 개인화 결과 비교")
     st.markdown(
         '<div class="panel-description">아래 카드는 Model 산출물에 개인화 블록이 있을 때 값이 채워지며 Dashboard에서 임의 보정하지 않습니다.</div>',
         unsafe_allow_html=True,

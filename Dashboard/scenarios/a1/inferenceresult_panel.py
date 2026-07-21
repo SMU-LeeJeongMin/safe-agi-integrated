@@ -9,8 +9,11 @@ from typing import Any
 
 import pandas as pd
 import streamlit as st
+from scenarios.common import render_panel_placeholder
 
 from components.panel_kit import (
+    render_panel_banner,
+    render_soft_notice,
     INFERENCE_SAVE_LABEL,
     render_saved_records,
 )
@@ -50,14 +53,15 @@ def _flatten_record(context: A1Context) -> dict[str, Any]:
 
 
 def render_inferenceresult_panel(context: A1Context) -> None:
-    st.header("[7] InferenceResult 저장 Panel")
-    st.markdown(
-        '<div class="panel-description">현재 선택 시점의 A1 Feature와 DTO-5 결과를 비교 및 검증용 레코드로 내려받는 panel</div>',
-        unsafe_allow_html=True,
-    )
+    render_panel_banner(7, "InferenceResult 저장 Panel", "현재 선택 시점의 A1 Feature와 DTO-5 결과를 비교 및 검증용 레코드로 내려받는 panel")
+    # F1 디자인 이식 방향이 확정될 때까지 골격 시나리오와 동일한 자리표시로 둔다.
+    # 기존 구현은 아래에 보존되어 있으며, 이 두 줄을 제거하면 복원된다.
+    render_panel_placeholder("A1")
+    return
 
-    st.info(
-        "Dashboard 폴더 안에 별도 CSV를 누적 생성하지 않습니다.\n"
+
+    render_soft_notice(
+        "Dashboard 폴더 안에 별도 CSV를 누적 생성하지 않습니다. "
         "현재 화면 세션에서만 결과를 모아 CSV 또는 JSON으로 내려받고, DB 저장은 추후 서버 REST API로 연결합니다."
     )
 

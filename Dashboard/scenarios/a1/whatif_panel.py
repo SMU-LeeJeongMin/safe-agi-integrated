@@ -5,8 +5,9 @@ from __future__ import annotations
 from typing import Any
 
 import streamlit as st
+from scenarios.common import render_panel_placeholder
 
-from components.panel_kit import WHATIF_RERUN_LABEL, result_card
+from components.panel_kit import WHATIF_RERUN_LABEL, result_card, render_panel_banner, render_subsection, render_soft_notice
 
 from scenarios.a1.mapper import A1Context, row_value, to_bool, to_float
 from scenarios.a1.formatting import _selected_alert_label, _fmt, _fmt_bool, _safe, _text
@@ -22,11 +23,12 @@ def _result_card(title: str, risk_value: Any, label: Any, state: Any, class_name
 
 def render_whatif_panel(context: A1Context) -> None:
     row = context.row
-    st.header("[4] What-If Simulating Panel")
-    st.markdown(
-        '<div class="panel-description">입력값을 바꿔 외부 Model/API에 전달할 A1 재분석 요청값을 구성하는 panel</div>',
-        unsafe_allow_html=True,
-    )
+    render_panel_banner(4, "What-If Simulating Panel", "입력값을 바꿔 외부 Model/API에 전달할 A1 재분석 요청값을 구성하는 panel")
+    # F1 디자인 이식 방향이 확정될 때까지 골격 시나리오와 동일한 자리표시로 둔다.
+    # 기존 구현은 아래에 보존되어 있으며, 이 두 줄을 제거하면 복원된다.
+    render_panel_placeholder("A1")
+    return
+
 
     current_distance = to_float(row_value(row, "dist_to_hazard_m"))
     current_offtrail = to_float(row_value(row, "off_trail_dist_m"))
@@ -36,7 +38,7 @@ def render_whatif_panel(context: A1Context) -> None:
 
     left, right = st.columns([1, 1.15])
     with left:
-        st.markdown("#### 현재 상태")
+        render_subsection("현재 상태")
         st.markdown(
             f"""
             <div class="whatif-current-line">위험 지점 거리: <b>{_safe(_fmt(current_distance, 1, ' m'))}</b></div>
@@ -48,7 +50,7 @@ def render_whatif_panel(context: A1Context) -> None:
         )
 
     with right:
-        st.markdown("#### 시뮬레이션 입력")
+        render_subsection("시뮬레이션 입력")
         c1, c2 = st.columns(2)
         with c1:
             changed_distance = st.slider(
@@ -104,11 +106,11 @@ def render_whatif_panel(context: A1Context) -> None:
 
     request = st.session_state.get(request_key)
     if not request:
-        st.info("A1 Feature가 연결되면 값을 조정하고 Model/API용 재분석 요청을 만들 수 있습니다. Dashboard 자체에서는 점수를 계산하지 않습니다.")
+        render_soft_notice("A1 Feature가 연결되면 값을 조정하고 Model/API용 재분석 요청을 만들 수 있습니다. Dashboard 자체에서는 점수를 계산하지 않습니다.")
         return
 
     st.markdown('<div class="whatif-result-gap"></div>', unsafe_allow_html=True)
-    st.markdown("#### 현재 결과 vs 재분석 요청")
+    render_subsection("현재 결과 vs 재분석 요청")
     c1, c2 = st.columns(2)
     with c1:
         _result_card("현재", context.representative, _selected_alert_label(context), "DTO-5 수신값", "amber")
@@ -116,6 +118,6 @@ def render_whatif_panel(context: A1Context) -> None:
         _result_card("What-If 요청", None, "Model 응답 대기", "요청 Payload 생성", "green")
 
     st.markdown('<div class="whatif-info-gap"></div>', unsafe_allow_html=True)
-    st.info("재분석 결과는 추후 서버 REST API 또는 Model 출력 파일에서 받아 같은 위치에 표시합니다.")
+    render_soft_notice("재분석 결과는 추후 서버 REST API 또는 Model 출력 파일에서 받아 같은 위치에 표시합니다.")
     with st.expander("Model/API 전달 요청 JSON 보기"):
         st.json(request)

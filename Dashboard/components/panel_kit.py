@@ -11,6 +11,7 @@ from typing import Any
 
 import pandas as pd
 import streamlit as st
+from pathlib import Path
 
 from utils.explanation import to_float
 
@@ -64,13 +65,14 @@ def render_scenario_header(eyebrow: str, title: str, summary_html: str, notice_h
     summary_html과 notice_html은 <br/> 등을 포함할 수 있어 이스케이프하지 않는다.
     호출하는 쪽에서 신뢰할 수 있는 문자열만 넘겨야 한다.
     """
-    st.markdown(f"<div class='safe-eyebrow'>{_safe(eyebrow)}</div>", unsafe_allow_html=True)
-    st.title(title)
-
+    # 초록 배너(제목) + 배너에 걸쳐 올라오는 흰색 요약 카드
     st.markdown(
         (
-            '<div class="safe-card soft">'
-            '<h3>시나리오 요약</h3>'
+            '<div class="scenario-hero">'
+            f'<div class="scenario-hero-eyebrow">{_safe(eyebrow)}</div>'
+            f'<h1 class="scenario-hero-title">{_safe(title)}</h1>'
+            '</div>'
+            '<div class="safe-card scenario-hero-summary">'
             f'<div class="safe-muted">{summary_html}</div>'
             '</div>'
         ),
@@ -130,6 +132,51 @@ def render_saved_records(
 
 
 # 패널 헤더와 [1] Input 골격
+def render_panel_banner(number: int, title: str, description: str) -> None:
+    """번호 + 사선 초록 배너형 패널 제목. 제목은 크게, 설명은 작게 배너 안에 표시한다."""
+    st.markdown(
+        (
+            '<div class="panel-banner">'
+            f'<div class="panel-banner-num">{number:02d}</div>'
+            '<div class="panel-banner-body">'
+            f'<div class="panel-banner-title">{_safe(title)}</div>'
+            f'<div class="panel-banner-desc">{_safe(description)}</div>'
+            '</div>'
+            '</div>'
+        ),
+        unsafe_allow_html=True,
+    )
+
+
+def render_subsection(title: str, tooltip: str | None = None) -> None:
+    """panel 내부 소제목. 제목 배너와 같은 사다리꼴 모티프의 얇은 리본을
+    글씨 아래에 깐다. tooltip이 있으면 제목 오른쪽에 (i) 아이콘으로 표시한다."""
+    indent_class = ""
+    tooltip_html = ""
+    if tooltip:
+        tooltip_html = (
+            '<span class="dto1-tooltip" aria-label="설명 보기" style="margin-left:8px;">i'
+            f'<span class="dto1-tooltip-text">{_safe(tooltip)}</span>'
+            '</span>'
+        )
+    st.markdown(
+        f'<div class="panel-subsection{indent_class}"><span>{_safe(title)}</span>{tooltip_html}</div>',
+        unsafe_allow_html=True,
+    )
+
+
+def render_soft_notice(text: str) -> None:
+    """연한 초록 안내 박스. 파란 st.info 대체용 공통 디자인."""
+    st.markdown(
+        (
+            '<div class="soft-notice">'
+            f'{_safe(text)}'
+            '</div>'
+        ),
+        unsafe_allow_html=True,
+    )
+
+
 def render_panel_header(title: str, description: str) -> None:
     """패널 제목(st.header)과 회색 설명 한 줄을 렌더링한다."""
     st.header(title)
@@ -139,10 +186,13 @@ def render_panel_header(title: str, description: str) -> None:
     )
 
 
-def metric_block(label: str, value: Any, note: str | None = None) -> str:
-    """[1] Input 카드 내부의 '라벨 + 값(+ 물음표 툴팁)' 한 블록 HTML을 반환한다."""
+def metric_block(label: str, value: Any, note: str | None = None, nowrap: bool = False) -> str:
+    """[1] Input 카드 내부의 '라벨 + 값(+ 물음표 툴팁)' 한 블록 HTML을 반환한다.
+
+    nowrap=True면 툴팁 문구를 줄바꿈 없이 한 줄로 표시한다."""
+    nowrap_class = " dto1-tooltip-nowrap" if nowrap else ""
     tooltip_html = (
-        '<span class="dto1-tooltip" aria-label="설명 보기">i'
+        f'<span class="dto1-tooltip{nowrap_class}" aria-label="설명 보기">i'
         f'<span class="dto1-tooltip-text">{_safe(note)}</span>'
         '</span>'
         if note
@@ -177,6 +227,66 @@ def render_time_card(time_text: str) -> None:
             '<b>현재 시점</b>'
             f'<span class="dto1-time-value">{_safe(time_text)}</span>'
             '</div>'
+        ),
+        unsafe_allow_html=True,
+    )
+
+
+@st.cache_data(show_spinner=False)
+def server_icon_b64() -> str:
+    """진한 초록으로 재채색한 서버 아이콘(base64)."""
+    import base64
+    path = Path(__file__).resolve().parent.parent / "assets" / "server_green.png"
+    return base64.b64encode(path.read_bytes()).decode("ascii")
+
+
+@st.cache_data(show_spinner=False)
+def _watch_icon_b64() -> str:
+    """진한 초록으로 재채색한 워치 아이콘(base64)."""
+    import base64
+    path = Path(__file__).resolve().parent.parent / "assets" / "watch_green.png"
+    return base64.b64encode(path.read_bytes()).decode("ascii")
+
+
+# 말풍선 배경색 (연한 세이지 그린 팔레트, 제목 배너의 진초록과 구분)
+BUBBLE_COLORS = ["#dfe6d6", "#d3ddc6", "#c9d4bb", "#e9ede2"]
+
+
+def render_input_bubbles(bubbles: list[tuple[str, list[tuple]]], time_text: str | None = None) -> None:
+    """[1] Input 데이터를 말풍선 4개 + 중앙 워치 아이콘 구도로 렌더링한다.
+
+    bubbles: (말풍선 제목, 블록 목록) 목록. 블록은 metric_block과 동일 형식.
+    말풍선 꼬리는 아래 중앙의 워치를 향하고, time_text가 있으면
+    워치 아래 "현재 시점 / 날짜 / 시각" 세 줄로 표시한다.
+    """
+    bubble_html = "".join(
+        (
+            f'<div class="dto1-bubble" style="--bubble:{BUBBLE_COLORS[i % len(BUBBLE_COLORS)]};">'
+            f'<div class="dto1-bubble-title">{_safe(title)}</div>'
+            + "".join(metric_block(*block) for block in blocks)
+            + '</div>'
+        )
+        for i, (title, blocks) in enumerate(bubbles)
+    )
+    time_html = ""
+    if time_text:
+        parts = str(time_text).split(" ")
+        date_part = parts[0] if parts else str(time_text)
+        clock_part = " ".join(parts[1:]) if len(parts) > 1 else ""
+        time_html = (
+            '<div class="dto1-watch-time">'
+            '<div class="time-label">현재 시점</div>'
+            f'<div class="time-value">{_safe(date_part)}</div>'
+            f'<div class="time-value">{_safe(clock_part)}</div>'
+            '</div>'
+        )
+    st.markdown(
+        (
+            f'<div class="dto1-bubble-row">{bubble_html}</div>'
+            '<div class="dto1-watch">'
+            f'<img src="data:image/png;base64,{_watch_icon_b64()}" alt="워치" />'
+            '</div>'
+            f'{time_html}'
         ),
         unsafe_allow_html=True,
     )
@@ -280,6 +390,7 @@ def render_location_map(
     zoom: float,
     legend: list[tuple[str, str]] | None = None,
     circle: dict | None = None,
+    height: int | None = None,
 ) -> None:
     """현재 위치와 대상 지점을 표시하는 공용 지도.
 
@@ -290,8 +401,18 @@ def render_location_map(
     map_df = pd.DataFrame(points)
 
     if legend:
+        def _legend_marker(dot_class: str) -> str:
+            # "icon:<색상>:<문자>" 형식이면 색 문자를 마커로 사용 (예: "icon:#1f7a5a:▲")
+            if dot_class.startswith("icon:"):
+                _, color, char = dot_class.split(":", 2)
+                return (
+                    f'<span style="color:{color}; font-weight:800; margin-right:6px; '
+                    f'font-size:1rem; line-height:1;">{_safe(char)}</span>'
+                )
+            return f'<span class="legend-dot {dot_class}"></span>'
+
         legend_html = "".join(
-            f'<span><span class="legend-dot {dot_class}"></span>{_safe(text)}</span>'
+            f'<span>{_legend_marker(dot_class)}{_safe(text)}</span>'
             for dot_class, text in legend
         )
         st.markdown(
@@ -361,6 +482,7 @@ def render_location_map(
                 tooltip={"text": "{label}"},
             ),
             use_container_width=True,
+            height=height if height else None,
         )
     except Exception:
         fallback = pd.DataFrame(
@@ -374,7 +496,7 @@ def render_location_map(
                 for p in points
             ]
         )
-        st.map(fallback, latitude="lat", longitude="lon", color="color", size="size")
+        st.map(fallback, latitude="lat", longitude="lon", color="color", size="size", height=height)
 
 
 def to_float_or_none(value: Any):

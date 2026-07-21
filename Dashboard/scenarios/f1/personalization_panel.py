@@ -1,4 +1,4 @@
-# [5] MAML 개인화 Panel (inner loop)
+# [5] Meta Learning 개인화 Panel (inner loop)
 # 같은 현재 입력이라도 사용자별 baseline이 달라지면 위험도 계산이 달라지는 효과
 
 from __future__ import annotations
@@ -8,7 +8,7 @@ import html
 import pandas as pd
 import streamlit as st
 
-from components.panel_kit import persona_card, risk_tone
+from components.panel_kit import persona_card, risk_tone, render_panel_banner, render_subsection
 
 from Model.f1_model import infer_f1
 from Model.personal_baseline import PersonalBaselineAdapter, personalized_features
@@ -116,11 +116,7 @@ def _summary_df(adapters: list[tuple[str, PersonalBaselineAdapter]]) -> pd.DataF
 
 
 def render_personalization_panel(row: pd.Series, dto5: dict) -> None:
-    st.header("[5] MAML 개인화 Panel")
-    st.markdown(
-        '<div class="panel-description">사용자별 평소 심박 기준을 반영해 같은 입력도 다르게 판단될 수 있음을 비교하는 panel</div>',
-        unsafe_allow_html=True,
-    )
+    render_panel_banner(5, "Meta Learning 개인화 Panel", "사용자별 평소 심박 기준을 반영해 같은 입력도 다르게 판단될 수 있음을 비교하는 panel")
 
     row_dict = row.to_dict()
     row_dict["ts"] = str(row_dict.get("ts"))
@@ -134,7 +130,7 @@ def render_personalization_panel(row: pd.Series, dto5: dict) -> None:
     dto5_low = infer_f1(personalized_features(row_dict, adapter_low))
     dto5_high = infer_f1(personalized_features(row_dict, adapter_high))
 
-    st.markdown("#### 개인화 전후 흐름")
+    render_subsection("개인화 전후 흐름")
     st.markdown(
         (
             '<div class="maml-flow">'
@@ -154,7 +150,7 @@ def render_personalization_panel(row: pd.Series, dto5: dict) -> None:
         unsafe_allow_html=True,
     )
 
-    st.markdown("#### 동일 시점 위험도 비교")
+    render_subsection("동일 시점 위험도 비교")
     st.markdown(
         '<div class="panel-description">아래 카드는 같은 현재 입력을 세 가지 기준으로 다시 계산한 결과입니다.</div>',
         unsafe_allow_html=True,

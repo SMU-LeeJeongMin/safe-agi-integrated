@@ -20,7 +20,7 @@ PANEL_NAV_LINKS = [
     ("[2] Feature Engineering Panel", "feature-engineering-panel"),
     ("[3] Model Explanation Panel", "model-explanation-panel"),
     ("[4] What-If Simulating Panel", "whatif-simulating-panel"),
-    ("[5] MAML 개인화 Panel", "maml-personalization-panel"),
+    ("[5] Meta Learning 개인화 Panel", "maml-personalization-panel"),
     ("[6] DTO-5 Output Panel", "dto5-output-panel"),
     ("[7] InferenceResult 저장 Panel", "inferenceresult-save-panel"),
 ]
@@ -46,9 +46,11 @@ def _render_scenario_panel_links(scenario_id: str, current_scenario: str) -> str
 
 def _render_all_scenario_navigation(current_scenario: str) -> None:
     """선택 화면과 같은 순서로 모든 시나리오 및 패널을 표시한다."""
-    for scenario_id in SCENARIOS:
-        with st.sidebar.expander(
-            f"{scenario_id} 시나리오",
+    for number, (scenario_id, definition) in enumerate(SCENARIOS.items(), start=1):
+        # expander 라벨은 마크다운으로 렌더링되어 "1. "이 순서 리스트로 파싱되며
+        # 번호가 사라짐. "1\."로 점을 이스케이프해 일반 텍스트로 표시한다.
+        with st.expander(
+            f"{number}\\. [{scenario_id}] {definition.title}",
             expanded=scenario_id == current_scenario,
         ):
             st.markdown(
@@ -70,14 +72,15 @@ def _dto_timestamp(dto5_sequence: list[dict[str, Any]], index: int) -> Any:
 def render_sidebar_links() -> None:
     """공통 작업 링크(GitHub 등)를 사이드바 최하단에 고정 표시한다."""
     st.sidebar.divider()
-    st.sidebar.markdown(
-        """
-        <div class="sidebar-section-heading">Links</div>
-        <div class="sidebar-section-caption">공통 작업 레포 바로가기</div>
-        """,
-        unsafe_allow_html=True,
-    )
-    st.sidebar.markdown(github_link_html(), unsafe_allow_html=True)
+    with st.sidebar.container(key="sb_links"):
+        st.markdown(
+            """
+            <div class="sidebar-section-heading">Links</div>
+            <div class="sidebar-section-caption">공통 작업 레포 바로가기</div>
+            """,
+            unsafe_allow_html=True,
+        )
+        st.markdown(github_link_html(), unsafe_allow_html=True)
 
 
 def render_sidebar(
@@ -87,14 +90,6 @@ def render_sidebar(
 ) -> int:
     current_scenario = scenario_code.upper()
 
-    st.sidebar.markdown(
-        """
-        <div class="sidebar-section-heading">시점 선택</div>
-        <div class="sidebar-section-caption">분 단위 시점 index</div>
-        """,
-        unsafe_allow_html=True,
-    )
-
     if not features.empty and dto5_sequence:
         item_count = min(len(features), len(dto5_sequence))
     elif not features.empty:
@@ -102,25 +97,34 @@ def render_sidebar(
     else:
         item_count = len(dto5_sequence)
 
-    if item_count > 1:
-        selected_idx = st.sidebar.slider(
-            "분 단위 시점 index",
-            min_value=0,
-            max_value=item_count - 1,
-            value=item_count - 1,
-            label_visibility="collapsed",
-            key=f"{current_scenario}_time_index",
+    # 섹션 흰색 상자 스타일링을 위한 키 컨테이너 (기본 상태에서는 투명)
+    with st.sidebar.container(key="sb_time_select"):
+        st.markdown(
+            """
+            <div class="sidebar-section-heading">시점 선택</div>
+            <div class="sidebar-section-caption">분 단위 시점 index</div>
+            """,
+            unsafe_allow_html=True,
         )
-    else:
-        selected_idx = st.sidebar.slider(
-            "분 단위 시점 index",
-            min_value=0,
-            max_value=1,
-            value=0,
-            disabled=True,
-            label_visibility="collapsed",
-            key=f"{current_scenario}_time_index_waiting",
-        )
+        if item_count > 1:
+            selected_idx = st.slider(
+                "분 단위 시점 index",
+                min_value=0,
+                max_value=item_count - 1,
+                value=item_count - 1,
+                label_visibility="collapsed",
+                key=f"{current_scenario}_time_index",
+            )
+        else:
+            selected_idx = st.slider(
+                "분 단위 시점 index",
+                min_value=0,
+                max_value=1,
+                value=0,
+                disabled=True,
+                label_visibility="collapsed",
+                key=f"{current_scenario}_time_index_waiting",
+            )
 
     selected_ts = None
     if not features.empty:
@@ -131,34 +135,35 @@ def render_sidebar(
         selected_ts = _dto_timestamp(dto5_sequence, selected_idx)
 
     selected_time_text = format_kst(selected_ts) if selected_ts is not None else "데이터 연결 대기"
-    st.sidebar.markdown(
-        f"""
-        <div class="sidebar-time-box">
-            <div class="sidebar-time-label">선택 시점</div>
-            <div class="sidebar-time-value">{selected_time_text}</div>
-        </div>
-        """,
-        unsafe_allow_html=True,
-    )
+    with st.sidebar.container(key="sb_time_value"):
+        st.markdown(
+            f"""
+            <div class="sidebar-time-box">
+                <div class="sidebar-time-label">선택 시점</div>
+                <div class="sidebar-time-value">{selected_time_text}</div>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
 
     st.sidebar.divider()
-    st.sidebar.markdown(
-        """
-        <div class="sidebar-section-heading">Panel Navigation</div>
-        <div class="sidebar-section-caption">전체 시나리오 및 Panel 바로가기</div>
-        """,
-        unsafe_allow_html=True,
-    )
-    _render_all_scenario_navigation(current_scenario)
-
-    st.sidebar.markdown(
-        (
-            '<div class="sidebar-nav" style="margin-top:10px;">'
-            '<a href="?page=monitor" target="_self">실시간 모니터링 (BETA)</a>'
-            '</div>'
-        ),
-        unsafe_allow_html=True,
-    )
+    with st.sidebar.container(key="sb_panel_nav"):
+        st.markdown(
+            """
+            <div class="sidebar-section-heading">Panel Navigation</div>
+            <div class="sidebar-section-caption">전체 시나리오 및 Panel 바로가기</div>
+            """,
+            unsafe_allow_html=True,
+        )
+        _render_all_scenario_navigation(current_scenario)
+        st.markdown(
+            (
+                '<div class="sidebar-nav sidebar-nav-monitor" style="margin-top:10px;">'
+                '<a href="?page=monitor" target="_self">실시간 모니터링 (BETA)</a>'
+                '</div>'
+            ),
+            unsafe_allow_html=True,
+        )
 
     render_sidebar_links()
 

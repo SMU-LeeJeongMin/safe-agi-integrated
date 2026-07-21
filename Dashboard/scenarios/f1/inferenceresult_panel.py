@@ -8,7 +8,7 @@ from datetime import datetime
 import pandas as pd
 import streamlit as st
 
-from components.panel_kit import INFERENCE_SAVE_LABEL, render_saved_records
+from components.panel_kit import INFERENCE_SAVE_LABEL, render_saved_records, render_panel_banner, render_soft_notice
 
 from utils.time_utils import format_kst
 from utils.explanation import get_nested
@@ -66,13 +66,9 @@ def load_saved_results() -> pd.DataFrame:
 
 
 def render_inferenceresult_panel(row: pd.Series, dto5: dict, reason_text: str) -> None:
-    st.header("[7] InferenceResult 저장 Panel")
-    st.markdown(
-        '<div class="panel-description">실제 분석 결과와 What-if 결과를 저장해 이후 비교 및 검증할 수 있도록 기록하는 panel</div>',
-        unsafe_allow_html=True,
-    )
+    render_panel_banner(7, "InferenceResult 저장 Panel", "실제 분석 결과와 What-if 결과를 저장해 이후 비교 및 검증할 수 있도록 기록하는 panel")
 
-    st.info(
+    render_soft_notice(
         "현재 화면 세션에서 실제 결과와 What-If 결과를 비교하고 CSV로 내려받으며, DB 저장은 추후 서버 REST API로 연결합니다."
     )
 

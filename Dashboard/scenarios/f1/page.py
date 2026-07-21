@@ -44,31 +44,31 @@ def render(payload: ScenarioPayload, definition: ScenarioDefinition) -> None:
 
     render_anchor("dashboard-top")
     render_title_panel(row=row, dto5=dto5, report=payload.report)
+    st.markdown('<div style="height:44px;"></div>', unsafe_allow_html=True)
 
     render_anchor("dto1-input-panel")
-    st.divider()
-    render_dto1_input_panel(row)
+    render_dto1_input_panel(row, payload.features, payload.dto5_sequence)
 
     render_anchor("feature-engineering-panel")
-    st.divider()
+    st.markdown('<div style="height:38px;"></div>', unsafe_allow_html=True)
     render_feature_engineering_panel(row, payload.features, payload.dto5_sequence)
 
     render_anchor("model-explanation-panel")
-    st.divider()
+    st.markdown('<div style="height:38px;"></div>', unsafe_allow_html=True)
     render_model_explanation_panel(row, dto5, reason_text, explanation=payload.explanation)
 
     render_anchor("whatif-simulating-panel")
-    st.divider()
+    st.markdown('<div style="height:38px;"></div>', unsafe_allow_html=True)
     render_whatif_panel(row, dto5)
 
     render_anchor("maml-personalization-panel")
-    st.divider()
+    st.markdown('<div style="height:38px;"></div>', unsafe_allow_html=True)
     render_personalization_panel(row, dto5)
 
     render_anchor("dto5-output-panel")
-    st.divider()
+    st.markdown('<div style="height:38px;"></div>', unsafe_allow_html=True)
     render_dto5_panel(row, dto5, reason_text)
 
     render_anchor("inferenceresult-save-panel")
-    st.divider()
+    st.markdown('<div style="height:38px;"></div>', unsafe_allow_html=True)
     render_inferenceresult_panel(row, dto5, reason_text)

@@ -5,6 +5,7 @@ from __future__ import annotations
 import streamlit as st
 
 from components.panel_kit import (
+    render_soft_notice,
     render_location_map,
 )
 from scenarios.a1.mapper import A1Context, first_value, nested, row_value, to_float
@@ -18,7 +19,7 @@ def render_a1_map(context: A1Context) -> None:
     hazard_lon = to_float(first_value(row_value(row, "hazard_lon"), context.location.get("lon")))
 
     if None in {user_lat, user_lon, hazard_lat, hazard_lon}:
-        st.info("사용자 위치와 위험 POI 좌표가 연결되면 지도에 표시됩니다.")
+        render_soft_notice("사용자 위치와 위험 POI 좌표가 연결되면 지도에 표시됩니다.")
         return
 
     radius = to_float(row_value(row, "danger_radius_m", "hazard_radius_m", "outer_radius_m"))
