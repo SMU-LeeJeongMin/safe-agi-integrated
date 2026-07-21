@@ -1,0 +1,89 @@
+{
+  "phase": 7,
+  "total_windows": 22120,
+  "window_sizes": [
+    1,
+    3,
+    5,
+    10,
+    13
+  ],
+  "windows_per_size": {
+    "1": 4640,
+    "3": 4560,
+    "5": 4480,
+    "10": 4280,
+    "13": 4160
+  },
+  "stride": 1,
+  "window_rep_rule": "max (설계 §2)",
+  "x_feature_count": 33,
+  "x_features": [
+    "hr_mean_bpm__mean",
+    "hr_mean_bpm__max",
+    "hr_mean_bpm__min",
+    "hr_mean_bpm__std",
+    "hr_mean_bpm__slope",
+    "hr_ratio_maxhr__mean",
+    "hr_ratio_maxhr__max",
+    "hr_ratio_maxhr__min",
+    "hr_ratio_maxhr__std",
+    "hr_ratio_maxhr__slope",
+    "hr_z_personal__mean",
+    "hr_z_personal__max",
+    "hr_z_personal__min",
+    "hr_z_personal__std",
+    "hr_z_personal__slope",
+    "spo2_min_pct__mean",
+    "spo2_min_pct__max",
+    "spo2_min_pct__min",
+    "spo2_min_pct__std",
+    "spo2_min_pct__slope",
+    "steps_1min__mean",
+    "steps_1min__max",
+    "steps_1min__min",
+    "steps_1min__std",
+    "steps_1min__slope",
+    "speed_mean_mpm__mean",
+    "speed_mean_mpm__max",
+    "speed_mean_mpm__min",
+    "speed_mean_mpm__std",
+    "speed_mean_mpm__slope",
+    "cumulative_min__last",
+    "heat_index__last",
+    "accident_prior__last"
+  ],
+  "y_columns": [
+    "y_e1",
+    "y_e2",
+    "y_risk_level",
+    "y_fatigue_state",
+    "y_outcome",
+    "label_disagreement_flag"
+  ],
+  "y_used_for_training": [
+    "y_e1",
+    "y_e2"
+  ],
+  "y_reserved": [
+    "y_outcome",
+    "label_disagreement_flag"
+  ],
+  "risk_level_distribution": {
+    "정상": 7736,
+    "주의": 4457,
+    "경고": 8469,
+    "위험": 1458
+  },
+  "risk_ratio_by_size": {
+    "1": 0.0491,
+    "3": 0.0577,
+    "5": 0.0638,
+    "10": 0.0771,
+    "13": 0.0844
+  },
+  "source": "phase6_sessions.csv (40세션 가상)",
+  "layer": "가상 (규격 조건 정박)",
+  "note_1min": "1분 window는 std=slope=0 (단일 시점). OPTUNA가 선택 시 순간값 모델이 됨",
+  "teacher_note": "정답은 teacher_labels 단일 함수에서 규칙-오라클로 생성. 실데이터/결과라벨 오면 이 함수만 교체"
+}
