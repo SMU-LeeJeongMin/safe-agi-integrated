@@ -42,8 +42,8 @@ def _render_session_list(entries: list[SessionEntry], selected_key: str | None) 
 
     snapshots: list[tuple[SessionEntry, dict]] = []
     for entry in entries:
-        pos = int(_get_state(entry.scenario_id, entry.session_id, "pos", 0))
-        snapshots.append((entry, session_snapshot(entry, pos)))
+        # 벽시계 모드: 각 세션의 현재 위치는 snapshot 내부에서 시계 기준으로 계산한다
+        snapshots.append((entry, session_snapshot(entry)))
 
     age_options = sorted({snap["age_group"] for _, snap in snapshots})
     grade_filter = st.multiselect("등급 필터", GRADE_ORDER, default=[], key="monitor_grade_filter",

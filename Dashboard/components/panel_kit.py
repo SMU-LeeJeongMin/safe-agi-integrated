@@ -249,7 +249,7 @@ def _watch_icon_b64() -> str:
 
 
 # 말풍선 배경색 (연한 세이지 그린 팔레트, 제목 배너의 진초록과 구분)
-BUBBLE_COLORS = ["#dfe6d6", "#d3ddc6", "#c9d4bb", "#e9ede2"]
+BUBBLE_COLORS = ["#a3b285"]  # [2] 패널 연한 초록으로 통일 ([1] 말풍선, [6] 꽃잎 공용)
 
 
 def render_input_bubbles(bubbles: list[tuple[str, list[tuple]]], time_text: str | None = None) -> None:

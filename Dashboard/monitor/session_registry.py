@@ -1,13 +1,4 @@
 # 실시간 모니터링용 다중 세션 탐색 및 로딩
-#
-# Dashboard는 Input/Model 산출물을 읽기만 한다 (레이어 원칙).
-# 다중 세션 표준 경로 규격:
-#   Input/<시나리오ID>/outputs/sessions/<세션ID>/
-#     - dto5_sequence.json                (필수)
-#     - <id>_minute_features.csv 등       (선택, FEATURE_CANDIDATES 참고)
-# 위 경로에 세션 디렉터리가 없으면 기존 단일 산출물(레지스트리 후보 경로)을
-# 세션 1건으로 취급한다. 담당자가 다중 세션을 규격에 맞춰 내보내는 순간
-# 코드 수정 없이 리스트가 채워진다.
 
 from __future__ import annotations
 
@@ -29,6 +20,7 @@ from core.source_loader import (
     resolve_source,
 )
 from utils.explanation import RISK_CAUTION, RISK_DANGER, RISK_WARNING, to_float
+from monitor.state import wallclock_pos
 from core import trainset
 
 
@@ -162,8 +154,12 @@ def risk_grade(representative: float) -> str:
     return "위험"
 
 
-def session_snapshot(entry: SessionEntry, pos: int) -> dict[str, Any]:
-    """세션 리스트 표시에 필요한 현재 수신 시점 상태 요약."""
+def session_snapshot(entry: SessionEntry, pos: int | None = None) -> dict[str, Any]:
+    """세션 리스트 표시에 필요한 현재 수신 시점 상태 요약.
+
+    pos를 생략하면 벽시계 기준 현재 위치(wallclock_pos)를 사용한다.
+    모든 세션이 관찰 여부와 무관하게 동시에 진행되는 것으로 표시된다.
+    """
     if entry.is_synth:
         return _synth_snapshot(entry, pos)
     try:
@@ -172,6 +168,8 @@ def session_snapshot(entry: SessionEntry, pos: int) -> dict[str, Any]:
     except Exception:
         sequence = []
     total = len(sequence)
+    if pos is None:
+        pos = wallclock_pos(total, entry.scenario_id, entry.session_id)
     safe_pos = min(max(int(pos), 0), total - 1) if total else 0
     representative = 0.0
     if total:
@@ -199,6 +197,8 @@ def _synth_snapshot(entry: SessionEntry, pos: int) -> dict[str, Any]:
     except Exception:
         sequence = []
     total = len(sequence)
+    if pos is None:
+        pos = wallclock_pos(total, entry.scenario_id, entry.session_id)
     safe_pos = min(max(int(pos), 0), total - 1) if total else 0
     representative = 0.0
     if total:

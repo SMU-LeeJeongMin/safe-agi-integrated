@@ -41,7 +41,7 @@ from monitor.injection import (
 )
 from monitor.session_list import _render_session_list
 from monitor.session_registry import discover_sessions, load_entry_payload
-from monitor.state import _get_state, _set_state
+from monitor.state import _get_state, _set_state, wallclock_pos, WALLCLOCK_SECONDS_PER_MINUTE
 from utils.explanation import format_profile, to_float
 
 # F1 모델 함수는 Model/ (B 영역)의 확정 공식을 그대로 재사용한다.
@@ -92,22 +92,21 @@ def _render_live_area(
     scenario_id: str,
     target: str,
     window: int,
-    playing: bool,
-    advance: bool,
     in_fragment: bool = False,
 ) -> None:
-    """스트림 위치를 한 칸 진행시키고 현재 시점 상태를 렌더링한다."""
+    """벽시계 기준 현재 수신 시점 상태를 렌더링한다.
+
+    재생 위치는 상태 저장 없이 현재 시각에서 계산하므로(wallclock_pos),
+    모든 세션이 동시에 진행되고 페이지 이탈이나 새로고침과 무관하게 이어진다.
+    세션 끝에 도달하면 처음으로 순환한다.
+    """
     features = payload.features
     dto5_sequence = payload.dto5_sequence
     total = payload.item_count
     if total <= 0:
         return
 
-    pos = int(_get_state(scenario_id, target, "pos", 0))
-    if advance and playing:
-        pos = min(pos + 1, total - 1)
-        _set_state(scenario_id, target, "pos", pos)
-    pos = min(pos, total - 1)
+    pos = wallclock_pos(total, scenario_id, target)
 
     row = payload.row_at(pos)
     dto5 = payload.dto5_at(pos)
@@ -115,9 +114,8 @@ def _render_live_area(
     fatigue = dto5.get("fatigue", {})
     rep = to_float(risk.get("representative"))
 
-    reached_end = pos >= total - 1
-    live_class = "" if (playing and not reached_end) else "paused"
-    live_text = "LIVE 스트리밍" if (playing and not reached_end) else ("스트림 종료" if reached_end else "일시정지")
+    live_class = ""
+    live_text = "LIVE 스트리밍"
     # 연령대 표기: 기존 산출물은 age_group, 학습셋은 원본 age 컬럼을 사용한다 (표시용 파생)
     profile_value = row.get("age_group") if not features.empty else None
     if (profile_value is None or (isinstance(profile_value, float) and pd.isna(profile_value))) and not features.empty:
@@ -418,31 +416,23 @@ def _render_stream_column(payload, scenario_id: str, target: str, window: int, i
         render_source_waiting_card(payload, scenario_id)
         return
 
-    # 재생 컨트롤 (전체 페이지 rerun 대상)
-    total = payload.item_count
-    playing = bool(_get_state(scenario_id, target, "playing", True))
+    # 벽시계 모드: 모든 세션이 현재 시각 기준으로 동시에 진행된다.
+    # 재생, 일시정지, 처음부터 같은 리플레이 조작은 실시간 개념과 맞지 않아 제거했다.
     st.markdown('<div style="height:18px;"></div>', unsafe_allow_html=True)
-    ctrl1, ctrl2, _spacer = st.columns([1, 1, 4])
-    with ctrl1:
-        if st.button("일시정지" if playing else "재생", key="monitor_toggle", use_container_width=True, type="primary"):
-            _set_state(scenario_id, target, "playing", not playing)
-            st.rerun()
-    with ctrl2:
-        if st.button("처음부터", key="monitor_restart", use_container_width=True):
-            _set_state(scenario_id, target, "pos", 0)
-            st.rerun()
+    st.caption(
+        f"라이브 시뮬레이션: 실제 {WALLCLOCK_SECONDS_PER_MINUTE}초 = 산행 1분. "
+        "세션 끝에 도달하면 처음으로 순환합니다."
+    )
 
     # 라이브 영역: fragment 부분 갱신 (지원 시)
     if interval is not None and hasattr(st, "fragment"):
 
         @st.fragment(run_every=interval)
         def _live_fragment() -> None:
-            _render_live_area(payload, scenario_id, target, window, playing, advance=True, in_fragment=True)
+            _render_live_area(payload, scenario_id, target, window, in_fragment=True)
 
         _live_fragment()
     else:
-        _render_live_area(payload, scenario_id, target, window, playing, advance=False)
-        if st.button("다음 시점 ▶", key="monitor_step", use_container_width=False):
-            pos = int(_get_state(scenario_id, target, "pos", 0))
-            _set_state(scenario_id, target, "pos", min(pos + 1, total - 1))
+        _render_live_area(payload, scenario_id, target, window)
+        if st.button("지금 시점으로 갱신", key="monitor_step", use_container_width=False):
             st.rerun()

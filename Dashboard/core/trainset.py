@@ -35,8 +35,6 @@ TRAINSET_NOTE = (
 NO_LABELS_NOTE = "이 학습셋에는 정답 라벨(windows/)이 없어 신호 시계열만 표시합니다."
 
 
-# ── 경로 탐색 ──────────────────────────────────────────────────────────
-
 def trainset_root(scenario_id: str) -> Path:
     return REPO_ROOT / "Input" / scenario_id / "synth"
 
@@ -81,8 +79,6 @@ def windows_summary(scenario_id: str) -> dict[str, Any]:
     return _summary(trainset_root(scenario_id) / "windows")
 
 
-# ── 로딩 (캐시) ────────────────────────────────────────────────────────
-
 @st.cache_data(show_spinner=False, max_entries=12)
 def _read_csv(path_text: str, fingerprint: tuple[int, int]) -> pd.DataFrame:
     del fingerprint
@@ -119,8 +115,6 @@ def minute_labels_frame(scenario_id: str) -> pd.DataFrame:
     return _read_minute_labels(str(path), _fingerprint(path))
 
 
-# ── 컬럼 의미 (summary 우선, 추론 폴백) ────────────────────────────────
-
 def signal_columns(scenario_id: str) -> list[str]:
     declared = sessions_summary(scenario_id).get("signal_columns")
     frame = sessions_frame(scenario_id)
@@ -148,8 +142,6 @@ def y_columns(scenario_id: str) -> list[str]:
         return [c for c in declared if c in frame.columns]
     return [c for c in frame.columns if c.startswith("y_")]
 
-
-# ── 세션 접근 (원본 그대로) ────────────────────────────────────────────
 
 def list_sessions(scenario_id: str) -> list[dict[str, Any]]:
     """세션 메타 목록. 필드는 원본 이름을 유지하고, 목록 표기용 label만 파생한다."""
@@ -190,8 +182,6 @@ def session_minute_labels(scenario_id: str, session_id: int) -> pd.DataFrame:
         return pd.DataFrame()
     return labels[labels["session_id"] == int(session_id)].reset_index(drop=True)
 
-
-# ── 정답 라벨 -> DTO-5 투영 (팀 계약 구조로만 감싼다) ──────────────────
 
 def _risk_level_and_label(value: Any) -> tuple[int | None, str | None]:
     if value is None or (isinstance(value, float) and pd.isna(value)):
@@ -253,8 +243,6 @@ def session_dto5(scenario_id: str, session_id: int) -> list[dict[str, Any]]:
         )
     return sequence
 
-
-# ── 표시용 파생 (데이터 가공 아님, 화면 문구 전용) ─────────────────────
 
 def display_session_label(session_id: int, persona: Any) -> str:
     persona_text = None if persona is None or (isinstance(persona, float) and pd.isna(persona)) else str(persona)
