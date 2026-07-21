@@ -15,7 +15,7 @@ from Model.f1_model import compute_e1_e2
 from Model.personal_baseline import PersonalBaselineAdapter, personalized_features
 from monitor.history import _anomaly_indices
 from monitor.state import _get_state, _set_state
-from utils.explanation import RISK_CAUTION, RISK_DANGER, RISK_WARNING, ref_hr_baseline, to_bool, to_float
+from utils.explanation import RISK_CAUTION, RISK_DANGER, RISK_WARNING, complete_f1_inputs, ref_hr_baseline, to_bool, to_float
 from utils.time_utils import format_kst
 
 
@@ -121,7 +121,7 @@ def _maml_risk_series(
         adapter.observe(to_float(row.get("hr_mean_bpm")), to_float(row.get("hr_ratio_maxhr")))
         if idx >= start:
             try:
-                dto5 = infer_f1(personalized_features(row.to_dict(), adapter))
+                dto5 = infer_f1(personalized_features(complete_f1_inputs(row), adapter))
                 out.append(to_float((dto5.get("risk") or {}).get("representative")))
             except Exception:
                 out.append(float("nan"))
@@ -155,7 +155,8 @@ def _render_risk_event_chart(
         if ts is None and not features.empty and idx < len(features):
             ts = features.iloc[idx].get("ts")
         xs.append(idx)
-        full = format_kst(ts) if ts is not None else str(idx)
+        minute = item.get("minute")
+        full = format_kst(ts) if ts is not None else (f"{int(minute)}분" if minute is not None else str(idx))
         labels.append(full)
         # 축 눈금은 시:분만 사용 (전체 시각은 hover에 표시)
         short_labels.append(full[-9:-4] if full.endswith(" KST") and len(full) >= 9 else full)

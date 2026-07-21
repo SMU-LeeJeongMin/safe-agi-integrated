@@ -7,6 +7,78 @@ import html
 import streamlit as st
 
 from core.contracts import ScenarioPayload
+from core import trainset
+
+
+LEGACY_SOURCE_OPTION = "기존 산출물 (outputs)"
+
+
+def render_trainset_picker(payload: ScenarioPayload, scenario_id: str) -> ScenarioPayload:
+    """사이드바에서 학습셋 관찰 대상(사용자, 세션 상황)을 고르게 하고 payload를 교체한다.
+
+    - Input/<ID>/synth 학습셋이 없으면 UI 없이 기존 payload를 그대로 돌려준다.
+    - 기존 outputs 산출물이 연결되어 있으면 그것도 선택지로 유지한다.
+      (outputs가 삭제된 뒤에는 학습셋 세션이 기본 선택이 된다.)
+    - 학습셋은 사용자(페르소나) 10명 x 상황 4종 구조이므로
+      사용자 선택 -> 상황 선택의 2단으로 나눈다.
+    """
+    if not trainset.available(scenario_id):
+        return payload
+
+    metas = trainset.list_sessions(scenario_id)
+    if not metas:
+        return payload
+
+    # 사용자(페르소나) 단위 그룹핑
+    users: dict[str, list[dict]] = {}
+    for meta in metas:
+        persona = meta.get("persona_name") or f"session{meta['session_id']:02d}"
+        users.setdefault(persona, []).append(meta)
+
+    def _user_label(persona: str) -> str:
+        sessions = users[persona]
+        age = sessions[0].get("age")
+        age_text = f" ({int(age)}세)" if age is not None else ""
+        return f"{persona}{age_text}"
+
+    has_legacy = payload.item_count > 0
+    user_options = ([LEGACY_SOURCE_OPTION] if has_legacy else []) + sorted(users)
+
+    with st.sidebar.container(key=f"sb_trainset_picker_{scenario_id}"):
+        st.markdown(
+            f"""
+            <div class="sidebar-section-heading">관찰 대상 선택</div>
+            <div class="sidebar-section-caption">학습셋 사용자 {len(users)}명, 세션 {len(metas)}개</div>
+            """,
+            unsafe_allow_html=True,
+        )
+        selected_user = st.selectbox(
+            "관찰 사용자",
+            options=user_options,
+            format_func=lambda v: v if v == LEGACY_SOURCE_OPTION else _user_label(v),
+            key=f"{scenario_id}_trainset_user",
+            label_visibility="collapsed",
+        )
+        if selected_user == LEGACY_SOURCE_OPTION:
+            st.sidebar.divider()
+            return payload
+
+        sessions = users[selected_user]
+        session_labels = {
+            int(meta["session_id"]): (
+                f"{meta['situation']} 상황" if meta.get("situation") else f"세션 {meta['session_id']:02d}"
+            )
+            for meta in sessions
+        }
+        selected_session_id = st.selectbox(
+            "세션 상황",
+            options=list(session_labels),
+            format_func=lambda sid: session_labels[sid],
+            key=f"{scenario_id}_trainset_session_{selected_user}",
+            label_visibility="collapsed",
+        )
+    st.sidebar.divider()
+    return trainset.build_payload(scenario_id, int(selected_session_id))
 
 
 def render_back_buttons() -> None:

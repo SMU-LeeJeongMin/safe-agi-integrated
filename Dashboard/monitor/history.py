@@ -81,7 +81,7 @@ def _render_anomaly_history(
             fatigue = item.get("fatigue") or {}
             feat = features.iloc[idx] if idx < len(features) else None
             rows.append({
-                "발생 시각": format_kst(item.get("ts")),
+                "발생 시각": format_kst(item.get("ts")) if item.get("ts") is not None else (f"{item.get('minute')}분차" if item.get("minute") is not None else "-"),
                 "산행 경과(분)": f"{to_float(feat.get('cumulative_min')):.0f}" if feat is not None else "-",
                 "위험 등급": str(risk.get("label", "-")),
                 "피로 상태": str(fatigue.get("state", "-")),

@@ -11,6 +11,7 @@ import streamlit as st
 from components.panel_kit import persona_card, risk_tone, render_panel_banner, render_subsection
 
 from Model.f1_model import infer_f1
+from utils.explanation import complete_f1_inputs
 from Model.personal_baseline import PersonalBaselineAdapter, personalized_features
 from utils.explanation import format_profile, get_nested, ref_hr_baseline
 
@@ -118,7 +119,7 @@ def _summary_df(adapters: list[tuple[str, PersonalBaselineAdapter]]) -> pd.DataF
 def render_personalization_panel(row: pd.Series, dto5: dict) -> None:
     render_panel_banner(5, "Meta Learning 개인화 Panel", "사용자별 평소 심박 기준을 반영해 같은 입력도 다르게 판단될 수 있음을 비교하는 panel")
 
-    row_dict = row.to_dict()
+    row_dict = complete_f1_inputs(row)  # 학습셋 세션의 파생 플래그 부재 보완
     row_dict["ts"] = str(row_dict.get("ts"))
     base_desc, base_subtitle, baseline = _baseline_wording(row)
     prior_kwargs = {"prior_mean": baseline["rest_hr"], "prior_std": baseline["rest_std"]}

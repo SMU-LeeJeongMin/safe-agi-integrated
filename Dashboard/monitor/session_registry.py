@@ -29,6 +29,7 @@ from core.source_loader import (
     resolve_source,
 )
 from utils.explanation import RISK_CAUTION, RISK_DANGER, RISK_WARNING, to_float
+from core import trainset
 
 
 @dataclass(frozen=True)
@@ -38,10 +39,18 @@ class SessionEntry:
     features_path: Path | None
     dto5_path: Path
     from_sessions_dir: bool
+    # Input/<ID>/synth 학습셋 세션이면 원본 session_id 정수 (아니면 None).
+    # 학습셋 세션은 개별 파일이 아니라 통합 CSV에서 리더(core.trainset)로
+    # 원본 컬럼 그대로 읽는다.
+    synth_session_id: int | None = None
 
     @property
     def key(self) -> str:
         return f"{self.scenario_id}::{self.session_id}"
+
+    @property
+    def is_synth(self) -> bool:
+        return self.synth_session_id is not None
 
 
 def _feature_candidates(scenario_id: str) -> tuple[str, ...]:
@@ -119,6 +128,27 @@ def discover_sessions(scenario_ids: list[str]) -> list[SessionEntry]:
                 False,
             )
         )
+
+    # Input/<ID>/synth 학습셋 세션 (전 시나리오 공통 규격, 통합 CSV를 리더로 읽음).
+    # 구 outputs/ 산출물이 삭제되어 표준 경로 세션이 비더라도 목록이 유지되고,
+    # 이후 시나리오(A2, F4, E1 등)가 같은 구조로 산출되면 코드 수정 없이 노출된다.
+    for scenario_id in scenario_ids:
+        if not trainset.available(scenario_id):
+            continue
+        sessions_path = trainset.sessions_csv(scenario_id)
+        labels_path = trainset.windows_csv(scenario_id) or sessions_path
+        existing_keys = {entry.key for entry in entries}
+        for meta in trainset.list_sessions(scenario_id):
+            entry = SessionEntry(
+                scenario_id=scenario_id,
+                session_id=str(meta["label"]),
+                features_path=sessions_path,
+                dto5_path=labels_path,
+                from_sessions_dir=False,
+                synth_session_id=int(meta["session_id"]),
+            )
+            if entry.key not in existing_keys:
+                entries.append(entry)
     return entries
 
 
@@ -134,6 +164,8 @@ def risk_grade(representative: float) -> str:
 
 def session_snapshot(entry: SessionEntry, pos: int) -> dict[str, Any]:
     """세션 리스트 표시에 필요한 현재 수신 시점 상태 요약."""
+    if entry.is_synth:
+        return _synth_snapshot(entry, pos)
     try:
         raw = _read_json_file(str(entry.dto5_path), _fingerprint(entry.dto5_path))
         sequence = _extract_dto5_sequence(raw)
@@ -160,12 +192,50 @@ def session_snapshot(entry: SessionEntry, pos: int) -> dict[str, Any]:
     }
 
 
+def _synth_snapshot(entry: SessionEntry, pos: int) -> dict[str, Any]:
+    """학습셋 세션용 리스트 요약. 위험도는 규칙 오라클 정답 기준."""
+    try:
+        sequence = trainset.session_dto5(entry.scenario_id, entry.synth_session_id)
+    except Exception:
+        sequence = []
+    total = len(sequence)
+    safe_pos = min(max(int(pos), 0), total - 1) if total else 0
+    representative = 0.0
+    if total:
+        risk = sequence[safe_pos].get("risk") or {}
+        representative = to_float(risk.get("representative"))
+
+    age_group = None
+    try:
+        meta = next(
+            (m for m in trainset.list_sessions(entry.scenario_id) if m["session_id"] == entry.synth_session_id),
+            None,
+        )
+        if meta:
+            age_group = trainset.display_age_group(meta.get("age"))
+    except Exception:
+        pass
+
+    return {
+        "total": total,
+        "pos": safe_pos,
+        "representative": representative,
+        "grade": risk_grade(representative) if total else "-",
+        "age_group": age_group or "미등록",
+    }
+
+
 def load_entry_payload(entry: SessionEntry) -> ScenarioPayload:
     """선택된 세션의 관찰용 payload를 만든다.
 
     기본 단일 산출물 세션은 기존 로더를 그대로 사용해 report 등 부가 산출물과
     경고 메시지 동작을 유지하고, sessions 디렉터리 세션은 필요한 두 파일만 읽는다.
+    학습셋 세션은 통합 CSV를 원본 컬럼 그대로 읽고(core.trainset),
+    정답 라벨만 DTO-5 계약 구조로 투영한다.
     """
+    if entry.is_synth:
+        return trainset.build_payload(entry.scenario_id, entry.synth_session_id)
+
     if not entry.from_sessions_dir:
         definition = SCENARIOS.get(entry.scenario_id)
         if definition is not None and definition.source_spec is not None:

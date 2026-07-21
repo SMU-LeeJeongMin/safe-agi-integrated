@@ -142,7 +142,16 @@ def render_time_series_section(
 
     n = min(len(features), len(dto5_sequence))
     graph_df = features.iloc[:n].copy()
-    graph_df["ts_kst"] = [to_kst_timestamp(x) for x in graph_df["ts"]]
+    # 시간축: 실측 산출물은 ts(UTC -> KST), 학습셋은 원본 minute_idx(산행 경과 분)를 그대로 쓴다.
+    has_ts = "ts" in graph_df.columns
+    if has_ts:
+        graph_df["ts_kst"] = [to_kst_timestamp(x) for x in graph_df["ts"]]
+        x_axis_label = "한국시간"
+    else:
+        graph_df["ts_kst"] = (
+            graph_df["minute_idx"] if "minute_idx" in graph_df.columns else pd.Series(range(n))
+        )
+        x_axis_label = "산행 경과(분)"
 
     graph_df["risk_representative"] = [
         get_nested(x, ["risk", "representative"], 0)
@@ -154,14 +163,17 @@ def render_time_series_section(
         for x in dto5_sequence[:n]
     ]
 
-    selected_ts = to_kst_timestamp(row.get("ts"))
-    format_kst_text = selected_ts.strftime("%Y-%m-%d %H:%M") + " KST" if selected_ts is not None else ""
+    if has_ts:
+        selected_ts = to_kst_timestamp(row.get("ts"))
+        format_kst_text = selected_ts.strftime("%Y-%m-%d %H:%M") + " KST" if selected_ts is not None else ""
+        axis_title = f"현재 시점: {format_kst_text}" if selected_ts is not None else x_axis_label
+    else:
+        minute = row.get("minute_idx")
+        selected_ts = None if minute is None or pd.isna(minute) else int(minute)
+        axis_title = f"현재 시점: {selected_ts}분차" if selected_ts is not None else x_axis_label
 
     # 현재 시점 표시 색: [1] 말풍선의 연한 초록과 통일
     SELECTED_LINE_COLOR = "#a3b285"
-    axis_title = (
-        f"현재 시점: {format_kst_text}" if selected_ts is not None else "한국시간"
-    )
 
     def add_selected_line(fig):
         if selected_ts is not None:
@@ -180,7 +192,7 @@ def render_time_series_section(
             x="ts_kst",
             y="hr_mean_bpm",
             title="시간별 평균 심박수 변화",
-            labels={"ts_kst": "한국시간", "hr_mean_bpm": "평균 심박수(bpm)"},
+            labels={"ts_kst": x_axis_label, "hr_mean_bpm": "평균 심박수(bpm)"},
         )
         st.plotly_chart(add_selected_line(fig_hr), use_container_width=True)
 
@@ -190,7 +202,7 @@ def render_time_series_section(
             x="ts_kst",
             y="spo2_min_pct",
             title="시간별 SpO2 변화",
-            labels={"ts_kst": "한국시간", "spo2_min_pct": "SpO2(%)"},
+            labels={"ts_kst": x_axis_label, "spo2_min_pct": "SpO2(%)"},
         )
         st.plotly_chart(add_selected_line(fig_spo2), use_container_width=True)
 
@@ -200,7 +212,7 @@ def render_time_series_section(
             x="ts_kst",
             y="risk_representative",
             title="시간별 대표 위험도 변화",
-            labels={"ts_kst": "한국시간", "risk_representative": "대표 위험도"},
+            labels={"ts_kst": x_axis_label, "risk_representative": "대표 위험도"},
         )
         st.plotly_chart(add_selected_line(fig_risk), use_container_width=True)
 
@@ -213,7 +225,7 @@ def render_time_series_section(
                 x="ts_kst",
                 y="steps_1min",
                 title="시간별 최근 1분 걸음 수",
-                labels={"ts_kst": "한국시간", "steps_1min": "걸음 수"},
+                labels={"ts_kst": x_axis_label, "steps_1min": "걸음 수"},
             )
             st.plotly_chart(add_selected_line(fig_steps), use_container_width=True)
 
@@ -223,6 +235,6 @@ def render_time_series_section(
                 x="ts_kst",
                 y="speed_mean_mpm",
                 title="시간별 평균 속도",
-                labels={"ts_kst": "한국시간", "speed_mean_mpm": "속도(m/min)"},
+                labels={"ts_kst": x_axis_label, "speed_mean_mpm": "속도(m/min)"},
             )
             st.plotly_chart(add_selected_line(fig_speed), use_container_width=True)

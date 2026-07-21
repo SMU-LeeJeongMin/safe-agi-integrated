@@ -401,6 +401,55 @@ def build_feature_importance(row: pd.Series, dto5: dict[str, Any]) -> list[dict[
     return candidates[:5]
 
 
+def complete_f1_inputs(row: pd.Series) -> dict[str, Any]:
+    """Model.f1_model 입력 계약(judge_fatigue 필수 키 3종)을 보완한 dict 사본.
+
+    학습셋(Input/<ID>/synth) 세션에는 규칙 파생 플래그
+    (hr_overload_5min, spo2_grade, rest_due_90min)가 없다.
+    payload.features 원본은 바꾸지 않고, 모델 호출 직전에만 정의서 v0.3
+    규칙으로 보완한다. 값이 이미 있으면 원본을 그대로 쓴다.
+    (monitor/injection.py가 주입 데모에서 쓰는 방식과 동일한 선례이며,
+    Input이 파생 플래그를 산출물에 포함하면 이 보완은 자연히 무시된다.)
+
+    - spo2_grade: 95 이상 정상, 90~94 경고, 90 미만 위험 (정의서 v0.3)
+    - rest_due_90min: 누적 90분 배수 도래 시점 (90분마다 휴식 권고)
+    - hr_overload_5min: 원본 플래그가 없으면 MaxHR 0.6~0.8 구간 여부로 근사.
+      "5분 이상 지속" 조건은 단일 행에서 판정할 수 없으므로 Input 산출
+      플래그가 정본이다 (Input 담당에게 파생 플래그 포함 요청 예정).
+    """
+    f = dict(row.to_dict())
+
+    if f.get("spo2_grade") is None or (isinstance(f.get("spo2_grade"), float) and pd.isna(f.get("spo2_grade"))):
+        spo2 = to_float(f.get("spo2_min_pct"), default=100.0)
+        if spo2 >= SPO2_WARN:
+            f["spo2_grade"] = "정상"
+        elif spo2 >= SPO2_DANGER:
+            f["spo2_grade"] = "경고"
+        else:
+            f["spo2_grade"] = "위험"
+
+    if f.get("rest_due_90min") is None or (isinstance(f.get("rest_due_90min"), float) and pd.isna(f.get("rest_due_90min"))):
+        cumulative = to_float(f.get("cumulative_min"))
+        f["rest_due_90min"] = cumulative > 0 and int(cumulative) % REST_CYCLE_MIN == 0
+
+    if f.get("hr_overload_5min") is None or (isinstance(f.get("hr_overload_5min"), float) and pd.isna(f.get("hr_overload_5min"))):
+        ratio = to_float(f.get("hr_ratio_maxhr"))
+        f["hr_overload_5min"] = 0.6 <= ratio <= 0.8
+
+    # DTO 식별 필드: 학습셋에는 uuid, ts가 없으므로 세션 식별자로 보완한다 (표기용)
+    if f.get("uuid") is None or (isinstance(f.get("uuid"), float) and pd.isna(f.get("uuid"))):
+        session_id = f.get("session_id")
+        persona = f.get("persona_name")
+        try:
+            f["uuid"] = f"synth{int(session_id):02d}_{persona}" if session_id is not None else None
+        except (TypeError, ValueError):
+            f["uuid"] = None
+    if "ts" not in f:
+        f["ts"] = None
+
+    return f
+
+
 def make_reason_text(row: pd.Series, dto5: dict[str, Any]) -> str:
     risk_label = get_nested(dto5, ["risk", "label"], "알 수 없음")
     fatigue_state = get_nested(dto5, ["fatigue", "state"], "알 수 없음")

@@ -5,7 +5,13 @@ from __future__ import annotations
 import streamlit as st
 
 from core.contracts import ScenarioDefinition, ScenarioPayload
-from scenarios.common import render_anchor, render_back_buttons, render_payload_messages, render_source_waiting_card
+from scenarios.common import (
+    render_anchor,
+    render_back_buttons,
+    render_payload_messages,
+    render_source_waiting_card,
+    render_trainset_picker,
+)
 
 # F1이 선택된 뒤에만 import된다.
 from components.sidebar import render_sidebar
@@ -22,6 +28,10 @@ from utils.explanation import make_reason_text
 
 def render(payload: ScenarioPayload, definition: ScenarioDefinition) -> None:
     del definition
+
+    # 학습셋(Input/F1/synth)이 있으면 사이드바에서 관찰 대상(사용자, 상황)을
+    # 선택하게 하고, 선택된 세션으로 payload를 교체한다.
+    payload = render_trainset_picker(payload, "F1")
 
     selected_idx = render_sidebar(
         payload.features,

@@ -21,6 +21,7 @@ from components.layout import render_risk_gauge, safe_html
 from components.panel_kit import render_location_map, render_subsection
 from components.sidebar import render_sidebar_links
 from core.registry import SCENARIOS
+from core import trainset
 from scenarios.common import render_back_buttons, render_payload_messages, render_source_waiting_card
 from monitor.charts import (
     _metric_card,
@@ -117,7 +118,11 @@ def _render_live_area(
     reached_end = pos >= total - 1
     live_class = "" if (playing and not reached_end) else "paused"
     live_text = "LIVE 스트리밍" if (playing and not reached_end) else ("스트림 종료" if reached_end else "일시정지")
-    age_text = format_profile(row.get("age_group")) if not features.empty else "미등록"
+    # 연령대 표기: 기존 산출물은 age_group, 학습셋은 원본 age 컬럼을 사용한다 (표시용 파생)
+    profile_value = row.get("age_group") if not features.empty else None
+    if (profile_value is None or (isinstance(profile_value, float) and pd.isna(profile_value))) and not features.empty:
+        profile_value = trainset.display_age_group(row.get("age"))
+    age_text = format_profile(profile_value)
     user_lat = to_float(row.get("user_lat")) if not features.empty else 0.0
     user_lon = to_float(row.get("user_lon")) if not features.empty else 0.0
     loc_text = f", 위치 <b>{user_lat:.5f}, {user_lon:.5f}</b>" if (user_lat and user_lon) else ""
@@ -223,6 +228,13 @@ def _render_live_area(
                 ("SpO2", "%", "spo2_min_pct", -spo2_drop, None, f"{display_spo2:.0f} %", f"분 최저 산소포화도{spo2_suffix}"),
                 ("걸음 수", "보", "steps_1min", steps_delta, 0.0, f"{display_steps:.0f} 보", f"최근 1분 걸음 수{steps_suffix}"),
             ]
+            # 원본 컬럼이 있는 지표만 표시하고, 전부 없으면 (다른 시나리오 학습셋 등)
+            # 신호 컬럼을 추론해 범용 스파크라인으로 폴백한다.
+            metric_rows = [m for m in metric_rows if m[2] in features.columns]
+            if not metric_rows:
+                for column in trainset.numeric_signal_columns(features)[:3]:
+                    current = to_float(row.get(column))
+                    metric_rows.append((column, "", column, 0.0, None, f"{current:.2f}", "학습셋 신호"))
             metric_cols = st.columns(3)
             for col_ctx, (label, unit, column, delta, clamp, value_text, value_sub) in zip(metric_cols, metric_rows):
                 with col_ctx:

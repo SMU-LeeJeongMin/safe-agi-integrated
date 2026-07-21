@@ -5,6 +5,7 @@ import pandas as pd
 import streamlit as st
 
 from components.panel_kit import render_detail_expander, render_input_bubbles, render_panel_header, render_panel_banner
+from core import trainset
 from utils.explanation import format_id, format_profile, format_value, ref_hr_baseline, to_float
 from utils.time_utils import format_kst, format_utc
 
@@ -22,13 +23,22 @@ def render_dto1_input_panel(
     speed = to_float(row.get("speed_mean_mpm"))
     lat = to_float(row.get("user_lat"))
     lon = to_float(row.get("user_lon"))
-    uuid_display, uuid_tooltip = format_id(row.get("uuid"))
+    # 학습셋 세션은 uuid, age_group이 없으므로 원본 컬럼(session_id, persona_name, age)에서
+    # 표시용으로만 파생한다 (성별은 학습셋 Phase 3 비식별 ID 도입 전까지 미등록이 정확한 표시).
+    uuid_value = row.get("uuid")
+    if (uuid_value is None or (isinstance(uuid_value, float) and pd.isna(uuid_value))) and row.get("persona_name") is not None:
+        uuid_value = row.get("persona_name")
+    age_group_value = row.get("age_group")
+    if age_group_value is None or (isinstance(age_group_value, float) and pd.isna(age_group_value)):
+        age_group_value = trainset.display_age_group(row.get("age"))
+
+    uuid_display, uuid_tooltip = format_id(uuid_value)
     uuid_block = ("세션 ID", uuid_display, uuid_tooltip) if uuid_tooltip else ("세션 ID", uuid_display)
 
     baseline = ref_hr_baseline(row)
     user_items = [
         uuid_block,
-        ("연령대", format_profile(row.get("age_group"))),
+        ("연령대", format_profile(age_group_value)),
         ("성별", format_profile(row.get("gender"))),
     ]
     if baseline["is_fallback"] is not None:
@@ -79,7 +89,7 @@ def render_dto1_input_panel(
 
     render_detail_expander(
         [
-            {"구분": "세션", "항목": "uuid", "값": row.get("uuid")},
+            {"구분": "세션", "항목": "uuid", "값": uuid_value},
             {"구분": "시간", "항목": "KST", "값": format_kst(row.get("ts"))},
             {"구분": "시간", "항목": "UTC", "값": format_utc(row.get("ts"))},
             {"구분": "위치", "항목": "user_lat", "값": format_value(row.get("user_lat"), 6)},
@@ -91,7 +101,7 @@ def render_dto1_input_panel(
             {"구분": "이동", "항목": "speed_mean_mpm", "값": f"{format_value(row.get('speed_mean_mpm'), 1)} m/min"},
             {"구분": "환경", "항목": "heat_index", "값": format_value(row.get("heat_index"), 1)},
             {"구분": "환경", "항목": "accident_prior", "값": format_value(row.get("accident_prior"), 2)},
-            {"구분": "프로필", "항목": "age_group", "값": format_profile(row.get("age_group"))},
+            {"구분": "프로필", "항목": "age_group", "값": format_profile(age_group_value)},
             {"구분": "프로필", "항목": "gender", "값": format_profile(row.get("gender"))},
             {"구분": "판정 기준", "항목": "ref_max_hr", "값": f"{format_value(row.get('ref_max_hr'), 0)} bpm"},
             {"구분": "판정 기준", "항목": "ref_resting_hr", "값": f"{format_value(row.get('ref_resting_hr'), 1)} bpm"},
