@@ -1,0 +1,28 @@
+{
+  "phase": 6,
+  "session_count": 40,
+  "session_length_rows": 116,
+  "session_length_basis": "실측 뼈대 세션(fatigue_minute_features.csv, 116분) 길이를 따름",
+  "total_rows": 4640,
+  "situation_distribution": {
+    "정상": 10,
+    "주의": 10,
+    "경고": 10,
+    "위험": 10
+  },
+  "persona_count": 10,
+  "signal_columns": [
+    "hr_mean_bpm",
+    "hr_ratio_maxhr",
+    "hr_z_personal",
+    "spo2_min_pct",
+    "steps_1min",
+    "speed_mean_mpm",
+    "cumulative_min",
+    "heat_index",
+    "accident_prior"
+  ],
+  "label_included": false,
+  "label_note": "정답(y)은 Phase 7에서 규칙-오라클 부착",
+  "all_sessions_116_rows": true
+}
