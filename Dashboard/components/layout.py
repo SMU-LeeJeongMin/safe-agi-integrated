@@ -1253,9 +1253,73 @@ def inject_global_css() -> None:
             height: 14px;
         }
 
+        /* ── 사이드바 디자인 통일 (Streamlit 1.45.1 고정 전제) ──
+           배경은 hero 배너와 같은 진초록 계열, 바탕 위 글씨는 흰색,
+           카드류(시점 박스, expander)는 흰 카드로 띄워 대비 확보 */
+        [data-testid="stSidebar"] {
+            background: linear-gradient(180deg, #2e6b35 0%, #235229 100%);
+            border-right: 1px solid #1d4a26;
+        }
+        [data-testid="stSidebar"] hr {
+            border-color: rgba(255, 255, 255, .25);
+        }
+        [data-testid="stSidebar"] [data-testid="stSidebarCollapseButton"],
+        [data-testid="stSidebar"] [data-testid="stSidebarCollapseButton"] button {
+            color: #ffffff !important;
+        }
+        /* 진초록 바탕 위 위젯 라벨: 셀렉트박스, 슬라이더, 토글, 라디오 등 (monitor 사이드바 포함)
+           expander 흰 카드 내부에는 위젯 라벨이 없다는 전제의 규칙 */
+        [data-testid="stSidebar"] [data-testid="stWidgetLabel"] p,
+        [data-testid="stSidebar"] [data-testid="stCheckbox"] p,
+        [data-testid="stSidebar"] [data-testid="stRadio"] label p {
+            color: #ffffff !important;
+        }
+        /* 진초록 바탕 위 슬라이더: 핸들 흰색, 트랙 세이지, 값 표기는 흰색 */
+        [data-testid="stSidebar"] [data-testid="stSlider"] div[role="slider"] {
+            background-color: #ffffff !important;
+            border-color: #ffffff !important;
+            box-shadow: 0 0 0 1px #dfe6d6 !important;
+        }
+        [data-testid="stSidebar"] [data-testid="stSlider"] [data-baseweb="slider"] div[style*="background"] {
+            background-color: #a3b285 !important;
+        }
+        [data-testid="stSidebar"] [data-testid="stSliderThumbValue"],
+        [data-testid="stSidebar"] [data-testid="stSliderTickBarMin"],
+        [data-testid="stSidebar"] [data-testid="stSliderTickBarMax"] {
+            color: #ffffff !important;
+        }
+        /* 진초록 바탕에 직접 놓이는 링크 (실시간 모니터링, GitHub) */
+        [data-testid="stSidebar"] .sidebar-nav-monitor a,
+        [data-testid="stSidebar"] .project-link {
+            color: rgba(255, 255, 255, .94) !important;
+        }
+        [data-testid="stSidebar"] .sidebar-nav-monitor a:hover,
+        [data-testid="stSidebar"] .project-link:hover {
+            background: rgba(255, 255, 255, .12);
+            border-color: rgba(255, 255, 255, .35);
+            color: #ffffff !important;
+        }
+        /* 시나리오 expander: 흰 카드, 펼친 항목은 진초록 세로 바와 연초록 배경으로 강조 */
+        [data-testid="stSidebar"] [data-testid="stExpander"] details {
+            background: #ffffff;
+            border: 1px solid #e3e6dd;
+            border-radius: 10px;
+        }
+        [data-testid="stSidebar"] [data-testid="stExpander"] details[open] {
+            border-color: #c7dfc8;
+        }
+        [data-testid="stSidebar"] [data-testid="stExpander"] details[open] > summary {
+            background: #eef7ef;
+            box-shadow: inset 4px 0 0 #2e6b35;
+        }
+
         .sidebar-time-box {
             margin-top: 10px;
             margin-bottom: 16px;
+            background: #ffffff;
+            border: 1px solid #dfe6d6;
+            border-radius: 12px;
+            padding: 12px 14px;
         }
         .sidebar-time-label {
             color: #111827;
@@ -1264,21 +1328,24 @@ def inject_global_css() -> None:
             margin-bottom: 4px;
         }
         .sidebar-time-value {
-            color: #1f2937;
+            color: #2e6b35;
             font-size: .98rem;
-            font-weight: 700;
+            font-weight: 800;
             line-height: 1.35;
         }
         .sidebar-section-heading {
             margin: 0 0 3px;
-            color: #111827;
+            padding-left: 10px;
+            border-left: 4px solid #dfe6d6;
+            color: #ffffff;
             font-size: 1.1rem;
             font-weight: 900;
             line-height: 1.25;
         }
         .sidebar-section-caption {
             margin: 0 0 8px;
-            color: #31333f;
+            padding-left: 14px;
+            color: rgba(255, 255, 255, .78);
             font-size: .94rem;
             font-weight: 400;
             line-height: 1.45;
@@ -1848,7 +1915,7 @@ def render_scenario_select_page() -> None:
             '</div>'
             '<div class="safe-card scenario-hero-summary">'
             '<div class="safe-muted">'
-            '카드에 마우스를 올리면 종이가 덮이며 시나리오 상세 설명 표시'
+            '카드에 마우스를 올리면 해당 시나리오 상세 설명 표시'
             '<br />카드를 누르면 해당 시나리오 대시보드로 바로 이동'
             '</div>'
             '</div>'
