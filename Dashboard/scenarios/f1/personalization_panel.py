@@ -131,7 +131,7 @@ def render_personalization_panel(row: pd.Series, dto5: dict) -> None:
     dto5_low = infer_f1(personalized_features(row_dict, adapter_low))
     dto5_high = infer_f1(personalized_features(row_dict, adapter_high))
 
-    render_subsection("개인화 전후 흐름")
+    render_subsection("개인화 전후 흐름", first=True)
     st.markdown(
         (
             '<div class="maml-flow">'

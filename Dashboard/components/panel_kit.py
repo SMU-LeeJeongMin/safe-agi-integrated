@@ -60,20 +60,18 @@ def step_card(title: str, summary: str, value: Any, rows: list[tuple[str, Any]])
 
 # 시나리오 대시보드 상단 헤더 골격
 def render_scenario_header(eyebrow: str, title: str, summary_html: str, notice_html: str | None = None) -> None:
-    """eyebrow, 제목, 시나리오 요약 카드, (선택) 안내 박스를 렌더링한다.
+    """eyebrow, 제목, 배너 안 요약 문구, (선택) 안내 박스를 렌더링한다.
 
     summary_html과 notice_html은 <br/> 등을 포함할 수 있어 이스케이프하지 않는다.
     호출하는 쪽에서 신뢰할 수 있는 문자열만 넘겨야 한다.
     """
-    # 초록 배너(제목) + 배너에 걸쳐 올라오는 흰색 요약 카드
+    # 초록 배너(제목)와 배너 안 요약 문구 (panel 배너처럼 제목 밑에 설명)
     st.markdown(
         (
             '<div class="scenario-hero">'
             f'<div class="scenario-hero-eyebrow">{_safe(eyebrow)}</div>'
             f'<h1 class="scenario-hero-title">{_safe(title)}</h1>'
-            '</div>'
-            '<div class="safe-card scenario-hero-summary">'
-            f'<div class="safe-muted">{summary_html}</div>'
+            f'<div class="scenario-hero-sub">{summary_html}</div>'
             '</div>'
         ),
         unsafe_allow_html=True,
@@ -148,10 +146,10 @@ def render_panel_banner(number: int, title: str, description: str) -> None:
     )
 
 
-def render_subsection(title: str, tooltip: str | None = None) -> None:
+def render_subsection(title: str, tooltip: str | None = None, first: bool = False) -> None:
     """panel 내부 소제목. 제목 배너와 같은 사다리꼴 모티프의 얇은 리본을
     글씨 아래에 깐다. tooltip이 있으면 제목 오른쪽에 (i) 아이콘으로 표시한다."""
-    indent_class = ""
+    indent_class = " first" if first else ""  # 배너 직후 첫 소제목은 위 여백 제거
     tooltip_html = ""
     if tooltip:
         tooltip_html = (
@@ -253,40 +251,44 @@ BUBBLE_COLORS = ["#a3b285"]  # [2] 패널 연한 초록으로 통일 ([1] 말풍
 
 
 def render_input_bubbles(bubbles: list[tuple[str, list[tuple]]], time_text: str | None = None) -> None:
-    """[1] Input 데이터를 말풍선 4개 + 중앙 워치 아이콘 구도로 렌더링한다.
+    """[1] Input 데이터를 왼쪽 현재 시점 카드 + 오른쪽 2x2 입력 카드 구도로 렌더링한다.
 
-    bubbles: (말풍선 제목, 블록 목록) 목록. 블록은 metric_block과 동일 형식.
-    말풍선 꼬리는 아래 중앙의 워치를 향하고, time_text가 있으면
-    워치 아래 "현재 시점 / 날짜 / 시각" 세 줄로 표시한다.
+    bubbles: (카드 제목, 블록 목록) 목록. 블록은 metric_block과 동일 형식.
+    왼쪽 카드는 "현재 시점" 제목과 날짜, 시각을 왼쪽 정렬로 표기하고
+    하단 왼쪽에 손목 워치 아이콘을 배치한다.
+    입력 카드 내부 블록은 라벨/값 2열 그리드로 배치한다.
     """
-    bubble_html = "".join(
+    cards_html = "".join(
         (
-            f'<div class="dto1-bubble" style="--bubble:{BUBBLE_COLORS[i % len(BUBBLE_COLORS)]};">'
+            '<div class="dto1-input-card">'
             f'<div class="dto1-bubble-title">{_safe(title)}</div>'
+            '<div class="dto1-card-body">'
             + "".join(metric_block(*block) for block in blocks)
             + '</div>'
+            '</div>'
         )
-        for i, (title, blocks) in enumerate(bubbles)
+        for title, blocks in bubbles
     )
-    time_html = ""
+    date_part, clock_part = "-", ""
     if time_text:
         parts = str(time_text).split(" ")
         date_part = parts[0] if parts else str(time_text)
         clock_part = " ".join(parts[1:]) if len(parts) > 1 else ""
-        time_html = (
-            '<div class="dto1-watch-time">'
-            '<div class="time-label">현재 시점</div>'
+    st.markdown(
+        (
+            '<div class="dto1-grid">'
+            '<div class="dto1-clock-card">'
+            '<div class="dto1-clock-head">'
+            '<div class="dto1-clock-title">현재 시점</div>'
             f'<div class="time-value">{_safe(date_part)}</div>'
             f'<div class="time-value">{_safe(clock_part)}</div>'
             '</div>'
-        )
-    st.markdown(
-        (
-            f'<div class="dto1-bubble-row">{bubble_html}</div>'
-            '<div class="dto1-watch">'
-            f'<img src="data:image/png;base64,{_watch_icon_b64()}" alt="워치" />'
+            '<div class="dto1-clock-wrap">'
+            f'<img class="dto1-watch-img" src="data:image/png;base64,{_watch_icon_b64()}" alt="워치" />'
             '</div>'
-            f'{time_html}'
+            '</div>'
+            f'<div class="dto1-input-cards">{cards_html}</div>'
+            '</div>'
         ),
         unsafe_allow_html=True,
     )

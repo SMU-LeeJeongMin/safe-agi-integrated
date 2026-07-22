@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import streamlit as st
 
-from components.sidebar import render_sidebar
+from components.sidebar import render_sidebar, render_sidebar_topbar
 from core.contracts import ScenarioDefinition, ScenarioPayload
 from scenarios.a1.mapper import build_context
 from scenarios.a1.dto1_input_panel import render_dto1_input_panel
@@ -21,6 +21,7 @@ from scenarios.common import render_anchor, render_back_buttons, render_payload_
 def render(payload: ScenarioPayload, definition: ScenarioDefinition) -> None:
     del definition
 
+    render_sidebar_topbar("?page=dashboard&scenario=A1")
     selected_idx = render_sidebar(payload.features, payload.dto5_sequence, scenario_code="A1")
     row = payload.row_at(selected_idx)
     dto5 = payload.dto5_at(selected_idx)
@@ -37,29 +38,29 @@ def render(payload: ScenarioPayload, definition: ScenarioDefinition) -> None:
 
     st.markdown('<div style="height:6px;"></div>', unsafe_allow_html=True)
     render_anchor("dto1-input-panel")
-    st.markdown('<div style="height:38px;"></div>', unsafe_allow_html=True)
+    st.markdown('<div style="height:96px;"></div>', unsafe_allow_html=True)
     render_dto1_input_panel(context)
 
     render_anchor("feature-engineering-panel")
-    st.markdown('<div style="height:38px;"></div>', unsafe_allow_html=True)
+    st.markdown('<div style="height:96px;"></div>', unsafe_allow_html=True)
     render_feature_engineering_panel(context, payload)
 
     render_anchor("model-explanation-panel")
-    st.markdown('<div style="height:38px;"></div>', unsafe_allow_html=True)
+    st.markdown('<div style="height:96px;"></div>', unsafe_allow_html=True)
     render_model_explanation_panel(context)
 
     render_anchor("whatif-simulating-panel")
-    st.markdown('<div style="height:38px;"></div>', unsafe_allow_html=True)
+    st.markdown('<div style="height:96px;"></div>', unsafe_allow_html=True)
     render_whatif_panel(context)
 
     render_anchor("maml-personalization-panel")
-    st.markdown('<div style="height:38px;"></div>', unsafe_allow_html=True)
+    st.markdown('<div style="height:96px;"></div>', unsafe_allow_html=True)
     render_personalization_panel(context)
 
     render_anchor("dto5-output-panel")
-    st.markdown('<div style="height:38px;"></div>', unsafe_allow_html=True)
+    st.markdown('<div style="height:96px;"></div>', unsafe_allow_html=True)
     render_dto5_panel(context)
 
     render_anchor("inferenceresult-save-panel")
-    st.markdown('<div style="height:38px;"></div>', unsafe_allow_html=True)
+    st.markdown('<div style="height:96px;"></div>', unsafe_allow_html=True)
     render_inferenceresult_panel(context)

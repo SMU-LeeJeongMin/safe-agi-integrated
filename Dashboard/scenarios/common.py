@@ -82,24 +82,8 @@ def render_trainset_picker(payload: ScenarioPayload, scenario_id: str) -> Scenar
 
 
 def render_back_buttons() -> None:
-    """기존 Dashboard 상단 이동 버튼을 그대로 유지한 컴포넌트."""
-    st.markdown(
-        """
-        <div style="display:flex; gap:10px; align-items:center; margin:0 0 24px 0;">
-            <a href="?page=intro" target="_self"
-               style="display:inline-flex; align-items:center; justify-content:center;
-                      min-width:92px; padding:8px 15px; border:1px solid #d0d5dd;
-                      border-radius:8px; color:#1f2937; text-decoration:none;
-                      background:#ffffff; font-weight:500; line-height:1.2;">처음으로</a>
-            <a href="?page=scenario" target="_self"
-               style="display:inline-flex; align-items:center; justify-content:center;
-                      min-width:118px; padding:8px 15px; border:1px solid #d0d5dd;
-                      border-radius:8px; color:#1f2937; text-decoration:none;
-                      background:#ffffff; font-weight:500; line-height:1.2;">시나리오 선택</a>
-        </div>
-        """,
-        unsafe_allow_html=True,
-    )
+    """상단 이동 버튼은 사이드바 상단 바(로고, 홈, 뒤로가기)로 대체되어 더 이상 그리지 않는다."""
+    return None
 
 
 def render_anchor(anchor: str) -> None:
@@ -190,8 +174,9 @@ def render_panel_placeholder(scenario_id: str) -> None:
 def render_skeleton_page(payload: ScenarioPayload, scenario_id: str, render_title) -> None:
     """A1과 동일한 화면 골격(사이드바, 요약, panel 앵커 7개)을 placeholder로 렌더링한다."""
     from components.panel_kit import render_panel_banner
-    from components.sidebar import render_sidebar
+    from components.sidebar import render_sidebar, render_sidebar_topbar
 
+    render_sidebar_topbar(f"?page=dashboard&scenario={scenario_id}")
     render_sidebar(payload.features, payload.dto5_sequence, scenario_code=scenario_id)
 
     render_back_buttons()
@@ -206,7 +191,7 @@ def render_skeleton_page(payload: ScenarioPayload, scenario_id: str, render_titl
     st.markdown('<div style="height:6px;"></div>', unsafe_allow_html=True)
     for index, (anchor, title, description) in enumerate(SKELETON_PANELS):
         render_anchor(anchor)
-        st.markdown('<div style="height:38px;"></div>', unsafe_allow_html=True)
+        st.markdown('<div style="height:96px;"></div>', unsafe_allow_html=True)
         clean_title = title.split("] ", 1)[1] if "] " in title else title
         render_panel_banner(index + 1, clean_title, description)
         render_panel_placeholder(scenario_id)

@@ -55,7 +55,7 @@ def render_dto5_panel(context: A1Context) -> None:
 
     render_panel_banner(6, "DTO-5 Output Panel", "A1 모델 결과가 공식 DTO-5 alerts[]의 type, level, location, detour_available로 정리되는 과정을 보여주는 panel")
 
-    render_subsection("DTO-5 핵심 필드")
+    render_subsection("DTO-5 핵심 필드", first=True)
 
     alert_core_html = (
         _bubble_block("type", _text(alert.get("type"), "A1" if context.has_dto5 else "-"))
@@ -84,9 +84,6 @@ def render_dto5_panel(context: A1Context) -> None:
             + _quad_bubble(1, "Location", location_html)
             + _quad_bubble(2, "Detour", detour_html)
             + _quad_bubble(3, "Message", message_html, horizontal=False)
-            + '<div class="dto5-quad-center">'
-            + f'<img src="data:image/png;base64,{server_icon_b64()}" alt="서버" />'
-            + '</div>'
             + '</div>'
         ),
         unsafe_allow_html=True,

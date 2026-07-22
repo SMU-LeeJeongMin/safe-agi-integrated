@@ -14,7 +14,7 @@ from scenarios.common import (
 )
 
 # F1이 선택된 뒤에만 import된다.
-from components.sidebar import render_sidebar
+from components.sidebar import render_sidebar, render_sidebar_topbar
 from scenarios.f1.title_panel import render_title_panel
 from scenarios.f1.dto1_input_panel import render_dto1_input_panel
 from scenarios.f1.feature_engineering_panel import render_feature_engineering_panel
@@ -31,6 +31,7 @@ def render(payload: ScenarioPayload, definition: ScenarioDefinition) -> None:
 
     # 학습셋(Input/F1/synth)이 있으면 사이드바에서 관찰 대상(사용자, 상황)을
     # 선택하게 하고, 선택된 세션으로 payload를 교체한다.
+    render_sidebar_topbar("?page=dashboard&scenario=F1")
     payload = render_trainset_picker(payload, "F1")
 
     selected_idx = render_sidebar(
@@ -60,25 +61,25 @@ def render(payload: ScenarioPayload, definition: ScenarioDefinition) -> None:
     render_dto1_input_panel(row, payload.features, payload.dto5_sequence)
 
     render_anchor("feature-engineering-panel")
-    st.markdown('<div style="height:38px;"></div>', unsafe_allow_html=True)
+    st.markdown('<div style="height:96px;"></div>', unsafe_allow_html=True)
     render_feature_engineering_panel(row, payload.features, payload.dto5_sequence)
 
     render_anchor("model-explanation-panel")
-    st.markdown('<div style="height:38px;"></div>', unsafe_allow_html=True)
+    st.markdown('<div style="height:96px;"></div>', unsafe_allow_html=True)
     render_model_explanation_panel(row, dto5, reason_text, explanation=payload.explanation)
 
     render_anchor("whatif-simulating-panel")
-    st.markdown('<div style="height:38px;"></div>', unsafe_allow_html=True)
+    st.markdown('<div style="height:96px;"></div>', unsafe_allow_html=True)
     render_whatif_panel(row, dto5)
 
     render_anchor("maml-personalization-panel")
-    st.markdown('<div style="height:38px;"></div>', unsafe_allow_html=True)
+    st.markdown('<div style="height:96px;"></div>', unsafe_allow_html=True)
     render_personalization_panel(row, dto5)
 
     render_anchor("dto5-output-panel")
-    st.markdown('<div style="height:38px;"></div>', unsafe_allow_html=True)
+    st.markdown('<div style="height:96px;"></div>', unsafe_allow_html=True)
     render_dto5_panel(row, dto5, reason_text)
 
     render_anchor("inferenceresult-save-panel")
-    st.markdown('<div style="height:38px;"></div>', unsafe_allow_html=True)
+    st.markdown('<div style="height:96px;"></div>', unsafe_allow_html=True)
     render_inferenceresult_panel(row, dto5, reason_text)

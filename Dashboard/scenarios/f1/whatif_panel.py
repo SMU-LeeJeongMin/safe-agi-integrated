@@ -12,6 +12,13 @@ from utils.explanation import build_whatif_features, get_nested, to_float
 
 # 등급 텍스트 색 (기존 zone 팔레트와 동일)
 GRADE_COLORS = {"정상": "#16734f", "주의": "#8a5900", "경고": "#b42318", "위험": "#8f1010"}
+# 등급 캡슐의 연한 배경과 테두리 (글자색과 같은 계열의 옅은 톤)
+GRADE_CHIP_TONES = {
+    "정상": ("#eaf8f0", "#c7ead5"),
+    "주의": ("#fff4db", "#f1d19a"),
+    "경고": ("#ffe9e5", "#f3b8ae"),
+    "위험": ("#ffe0e0", "#f2b6b6"),
+}
 
 # 지표 정의: (표시명, 단위, 슬라이더 범위, 스텝, row 컬럼, 포맷)
 METRICS = [
@@ -37,11 +44,12 @@ def _pct(value: float, lo: float, hi: float) -> float:
 
 def _status_line(risk_value: object, label: object, state: object) -> str:
     color = GRADE_COLORS.get(str(label), "#16734f")
+    bg, border = GRADE_CHIP_TONES.get(str(label), ("#eef1e8", "#dfe6d6"))
     return (
         '<div class="whatif-side-status">'
-        f'대표 위험도 <b>{_format_risk_value(risk_value)}</b>'
-        f'&nbsp;&nbsp;위험 등급 <b style="color:{color};">{label}</b>'
-        f'&nbsp;&nbsp;피로 상태 <b>{state}</b>'
+        f'대표 위험도 <span class="whatif-chip">{_format_risk_value(risk_value)}</span>'
+        f'&nbsp;위험 등급 <span class="whatif-chip" style="color:{color}; background:{bg}; border-color:{border};">{label}</span>'
+        f'&nbsp;피로 상태 <span class="whatif-chip">{state}</span>'
         '</div>'
     )
 
@@ -73,16 +81,15 @@ def render_whatif_panel(row: pd.Series, dto5: dict) -> None:
     )
     whatif_dto5 = infer_f1(whatif_features)
 
-    render_subsection("입력값 변경 후 결과 비교하기")
-    st.markdown('<div style="height:18px;"></div>', unsafe_allow_html=True)
 
-    # ── 헤더: 지표 행과 같은 5열 그리드, 제목과 결과는 각 그래프 중앙 정렬 ──
-    _sp1, head_l, head_c, head_r, _sp2 = st.columns([0.28, 1.15, 0.34, 1.15, 0.28], vertical_alignment="top")
+    # ── 헤더: 지표 행과 같은 그리드에 맞춰 제목이 막대 시작선 위에 오도록 배치
+    #    (라벨 열은 헤더에서 비워 라벨이 왼쪽 바깥으로 빠져 보이게 한다) ──
+    _hlab_l, head_l, _hgap, _hlab_r, head_r = st.columns(
+        [0.26, 1.49, 0.12, 0.26, 1.49], vertical_alignment="top"
+    )
     with head_l:
         st.markdown('<div class="whatif-side-title">현재 입력값</div>', unsafe_allow_html=True)
         st.markdown(_status_line(current_risk, current_label, current_state), unsafe_allow_html=True)
-    with head_c:
-        st.markdown('<div class="whatif-vs">VS</div>', unsafe_allow_html=True)
     with head_r:
         st.markdown('<div class="whatif-side-title">시뮬레이션 입력값</div>', unsafe_allow_html=True)
         st.markdown(
@@ -94,11 +101,9 @@ def render_whatif_panel(row: pd.Series, dto5: dict) -> None:
             unsafe_allow_html=True,
         )
 
-    st.markdown('<div style="height:12px;"></div>', unsafe_allow_html=True)
-
     # ── 지표별 VS 게이지 행 ──
     # 오른쪽 게이지의 시각은 슬라이더 뒤에 ::before로 그린다:
-    # 왼쪽 막대와 동일한 색(#c9d4bb 채움, #f1f0ec 바탕)의 gradient를
+    # 왼쪽 막대와 동일한 색(#c9d4bb 채움, #ecefe2 바탕)의 gradient를
     # 파이썬이 아는 채움 비율(%)로 주입해 색과 디자인을 정확히 통일한다.
     gauge_styles = []
     for _, _, (lo, hi), _, col, _ in METRICS:
@@ -107,7 +112,7 @@ def render_whatif_panel(row: pd.Series, dto5: dict) -> None:
             f'.st-key-wfbar_{col} div[data-baseweb="slider"] > div:first-child::before {{'
             'content:""; position:absolute; left:2px; right:2px; top:calc(50% + 10px);'
             'transform:translateY(-50%); height:26px; border-radius:999px; z-index:0;'
-            f'background: linear-gradient(to right, #c9d4bb 0 {pct:.1f}%, #f1f0ec {pct:.1f}% 100%);'
+            f'background: linear-gradient(to right, #c9d4bb 0 {pct:.1f}%, #ecefe2 {pct:.1f}% 100%);'
             '}'
         )
     st.markdown("<style>" + "".join(gauge_styles) + "</style>", unsafe_allow_html=True)
@@ -118,22 +123,27 @@ def render_whatif_panel(row: pd.Series, dto5: dict) -> None:
         cur_pct = _pct(cur_val, lo, hi)
         unit_suffix = f" {unit}" if unit else ""
 
-        v_l, bar_l, mid, bar_r, v_r = st.columns([0.28, 1.15, 0.34, 1.15, 0.28], vertical_alignment="center")
-        with v_l:
-            st.markdown(
-                f'<div class="whatif-bar-value left">{fmt.format(cur_val)}{unit_suffix}</div>',
-                unsafe_allow_html=True,
-            )
+        lab_l, bar_l, v_l, _gap, lab_r, bar_r, v_r = st.columns(
+            [0.26, 1.15, 0.34, 0.12, 0.26, 1.15, 0.34], vertical_alignment="center"
+        )
+        with lab_l:
+            st.markdown(f'<div class="whatif-metric-label gray">{label}</div>', unsafe_allow_html=True)
         with bar_l:
+            # 왼쪽 게이지: 끝이 둥근 회색 채움 막대 (조작 불가)
             st.markdown(
                 (
-                    '<div class="whatif-track left">'
-                    f'<div class="whatif-fill left" style="width:{cur_pct:.1f}%;"></div>'
+                    '<div class="whatif-track gray">'
+                    f'<div class="whatif-fill gray" style="width:{cur_pct:.1f}%;"></div>'
                     '</div>'
                 ),
                 unsafe_allow_html=True,
             )
-        with mid:
+        with v_l:
+            st.markdown(
+                f'<div class="whatif-bar-value">{fmt.format(cur_val)}{unit_suffix}</div>',
+                unsafe_allow_html=True,
+            )
+        with lab_r:
             st.markdown(f'<div class="whatif-metric-label">{label}</div>', unsafe_allow_html=True)
         with bar_r:
             with st.container(key=f"wfbar_{col}"):

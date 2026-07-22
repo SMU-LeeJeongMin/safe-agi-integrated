@@ -18,6 +18,7 @@ import plotly.graph_objects as go
 import streamlit as st
 
 from components.layout import render_risk_gauge, safe_html
+from components.sidebar import render_sidebar_topbar
 from components.panel_kit import render_location_map, render_subsection
 from components.sidebar import render_sidebar_links
 from core.registry import SCENARIOS
@@ -345,6 +346,9 @@ def _render_live_area(
 
 # 페이지 엔트리
 def render_monitor_page() -> None:
+    # 사이드바 상단 바 (로고, 홈, 뒤로가기)
+    render_sidebar_topbar("?page=monitor")
+
     # 사이드바: 관찰 설정
     st.sidebar.markdown(
         """
@@ -384,9 +388,7 @@ def render_monitor_page() -> None:
             '<div class="scenario-hero">'
             '<div class="scenario-hero-eyebrow">REALTIME MONITORING</div>'
             '<div class="scenario-hero-title">실시간 모니터링</div>'
-            '</div>'
-            '<div class="scenario-hero-summary safe-card">'
-            '<div class="safe-muted">특정 관찰 대상을 선택해 워치 유입값을 분 단위 스트림으로 관찰하는 화면입니다.<br />'
+            '<div class="scenario-hero-sub">특정 관찰 대상을 선택해 워치 유입값을 분 단위 스트림으로 관찰하는 화면입니다.<br />'
             '이벤트 주입 버튼으로 유입값을 인위적으로 변동시켜 모델의 위험 반응을 확인할 수 있습니다.</div>'
             '</div>'
         ),

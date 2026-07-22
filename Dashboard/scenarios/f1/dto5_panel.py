@@ -65,7 +65,7 @@ def render_dto5_panel(row: pd.Series, dto5: dict, reason_text: str) -> None:
     alerts = dto5.get("alerts") or []
     first_alert = alerts[0] if alerts else {}
 
-    render_subsection("DTO-5 핵심 필드")
+    render_subsection("DTO-5 핵심 필드", first=True)
 
     e1_e2_tip = (
         f"e1_biometric: {_fmt_float(risk.get('e1_biometric'))}<br />"
@@ -110,10 +110,7 @@ def render_dto5_panel(row: pd.Series, dto5: dict, reason_text: str) -> None:
             + _quad_bubble(0, "Risk", risk_html)
             + _quad_bubble(1, "Fatigue", fatigue_html)
             + _quad_bubble(2, "Nearest Shelter", shelter_html)
-            + _quad_bubble(3, "Alert", alert_html, horizontal=False)
-            + '<div class="dto5-quad-center">'
-            + f'<img src="data:image/png;base64,{server_icon_b64()}" alt="서버" />'
-            + '</div>'
+            + _quad_bubble(3, "Alert", alert_html)
             + '</div>'
         ),
         unsafe_allow_html=True,

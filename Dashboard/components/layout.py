@@ -107,7 +107,6 @@ def inject_global_css() -> None:
             border-radius: 28px;
             padding: 42px 44px;
             background: linear-gradient(135deg, #f4f6f0 0%, #ffffff 46%, #eff7f1 100%);
-            box-shadow: 0 18px 48px rgba(16, 35, 63, 0.12);
             margin-bottom: 22px;
         }
         .safe-eyebrow { color: var(--safe-blue); font-weight: 800; letter-spacing: .08em; font-size: .9rem; }
@@ -118,7 +117,6 @@ def inject_global_css() -> None:
             border-radius: 20px;
             padding: 20px 22px;
             background: var(--safe-card);
-            box-shadow: 0 8px 24px rgba(16, 35, 63, 0.06);
             height: 100%;
         }
         .safe-card.soft { background: #f8f9f4; }
@@ -140,28 +138,43 @@ def inject_global_css() -> None:
             letter-spacing: -0.03em;
         }
 
-        /* panel 내부 소제목: 얇은 사다리꼴 리본을 글씨 하단에 배치 */
+        /* 본문 상세보기 expander: 박스 테두리 제거, 라벨과 화살표 한 줄 가운데 정렬.
+           라벨 래퍼에 Streamlit이 flex-grow와 width 100%를 주므로 !important로 눌러야
+           가운데 정렬이 적용된다 (사이드바 expander는 흰 카드 유지, 1.45.1 DOM 기준) */
+        [data-testid="stMain"] [data-testid="stExpander"] details {
+            border: none;
+        }
+        [data-testid="stMain"] [data-testid="stExpander"] summary {
+            display: flex;
+            flex-direction: row;
+            justify-content: center !important;
+            align-items: center;
+            gap: 6px;
+        }
+        [data-testid="stMain"] [data-testid="stExpander"] summary > span,
+        [data-testid="stMain"] [data-testid="stExpander"] summary > div,
+        [data-testid="stMain"] [data-testid="stExpander"] summary [data-testid="stMarkdownContainer"] {
+            flex: 0 0 auto !important;
+            width: auto !important;
+        }
+        [data-testid="stMain"] [data-testid="stExpander"] summary [data-testid="stMarkdownContainer"] p {
+            text-align: center;
+        }
+
+        /* panel 내부 소제목: 장식 없이 굵은 글씨로만 표기 */
         .panel-subsection {
             margin: 30px 0 14px;
         }
+        /* 배너 바로 아래 첫 소제목: 다른 패널 첫 내용과 시작선을 맞춤 */
+        .panel-subsection.first {
+            margin-top: 0;
+        }
         .panel-subsection span {
             display: inline-block;
-            position: relative;
             font-size: 1.25rem;
             font-weight: 800;
             color: #1f2937;
-            padding: 0 4px 10px 2px;
-        }
-        .panel-subsection span::after {
-            content: "";
-            position: absolute;
-            left: 0;
-            right: -30px;
-            bottom: 0;
-            height: 8px;
-            background: #2e6b35;
-            clip-path: polygon(0 0, 100% 0, calc(100% - 14px) 100%, 0 100%);
-            border-radius: 2px;
+            padding: 0 2px 2px;
         }
         .panel-banner-body {
             flex: 1;
@@ -210,50 +223,22 @@ def inject_global_css() -> None:
             flex-wrap: wrap;
             gap: 6px 52px;
         }
-        .dto5-quad .dto5-quad-bubble:nth-child(1) .dto5-quad-row,
-        .dto5-quad .dto5-quad-bubble:nth-child(3) .dto5-quad-row {
-            justify-content: flex-end;
+        /* 긴 알림 문구는 칸 폭 안에서 두 줄로 줄바꿈 */
+        .dto5-quad .dto1-block { min-width: 0; }
+        .dto5-quad .dto1-value {
+            white-space: normal;
+            word-break: keep-all;
+            line-height: 1.45;
         }
         .dto5-quad .dto1-bubble::after {
             display: none; /* 말풍선 꼬리는 사용하지 않음 */
         }
-        /* 꽃잎 구도: 바깥과 중앙 대각 모서리는 뾰족, 나머지 두 모서리는 크게 둥글린다 */
-        .dto5-quad .dto5-quad-bubble:nth-child(1) { border-radius: 6px 64px 6px 64px; }
-        .dto5-quad .dto5-quad-bubble:nth-child(2) { border-radius: 64px 6px 64px 6px; }
-        .dto5-quad .dto5-quad-bubble:nth-child(3) { border-radius: 64px 6px 64px 6px; }
-        .dto5-quad .dto5-quad-bubble:nth-child(4) { border-radius: 6px 64px 6px 64px; }
-        /* 글씨는 중앙(서버 아이콘) 쪽으로 정렬하되 중앙과 여유를 둔다 */
-        .dto5-quad .dto5-quad-bubble:nth-child(1),
-        .dto5-quad .dto5-quad-bubble:nth-child(3) {
-            text-align: right;
-            padding-right: 130px;
-        }
-        .dto5-quad .dto5-quad-bubble:nth-child(1) .dto1-label-row,
-        .dto5-quad .dto5-quad-bubble:nth-child(3) .dto1-label-row {
-            justify-content: flex-end;
-        }
-        .dto5-quad .dto5-quad-bubble:nth-child(2),
-        .dto5-quad .dto5-quad-bubble:nth-child(4) {
-            padding-left: 130px;
-        }
-        .dto5-quad-center {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 122px;
-            height: 122px;
-            border-radius: 999px;
-            background: #ffffff;
-            box-shadow: 0 0 0 12px #ffffff;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 2;
-        }
-        .dto5-quad-center img {
-            width: 62px;
-            height: 62px;
+        /* 4분할 카드: 다른 카드와 동일한 모서리(20px), 글씨 왼쪽 정렬 */
+        .dto5-quad .dto5-quad-bubble {
+            border-radius: 20px;
+            text-align: left;
+            padding-left: 34px;
+            padding-right: 34px;
         }
 
         /* [4] What-If: VS 게이지 레이아웃 */
@@ -266,48 +251,61 @@ def inject_global_css() -> None:
             line-height: 1.1;
         }
         .whatif-side-title {
-            text-align: center;
+            text-align: left;
             font-size: 1.2rem;
             font-weight: 800;
             color: #1f2937;
             margin: 0 0 2px;
         }
         .whatif-side-status {
-            text-align: center;
+            text-align: left;
             color: #475467;
             font-size: 1rem;
-            margin: 0 0 4px;
+            margin: 0;
         }
         .whatif-side-status b { color: #111827; }
+        /* 상태 줄의 값(수치, 등급, 피로 상태) 캡슐 */
+        .whatif-chip {
+            display: inline-block;
+            padding: 1px 11px;
+            border-radius: 999px;
+            background: #eef1e8;
+            border: 1px solid #dfe6d6;
+            color: #111827;
+            font-weight: 700;
+            font-size: .95rem;
+            line-height: 1.5;
+            vertical-align: baseline;
+        }
         .whatif-track {
+            position: relative;
             height: 26px;
             border-radius: 999px;
-            /* 파란기 없는 웜 그레이 바탕 */
-            background: #f1f0ec;
-            overflow: hidden;
+            /* 카드 팔레트와 동일한 연세이지 바탕 */
+            background: #ecefe2;
         }
-        .whatif-track.left {
-            display: flex;
-            justify-content: flex-end;
-        }
+        .whatif-track.gray { background: #ececea; }
         .whatif-fill {
+            position: absolute;
+            left: 0;
+            top: 0;
             height: 100%;
             border-radius: 999px;
         }
-        .whatif-fill.left { background: #9aa19a; }
+        .whatif-fill.gray { background: #d6d6d2; }
         .whatif-metric-label {
-            text-align: center;
+            text-align: left;
             font-size: 1.06rem;
             font-weight: 800;
             color: #2e6b35;
         }
+        .whatif-metric-label.gray { color: #374151; }
         .whatif-bar-value {
             font-size: 1.06rem;
             font-weight: 700;
             color: #111827;
             white-space: nowrap;
         }
-        .whatif-bar-value.left { text-align: right; }
         /* 오른쪽 게이지: 슬라이더 자체를 26px 알약 막대로 스타일링.
            채움은 테마 primary에 filter를 걸어 연한 초록 톤으로, 바탕은 밝은 웜 그레이로 보인다. */
         [class*="st-key-wfbar_"] [data-testid="stSlider"] {
@@ -343,7 +341,6 @@ def inject_global_css() -> None:
             height: 24px;
             background: #2e6b35;
             border: 2px solid #ffffff;
-            box-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);
             cursor: grab;
         }
         [class*="st-key-wfbar_"] div[data-baseweb="slider"] [role="slider"]:active {
@@ -351,86 +348,148 @@ def inject_global_css() -> None:
         }
 
         /* [2] Feature: 좌우 번갈아 배치되는 라운드 밴드 */
-        .feature-band-row {
+        /* [3] Model: 단계 카드 행, 마지막 대표값 카드만 초록 강조 (발표 슬라이드 구도) */
+        .model3-grid {
+            display: grid;
+            gap: 16px;
+            align-items: stretch;
+        }
+        .model3-card {
+            background: #e9ecdf;
+            border-radius: 14px;
+            padding: 26px 24px 28px;
             display: flex;
-            align-items: center;
-            margin: 18px 0;
+            flex-direction: column;
         }
-        .feature-band-row.reverse {
-            flex-direction: row-reverse;
+        .model3-card.highlight {
+            background: #5b8f62;
         }
-        .feature-band {
-            flex: 0 0 62%;
-            background: #e4e9db;
-            padding: 20px 30px;
+        .model3-name {
+            color: #2e6b35;
+            font-size: 1.06rem;
+            font-weight: 800;
+            letter-spacing: .01em;
         }
-        .feature-band-row:not(.reverse) .feature-band {
-            border-radius: 0 999px 999px 0;
-            margin-left: -1rem;
-            padding-left: calc(1rem + 30px);
-            padding-right: 56px;
-        }
-        .feature-band-row.reverse .feature-band {
-            border-radius: 999px 0 0 999px;
-            margin-right: -1rem;
-            padding-right: calc(1rem + 30px);
-            padding-left: 56px;
-        }
-        .feature-band-label {
-            color: #667085;
-            font-size: 1rem;
-            font-weight: 500;
-        }
-        .feature-band-value {
+        .model3-value {
             color: #111827;
-            font-size: 1.2rem;
-            font-weight: 800;
-            margin: 2px 0 10px;
+            font-size: 1.72rem;
+            font-weight: 900;
+            margin: 10px 0 12px;
         }
-        .feature-band-sub {
+        .model3-desc {
             color: #667085;
-            font-size: 1rem;
-            font-weight: 500;
-            margin-top: 6px;
+            font-size: .95rem;
+            line-height: 1.55;
+            word-break: keep-all;
         }
-        .feature-band-text {
-            color: #1f2937;
-            font-size: 1.1rem;
-            font-weight: 700;
-            line-height: 1.45;
+        .model3-card.highlight .model3-name { color: rgba(255, 255, 255, .85); }
+        .model3-card.highlight .model3-value { color: #ffffff; }
+        .model3-card.highlight .model3-desc { color: rgba(255, 255, 255, .82); }
+
+        /* [2] Feature: feature명 헤더 카드 + 본문 카드 (발표 슬라이드 팔레트) */
+        .feat2-grid {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 16px;
+            align-items: stretch;
         }
-        .feature-band-connector {
-            flex: 1;
+        .feat2-col {
             display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 0 16px;
+            flex-direction: column;
         }
-        .feature-band-row.reverse .feature-band-connector {
-            flex-direction: row-reverse;
-        }
-        .feature-band-connector .knot {
-            flex: 0 0 auto;
-            width: 15px;
-            height: 15px;
-            border-radius: 999px;
-            background: #c9d4bb;
-        }
-        .feature-band-connector .line {
-            flex: 1;
-            border-top: 3px dashed #c9d4bb;
-        }
-        .feature-band-name {
-            flex: 0 0 auto;
+        .feat2-head {
+            background: #dfe6d6;
+            color: #2e6b35;
             font-weight: 800;
+            font-size: 1.06rem;
+            text-align: center;
+            border-radius: 12px;
+            padding: 12px 10px;
+            letter-spacing: .01em;
+            word-break: break-all;
+        }
+        .feat2-body {
+            flex: 1;
+            margin-top: 12px;
+            background: #ecefe2;
+            border-radius: 12px;
+            padding: 18px 18px 20px;
+        }
+        .feat2-sub {
+            color: #667085;
+            font-size: .95rem;
+            font-weight: 500;
+            margin-top: 12px;
+        }
+        .feat2-sub:first-child { margin-top: 0; }
+        .feat2-text {
+            color: #1f2937;
+            font-size: 1rem;
+            font-weight: 700;
+            line-height: 1.5;
+            margin-top: 2px;
+            word-break: keep-all;
+        }
+
+        /* [1] Input: 왼쪽 현재 시점 카드 + 오른쪽 2x2 입력 카드 (연초록 팔레트) */
+        .dto1-grid {
+            display: grid;
+            grid-template-columns: 1fr 2.05fr;
+            gap: 16px;
+            align-items: stretch;
+        }
+        .dto1-clock-card {
+            background: #ecefe2;
+            border-radius: 14px;
+            padding: 22px 24px 24px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            gap: 22px;
+        }
+        .dto1-clock-title {
             color: #2e6b35;
             font-size: 1.2rem;
-            letter-spacing: .02em;
+            font-weight: 800;
+            margin-bottom: 8px;
         }
-        /* 오른쪽에 놓이는 feature 이름과 점선 사이 간격 */
-        .feature-band-row:not(.reverse) .feature-band-name {
-            margin-left: 14px;
+        .dto1-clock-head .time-value {
+            color: #667085;
+            font-size: 1rem;
+            font-weight: 600;
+            line-height: 1.5;
         }
+        .dto1-clock-wrap {
+            display: flex;
+            justify-content: flex-start;
+        }
+        .dto1-watch-img {
+            width: auto;
+            height: 130px;
+            margin-left: -10px; /* 카드 왼쪽 여백에 더 붙여 배치 */
+            margin-bottom: 14px; /* 카드 하단과의 간격 확보 */
+            opacity: .5; /* 진초록 아이콘을 연초록 톤으로 표현 */
+        }
+        .dto1-input-cards {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+        .dto1-input-card {
+            background: #ecefe2;
+            border-radius: 14px;
+            padding: 20px 22px;
+        }
+        .dto1-input-card .dto1-bubble-title {
+            color: #2e6b35;
+            margin-bottom: 10px;
+        }
+        .dto1-card-body {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4px 20px;
+        }
+        .dto1-input-card .dto1-value { font-size: 1.06rem; }
 
         /* [1] Input: 말풍선 4개 + 중앙 워치 구도 */
         .dto1-bubble-row {
@@ -500,11 +559,11 @@ def inject_global_css() -> None:
         .scenario-hero {
             /* 테마 primary(#2e6b35) 기준 초록. 본문 컨테이너 패딩(1rem)만큼
                좌우로 당겨 가로 가득 배치한다. */
-            background: linear-gradient(135deg, #2e6b35 0%, #1d4a26 100%);
+            background: #2e6b35;
             border-radius: 0;
             margin-left: -1rem;
             margin-right: -1rem;
-            padding: 32px calc(1rem + 34px) 88px;
+            padding: 32px calc(1rem + 34px) 30px;
             color: #ffffff;
         }
         .scenario-hero-eyebrow {
@@ -522,10 +581,12 @@ def inject_global_css() -> None:
             margin: 10px 0 0;
             padding: 0;
         }
-        .scenario-hero-summary {
-            position: relative;
-            z-index: 2;
-            margin: -62px 24px 0;
+        .scenario-hero-sub {
+            margin-top: 14px;
+            color: rgba(255, 255, 255, .86);
+            font-size: 1rem;
+            line-height: 1.65;
+            max-width: 980px;
         }
         .safe-card.amber { background: #fff8ec; border-color: #f1d19a; }
         .safe-card.red { background: #fff3f3; border-color: #efc0c0; }
@@ -626,7 +687,6 @@ def inject_global_css() -> None:
             font-size: .9rem;
             font-weight: 600;
             line-height: 1.45;
-            box-shadow: 0 10px 24px rgba(16, 35, 63, .18);
             z-index: 9999;
             white-space: normal;
             word-break: keep-all;
@@ -731,7 +791,6 @@ def inject_global_css() -> None:
             background: #ffffff;
             box-sizing: border-box;
             overflow: hidden;
-            box-shadow: 0 8px 22px rgba(16,35,63,.06);
         }
         .scenario-face {
             display: flex;
@@ -746,23 +805,19 @@ def inject_global_css() -> None:
         /* 종이: 크림색 배경과 연초록 괘선, hover 시 살짝 기울며 카드를 덮음 */
         .scenario-paper {
             position: absolute;
-            left: -5%;
-            top: 0;
-            width: 110%;
-            height: 106%;
+            inset: 0;
             box-sizing: border-box;
-            /* 좌우 5% 돌출과 회전 기울기를 감안해 안쪽 여백을 넉넉히 확보 */
-            padding: 24px 42px 28px;
+            padding: 22px 26px 20px;
             background: #f7f5ef;
             border-bottom: 1px solid #e3ded2;
-            transform: translateY(-114%);
+            transform: translateY(-104%);
             transition: transform .45s cubic-bezier(.25, .8, .3, 1);
             display: flex;
             flex-direction: column;
         }
         .scenario-card:hover .scenario-paper,
         .scenario-card:focus-visible .scenario-paper {
-            transform: translateY(-3%) rotate(-1.1deg);
+            transform: translateY(0);
         }
         .scenario-paper::before {
             content: "";
@@ -775,7 +830,7 @@ def inject_global_css() -> None:
         .scenario-paper-ribbon {
             position: absolute;
             top: 0;
-            left: 42px;
+            left: 26px;
             width: 16px;
             height: 46px;
             background: #2e6b35;
@@ -1003,7 +1058,6 @@ def inject_global_css() -> None:
             border-radius: 24px;
             padding: 24px 26px;
             background: linear-gradient(135deg, #f2fbf7 0%, #ffffff 58%, #fff8ec 100%);
-            box-shadow: 0 12px 30px rgba(16, 35, 63, 0.08);
             display: grid;
             grid-template-columns: minmax(0, 1.7fr) minmax(240px, .7fr);
             gap: 22px;
@@ -1063,7 +1117,6 @@ def inject_global_css() -> None:
             background: #ffffff;
             padding: 20px 22px;
             min-height: 142px;
-            box-shadow: 0 8px 24px rgba(16, 35, 63, .05);
         }
         .maml-flow-card.highlight {
             background: #f2fbf7;
@@ -1099,7 +1152,6 @@ def inject_global_css() -> None:
             background: #ffffff;
             padding: 22px 22px 20px;
             min-height: 340px;
-            box-shadow: 0 10px 28px rgba(16,35,63,.06);
         }
         .maml-persona-card.neutral { background: #f8f9f4; }
         .maml-persona-card.low { background: #fff8ec; border-color: #f1d19a; }
@@ -1273,7 +1325,7 @@ def inject_global_css() -> None:
            배경은 hero 배너와 같은 진초록 계열, 바탕 위 글씨는 흰색,
            카드류(시점 박스, expander)는 흰 카드로 띄워 대비 확보 */
         [data-testid="stSidebar"] {
-            background: linear-gradient(180deg, #2e6b35 0%, #235229 100%);
+            background: #2e6b35;
             border-right: 1px solid #1d4a26;
         }
         [data-testid="stSidebar"] hr {
@@ -1282,6 +1334,39 @@ def inject_global_css() -> None:
         [data-testid="stSidebar"] [data-testid="stSidebarCollapseButton"],
         [data-testid="stSidebar"] [data-testid="stSidebarCollapseButton"] button {
             color: #ffffff !important;
+        }
+        /* 사이드바 상단 바: 로고(왼쪽), 홈과 뒤로가기 아이콘(오른쪽) */
+        .sidebar-topbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin: 2px 0 30px;
+        }
+        .sidebar-topbar img {
+            height: 38px;
+        }
+        .sidebar-topbar-icons {
+            display: flex;
+            gap: 6px;
+        }
+        .sidebar-topbar-icons a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            text-decoration: none;
+        }
+        .sidebar-topbar-icons a:hover {
+            background: rgba(255, 255, 255, .14);
+        }
+        /* 사이드바 토글(위험도 내림차순 정렬 등): 트랙 흰색, 손잡이 진초록 */
+        [data-testid="stSidebar"] [data-testid="stCheckbox"] label[data-baseweb="checkbox"] > div:first-child {
+            background-color: rgba(255, 255, 255, .92) !important;
+        }
+        [data-testid="stSidebar"] [data-testid="stCheckbox"] label[data-baseweb="checkbox"] > div:first-child > div {
+            background-color: #2e6b35 !important;
         }
         /* 진초록 바탕 위 위젯 라벨: 셀렉트박스, 슬라이더, 토글, 라디오 등 (monitor 사이드바 포함)
            expander 흰 카드 내부에는 위젯 라벨이 없다는 전제의 규칙 */
@@ -1294,10 +1379,18 @@ def inject_global_css() -> None:
         [data-testid="stSidebar"] [data-testid="stSlider"] div[role="slider"] {
             background-color: #ffffff !important;
             border-color: #ffffff !important;
-            box-shadow: 0 0 0 1px #dfe6d6 !important;
+            box-shadow: 0 0 0 2px #2e6b35 !important;
         }
-        [data-testid="stSidebar"] [data-testid="stSlider"] [data-baseweb="slider"] div[style*="background"] {
-            background-color: #a3b285 !important;
+        /* 트랙: 채워진 구간(테마 primary 진초록)이 배경에 묻히므로
+           트랙 안쪽 div의 인라인 gradient를 통째로 흰색으로 덮는다 */
+        [data-testid="stSidebar"] [data-testid="stSlider"] [data-baseweb="slider"] > div:first-child > div:first-child {
+            background: rgba(255, 255, 255, .92) !important;
+        }
+        /* 최소/최대/현재값 표기: 배경 칩 제거, 흰 글자만 표시 */
+        [data-testid="stSidebar"] [data-testid="stSliderThumbValue"],
+        [data-testid="stSidebar"] [data-testid="stSliderTickBarMin"],
+        [data-testid="stSidebar"] [data-testid="stSliderTickBarMax"] {
+            background: transparent !important;
         }
         [data-testid="stSidebar"] [data-testid="stSliderThumbValue"],
         [data-testid="stSidebar"] [data-testid="stSliderTickBarMin"],
@@ -1501,7 +1594,6 @@ def inject_global_css() -> None:
             object-fit: contain;
             border-radius: 999px;
             background: rgba(255,255,255,.94);
-            box-shadow: 0 8px 26px rgba(0,0,0,.18);
         }
         .intro-lab-ko {
             color: #f7fff7;
@@ -1576,7 +1668,6 @@ def inject_global_css() -> None:
             color: #ffffff !important;
             font-weight: 900;
             letter-spacing: .02em;
-            box-shadow: 0 12px 28px rgba(0,0,0,.22);
             transition: transform .16s ease, background .16s ease;
         }
         .intro-cta:hover {
@@ -1650,11 +1741,11 @@ def inject_global_css() -> None:
         .model-contrib-fill {
             height: 100%;
             border-radius: 999px;
-            background: linear-gradient(90deg, #2e6b35, #5b8f62);
+            background: #2e6b35;
         }
-        .model-contrib-fill.green { background: linear-gradient(90deg, #1f7a5a, #35a37e); }
-        .model-contrib-fill.amber { background: linear-gradient(90deg, #ad741b, #d29a3f); }
-        .model-contrib-fill.gray { background: linear-gradient(90deg, #98a2b3, #b6bfcc); }
+        .model-contrib-fill.green { background: #1f7a5a; }
+        .model-contrib-fill.amber { background: #ad741b; }
+        .model-contrib-fill.gray { background: #98a2b3; }
 
         /* ── 신규: 실시간 모니터링 페이지 ── */
         .monitor-risk-now {
@@ -1928,9 +2019,7 @@ def render_scenario_select_page() -> None:
             '<div class="scenario-hero">'
             '<div class="scenario-hero-eyebrow">SAFE SCENARIOS</div>'
             '<h1 class="scenario-hero-title">시나리오 선택</h1>'
-            '</div>'
-            '<div class="safe-card scenario-hero-summary">'
-            '<div class="safe-muted">'
+            '<div class="scenario-hero-sub">'
             '카드에 마우스를 올리면 해당 시나리오 상세 설명 표시'
             '<br />카드를 누르면 해당 시나리오 대시보드로 바로 이동'
             '</div>'

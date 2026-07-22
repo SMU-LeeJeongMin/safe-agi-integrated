@@ -64,13 +64,12 @@ def _feature_summary(feature: str, item: dict[str, str]) -> str:
 
 
 def _render_feature_bands(calc_by_feature: dict[str, dict]) -> None:
-    """대표 feature 4개를 좌우 번갈아 배치되는 라운드 밴드로 렌더링한다.
+    """대표 feature 4개를 feature명 헤더 카드 + 본문 카드 구성으로 렌더링한다.
 
-    밴드 안: 라벨(i 툴팁), 값, 공식, 현재 시점 실제 값이 대입된 계산.
-    밴드 밖: 점선 커넥터와 feature 이름.
+    본문 카드 안: 제목(i 툴팁), 값, 공식, 현재 시점 실제 값이 대입된 계산.
     """
-    rows_html: list[str] = []
-    for i, feature in enumerate(KEY_FEATURES):
+    cols_html: list[str] = []
+    for feature in KEY_FEATURES:
         item = calc_by_feature.get(feature)
         if not item:
             continue
@@ -86,23 +85,20 @@ def _render_feature_bands(calc_by_feature: dict[str, dict]) -> None:
             if desc
             else ""
         )
-        # 첫 행은 feature명이 왼쪽(밴드가 오른쪽)에서 시작하도록 교대
-        reverse_class = " reverse" if i % 2 == 0 else ""
-        rows_html.append(
-            f'<div class="feature-band-row{reverse_class}">'
-            '<div class="feature-band">'
-            f'<div class="feature-band-label">{escape(title)}{tooltip_html}</div>'
-            f'<div class="feature-band-value">{escape(str(value))}</div>'
-            '<div class="feature-band-sub">공식</div>'
-            f'<div class="feature-band-text">{escape(formula)}</div>'
-            '<div class="feature-band-sub">현재 시점 계산</div>'
-            f'<div class="feature-band-text">{escape(calc)} = {escape(str(value))}</div>'
+        cols_html.append(
+            '<div class="feat2-col">'
+            f'<div class="feat2-head">{escape(feature)}</div>'
+            '<div class="feat2-body">'
+            f'<div class="feat2-sub">{escape(title)}{tooltip_html}</div>'
+            f'<div class="feat2-text">{escape(str(value))}</div>'
+            '<div class="feat2-sub">공식</div>'
+            f'<div class="feat2-text">{escape(formula)}</div>'
+            '<div class="feat2-sub">현재 시점 계산</div>'
+            f'<div class="feat2-text">{escape(calc)} = {escape(str(value))}</div>'
             '</div>'
-            '<div class="feature-band-connector"><span class="knot"></span><span class="line"></span></div>'
-            f'<div class="feature-band-name">{escape(feature)}</div>'
             '</div>'
         )
-    st.markdown("".join(rows_html), unsafe_allow_html=True)
+    st.markdown(f'<div class="feat2-grid">{"".join(cols_html)}</div>', unsafe_allow_html=True)
 
 
 def render_feature_engineering_panel(
@@ -115,7 +111,7 @@ def render_feature_engineering_panel(
     calc_rows = build_feature_calculations(row)
     calc_by_feature = {item["feature"]: item for item in calc_rows}
 
-    render_subsection("F1 시나리오에 사용되는 대표 Feature")
+    render_subsection("F1 시나리오에 사용되는 대표 Feature", first=True)
     st.markdown(
         '<div class="panel-description">F1은 "이 사람이 평소보다 힘들어하는가"를 판단합니다. '
         '그래서 심박 절대값이 아니라 개인 기준 대비 비율(ratio, z)로 변환합니다.</div>',
@@ -125,10 +121,6 @@ def render_feature_engineering_panel(
 
     st.markdown('<div class="feature-table-gap"></div>', unsafe_allow_html=True)
     with st.expander("전체 feature table 보기"):
-        st.markdown(
-            '<div class="panel-description">왼쪽 index 0~115는 산행 중 116개의 1분 시점을 의미하고, 20 feature는 모델 입력으로 사용하는 20개 컬럼을 의미합니다.</div>',
-            unsafe_allow_html=True,
-        )
         st.dataframe(features, use_container_width=True)
 
 

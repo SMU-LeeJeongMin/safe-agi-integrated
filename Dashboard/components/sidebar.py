@@ -69,6 +69,59 @@ def _dto_timestamp(dto5_sequence: list[dict[str, Any]], index: int) -> Any:
     return item.get("timestamp") or item.get("ts") or item.get("trigger_ts")
 
 
+@st.cache_data(show_spinner=False)
+def _sookmyung_logo_b64() -> str:
+    """사이드바 상단 바에 쓰는 숙명여대 로고(base64)."""
+    import base64
+    from pathlib import Path
+
+    path = Path(__file__).resolve().parent.parent / "assets" / "sookmyung_logo.webp"
+    return base64.b64encode(path.read_bytes()).decode("ascii")
+
+
+def render_sidebar_topbar(current_url: str | None = None) -> None:
+    """사이드바 최상단 바를 렌더링한다.
+
+    왼쪽에 숙명여대 로고, 오른쪽에 홈(시나리오 선택 이동)과 뒤로가기 아이콘.
+    components.html(iframe)은 샌드박스 때문에 부모 창 이동이 막혀
+    순수 링크와 세션 기반 자체 히스토리로 구현한다.
+    current_url을 넘기면 방문 기록에 쌓여 뒤로가기 대상이 된다.
+    """
+    history: list[str] = st.session_state.setdefault("_nav_history", [])
+    if current_url:
+        if not history or history[-1] != current_url:
+            history.append(current_url)
+            if len(history) > 8:
+                del history[: len(history) - 8]
+    back_href = history[-2] if len(history) >= 2 else "?page=scenario"
+
+    home_svg = (
+        '<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#ffffff"'
+        ' stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">'
+        '<path d="M3 10.5 12 3l9 7.5" /><path d="M5.5 9.5V21h13V9.5" />'
+        '</svg>'
+    )
+    back_svg = (
+        '<svg width="27" height="27" viewBox="0 0 24 24" fill="none" stroke="#ffffff"'
+        ' stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round">'
+        '<path d="M20 5H9L3 12l6 7h11a1 1 0 0 0 1-1V6a1 1 0 0 0-1-1Z" />'
+        '<path d="m11.5 9.5 5 5M16.5 9.5l-5 5" />'
+        '</svg>'
+    )
+    st.sidebar.markdown(
+        (
+            '<div class="sidebar-topbar">'
+            f'<img src="data:image/webp;base64,{_sookmyung_logo_b64()}" alt="숙명여자대학교" />'
+            '<div class="sidebar-topbar-icons">'
+            f'<a href="?page=scenario" target="_self" title="시나리오 선택으로 이동" aria-label="시나리오 선택으로 이동">{home_svg}</a>'
+            f'<a href="{back_href}" target="_self" title="뒤로가기" aria-label="뒤로가기">{back_svg}</a>'
+            '</div>'
+            '</div>'
+        ),
+        unsafe_allow_html=True,
+    )
+
+
 def render_sidebar_links() -> None:
     """공통 작업 링크(GitHub 등)를 사이드바 최하단에 고정 표시한다."""
     st.sidebar.divider()
