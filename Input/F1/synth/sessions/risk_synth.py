@@ -36,20 +36,24 @@ class SituationProfile:
 
 
 PROFILES = [
-    # 정상: 원본 후반 고강도를 눌러 순수 정상화 (hr_cap 로 전체 상한)
-    SituationProfile("정상", hr_ratio_peak=0.70, spo2_floor=96,
+    # 등급별 후반 peak 신호를 목표 e1(윈도우 max 기준)에 역산 정합:
+    #   정상 e1<0.5, 주의~0.59, 경고~0.79, 위험~0.94 (rule_ref e1 공식 기준)
+    # 정상: ratio<0.6(규칙 과부하 경계) 미만 유지 — 3차결과물 "정상 과부하비 0.6 미만".
+    SituationProfile("정상", hr_ratio_peak=0.56, spo2_floor=97,
                      overload_minutes=0,  move_drop=0.0, weight=0.50,
-                     hr_cap=0.74, hr_z_peak=0.0),
-    SituationProfile("주의", hr_ratio_peak=0.80, spo2_floor=95,
-                     overload_minutes=6,  move_drop=0.2, weight=0.20,
-                     hr_cap=0.85, hr_z_peak=5.0),
-    SituationProfile("경고", hr_ratio_peak=0.88, spo2_floor=93,
-                     overload_minutes=8,  move_drop=0.4, weight=0.20,
-                     hr_cap=0.92, hr_z_peak=9.0),
-    # 위험: 여러 축 동시 (SpO2 위험 + 과부하 + 개인편차 + 이동저하)
-    SituationProfile("위험", hr_ratio_peak=0.97, spo2_floor=87,
-                     overload_minutes=12, move_drop=0.75, weight=0.10,
-                     hr_cap=1.0, hr_z_peak=16.0),
+                     hr_cap=0.58, hr_z_peak=0.0),
+    # 주의: ratio~0.70, spo2 95, hr_z 5 → e1~0.59
+    SituationProfile("주의", hr_ratio_peak=0.70, spo2_floor=95,
+                     overload_minutes=6,  move_drop=0.2, weight=0.30,
+                     hr_cap=0.72, hr_z_peak=5.0),
+    # 경고: ratio~0.80, spo2 93, hr_z 9 → e1~0.79
+    SituationProfile("경고", hr_ratio_peak=0.80, spo2_floor=93,
+                     overload_minutes=8,  move_drop=0.4, weight=0.13,
+                     hr_cap=0.82, hr_z_peak=9.0),
+    # 위험: ratio~0.92, spo2 88↓, hr_z 14 → e1~0.90+
+    SituationProfile("위험", hr_ratio_peak=0.92, spo2_floor=88,
+                     overload_minutes=12, move_drop=0.75, weight=0.12,
+                     hr_cap=0.96, hr_z_peak=14.0),
 ]
 
 

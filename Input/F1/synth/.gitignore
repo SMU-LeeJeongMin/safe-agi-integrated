@@ -1,0 +1,20 @@
+# Phase 2 데이터 파일 — 코드로 재생성되므로 커밋 제외
+# (원재료·대용량. 필요 시 Git LFS 또는 별도 스토리지 사용)
+
+# 세션 원재료 (window 의 입력·생성근거. 학습용 아님 → 코드로 재생성)
+sessions/synth_sessions.csv
+sessions/out/
+sessions/sessions_summary.json
+
+# 윈도우 학습셋 (최종 학습본이나 대용량 ~627MB → LFS/별도 스토리지 권장)
+windows/window_dataset.csv
+windows/window_dataset_sample.csv
+windows/out_window_dataset.csv
+windows/out/
+
+# 국건영 부트스트랩 원본값 (10MB. 요약표만 커밋, 샘플은 별도 배치)
+sessions/dist_samples_knhanes.csv
+
+# 파이썬
+__pycache__/
+*.pyc
