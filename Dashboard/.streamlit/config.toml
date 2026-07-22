@@ -1,3 +1,6 @@
+[server]
+enableStaticServing = true
+
 [theme]
 primaryColor = "#2e6b35"
 dataframeHeaderBackgroundColor = "#dfe6d6"

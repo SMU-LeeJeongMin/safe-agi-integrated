@@ -210,7 +210,7 @@ def _render_live_area(
             st.markdown(
                 (
                     '<span style="display:inline-flex; align-items:center; gap:6px; margin-left:-16px; position:relative; top:5px;">'
-                    '<span style="font-weight:400; font-size:0.875rem; color:#31333f;">수치를 그래프로 보기</span>'
+                    '<span style="font-weight:400; font-size:.9rem; color:#31333f;">수치를 그래프로 보기</span>'
                     '<span class="dto1-tooltip" aria-label="설명 보기">i'
                     '<span class="dto1-tooltip-text">끄면 기존 숫자 카드로 표시합니다.</span>'
                     '</span>'
@@ -242,9 +242,9 @@ def _render_live_area(
                         st.markdown(
                             (
                                 f'<div style="padding: 0 6px 14px;">'
-                                f'<div class="safe-muted" style="font-size: 0.9rem;">{safe_html(label)}</div>'
+                                f'<div class="safe-muted" style="font-size: .9rem;">{safe_html(label)}</div>'
                                 f'<div style="font-size: 1.5rem; font-weight: 700; line-height: 1.2;">{safe_html(value_text)}</div>'
-                                f'<div class="safe-muted" style="font-size: 0.82rem;">{safe_html(value_sub)}</div>'
+                                f'<div class="safe-muted" style="font-size: .84rem;">{safe_html(value_sub)}</div>'
                                 '</div>'
                             ),
                             unsafe_allow_html=True,

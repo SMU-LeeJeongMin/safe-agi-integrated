@@ -83,8 +83,8 @@ def render_scenario_header(eyebrow: str, title: str, summary_html: str, notice_h
         st.markdown(
             (
                 '<div style="height:22px;"></div>'
-                '<div style="background:#eef5ff; border-radius:10px; padding:18px 20px;'
-                ' color:#1f3b5d; line-height:1.65; font-size:1.02rem;">'
+                '<div style="background:#eef1e8; border-radius:10px; padding:18px 20px;'
+                ' color:#33402c; line-height:1.65; font-size:1rem;">'
                 f'{notice_html}'
                 '</div>'
             ),
@@ -425,7 +425,7 @@ def render_location_map(
 
         scatter_df = map_df.copy()
         scatter_df["color"] = scatter_df["kind"].apply(
-            lambda kind: [36, 84, 166, 215] if kind == "current" else [200, 62, 62, 225]
+            lambda kind: [46, 107, 53, 215] if kind == "current" else [200, 62, 62, 225]
         )
         scatter_df["size"] = scatter_df["kind"].apply(lambda kind: 75 if kind == "current" else 92)
 
@@ -490,7 +490,7 @@ def render_location_map(
                 {
                     "lat": p["lat"],
                     "lon": p["lon"],
-                    "color": "#2454a6" if p.get("kind") == "current" else "#c83e3e",
+                    "color": "#2e6b35" if p.get("kind") == "current" else "#c83e3e",
                     "size": 40 if p.get("kind") == "current" else 48,
                 }
                 for p in points

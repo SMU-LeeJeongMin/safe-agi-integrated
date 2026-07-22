@@ -67,15 +67,31 @@ def inject_global_css() -> None:
     st.markdown(
         """
         <style>
+        /* Pretendard 가변 폰트 (로컬 서빙): static/fonts/PretendardVariable.woff2,
+           .streamlit/config.toml의 enableStaticServing = true 전제.
+           아이콘 폰트와 코드 폰트는 적용 대상에서 제외 */
+        @font-face {
+            font-family: "Pretendard Variable";
+            font-weight: 45 920;
+            font-style: normal;
+            font-display: swap;
+            src: local("Pretendard Variable"),
+                 url("app/static/fonts/PretendardVariable.woff2") format("woff2-variations");
+        }
+        html, body,
+        [data-testid="stAppViewContainer"] *:not([data-testid="stIconMaterial"]):not([class*="material-symbols"]):not(code):not(pre):not(kbd):not(samp),
+        [data-testid="stSidebar"] *:not([data-testid="stIconMaterial"]):not([class*="material-symbols"]):not(code):not(pre) {
+            font-family: "Pretendard Variable", Pretendard, "Malgun Gothic", "Apple SD Gothic Neo", sans-serif !important;
+        }
         :root {
             --safe-navy: #10233f;
-            --safe-blue: #2454a6;
-            --safe-sky: #eef5ff;
+            --safe-blue: #2e6b35;  /* 구 파란 브랜드색을 진초록으로 재지정 (변수명은 호환 유지) */
+            --safe-sky: #eef1e8;
             --safe-green: #1f7a5a;
             --safe-red: #c83e3e;
             --safe-amber: #ad741b;
             --safe-gray: #667085;
-            --safe-border: #d9e2f2;
+            --safe-border: #e2e5dc;
             --safe-card: #ffffff;
         }
         .block-container { padding-top: 3.4rem; max-width: 1320px; }
@@ -85,18 +101,18 @@ def inject_global_css() -> None:
         h1 { font-size: 2.75rem !important; letter-spacing: -0.035em; }
         h2, h3 { letter-spacing: -0.025em; }
         [data-testid="stMetricValue"] { font-size: 2.25rem; }
-        [data-testid="stMetricLabel"] { font-size: 1.04rem; }
+        [data-testid="stMetricLabel"] { font-size: 1.06rem; }
         .safe-hero {
             border: 1px solid var(--safe-border);
             border-radius: 28px;
             padding: 42px 44px;
-            background: linear-gradient(135deg, #f6f9ff 0%, #ffffff 46%, #eff7f1 100%);
+            background: linear-gradient(135deg, #f4f6f0 0%, #ffffff 46%, #eff7f1 100%);
             box-shadow: 0 18px 48px rgba(16, 35, 63, 0.12);
             margin-bottom: 22px;
         }
         .safe-eyebrow { color: var(--safe-blue); font-weight: 800; letter-spacing: .08em; font-size: .9rem; }
         .safe-title { color: var(--safe-navy); font-size: 3.35rem; line-height: 1.08; font-weight: 900; margin: 10px 0 12px; letter-spacing: -0.05em; }
-        .safe-subtitle { color: #344054; font-size: 1.26rem; line-height: 1.65; max-width: 880px; }
+        .safe-subtitle { color: #344054; font-size: 1.25rem; line-height: 1.65; max-width: 880px; }
         .safe-card {
             border: 1px solid var(--safe-border);
             border-radius: 20px;
@@ -105,7 +121,7 @@ def inject_global_css() -> None:
             box-shadow: 0 8px 24px rgba(16, 35, 63, 0.06);
             height: 100%;
         }
-        .safe-card.soft { background: #f8fbff; }
+        .safe-card.soft { background: #f8f9f4; }
         .safe-card.green { background: #f2fbf7; border-color: #cdebdc; }
 
         /* 패널 제목 배너: 왼쪽 큰 번호 + 오른쪽 사선 초록 리본 */
@@ -251,7 +267,7 @@ def inject_global_css() -> None:
         }
         .whatif-side-title {
             text-align: center;
-            font-size: 1.25rem;
+            font-size: 1.2rem;
             font-weight: 800;
             color: #1f2937;
             margin: 0 0 2px;
@@ -259,7 +275,7 @@ def inject_global_css() -> None:
         .whatif-side-status {
             text-align: center;
             color: #475467;
-            font-size: 1.0rem;
+            font-size: 1rem;
             margin: 0 0 4px;
         }
         .whatif-side-status b { color: #111827; }
@@ -281,12 +297,12 @@ def inject_global_css() -> None:
         .whatif-fill.left { background: #9aa19a; }
         .whatif-metric-label {
             text-align: center;
-            font-size: 1.1rem;
+            font-size: 1.06rem;
             font-weight: 800;
             color: #2e6b35;
         }
         .whatif-bar-value {
-            font-size: 1.05rem;
+            font-size: 1.06rem;
             font-weight: 700;
             color: #111827;
             white-space: nowrap;
@@ -362,7 +378,7 @@ def inject_global_css() -> None:
         }
         .feature-band-label {
             color: #667085;
-            font-size: 1.0rem;
+            font-size: 1rem;
             font-weight: 500;
         }
         .feature-band-value {
@@ -373,7 +389,7 @@ def inject_global_css() -> None:
         }
         .feature-band-sub {
             color: #667085;
-            font-size: 1.0rem;
+            font-size: 1rem;
             font-weight: 500;
             margin-top: 6px;
         }
@@ -476,7 +492,7 @@ def inject_global_css() -> None:
             font-size: .95rem;
         }
         .dto1-watch-time .time-value {
-            font-size: 1.02rem;
+            font-size: 1rem;
             font-weight: 600;
         }
 
@@ -515,12 +531,12 @@ def inject_global_css() -> None:
         .safe-card.red { background: #fff3f3; border-color: #efc0c0; }
         .safe-card h3, .safe-card h4 { margin-top: 0; color: var(--safe-navy); }
         .safe-card h3 { font-size: 1.55rem; }
-        .safe-card h4 { font-size: 1.22rem; }
+        .safe-card h4 { font-size: 1.2rem; }
         .safe-card .big { font-size: 2.05rem; font-weight: 900; color: var(--safe-navy); }
 
         .panel-description {
             color: #98a2b3;
-            font-size: 1.00rem;
+            font-size: 1rem;
             line-height: 1.65;
             margin: -8px 0 18px;
         }
@@ -561,7 +577,7 @@ def inject_global_css() -> None:
         .dto1-main-value {
             color: var(--safe-navy);
             font-size: 1.72rem;
-            font-weight: 950;
+            font-weight: 900;
             line-height: 1.22;
             margin: 26px 0 16px;
         }
@@ -588,7 +604,7 @@ def inject_global_css() -> None:
             width: 16px;
             height: 16px;
             border-radius: 999px;
-            background: #eef2f7;
+            background: #f1f0ec;
             color: #667085;
             font-size: .72rem;
             font-weight: 800;
@@ -607,7 +623,7 @@ def inject_global_css() -> None:
             border-radius: 10px;
             background: #10233f;
             color: #ffffff;
-            font-size: .92rem;
+            font-size: .9rem;
             font-weight: 600;
             line-height: 1.45;
             box-shadow: 0 10px 24px rgba(16, 35, 63, .18);
@@ -664,14 +680,14 @@ def inject_global_css() -> None:
         .feature-formula-label {
             display: block;
             color: #667085;
-            font-size: .96rem;
+            font-size: .95rem;
             font-weight: 500;
             margin-bottom: 3px;
         }
         .feature-formula-text {
             display: block;
             color: #475467;
-            font-size: .98rem;
+            font-size: 1rem;
             line-height: 1.45;
             font-weight: 500;
             word-break: keep-all;
@@ -679,7 +695,7 @@ def inject_global_css() -> None:
         .dto1-value {
             color: var(--safe-navy);
             font-size: 1.72rem;
-            font-weight: 950;
+            font-weight: 900;
             line-height: 1.18;
         }
         .dto1-note {
@@ -693,8 +709,8 @@ def inject_global_css() -> None:
         .safe-muted { color: var(--safe-gray); font-size: 1.06rem; line-height: 1.65; }
         .safe-pill {
             display: inline-flex; align-items: center; gap: 6px;
-            padding: 6px 11px; border-radius: 999px; background: #eef5ff;
-            border: 1px solid #d3e1fb; color: #163a70; font-weight: 800; font-size: .86rem;
+            padding: 6px 11px; border-radius: 999px; background: #eef1e8;
+            border: 1px solid #dfe6d6; color: #33402c; font-weight: 800; font-size: .84rem;
         }
         .safe-pill.gray { background: #f2f4f7; border-color: #e4e7ec; color: #667085; }
         .safe-pill.green { background: #eaf8f0; border-color: #c7ead5; color: #16734f; }
@@ -803,7 +819,7 @@ def inject_global_css() -> None:
         }
         .pipeline-step {
             border: 1px solid var(--safe-border); border-radius: 14px; padding: 12px 10px; background: #ffffff; text-align: center;
-            font-weight: 800; font-size: .86rem; color: var(--safe-navy);
+            font-weight: 800; font-size: .84rem; color: var(--safe-navy);
         }
         .pipeline-step span { display: block; color: var(--safe-gray); font-size: .76rem; font-weight: 700; margin-bottom: 3px; }
         .risk-gauge-wrap { position: relative; margin: 22px 0 20px; padding-top: 30px; }
@@ -812,7 +828,7 @@ def inject_global_css() -> None:
             height: 34px;
             border-radius: 999px;
             overflow: hidden;
-            border: 1px solid #cfd8e8;
+            border: 1px solid #dfe6d6;
             background: linear-gradient(to right, #e8f5ed 0%, #e8f5ed 50%, #fff4db 50%, #fff4db 65%, #ffe0e0 65%, #ffe0e0 85%, #f2b6b6 85%, #f2b6b6 100%);
         }
         .risk-marker {
@@ -828,8 +844,8 @@ def inject_global_css() -> None:
             position: absolute;
             top: 0;
             transform: translateX(-50%);
-            font-size: 1.08rem;
-            font-weight: 950;
+            font-size: 1.06rem;
+            font-weight: 900;
             white-space: nowrap;
             letter-spacing: -0.01em;
         }
@@ -843,7 +859,7 @@ def inject_global_css() -> None:
             top: 0;
             transform: translateX(-50%);
             color: #344054;
-            font-size: 1.08rem;
+            font-size: 1.06rem;
             font-weight: 600;
             white-space: nowrap;
         }
@@ -852,7 +868,7 @@ def inject_global_css() -> None:
             top: 24px;
             transform: translateX(-50%);
             color: #667085;
-            font-size: 1.02rem;
+            font-size: 1rem;
             font-weight: 500;
             white-space: nowrap;
         }
@@ -889,17 +905,17 @@ def inject_global_css() -> None:
         }
         .model-importance-title {
             color: var(--safe-navy);
-            font-size: 1.22rem;
-            font-weight: 850;
+            font-size: 1.2rem;
+            font-weight: 800;
             line-height: 1.45;
         }
         .model-importance-title span {
             color: #475467;
-            font-weight: 650;
+            font-weight: 600;
         }
         .model-importance-reason {
             color: #667085;
-            font-size: 1.08rem;
+            font-size: 1.06rem;
             line-height: 1.65;
             margin-top: 8px;
         }
@@ -926,7 +942,7 @@ def inject_global_css() -> None:
         }
         .model-step-summary {
             color: #475467;
-            font-size: 1.02rem;
+            font-size: 1rem;
             line-height: 1.58;
             min-height: 76px;
             word-break: keep-all;
@@ -943,7 +959,7 @@ def inject_global_css() -> None:
         .model-formula-label {
             display: block;
             color: #667085;
-            font-size: .96rem;
+            font-size: .95rem;
             font-weight: 500;
             margin-bottom: 4px;
         }
@@ -963,18 +979,18 @@ def inject_global_css() -> None:
             margin: 0 0 10px;
         }
         .whatif-current-line b {
-            font-size: 1.14rem;
+            font-size: 1.12rem;
             font-weight: 900;
         }
         .main [data-testid="stSlider"] label,
         .main [data-testid="stSlider"] label p {
-            font-size: 1.08rem !important;
+            font-size: 1.06rem !important;
             color: var(--safe-navy) !important;
-            font-weight: 650 !important;
+            font-weight: 600 !important;
         }
         .main [data-testid="stSlider"] [data-testid="stTickBarMin"],
         .main [data-testid="stSlider"] [data-testid="stTickBarMax"] {
-            font-size: 1.02rem !important;
+            font-size: 1rem !important;
         }
         .main [data-testid="stSlider"] {
             font-size: 1.06rem !important;
@@ -1003,12 +1019,12 @@ def inject_global_css() -> None:
         }
         .maml-hero-desc {
             color: #667085;
-            font-size: 1.04rem;
+            font-size: 1.06rem;
             line-height: 1.65;
             word-break: keep-all;
         }
         .maml-current-box {
-            border: 1px solid #d9e2f2;
+            border: 1px solid #e2e5dc;
             border-radius: 18px;
             background: rgba(255,255,255,.78);
             padding: 18px 20px;
@@ -1016,7 +1032,7 @@ def inject_global_css() -> None:
         .maml-current-box span {
             display: block;
             color: #667085;
-            font-size: .98rem;
+            font-size: 1rem;
             font-weight: 600;
             margin-bottom: 4px;
         }
@@ -1061,7 +1077,7 @@ def inject_global_css() -> None:
         .maml-flow-card b {
             display: block;
             color: var(--safe-navy);
-            font-size: 1.22rem;
+            font-size: 1.2rem;
             margin: 8px 0 8px;
         }
         .maml-flow-card p {
@@ -1074,7 +1090,7 @@ def inject_global_css() -> None:
         .maml-flow-arrow {
             color: #2e6b35;
             font-size: 2.4rem;
-            font-weight: 950;
+            font-weight: 900;
             text-align: center;
         }
         .maml-persona-card {
@@ -1085,12 +1101,12 @@ def inject_global_css() -> None:
             min-height: 340px;
             box-shadow: 0 10px 28px rgba(16,35,63,.06);
         }
-        .maml-persona-card.neutral { background: #f8fbff; }
+        .maml-persona-card.neutral { background: #f8f9f4; }
         .maml-persona-card.low { background: #fff8ec; border-color: #f1d19a; }
         .maml-persona-card.high { background: #f2fbf7; border-color: #cdebdc; }
         .maml-persona-title {
             color: var(--safe-navy);
-            font-size: 1.25rem;
+            font-size: 1.2rem;
             font-weight: 900;
             margin-bottom: 6px;
         }
@@ -1156,8 +1172,8 @@ def inject_global_css() -> None:
             display: inline-flex;
             border-radius: 999px;
             padding: 7px 12px;
-            font-size: .92rem;
-            font-weight: 850;
+            font-size: .9rem;
+            font-weight: 800;
             border: 1px solid #e4e7ec;
             background: #ffffff;
             color: #344054;
@@ -1183,13 +1199,13 @@ def inject_global_css() -> None:
         .status-hit { color: #16734f; font-weight: 900; }
         .status-miss { color: #667085; font-weight: 800; }
         .app-preview {
-            border-radius: 28px; border: 1px solid #cfd8e8; background: #f9fbff; padding: 22px;
-            box-shadow: inset 0 0 0 8px #eef3fb;
+            border-radius: 28px; border: 1px solid #dfe6d6; background: #f8f9f4; padding: 22px;
+            box-shadow: inset 0 0 0 8px #eef1e8;
         }
-        .app-preview-inner { background: #ffffff; border-radius: 22px; padding: 20px; border: 1px solid #e4eaf5; }
+        .app-preview-inner { background: #ffffff; border-radius: 22px; padding: 20px; border: 1px solid #e3e6dd; }
         .icon-row { display:flex; gap:12px; flex-wrap:wrap; align-items:center; margin: 8px 0; }
         .legend-dot { width: 14px; height: 14px; border-radius: 999px; display: inline-block; margin-right: 6px; vertical-align: middle; }
-        .dot-blue { background:#2454a6; } .dot-red { background:#c83e3e; }
+        .dot-blue { background:#2e6b35; } .dot-red { background:#c83e3e; }
 
         .dto5-core-card {
             min-height: 292px;
@@ -1222,20 +1238,20 @@ def inject_global_css() -> None:
             align-items: start;
         }
         .dto5-alert-title {
-            font-size: 1.28rem;
+            font-size: 1.2rem;
             line-height: 1.45;
-            font-weight: 850;
+            font-weight: 800;
         }
         .dto5-alert-message {
             color: var(--safe-navy);
-            font-size: 1.28rem;
-            font-weight: 850;
+            font-size: 1.25rem;
+            font-weight: 800;
             line-height: 1.45;
             word-break: keep-all;
         }
         .dto5-map-legend {
-            font-size: 1.02rem;
-            font-weight: 650;
+            font-size: 1rem;
+            font-weight: 600;
             color: #344054;
         }
         .mountain-mark {
@@ -1246,7 +1262,7 @@ def inject_global_css() -> None:
             height: 18px;
             margin-right: 6px;
             color: #2e6b35;
-            font-weight: 950;
+            font-weight: 900;
             vertical-align: middle;
         }
         .infer-save-gap {
@@ -1323,13 +1339,13 @@ def inject_global_css() -> None:
         }
         .sidebar-time-label {
             color: #111827;
-            font-size: .94rem;
+            font-size: .95rem;
             font-weight: 900;
             margin-bottom: 4px;
         }
         .sidebar-time-value {
             color: #2e6b35;
-            font-size: .98rem;
+            font-size: 1rem;
             font-weight: 800;
             line-height: 1.35;
         }
@@ -1338,7 +1354,7 @@ def inject_global_css() -> None:
             padding-left: 10px;
             border-left: 4px solid #dfe6d6;
             color: #ffffff;
-            font-size: 1.1rem;
+            font-size: 1.12rem;
             font-weight: 900;
             line-height: 1.25;
         }
@@ -1346,7 +1362,7 @@ def inject_global_css() -> None:
             margin: 0 0 8px;
             padding-left: 14px;
             color: rgba(255, 255, 255, .78);
-            font-size: .94rem;
+            font-size: .95rem;
             font-weight: 400;
             line-height: 1.45;
         }
@@ -1362,7 +1378,7 @@ def inject_global_css() -> None:
             border-radius: 10px;
             color: #1f2937 !important;
             text-decoration: none !important;
-            font-weight: 750;
+            font-weight: 700;
             border: 1px solid transparent;
             line-height: 1.25;
         }
@@ -1382,7 +1398,7 @@ def inject_global_css() -> None:
         }
         [data-testid="stSidebar"] details summary [data-testid="stMarkdownContainer"] p {
             font-size: .95rem;
-            font-weight: 750;
+            font-weight: 700;
         }
 
         .scenario-sidebar-nav a {
@@ -1504,7 +1520,7 @@ def inject_global_css() -> None:
             max-width: 1150px;
             font-size: clamp(3.2rem, 6.3vw, 6.9rem);
             line-height: 1.02;
-            font-weight: 950;
+            font-weight: 900;
             letter-spacing: -.035em;
             margin: 0 0 22px;
             color: #ffffff;
@@ -1522,8 +1538,8 @@ def inject_global_css() -> None:
             letter-spacing: -.035em;
             color: rgba(255,255,255,.88);
         }
-        .intro-platform .green { color: #9cc567; font-weight: 950; }
-        .intro-platform .orange { color: #f2952d; font-weight: 950; }
+        .intro-platform .green { color: #9cc567; font-weight: 900; }
+        .intro-platform .orange { color: #f2952d; font-weight: 900; }
         .intro-desc {
             max-width: 980px;
             margin-top: 30px;
@@ -1558,7 +1574,7 @@ def inject_global_css() -> None:
             border-radius: 999px;
             background: #2e6b35;
             color: #ffffff !important;
-            font-weight: 950;
+            font-weight: 900;
             letter-spacing: .02em;
             box-shadow: 0 12px 28px rgba(0,0,0,.22);
             transition: transform .16s ease, background .16s ease;
@@ -1584,7 +1600,7 @@ def inject_global_css() -> None:
             border: 1px solid transparent;
             color: #1f2937 !important;
             text-decoration: none !important;
-            font-weight: 750;
+            font-weight: 700;
             line-height: 1.25;
         }
         .project-link:hover {
@@ -1601,7 +1617,7 @@ def inject_global_css() -> None:
         .intro-footer .project-link {
             padding: 6px 10px;
             color: rgba(255,255,255,.86) !important;
-            font-weight: 750;
+            font-weight: 700;
         }
         .intro-footer .project-link:hover {
             background: rgba(255,255,255,.10);
@@ -1619,22 +1635,22 @@ def inject_global_css() -> None:
         }
         .model-contrib-name {
             color: var(--safe-navy);
-            font-size: 1.02rem;
+            font-size: 1rem;
             font-weight: 800;
         }
         .model-contrib-name span { color: #667085; font-weight: 600; font-size: .95rem; }
-        .model-contrib-value { color: #344054; font-size: .98rem; font-weight: 800; }
+        .model-contrib-value { color: #344054; font-size: 1rem; font-weight: 800; }
         .model-contrib-track {
             height: 12px;
             border-radius: 999px;
-            background: #eef2f7;
-            border: 1px solid #e2e8f2;
+            background: #f1f0ec;
+            border: 1px solid #e3e6dd;
             overflow: hidden;
         }
         .model-contrib-fill {
             height: 100%;
             border-radius: 999px;
-            background: linear-gradient(90deg, #2454a6, #4b7bd6);
+            background: linear-gradient(90deg, #2e6b35, #5b8f62);
         }
         .model-contrib-fill.green { background: linear-gradient(90deg, #1f7a5a, #35a37e); }
         .model-contrib-fill.amber { background: linear-gradient(90deg, #ad741b, #d29a3f); }
@@ -1656,7 +1672,7 @@ def inject_global_css() -> None:
             background: #f2fbf7;
             border: 1px solid #cdebdc;
             color: #16734f;
-            font-weight: 850;
+            font-weight: 800;
             font-size: .9rem;
         }
         .monitor-live-pill.paused {
@@ -1688,7 +1704,7 @@ def inject_global_css() -> None:
         }
         .monitor-inject-note {
             color: #667085;
-            font-size: .98rem;
+            font-size: 1rem;
             line-height: 1.55;
             word-break: keep-all;
             margin: 6px 0 4px;
@@ -1722,7 +1738,7 @@ def inject_global_css() -> None:
         }
         .monitor-session-meta b {
             color: var(--safe-navy);
-            font-size: .98rem;
+            font-size: 1rem;
             line-height: 1.3;
             overflow: hidden;
             text-overflow: ellipsis;
@@ -1730,7 +1746,7 @@ def inject_global_css() -> None:
         }
         .monitor-session-meta span {
             color: #667085;
-            font-size: .88rem;
+            font-size: .9rem;
             line-height: 1.35;
         }
         .monitor-session-dot {
@@ -1781,7 +1797,7 @@ def inject_global_css() -> None:
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
-            font-size: .92rem;
+            font-size: .9rem;
         }
         /* 사이드바 배치용 컴팩트 스타일 */
         [data-testid="stSidebar"] .monitor-session-row {
