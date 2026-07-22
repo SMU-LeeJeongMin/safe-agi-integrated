@@ -1,0 +1,5 @@
+﻿dataset,region,slope_grade,pixel_count,ratio
+DEM_Copernicus,sudogwon,gentle(<15),1314811,0.644
+DEM_Copernicus,sudogwon,moderate(15-30),646169,0.317
+DEM_Copernicus,sudogwon,steep(30-45),79433,0.039
+DEM_Copernicus,sudogwon,very_steep(>=45),787,0.0004

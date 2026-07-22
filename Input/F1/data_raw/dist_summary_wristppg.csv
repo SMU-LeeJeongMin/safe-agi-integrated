@@ -1,0 +1,3 @@
+﻿dataset,variable,condition_key,condition_value,n,mean,std,min,p05,p25,p50,p75,p95,max,missing_rate,unit,layer,license
+WristPPG,heart_rate_interp,activity,walking,2238,84.88,14.89,40.1,60.0,73.86,86.78,96.0,106.03,126.94,,bpm,MEASURED_SENSOR,WristPPG(ODC-By 1.0)
+WristPPG,heart_rate_interp,activity,running,1501,91.59,25.41,40.21,53.71,64.81,90.63,114.63,129.08,155.15,,bpm,MEASURED_SENSOR,WristPPG(ODC-By 1.0)

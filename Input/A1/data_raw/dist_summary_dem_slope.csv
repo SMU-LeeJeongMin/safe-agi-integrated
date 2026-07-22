@@ -1,0 +1,2 @@
+﻿dataset,variable,condition_key,condition_value,n,mean,std,min,p05,p25,p50,p75,p95,max,missing_rate,unit,layer,license
+DEM_Copernicus,slope_deg,region,sudogwon,2041200,11.9,,0.0,,,9.9,,28.9,66.1,,degree,DERIVED_DEM,Copernicus DEM(free)

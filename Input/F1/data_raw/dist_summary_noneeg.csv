@@ -1,0 +1,7 @@
+﻿dataset,variable,condition_key,condition_value,n,mean,std,min,p05,p25,p50,p75,p95,max,missing_rate,unit,layer,license
+Non-EEG,SpO2,all,all,46229,95.93,1.71,80.0,93.0,95.0,96.0,97.0,98.0,100.0,,%,MEASURED_SENSOR,Non-EEG(ODC-By 1.0)
+Non-EEG,SpO2,gender,F,13947,95.87,1.71,87.0,93.0,95.0,96.0,97.0,98.0,99.0,,%,MEASURED_SENSOR,Non-EEG(ODC-By 1.0)
+Non-EEG,SpO2,gender,M,32282,95.96,1.71,80.0,94.0,95.0,96.0,97.0,98.0,100.0,,%,MEASURED_SENSOR,Non-EEG(ODC-By 1.0)
+Non-EEG,heart_rate,all,all,46229,77.3,15.29,48.0,57.0,65.0,75.0,87.0,107.0,134.0,,bpm,MEASURED_SENSOR,Non-EEG(ODC-By 1.0)
+Non-EEG,heart_rate,gender,F,13947,76.26,14.81,53.0,60.0,65.0,73.0,83.0,108.0,134.0,,bpm,MEASURED_SENSOR,Non-EEG(ODC-By 1.0)
+Non-EEG,heart_rate,gender,M,32282,77.75,15.48,48.0,56.0,66.0,76.0,88.0,107.0,131.0,,bpm,MEASURED_SENSOR,Non-EEG(ODC-By 1.0)

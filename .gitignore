@@ -8,3 +8,8 @@ venv/
 Dashboard/outputs/*.csv
 Dashboard/outputs/*.json
 !Dashboard/outputs/.gitkeep
+
+# Phase 1 raw/sample data - large or sensitive, regenerable
+*.sav
+*.tif
+Input/*/data_raw/dist_samples_*.csv
