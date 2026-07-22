@@ -699,23 +699,92 @@ def inject_global_css() -> None:
         .safe-pill.gray { background: #f2f4f7; border-color: #e4e7ec; color: #667085; }
         .safe-pill.green { background: #eaf8f0; border-color: #c7ead5; color: #16734f; }
         .safe-pill.amber { background: #fff4db; border-color: #f3d28b; color: #8a5900; }
+        /* 시나리오 선택: 표지 카드 위로 종이가 덮이는 hover 연출 */
+        .scenario-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 16px;
+        }
+        a.scenario-card, a.scenario-card:hover { text-decoration: none; }
         .scenario-card {
+            position: relative;
+            display: block;
+            height: 214px;
             border: 1px solid var(--safe-border);
             border-radius: 20px;
-            padding: 18px 18px 16px;
             background: #ffffff;
-            height: 190px;
             box-sizing: border-box;
-            display: flex;
-            flex-direction: column;
+            overflow: hidden;
             box-shadow: 0 8px 22px rgba(16,35,63,.06);
         }
-        .scenario-card.disabled { opacity: .55; background: #f7f8fa; }
-        .scenario-code { font-size: .9rem; color: var(--safe-blue); font-weight: 900; }
-        .scenario-title { font-size: 1.12rem; font-weight: 900; color: var(--safe-navy); margin: 4px 0 8px; min-height: 30px; }
-        .scenario-desc { color: #475467; line-height: 1.52; font-size: .95rem; word-break: keep-all; }
-        .scenario-arrow { display: inline-block; margin-top: 4px; }
+        .scenario-face {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            padding: 18px 18px 16px;
+            box-sizing: border-box;
+        }
+        .scenario-code { font-size: .9rem; color: #2e6b35; font-weight: 900; letter-spacing: .04em; }
+        .scenario-title { font-size: 1.12rem; font-weight: 900; color: #1f2937; margin: 6px 0 8px; line-height: 1.35; word-break: keep-all; }
         .scenario-status { margin-top: auto; padding-top: 12px; }
+        /* 종이: 크림색 배경과 연초록 괘선, hover 시 살짝 기울며 카드를 덮음 */
+        .scenario-paper {
+            position: absolute;
+            left: -5%;
+            top: 0;
+            width: 110%;
+            height: 106%;
+            box-sizing: border-box;
+            /* 좌우 5% 돌출과 회전 기울기를 감안해 안쪽 여백을 넉넉히 확보 */
+            padding: 24px 42px 28px;
+            background: #f7f5ef;
+            border-bottom: 1px solid #e3ded2;
+            transform: translateY(-114%);
+            transition: transform .45s cubic-bezier(.25, .8, .3, 1);
+            display: flex;
+            flex-direction: column;
+        }
+        .scenario-card:hover .scenario-paper,
+        .scenario-card:focus-visible .scenario-paper {
+            transform: translateY(-3%) rotate(-1.1deg);
+        }
+        .scenario-paper::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: repeating-linear-gradient(0deg, transparent 0 30px, rgba(46, 107, 53, .06) 30px 31px);
+            pointer-events: none;
+        }
+        /* SCENARIO 코드 왼쪽, 종이 위 테두리에서 늘어뜨린 책갈피 (하단 V 홈) */
+        .scenario-paper-ribbon {
+            position: absolute;
+            top: 0;
+            left: 42px;
+            width: 16px;
+            height: 46px;
+            background: #2e6b35;
+            clip-path: polygon(0 0, 100% 0, 100% 100%, 50% calc(100% - 8px), 0 100%);
+        }
+        .scenario-paper-code {
+            position: relative;
+            font-size: .78rem;
+            font-weight: 800;
+            color: #33402c;
+            letter-spacing: .07em;
+            margin-top: 2px;
+            margin-left: 28px;
+        }
+        .scenario-paper-desc { position: relative; font-size: .95rem; color: #33402c; line-height: 1.55; margin-top: 8px; word-break: keep-all; }
+        .scenario-paper-meta { position: relative; font-size: .84rem; color: #7a8471; line-height: 1.5; margin-top: 8px; word-break: keep-all; }
+        .scenario-paper-open {
+            position: relative;
+            margin-top: auto;
+            align-self: flex-end;
+            font-size: .9rem;
+            font-weight: 800;
+            color: #2e6b35;
+        }
+        .scenario-arrow { display: inline-block; margin-top: 4px; }
         div.stButton > button[kind="primary"],
         div.stButton > button[data-testid="baseButton-primary"] {
             background: #2e6b35 !important;
@@ -1558,8 +1627,10 @@ def inject_global_css() -> None:
             margin: 6px 0 4px;
         }
         .scenario-card.monitor {
-            background: #f8fbff;
-            border-color: #c9d9f3;
+            border-color: #dfe6d6;
+        }
+        .scenario-card.monitor .scenario-face {
+            background: #eef1e8;
         }
 
         /* ── 신규: 실시간 모니터링 세션 리스트 ── */
@@ -1730,51 +1801,106 @@ def render_intro_page() -> None:
     )
     st.markdown(intro_html, unsafe_allow_html=True)
 
+def _scenario_paper_card_html(
+    *,
+    code: str,
+    title: str,
+    href: str,
+    paper_eyebrow: str,
+    paper_desc: str,
+    paper_meta: str,
+    open_label: str,
+    pill_label: str,
+    pill_class: str,
+    extra_class: str = "",
+) -> str:
+    """표지(코드, 제목, 상태 pill)와 hover 시 덮이는 종이(상세)로 구성된 카드 HTML을 반환한다.
+
+    카드 전체가 링크로 동작하며, 종이 위에 상세 설명과 진행 상태, 열기 문구를 표기한다.
+    """
+    card_class = f"scenario-card {extra_class}".strip()
+    return (
+        f'<a class="{card_class}" href="{href}" target="_self" '
+        f'aria-label="{safe_html(title)} 화면으로 이동">'
+        '<div class="scenario-face">'
+        f'<div class="scenario-code">{safe_html(code)}</div>'
+        f'<div class="scenario-title">{safe_html(title)}</div>'
+        f'<div class="scenario-status"><span class="safe-pill {pill_class}">{safe_html(pill_label)}</span></div>'
+        '</div>'
+        '<div class="scenario-paper">'
+        '<span class="scenario-paper-ribbon"></span>'
+        f'<div class="scenario-paper-code">{safe_html(paper_eyebrow)}</div>'
+        f'<div class="scenario-paper-desc">{scenario_desc_html(paper_desc)}</div>'
+        f'<div class="scenario-paper-meta">{safe_html(paper_meta)}</div>'
+        f'<div class="scenario-paper-open">{safe_html(open_label)}</div>'
+        '</div>'
+        '</a>'
+    )
+
+
 def render_scenario_select_page() -> None:
-    st.markdown("<div class='safe-eyebrow'>SAFE SCENARIOS</div>", unsafe_allow_html=True)
-    st.title("시나리오 선택")
+    # 시나리오 페이지, monitor와 동일한 초록 hero 배너 + 겹치는 흰 요약 카드
+    st.markdown(
+        (
+            '<div class="scenario-hero">'
+            '<div class="scenario-hero-eyebrow">SAFE SCENARIOS</div>'
+            '<h1 class="scenario-hero-title">시나리오 선택</h1>'
+            '</div>'
+            '<div class="safe-card scenario-hero-summary">'
+            '<div class="safe-muted">'
+            '카드에 마우스를 올리면 종이가 덮이며 시나리오 상세 설명 표시'
+            '<br />카드를 누르면 해당 시나리오 대시보드로 바로 이동'
+            '</div>'
+            '</div>'
+            '<div style="height:30px;"></div>'
+        ),
+        unsafe_allow_html=True,
+    )
 
-    for start in range(0, len(SCENARIOS), 3):
-        cols = st.columns(3)
-        for col, (code, title, desc, demo_ready) in zip(cols, SCENARIOS[start:start + 3]):
-            with col:
-                status = "시연 가능" if demo_ready else "준비 중"
-                pill_class = "green" if demo_ready else "gray"
-                st.markdown(
-                    f"""
-                    <div class="scenario-card">
-                        <div class="scenario-code">{safe_html(code)}</div>
-                        <div class="scenario-title">{safe_html(title)}</div>
-                        <div class="scenario-desc">{scenario_desc_html(desc)}</div>
-                        <div class="scenario-status"><span class="safe-pill {pill_class}">{safe_html(status)}</span></div>
-                    </div>
-                    """,
-                    unsafe_allow_html=True,
-                )
-                button_type = "primary" if demo_ready else "secondary"
-                if st.button(f"{code} 대시보드 열기", key=f"open_{code}", use_container_width=True, type=button_type):
-                    st.session_state["selected_scenario"] = code
-                    st.session_state["page"] = "dashboard"
-                    st.rerun()
-
-    # 시나리오 카드와 동일한 시각 언어의 실시간 모니터링 진입 카드
-    st.markdown('<div style="height:18px;"></div>', unsafe_allow_html=True)
-    cols = st.columns(3)
-    with cols[0]:
-        st.markdown(
-            """
-            <div class="scenario-card monitor">
-                <div class="scenario-code">LIVE</div>
-                <div class="scenario-title">실시간 모니터링</div>
-                <div class="scenario-desc">특정 관찰 대상을 선택해 유입값을 스트리밍으로 관찰<br /><span class='scenario-arrow'>→ 이벤트 주입으로 위험 반응 확인</span></div>
-                <div class="scenario-status"><span class="safe-pill">BETA</span></div>
-            </div>
-            """,
-            unsafe_allow_html=True,
+    cards: list[str] = []
+    for code, title, desc, demo_ready in SCENARIOS:
+        pill_label = "시연 가능" if demo_ready else "준비 중"
+        pill_class = "green" if demo_ready else "gray"
+        paper_meta = (
+            "학습셋 40세션 연동, [1]부터 [7] 패널 시연 가능"
+            if demo_ready
+            else "골격 화면 진입 가능, 데이터 연동 준비 중"
         )
-        if st.button("실시간 모니터링 열기", key="open_monitor", use_container_width=True, type="primary"):
-            st.session_state["page"] = "monitor"
-            st.rerun()
+        cards.append(
+            _scenario_paper_card_html(
+                code=code,
+                title=title,
+                href=f"?page=dashboard&scenario={code}",
+                paper_eyebrow=f"SCENARIO {code}",
+                paper_desc=desc,
+                paper_meta=paper_meta,
+                open_label="문서 열기 →",
+                pill_label=pill_label,
+                pill_class=pill_class,
+            )
+        )
+    st.markdown(f'<div class="scenario-grid">{"".join(cards)}</div>', unsafe_allow_html=True)
+
+    # 시나리오 카드와 동일한 시각 언어의 실시간 모니터링 진입 카드 (연세이지 표지)
+    monitor_card = _scenario_paper_card_html(
+        code="LIVE",
+        title="실시간 모니터링",
+        href="?page=monitor",
+        paper_eyebrow="LIVE MONITOR",
+        paper_desc="특정 관찰 대상을 선택해 유입값을 스트리밍으로 관찰 → 이벤트 주입으로 위험 반응 확인",
+        paper_meta="벽시계 기준으로 40세션 동시 진행, 재접속 후에도 연속 재생",
+        open_label="화면 열기 →",
+        pill_label="BETA",
+        pill_class="green",
+        extra_class="monitor",
+    )
+    st.markdown(
+        (
+            '<div style="height:18px;"></div>'
+            f'<div class="scenario-grid">{monitor_card}</div>'
+        ),
+        unsafe_allow_html=True,
+    )
 
 
 def render_pipeline_nav() -> None:
